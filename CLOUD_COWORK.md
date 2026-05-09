@@ -103,6 +103,33 @@ launchctl unload ~/Library/LaunchAgents/com.claude.tradingagent.polling.plist
 # 6. Verify with Mac off — Step 4 above
 ```
 
-## Open question for Santiago
+## Decision (2026-05-09): Use BOTH
 
-Which cloud surface do you prefer — Anthropic's Cloud Routines (tighter Claude integration, less control) or GitHub Actions (more transparent YAML, slightly more work to wire)? Decide before Step 3.
+After review, the cloud cowork architecture splits responsibilities across two surfaces:
+
+### Claude Cloud Routines (agent-side)
+Owns work that requires Claude's reasoning loop — analysis, decisions, approvals, write-ups.
+
+- All 5 trading routines (pre-market, market open, midday, EOD, weekly review)
+- Polling routine (interprets ClickUp comments, drafts replies, updates memory)
+- Anywhere a sub-agent swarm is spawned (RuFlo Phase 0 item 2)
+- ADR authoring during weekly review
+
+**Why here**: each of these calls back into the Claude API and uses memory tools. They're not stateless functions — they're agentic.
+
+### GitHub Actions (repo-side)
+Owns deterministic automation that must run independently of any Claude session. Survives if Anthropic is down. Provides an audit trail in plain YAML.
+
+- Memory commit verification: every push triggers a check that `memory/` was updated and that no secrets leaked
+- Daily cron job: snapshot `memory/` + `journal/` to a separate "history" branch (immutable timeline of memory state)
+- Pre-merge gate on `main`: lint, validate `memory/clickup_config.json` schema, validate routine markdown front-matter, run `python3 -c "import scripts.alpaca_client; import scripts.research"` (smoke import test)
+- Saturday security scan: also runs as a GitHub Action so the codebase is checked even if local Mac and Anthropic cloud are both quiet
+- Optional: dependabot or equivalent on `requirements.txt`
+
+**Why here**: these jobs benefit from being deterministic, reproducible, and platform-independent. They don't need Claude to think — they need a reliable runner.
+
+### Boundary rule
+If a job needs Claude to make a judgment call → Cloud Routines.
+If a job is "always do X when Y" → GitHub Actions.
+
+Trading routines that include reasoning AND deterministic post-processing (e.g., "agent decides, then push to git, then validate") split: the agent half runs in Cloud Routines, the validation half runs as a GitHub Action triggered by the resulting push.
