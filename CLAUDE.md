@@ -79,13 +79,25 @@ You are an autonomous trading agent managing a **paper trading account** on Alpa
 
 ---
 
+## Obsidian Vault
+
+This project root IS an Obsidian vault. See `VAULT.md` for orientation. Key conventions:
+- New unsorted notes go in `inbox/` (configured as default in `.obsidian/app.json`)
+- Templates in `templates/` for setups, journals, ADRs, lessons
+- Use `[[wiki-links]]` for cross-references
+- YAML frontmatter is encouraged but not required (existing files don't all have it)
+- Tag taxonomy: `#setup/<TICKER>`, `#lesson`, `#adr`, `#rule`, `#journal`, `#weekly-review`, `#market-context`, `#feedback`, `#knowledge`, `#meta`, `#deny/<reason>`
+- Sync via git: `origin/main` IS your vault sync surface
+- Cloud routines read/write via repo clone; local Claude Code has full RuFlo + Obsidian integration
+
 ## RuFlo Memory Layer (vector-indexed semantic recall)
 
 In addition to the file-based memory below, this project uses RuFlo's AgentDB to store distilled trading patterns in a semantically searchable vector store. **Files remain the source of truth** (audit trail, git-versioned). The vector store is for fast semantic recall — "find similar past setups before approving a new one."
 
 **Namespaces:**
-- `trading` — setups, market context, lessons, infrastructure notes, principles
+- `trading` — setups, market context, lessons, infrastructure notes, principles (curated, distilled)
 - `trading-adrs` — ADR summaries (one per accepted ADR)
+- `trading-vault` — full vault content for raw recall (see `scripts/vault_index.py` to refresh)
 - `trading-security` — security scan findings (CRITICAL/HIGH only)
 
 **Key shape**: `<type>/<subject>/<descriptor>/YYYY-MM-DD` (e.g. `setup/NVDA/swing-pullback-206-210/2026-05-08`).

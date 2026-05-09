@@ -23,3 +23,13 @@ launchd_*.log
 dist/
 build/
 *.egg-info/
+
+# Obsidian vault — user-specific UI state (track only project config)
+.obsidian/workspace
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/cache
+.obsidian/plugins/*/data.json
+
+# Vault attachments folder is created lazily; track contents but not the empty dir marker
+attachments/.gitkeep
