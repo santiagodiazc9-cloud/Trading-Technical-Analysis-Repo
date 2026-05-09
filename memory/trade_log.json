@@ -1,0 +1,28 @@
+{
+  "_comment": "All trades + EOD snapshots. The day_0_baseline is the starting reference for cumulative P&L math. Each EOD snapshot under daily_snapshots is required for next-day day-over-day calculations.",
+  "day_0_baseline": {
+    "date": "2026-05-08",
+    "starting_equity": 100000.00,
+    "starting_cash": 100000.00,
+    "platform": "Alpaca Paper Trading",
+    "note": "Day 0 baseline — bot becomes active Monday 2026-05-11."
+  },
+  "trades": [],
+  "weekly_trade_count": {
+    "_comment": "Resets every Monday 00:00 ET. Used to enforce max-3-trades-per-week rule.",
+    "week_starting_2026-05-11": 0
+  },
+  "daily_snapshots": [],
+  "summary": {
+    "total_trades": 0,
+    "wins": 0,
+    "losses": 0,
+    "win_rate": null,
+    "total_pnl": 0,
+    "best_trade": null,
+    "worst_trade": null,
+    "current_equity": 100000.00,
+    "phase_pnl": 0,
+    "phase_pnl_pct": 0
+  }
+}

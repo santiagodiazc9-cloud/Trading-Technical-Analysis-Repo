@@ -1,0 +1,109 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Trading: Test Alpaca Connection",
+      "type": "shell",
+      "command": "python3 scripts/alpaca_client.py account",
+      "options": { "cwd": "${workspaceFolder}" },
+      "presentation": { "reveal": "always", "panel": "dedicated", "clear": true },
+      "problemMatcher": []
+    },
+    {
+      "label": "Trading: Show Open Positions",
+      "type": "shell",
+      "command": "python3 scripts/alpaca_client.py positions",
+      "options": { "cwd": "${workspaceFolder}" },
+      "presentation": { "reveal": "always", "panel": "dedicated", "clear": true },
+      "problemMatcher": []
+    },
+    {
+      "label": "Trading: Show Recent Orders",
+      "type": "shell",
+      "command": "python3 scripts/alpaca_client.py orders",
+      "options": { "cwd": "${workspaceFolder}" },
+      "presentation": { "reveal": "always", "panel": "dedicated", "clear": true },
+      "problemMatcher": []
+    },
+    {
+      "label": "Trading: Market Clock",
+      "type": "shell",
+      "command": "python3 scripts/alpaca_client.py clock",
+      "options": { "cwd": "${workspaceFolder}" },
+      "presentation": { "reveal": "always", "panel": "dedicated", "clear": true },
+      "problemMatcher": []
+    },
+    {
+      "label": "Trading: Scan Watchlist",
+      "type": "shell",
+      "command": "python3 scripts/research.py scan",
+      "options": { "cwd": "${workspaceFolder}" },
+      "presentation": { "reveal": "always", "panel": "dedicated", "clear": true },
+      "problemMatcher": []
+    },
+    {
+      "label": "Trading: Analyze Symbol (asks for ticker)",
+      "type": "shell",
+      "command": "python3 scripts/research.py analyze ${input:symbol}",
+      "options": { "cwd": "${workspaceFolder}" },
+      "presentation": { "reveal": "always", "panel": "dedicated", "clear": true },
+      "problemMatcher": []
+    },
+    {
+      "label": "Routine 1 (Pre-Market): Copy Prompt to Clipboard",
+      "type": "shell",
+      "command": "printf 'Run the pre-market research routine — read routines/1_pre_market_research.md and follow every step exactly.' | pbcopy && echo '✓ Pre-Market prompt copied. Paste into Claude Code (Cmd+V).'",
+      "options": { "cwd": "${workspaceFolder}" },
+      "presentation": { "reveal": "always", "panel": "dedicated", "clear": true },
+      "problemMatcher": []
+    },
+    {
+      "label": "Routine 2 (Market Open): Copy Prompt to Clipboard",
+      "type": "shell",
+      "command": "printf 'Run the market open execution routine — read routines/2_market_open_execution.md and follow every step exactly. Only place trades for setups explicitly approved in memory/open_positions.md.' | pbcopy && echo '✓ Market Open prompt copied. Paste into Claude Code (Cmd+V).'",
+      "options": { "cwd": "${workspaceFolder}" },
+      "presentation": { "reveal": "always", "panel": "dedicated", "clear": true },
+      "problemMatcher": []
+    },
+    {
+      "label": "Routine 3 (Midday): Copy Prompt to Clipboard",
+      "type": "shell",
+      "command": "printf 'Run the midday scan routine — read routines/3_midday_scan.md and follow every step exactly.' | pbcopy && echo '✓ Midday prompt copied. Paste into Claude Code (Cmd+V).'",
+      "options": { "cwd": "${workspaceFolder}" },
+      "presentation": { "reveal": "always", "panel": "dedicated", "clear": true },
+      "problemMatcher": []
+    },
+    {
+      "label": "Routine 4 (End-of-Day): Copy Prompt to Clipboard",
+      "type": "shell",
+      "command": "printf 'Run the end-of-day review routine — read routines/4_end_of_day_review.md and follow every step exactly.' | pbcopy && echo '✓ EOD prompt copied. Paste into Claude Code (Cmd+V).'",
+      "options": { "cwd": "${workspaceFolder}" },
+      "presentation": { "reveal": "always", "panel": "dedicated", "clear": true },
+      "problemMatcher": []
+    },
+    {
+      "label": "Routine 5 (Weekly Review): Copy Prompt to Clipboard",
+      "type": "shell",
+      "command": "printf 'Run the Friday weekly review routine — read routines/5_weekly_review.md and follow every step exactly.' | pbcopy && echo '✓ Weekly Review prompt copied. Paste into Claude Code (Cmd+V).'",
+      "options": { "cwd": "${workspaceFolder}" },
+      "presentation": { "reveal": "always", "panel": "dedicated", "clear": true },
+      "problemMatcher": []
+    },
+    {
+      "label": "Trading: Show Pending ClickUp Updates (fallback log)",
+      "type": "shell",
+      "command": "cat memory/pending_clickup_updates.md",
+      "options": { "cwd": "${workspaceFolder}" },
+      "presentation": { "reveal": "always", "panel": "dedicated", "clear": true },
+      "problemMatcher": []
+    }
+  ],
+  "inputs": [
+    {
+      "id": "symbol",
+      "type": "promptString",
+      "description": "Ticker symbol (e.g. AAPL, NVDA, TSLA)",
+      "default": "AAPL"
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "watchlist": [
+    {
+      "symbol": "AAPL",
+      "sector": "Tech",
+      "notes": "Mega-cap tech, strong trend follower",
+      "strategy": "swing"
+    },
+    {
+      "symbol": "MSFT",
+      "sector": "Tech",
+      "notes": "Cloud/AI leader, low volatility mover. Top mean-reversion candidate. Watch SMA 20.",
+      "strategy": "swing",
+      "priority": "high"
+    },
+    {
+      "symbol": "NVDA",
+      "sector": "Tech",
+      "notes": "AI chip leader, high volatility. Top swing candidate. Pullback entry 206-210, stop below 200.",
+      "strategy": "both",
+      "priority": "high"
+    },
+    {
+      "symbol": "TSLA",
+      "sector": "Consumer Discretionary",
+      "notes": "High beta, momentum-driven. Daily SMA bearish — intraday only until trend improves.",
+      "strategy": "day",
+      "priority": "normal"
+    },
+    {
+      "symbol": "AMZN",
+      "sector": "Consumer Discretionary",
+      "notes": "E-commerce + cloud, swing trade on pullbacks",
+      "strategy": "swing"
+    },
+    {
+      "symbol": "META",
+      "sector": "Communication Services",
+      "notes": "Social/AI play, watch for earnings catalysts",
+      "strategy": "swing"
+    },
+    {
+      "symbol": "GOOGL",
+      "sector": "Communication Services",
+      "notes": "Search + cloud, typically lower vol",
+      "strategy": "swing"
+    },
+    {
+      "symbol": "AMD",
+      "sector": "Tech",
+      "notes": "Chip sector, high beta, good for both styles",
+      "strategy": "both"
+    },
+    {
+      "symbol": "SPY",
+      "sector": "ETF — Broad Market",
+      "notes": "S&P 500 ETF — market direction proxy",
+      "strategy": "day"
+    },
+    {
+      "symbol": "QQQ",
+      "sector": "ETF — Broad Market",
+      "notes": "Nasdaq 100 ETF — tech sector proxy",
+      "strategy": "day"
+    }
+  ],
+  "last_updated": "2026-05-09",
+  "update_reason": "Added sector field per PDF must-fix rules to enable sector-failure exit logic. NOTE: AAPL/MSFT/NVDA/AMD all in Tech — concentration risk; agent should track sector exposure as a portfolio-level constraint."
+}

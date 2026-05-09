@@ -1,0 +1,4 @@
+shell-init: error retrieving current directory: getcwd: cannot access parent directories: Operation not permitted
+/bin/bash: /Users/santiagodiaz/Documents/Claude/Projects/Agent With API Key, For Trading Technical Analysis/scripts/run_claude_routines.sh: Operation not permitted
+shell-init: error retrieving current directory: getcwd: cannot access parent directories: Operation not permitted
+/bin/bash: /Users/santiagodiaz/Documents/Claude/Projects/Agent With API Key, For Trading Technical Analysis/scripts/run_claude_routines.sh: Operation not permitted

@@ -1,0 +1,22 @@
+# Claude routine cron schedule for the trading agent workspace
+# Load with: crontab scripts/claude_routine_cron.txt
+# Make sure /usr/local/bin/claude is the correct Claude CLI path for your system.
+
+WORKDIR=/Users/santiagodiaz/Documents/Claude/Projects/Agent\ With\ API\ Key,\ For\ Trading\ Technical\ Analysis
+SCRIPT="$WORKDIR/scripts/run_claude_routine.sh"
+LOG="$WORKDIR/claude_routine.log"
+
+# Pre-market research
+0 8 * * 1-5 cd "$WORKDIR" && "$SCRIPT" "routines/1_pre_market_research.md" >> "$LOG" 2>&1
+
+# Market open execution
+35 9 * * 1-5 cd "$WORKDIR" && "$SCRIPT" "routines/2_market_open_execution.md" >> "$LOG" 2>&1
+
+# Midday scan
+30 12 * * 1-5 cd "$WORKDIR" && "$SCRIPT" "routines/3_midday_scan.md" >> "$LOG" 2>&1
+
+# End-of-day review
+45 15 * * 1-5 cd "$WORKDIR" && "$SCRIPT" "routines/4_end_of_day_review.md" >> "$LOG" 2>&1
+
+# Weekly review
+30 16 * * 5 cd "$WORKDIR" && "$SCRIPT" "routines/5_weekly_review.md" >> "$LOG" 2>&1
