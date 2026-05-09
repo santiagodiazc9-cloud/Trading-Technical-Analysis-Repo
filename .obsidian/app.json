@@ -1,11 +1,10 @@
 {
+  "showInlineTitle": true,
   "useMarkdownLinks": false,
   "newLinkFormat": "shortest",
   "attachmentFolderPath": "attachments",
   "alwaysUpdateLinks": true,
   "showLineNumber": true,
-  "showInlineTitle": true,
-  "showViewHeader": true,
   "promptDelete": true,
   "trashOption": "system",
   "newFileLocation": "folder",
