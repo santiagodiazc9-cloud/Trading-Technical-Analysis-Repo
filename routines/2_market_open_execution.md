@@ -12,15 +12,15 @@ Read these files:
 - `memory/market_context.md` — today's context
 
 ### 2. Check Current State
-Run: `python scripts/alpaca_client.py account`
-Run: `python scripts/alpaca_client.py positions`
-Run: `python scripts/alpaca_client.py clock`
+Run: `python3 scripts/alpaca_client.py account`
+Run: `python3 scripts/alpaca_client.py positions`
+Run: `python3 scripts/alpaca_client.py clock`
 - Verify market is open
 - Note current equity and open positions
 
 ### 3. Validate Pre-Market Setups
 For each pending setup identified in pre-market research:
-Run: `python scripts/research.py analyze <SYMBOL>`
+Run: `python3 scripts/research.py analyze <SYMBOL>`
 - Are the signals still valid? Has the stock gapped in a way that changes the thesis?
 - Is the entry zone still reachable?
 - Re-run the 6-point checklist with current data
@@ -35,8 +35,8 @@ For each pending setup:
 - ALSO check that the master pause toggle (`control_tasks.trading_active_toggle`) status is `to do` — if it's anything else, do not place new trades.
 - If not approved, log "skipped: awaiting approval" and continue.
 - Approved setups only: ATR-size, cap at $1,000 or 5% of portfolio, then place order:
-  - `python scripts/alpaca_client.py buy <SYMBOL> <QTY> market`
-  - Verify: `python scripts/alpaca_client.py orders`
+  - `python3 scripts/alpaca_client.py buy <SYMBOL> <QTY> market`
+  - Verify: `python3 scripts/alpaca_client.py orders`
 - After placing, update the ClickUp pending-setup task: post a comment with execution details, then move the task to `lists.trade_log` using `clickup_move_task`.
 
 ### 5. Update Memory

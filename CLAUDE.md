@@ -79,6 +79,27 @@ You are an autonomous trading agent managing a **paper trading account** on Alpa
 
 ---
 
+## RuFlo Memory Layer (vector-indexed semantic recall)
+
+In addition to the file-based memory below, this project uses RuFlo's AgentDB to store distilled trading patterns in a semantically searchable vector store. **Files remain the source of truth** (audit trail, git-versioned). The vector store is for fast semantic recall — "find similar past setups before approving a new one."
+
+**Namespaces:**
+- `trading` — setups, market context, lessons, infrastructure notes, principles
+- `trading-adrs` — ADR summaries (one per accepted ADR)
+- `trading-security` — security scan findings (CRITICAL/HIGH only)
+
+**Key shape**: `<type>/<subject>/<descriptor>/YYYY-MM-DD` (e.g. `setup/NVDA/swing-pullback-206-210/2026-05-08`).
+
+**When to query**: Pre-market routine queries `trading` before finalizing each setup (see step 4a of `routines/1_pre_market_research.md`). Weekly review queries before proposing rule changes — to see if a similar rule was tried before.
+
+**When to write**: Pre-market routine writes each new setup. Weekly review writes ADR summaries. Security scan writes findings.
+
+**Tools**: `mcp__ruflo__memory_store` to write, `mcp__ruflo__memory_search` (with `smart: true` for query expansion) to read.
+
+If RuFlo MCP tools are unavailable in a given session, fall back to file-only memory and log the gap to `memory/pending_clickup_updates.md`.
+
+---
+
 ## File-Based Memory Architecture
 
 All persistent state lives in the `memory/` directory. **Read before acting. Write before exiting.**
@@ -139,7 +160,7 @@ A separate scheduled task (`trading-clickup-poller`) runs every 15 min during ma
 
 ## Scripts Available
 
-Run these via `python scripts/<name>.py` with appropriate arguments.
+Run these via `python3 scripts/<name>.py` with appropriate arguments.
 
 | Script | Purpose |
 |--------|---------|
@@ -150,37 +171,37 @@ Run these via `python scripts/<name>.py` with appropriate arguments.
 
 ```bash
 # Account info
-python scripts/alpaca_client.py account
+python3 scripts/alpaca_client.py account
 
 # Get positions
-python scripts/alpaca_client.py positions
+python3 scripts/alpaca_client.py positions
 
 # Place a market buy
-python scripts/alpaca_client.py buy AAPL 5 market
+python3 scripts/alpaca_client.py buy AAPL 5 market
 
 # Place a limit sell
-python scripts/alpaca_client.py sell TSLA 3 limit 250.00
+python3 scripts/alpaca_client.py sell TSLA 3 limit 250.00
 
 # Cancel all open orders
-python scripts/alpaca_client.py cancel-all
+python3 scripts/alpaca_client.py cancel-all
 
 # Close a position
-python scripts/alpaca_client.py close AAPL
+python3 scripts/alpaca_client.py close AAPL
 
 # Check if market is open
-python scripts/alpaca_client.py clock
+python3 scripts/alpaca_client.py clock
 
 # Get recent orders
-python scripts/alpaca_client.py orders
+python3 scripts/alpaca_client.py orders
 
 # Fetch technical analysis for a symbol
-python scripts/research.py analyze AAPL
+python3 scripts/research.py analyze AAPL
 
 # Scan entire watchlist
-python scripts/research.py scan
+python3 scripts/research.py scan
 
 # Get bars data as JSON
-python scripts/research.py bars AAPL 1Day 60
+python3 scripts/research.py bars AAPL 1Day 60
 ```
 
 ---
@@ -189,11 +210,13 @@ python scripts/research.py bars AAPL 1Day 60
 
 | Routine | Time (ET) | Purpose |
 |---------|-----------|---------|
-| **Pre-Market Research** | 8:00 AM | Scan watchlist, read news, update market_context.md, identify setups |
-| **Market Open Execution** | 9:35 AM | Execute planned trades from pre-market analysis |
-| **Midday Scan** | 12:30 PM | Check positions, scan for new setups, adjust stops |
-| **End-of-Day Review** | 3:45 PM | Close day trades, journal the day, update learnings |
-| **Friday Weekly Review** | 4:30 PM Fri | Review week's performance, adjust strategy, plan next week |
+| **Pre-Market Research** | 8:00 AM Mon-Fri | Scan watchlist, read news, update market_context.md, identify setups (uses RuFlo swarm + vector recall) |
+| **Market Open Execution** | 9:35 AM Mon-Fri | Execute planned trades from pre-market analysis |
+| **Midday Scan** | 12:30 PM Mon-Fri | Check positions, scan for new setups, adjust stops |
+| **End-of-Day Review** | 3:45 PM Mon-Fri | Close day trades, journal the day, update learnings |
+| **Friday Weekly Review** | 4:30 PM Fri | Review week's performance, adjust strategy, write ADR if rules changed |
+| **ClickUp Polling** | every 15min Mon-Fri 14:00–22:30 CEST | Pull approvals, knowledge inbox, feedback, run-routine triggers, watchlist sync |
+| **Security Scan** | 11:00 AM Sat | CVE scan, secret leak check, permissions audit. Reports only — no auto-fix |
 
 ---
 

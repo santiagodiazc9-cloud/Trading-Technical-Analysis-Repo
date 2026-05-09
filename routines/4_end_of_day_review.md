@@ -12,20 +12,20 @@ Read:
 - `memory/trade_log.json`
 
 ### 2. Close Day Trades
-Run: `python scripts/alpaca_client.py positions`
+Run: `python3 scripts/alpaca_client.py positions`
 - Identify any positions tagged as "day_trade" in open_positions.md
-- Close ALL day trade positions: `python scripts/alpaca_client.py close <SYMBOL>`
+- Close ALL day trade positions: `python3 scripts/alpaca_client.py close <SYMBOL>`
 - Log each close in trade_log.json with P&L
 
 ### 3. Review Swing Positions
 For remaining (swing) positions:
-Run: `python scripts/research.py analyze <SYMBOL>`
+Run: `python3 scripts/research.py analyze <SYMBOL>`
 - Update stop-losses if trailing
 - Note if any swing position needs attention tomorrow
 - Update `memory/open_positions.md` with current state
 
 ### 4. Daily Performance Review
-Run: `python scripts/alpaca_client.py account`
+Run: `python3 scripts/alpaca_client.py account`
 - Record today's P&L
 - Calculate win/loss ratio for the day
 - Update the summary section of `memory/trade_log.json`

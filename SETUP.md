@@ -251,9 +251,9 @@ Run the end-of-day review routine — read routines/4_end_of_day_review.md and f
 ### 5.3 — How a Typical Session Works
 
 1. Claude reads its memory files to know what happened yesterday
-2. It runs `python scripts/research.py scan` to check all watchlist stocks
+2. It runs `python3 scripts/research.py scan` to check all watchlist stocks
 3. It analyzes the indicator signals and decides if any setup is worth trading
-4. If yes, it runs `python scripts/alpaca_client.py buy AAPL 5 market` (for example)
+4. If yes, it runs `python3 scripts/alpaca_client.py buy AAPL 5 market` (for example)
 5. It updates `memory/open_positions.md` with the new trade details
 6. It writes a journal entry in `journal/` explaining its reasoning
 7. Before exiting, it saves everything back to the memory files

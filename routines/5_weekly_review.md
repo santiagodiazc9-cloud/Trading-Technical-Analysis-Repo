@@ -16,7 +16,7 @@ Read ALL memory files:
 - All journal entries from this week (`journal/YYYY-MM-DD.md`)
 
 ### 2. Weekly Performance Analysis
-Run: `python scripts/alpaca_client.py account`
+Run: `python3 scripts/alpaca_client.py account`
 
 Calculate and report:
 - Total P&L for the week
@@ -40,6 +40,45 @@ Based on the analysis:
 - Update `memory/strategy.md` with any refinements
 - Move confirmed lessons from observations → rules
 - Note in the "Adjustments Log" what changed and why
+
+### 4a. Write an ADR if strategy changed (RuFlo)
+If ANY rule, parameter, or decision criterion was added/changed/removed in step 4, create an Architecture Decision Record:
+
+1. Determine the next ADR number: `ls docs/adr/ | sort -n | tail -1` (or 0001 if directory is empty).
+2. Create `docs/adr/<NNNN>-<short-slug>.md` with this template:
+
+```markdown
+# ADR-<NNNN>: <decision title>
+
+**Date**: YYYY-MM-DD
+**Status**: Accepted
+**Supersedes**: <ADR-NNNN if any, else "none">
+
+## Context
+What was happening this week that motivated the change. Cite specific trades, journal entries, or memory keys.
+
+## Decision
+The exact rule change. Before → after. Be specific about thresholds and conditions.
+
+## Consequences
+- Positive: what this prevents or improves
+- Negative: what we're giving up or risking
+- Neutral: behavior unchanged in these scenarios
+
+## Validation Plan
+How we'll know if this was the right call. Concrete metric + timeframe (e.g., "If win rate of trades caught by this rule drops < 40% over next 10 samples, revisit.").
+
+## References
+- Memory: <namespace/key>
+- Trades: <ticker / date>
+- Journal: <YYYY-MM-DD.md>
+```
+
+3. Also store the ADR summary in RuFlo memory:
+   - `mcp__ruflo__memory_store` with `namespace: "trading-adrs"`, `key: "adr/<NNNN>"`, `value`: the full ADR markdown, `tags: ["adr", "<area-of-change>"]`
+4. If this ADR supersedes a prior one, edit the older ADR's frontmatter `Status` to `Superseded by ADR-<NNNN>`.
+
+If NO strategy change happened this week, skip ADR creation. ADRs are for actual rule changes, not weekly housekeeping.
 
 ### 5. Watchlist Maintenance
 - Remove symbols that have gone stale (no signals for 2+ weeks)

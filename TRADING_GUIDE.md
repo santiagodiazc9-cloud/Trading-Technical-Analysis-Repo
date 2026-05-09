@@ -63,7 +63,7 @@ The agent runs on a schedule (5 routines a day). Each routine reads its memory f
 **What you do here:**
 - Have one-off conversations with the agent ("analyze NVDA right now")
 - Edit memory files manually (e.g., approve a setup by editing `memory/open_positions.md`)
-- Run the project's Python scripts (`python scripts/research.py scan`)
+- Run the project's Python scripts (`python3 scripts/research.py scan`)
 - Check the project structure
 - Trigger any routine on demand (Cmd+Shift+P → "Run Task")
 

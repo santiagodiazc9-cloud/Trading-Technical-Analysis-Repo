@@ -20,3 +20,10 @@ LOG="$WORKDIR/claude_routine.log"
 
 # Weekly review
 30 16 * * 5 cd "$WORKDIR" && "$SCRIPT" "routines/5_weekly_review.md" >> "$LOG" 2>&1
+
+# ClickUp polling — every 15 min Mon-Fri 08:00–16:30 ET (the dispatcher
+# script gates on weekday + hour, so safe to run every 15 min always)
+*/15 * * * * cd "$WORKDIR" && "$WORKDIR/scripts/run_claude_polling.sh" >> "$LOG" 2>&1
+
+# Saturday security scan
+0 11 * * 6 cd "$WORKDIR" && "$SCRIPT" "routines/7_security_scan.md" >> "$LOG" 2>&1

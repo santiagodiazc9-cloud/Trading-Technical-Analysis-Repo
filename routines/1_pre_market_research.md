@@ -14,20 +14,39 @@ Read these files to understand your current state:
 - `memory/learnings.md` — lessons from past trades
 
 ### 2. Check Account
-Run: `python scripts/alpaca_client.py account`
+Run: `python3 scripts/alpaca_client.py account`
 - Note available cash and buying power
 - Check if the daily loss cap has been hit (2% of portfolio)
 
 ### 3. Scan Watchlist
-Run: `python scripts/research.py scan`
+Run: `python3 scripts/research.py scan`
 - Review all indicator readings for every watchlist symbol
 - Identify which symbols have active signals (crossovers, oversold/overbought, etc.)
 
-### 4. Deep-Dive Top Candidates
-For the top 3 most interesting symbols from the scan:
-Run: `python scripts/research.py analyze <SYMBOL>`
-- Evaluate trend alignment, momentum, and volatility
-- Run through the 6-point decision checklist from CLAUDE.md
+### 4. Parallel Deep-Dive (RuFlo swarm)
+For the top 3 candidates from the scan, spawn FOUR sub-agents IN PARALLEL using the Agent tool — send all four Agent tool calls in a single message (independent, no shared state):
+
+1. **Fundamentals agent** (`subagent_type: researcher`) — earnings, analyst PTs, revenue growth, sector positioning. Read recent SEC filings if relevant.
+2. **Technicals agent** (`subagent_type: researcher`) — run `python3 scripts/research.py analyze <SYMBOL>` for each candidate. Walk through the 6-point checklist from CLAUDE.md. Identify clean entry/stop/target levels.
+3. **News agent** (`subagent_type: researcher`) — last 24h news for each candidate via WebSearch. Specifically: catalysts, downgrades, analyst actions, sector news, competitor moves.
+4. **Sector momentum agent** (`subagent_type: researcher`) — sector ETF state (XLK, XLF, XLE, etc.) for the candidate's sector. Is the sector leading or rolling over? Check `memory/sector_blocklist.md` first.
+
+Each sub-agent prompt MUST be self-contained (the agent has no conversation context). Include ticker(s), the 6-point checklist text, and ask for a structured report under 250 words.
+
+After all four return, synthesize into one decision per candidate. If sub-agents disagree, default to the most cautious read.
+
+### 4a. Vector recall — similar past setups
+Before finalizing each setup, retrieve similar historical setups from RuFlo memory:
+
+Use `mcp__ruflo__memory_search` with:
+- `namespace: "trading"`
+- `query`: a one-line description of the proposed setup (e.g., "NVDA pullback to support after extended rally")
+- `limit: 5`
+- `smart: true` for query expansion + diversity
+
+Read the top results. If past setups with similar characteristics have a track record (filled/missed/won/lost), let that adjust the proposed confidence score by ±1. Note the citation in the setup description: "Vector memory: [key1, key2] — [outcome summary]".
+
+If no past setups match (similarity < 0.4 across all results), note "No prior precedent — first-of-kind setup" and proceed with caution (cap confidence at 7).
 
 ### 5. Update Memory Files
 - **`memory/market_context.md`**: Update with today's pre-market observations, key levels, sentiment
@@ -63,3 +82,19 @@ Also write each setup to `memory/open_positions.md` under "Pending Setups" — i
 If ClickUp MCP tools are unavailable, append summary to `memory/pending_clickup_updates.md`.
 
 **DO NOT place any trades in this routine.** This is research only — the user must reply to the ClickUp task to approve setups before market-open execution acts on them.
+
+### 8. Index today's research into RuFlo memory
+After posting to ClickUp, store today's pre-market intelligence so future routines can recall it:
+
+For each proposed setup, call `mcp__ruflo__memory_store`:
+- `namespace: "trading"`
+- `key: "setup/<TICKER>/<style>-<entry-zone>/YYYY-MM-DD"` (e.g. `setup/NVDA/swing-pullback-206-210/2026-05-08`)
+- `value`: setup summary (entry, stop, target, R:R, score, catalyst, sector)
+- `tags: ["setup", "<TICKER>", "<style>", "<sector>"]`
+
+Also store today's market context:
+- `key: "market-context/<theme>/YYYY-MM-DD"` (theme = e.g., `extended-overbought`, `risk-off-shift`, `pre-CPI`)
+- `value`: 3-5 sentence summary of regime
+- `tags: ["market-context", "<theme>"]`
+
+This makes today's analysis searchable from tomorrow's pre-market routine and from any future weekly review.
