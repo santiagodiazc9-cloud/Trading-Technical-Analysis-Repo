@@ -12,7 +12,6 @@ trading work get staged. Code is changed by humans (or `/ultrareview`-style
 reviews), then committed by humans.
 
 ### Single entrypoint
-
 All agent-initiated git ops go through `scripts/git_sync.py`. Routines and
 ad-hoc agent sessions invoke it like any other tool:
 
