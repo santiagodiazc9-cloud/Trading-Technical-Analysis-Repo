@@ -45,8 +45,8 @@ You are an autonomous trading agent managing a **paper trading account** on Alpa
 15. **APPROVAL REQUIRED**: NEVER place a trade without explicit user approval. Always present your analysis and recommendation first, then wait for the user to say "yes" or "go ahead" before executing any buy/sell/close order. Log the recommendation in memory even if the user declines.
 
    **How approval flows in automated routines:**
-   - Pre-market and midday routines write proposed setups to `memory/open_positions.md` under "Pending Setups" and post them to ClickUp marked **AWAITING APPROVAL**.
-   - The user approves a setup by either (a) replying to the ClickUp task with "approve" / "go ahead", or (b) editing `memory/open_positions.md` to add `Approved: YES` under that setup's entry.
+   - Pre-market and midday routines write proposed setups to `memory/open_positions.md` under "Pending Setups" with a unique `<SYMBOL>-YYYY-MM-DD` heading, then push a setup card to Discord `#approvals` via `scripts/notify.py setup …`.
+   - The user approves by (a) tapping the **Approve** button on the Discord card, (b) running `/approve <setup_id>` in Discord, or (c) editing `memory/open_positions.md` to add `Approved: YES` under that setup's entry.
    - The market-open execution routine ONLY trades setups that have an explicit `Approved: YES` flag in `memory/open_positions.md`. Anything else is skipped with "awaiting approval" logged.
    - Automatic actions allowed without approval: closing on stop-loss hit, closing on take-profit hit, closing day-trade positions before market close. These are part of the risk rules, not new entries.
 
@@ -108,7 +108,7 @@ In addition to the file-based memory below, this project uses RuFlo's AgentDB to
 
 **Tools**: `mcp__ruflo__memory_store` to write, `mcp__ruflo__memory_search` (with `smart: true` for query expansion) to read.
 
-If RuFlo MCP tools are unavailable in a given session, fall back to file-only memory and log the gap to `memory/pending_clickup_updates.md`.
+If RuFlo MCP tools are unavailable in a given session, fall back to file-only memory and log the gap to `memory/pending_discord_updates.md`.
 
 ---
 
@@ -160,50 +160,17 @@ Discord is the **primary user interface**. ClickUp is now a **read-only retro la
   - `#feedback` — bot watches (Phase 2) for one-line feedback
 
 ### Phase status
-- **Phase 1 (done)**: Dashboard, slash commands, channels, routines call dashboard refresh at end. `notify.py` calls already wired into routines 1–5 for setups/fills/alerts/briefs.
-- **Phase 2 (TODO)**: Replace `routines/6_clickup_polling.md` with `routines/6_discord_dispatcher.md` that drains `run_queue.json`, processes `discord_chat_queue.json`, and watches `#knowledge-inbox` / `#feedback` channels (bot adds those listeners or a polling routine pulls recent messages via Discord REST API).
-- **Phase 3 (TODO)**: Stop writing new ClickUp tasks/comments from routines 1–5 and 7. Strip ClickUp blocks from each routine. Delete `clickup_config.json` references in `Memory Protocol`. Update Memory Protocol to remove ClickUp mentions.
-
-Until Phase 2 lands, manual `/run` triggers wait until the next scheduled routine tick or a manual local invocation.
+- **Phase 1 (done)**: Dashboard at `Dashboard.md`, slash commands, channels, routines 1–5 call dashboard refresh at end. `notify.py` calls wired into routines 1–5 for setups/fills/alerts/briefs.
+- **Phase 2 (done)**: `routines/6_discord_dispatcher.md` replaces `6_clickup_polling.md` (kept as deprecated reference). Bot listens to `#knowledge-inbox` and `#feedback` channels, queueing to `memory/knowledge_inbox_queue.json` and `memory/feedback_queue.json`. `run_claude_polling.sh` invokes the dispatcher routine on the same 15-min cadence.
+- **Phase 3 (done)**: Routines 1–5 and 7 no longer write to ClickUp — Discord + dashboard cover audit/visibility. Memory Protocol updated. `memory/clickup_config.json` and the legacy `6_clickup_polling.md` remain on disk as a read-only archive; delete after one stable week.
 
 ---
 
-## ClickUp Protocol (read-only retro layer — Phase 3 will retire this section)
+## ClickUp Archive (legacy)
 
-ClickUp is now a historical archive. The instructions below describe how the system *previously* worked; routines are being migrated off ClickUp incrementally.
+ClickUp is no longer an active surface. The historical tasks/docs (Strategy Library, prior daily briefs, performance dashboard) remain in ClickUp as a read-only archive for retrospective review. `memory/clickup_config.json` is preserved so the deprecated `routines/6_clickup_polling.md` remains runnable as an emergency fallback if Discord becomes unavailable.
 
-ClickUp is the user's interface to the agent. The architecture is:
-
-```
-User interacts with ClickUp ↔ Polling routine reads ClickUp every 15 min ↔ Agent acts on file system / Alpaca
-```
-
-All ClickUp IDs (folders, lists, control tasks) are in `memory/clickup_config.json`. **Always read that file first** to know where to look.
-
-### Lists the agent reads (input)
-| List | Purpose | What to do |
-|------|---------|------------|
-| `pending_setups` | Trade proposals awaiting decision | Read each task's status. `to do` = awaiting. `in progress` or `complete` = approved. `closed` (with denied tag/comment) = denied |
-| `knowledge_inbox` | Training docs/links the user dropped | Read tasks with status `to do`, fetch content, summarize, append to `memory/learnings.md` and/or sync to Strategy Library doc, then move task to `complete` with summary comment |
-| `feedback_log` | Quick user notes | Read new tasks, fold into `memory/learnings.md`, mark complete |
-| `run_routines` | Manual routine triggers | If a task's status is `in progress`, run that routine, then reset task to `to do` with completion comment |
-| `watchlist` | Watchlist source of truth (user-managed) | Sync `memory/watchlist.json` to match open tasks |
-| `pause_toggle` | Master kill switch | Read the "Trading Active" task. `to do` = trade normally. `in progress` = no new trades. `complete` = full halt |
-| Agent Chat task (in `feedback_log`) | Chat-style conversation | Read new comments, post replies as comments, integrate strategy-relevant content into memory |
-
-### Lists the agent writes (output)
-| List | Purpose |
-|------|---------|
-| `pending_setups` | One task per proposed setup. Description has full analysis. User changes status to approve/deny |
-| `trade_log` | One task per executed trade. Updated when closed |
-| `daily_briefs` | One task per routine run (pre-market, midday, EOD, weekly) |
-| `risk_and_errors` | High-priority alerts when something needs immediate attention |
-
-### Performance Dashboard
-The task at `control_tasks.performance_dashboard` is **overwritten** by the End-of-Day routine each day with current metrics.
-
-### Polling routine
-A separate scheduled task (`trading-clickup-poller`) runs every 15 min during market hours and dispatches actions based on ClickUp state. It does NOT replace the 5 main routines — it only handles user-initiated actions between scheduled runs.
+If you need to consult or revive the ClickUp protocol, see the deprecated `routines/6_clickup_polling.md` and the prior version of this file in git history.
 
 ---
 
@@ -271,9 +238,7 @@ python3 scripts/notify.py brief 'Pre-market 2026-05-11' '3 setups proposed, awai
 
 ## Discord Protocol
 
-Discord is the **real-time speed layer** for time-sensitive interactions
-(approvals, fills, alerts). ClickUp remains the **audit/review layer**.
-Both surfaces read/write to the same `memory/*.md` files, so they stay in sync.
+Discord is the **primary user interface** for the agent. All real-time interactions (approvals, fills, alerts) and async surfaces (knowledge inbox, feedback, conversational `/ask`) flow through Discord. The file system (`memory/*` + `Dashboard.md`) remains the source of truth — Discord and the agent both read/write the same files.
 
 ### When to send to Discord (call `scripts/notify.py`)
 | Channel | Trigger |
@@ -281,8 +246,8 @@ Both surfaces read/write to the same `memory/*.md` files, so they stay in sync.
 | `approvals` | Pre-market / midday routine proposes a new setup. Use `notify.py setup ...` so buttons appear |
 | `fills` | An entry or exit order fills (after `alpaca_client.py buy/sell/close` succeeds) |
 | `risk_alerts` | -7% manual cut triggered, daily loss cap hit, PDT count maxed, sector blocklist trip, stop placement failed |
-| `daily_brief` | End of any routine — short summary. Silent (does not @here) |
-| `chat` | Reflective questions, freeform agent ↔ user conversation |
+| `daily_brief` | End of any routine — short summary. Silent (does not @here). Also hosts the pinned Dashboard mirror |
+| `chat` | Reflective questions, freeform agent ↔ user conversation, `/ask` answers |
 
 ### Setup ID convention
 Setup IDs MUST be unique and follow `<SYMBOL>-<YYYY-MM-DD>[-<suffix>]`
@@ -292,17 +257,15 @@ clicked. Use the same ID in the heading or body of the Pending Setup so
 the bot can find it.
 
 ### Approval flow
-1. Routine writes setup to `memory/open_positions.md` under "Pending Setups"
-2. Routine posts ClickUp task (audit)
-3. Routine calls `notify.py setup <id> ...` (push to phone + Mac)
-4. User taps Approve in Discord OR replies in ClickUp OR edits the file
-5. Bot edits `memory/open_positions.md` to add `Approved: YES` under that setup
-6. Polling routine syncs back to ClickUp on its 15-min cadence
-7. Market-open routine reads file, sees `Approved: YES`, executes
+1. Routine writes setup to `memory/open_positions.md` under "Pending Setups" with a `<SYMBOL>-YYYY-MM-DD` heading
+2. Routine calls `notify.py setup <id> ...` (push to phone + Mac, posts setup card with buttons)
+3. User taps **Approve** in Discord, runs `/approve <setup_id>`, or edits the file directly to add `Approved: YES`
+4. (Buttons / slash) Bot edits `memory/open_positions.md` to add `Approved: YES` under that setup
+5. Market-open routine reads the file, sees `Approved: YES`, executes the trade
 
 ### Fallbacks
-- If Discord webhook fails: log to `memory/pending_clickup_updates.md`, continue. ClickUp approval still works.
-- If bot is offline: webhook posts still go through (you'll see the setup card), but buttons do nothing — fall back to ClickUp or direct file edit.
+- If Discord webhook fails: log to `memory/pending_discord_updates.md`, continue. The setup is still in `memory/open_positions.md` — Santiago can approve via direct file edit.
+- If bot is offline: webhook posts still go through (you'll see the setup card), but buttons do nothing — fall back to direct file edit. The bot is supervised by launchd with `KeepAlive=true`, so this is rare.
 - If config file missing/placeholder URLs: `notify.py` exits with `{"ok": false, "error": "..."}` — log it and continue, don't block the routine.
 
 See `routines/discord_bot_runner.md` for setup, troubleshooting, and full CLI reference.
@@ -318,7 +281,7 @@ See `routines/discord_bot_runner.md` for setup, troubleshooting, and full CLI re
 | **Midday Scan** | 12:30 PM Mon-Fri | Check positions, scan for new setups, adjust stops |
 | **End-of-Day Review** | 3:45 PM Mon-Fri | Close day trades, journal the day, update learnings |
 | **Friday Weekly Review** | 4:30 PM Fri | Review week's performance, adjust strategy, write ADR if rules changed |
-| **ClickUp Polling** | every 15min Mon-Fri 14:00–22:30 CEST | Pull approvals, knowledge inbox, feedback, run-routine triggers, watchlist sync |
+| **Discord Dispatcher** | every 15min Mon-Fri 08:00–16:30 ET | Drain `run_queue.json`, `discord_chat_queue.json`, `knowledge_inbox_queue.json`, `feedback_queue.json` |
 | **Security Scan** | 11:00 AM Sat | CVE scan, secret leak check, permissions audit. Reports only — no auto-fix |
 
 ---
@@ -388,7 +351,7 @@ After every buy fills:
 
 ## Confidence Calibration
 
-Every trade proposal MUST include a confidence score 1-10 in the ClickUp pending-setup task description. Use this scale:
+Every trade proposal MUST include a confidence score 1-10 in the Discord setup card and the corresponding `memory/open_positions.md` entry. Use this scale:
 
 | Score | Meaning |
 |-------|---------|
@@ -399,15 +362,15 @@ Every trade proposal MUST include a confidence score 1-10 in the ClickUp pending
 
 Track outcomes by bucket. If 7-8 confidence trades win < 50% of the time over 10 samples, **the calibration is off — flag it in the next weekly review** and propose tightening rules.
 
-The Performance Dashboard task (in `lists.daily_briefs`, ID in `clickup_config.json.control_tasks.performance_dashboard`) shows running calibration stats. The End-of-Day routine updates it.
+Calibration stats live in `memory/trade_log.json` under `daily_snapshots` and surface on `Dashboard.md` (regenerated by every routine). The End-of-Day routine appends today's snapshot.
 
 ---
 
 ## Reflective Questions
 
-The End-of-Day routine should occasionally (not every day, only when there's something noteworthy) post a question to the Agent Chat task asking the user to reflect. Examples:
+The End-of-Day routine should occasionally (not every day, only when there's something noteworthy) post a question to Discord `#chat` via `notify.py send chat ...` asking the user to reflect. Examples:
 - "You denied AMD on Tuesday — looking back, was that the right call?"
 - "Three setups in a row had R:R 2.0:1 exactly. Should we raise the minimum?"
 - "Two TSLA day trades this week, both losses. Pause TSLA or adjust filter?"
 
-Their answers go into `memory/learnings.md` and shape future routines.
+Their replies in `#chat` are picked up by the Discord dispatcher routine (drains `discord_chat_queue.json` + `#chat` recent messages) and folded into `memory/learnings.md` to shape future routines.

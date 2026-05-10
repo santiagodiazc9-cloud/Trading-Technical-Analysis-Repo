@@ -74,38 +74,22 @@ If you identify setups worth executing at market open:
 
 **DO NOT place any trades in this routine.** This is research only.
 
-### 7. Post Update to ClickUp
-Read `memory/clickup_config.json`. Use these lists from it:
-- `lists.daily_briefs` for the brief
-- `lists.pending_setups` — one new task per proposed setup
-- `lists.risk_and_errors` if anything urgent
+### 7. Publish to Discord
+Discord is the primary user interface. ClickUp is no longer written to (read-only retro layer; existing tasks remain as historical archive).
 
-**A. Daily Brief** — `clickup_create_task` in `lists.daily_briefs`:
-- **name**: `Pre-Market Brief — YYYY-MM-DD`
-- **markdown_description**: account snapshot, top 3 candidates with checklist scores, market context, links to today's journal
-- **priority**: `normal`
+Also write each setup to `memory/open_positions.md` under "Pending Setups" — including a unique `<SYMBOL>-YYYY-MM-DD` heading the bot can match for Approve/Deny button clicks.
 
-**B. One task per pending setup** — `clickup_create_task` in `lists.pending_setups`:
-- **name**: `[TICKER] [LONG/SHORT] — entry $X, stop $Y, target $Z`
-- **markdown_description**: full analysis, R:R, position size, confidence (1-10), what would invalidate the setup
-- **priority**: `high`
-- The user approves by changing the task status from `to do` to `in progress` (or `complete`). The market-open routine and polling routine watch for this.
-
-Also write each setup to `memory/open_positions.md` under "Pending Setups" — include the ClickUp task ID for cross-reference.
-
-If ClickUp MCP tools are unavailable, append summary to `memory/pending_clickup_updates.md`.
-
-**C. Push each setup to Discord `#approvals`** — for every proposed setup, run:
+**A. Push each setup to Discord `#approvals`** — for every proposed setup:
 
 ```bash
 python3 scripts/notify.py setup <SETUP_ID> <SYMBOL> <LONG|SHORT> '<entry-zone>' '<stop>' '<target>' '<size>' '<rr>' <confidence-1-10> '<one-line catalyst>'
 ```
 
-`<SETUP_ID>` MUST be `<SYMBOL>-YYYY-MM-DD` (e.g. `NVDA-2026-05-11`) — same ID used in the `memory/open_positions.md` heading so the bot can match button clicks back to the file. The card posted to `#approvals` has Approve / Deny / More info buttons; tapping them edits `memory/open_positions.md` directly. See `routines/discord_bot_runner.md` for the full flow.
+The card has Approve / Deny / More info buttons; tapping them edits `memory/open_positions.md` directly. See `routines/discord_bot_runner.md` for the full flow.
 
-If `notify.py` returns `{"ok": false, ...}` (webhook unset, network error, etc.), append a line to `memory/pending_clickup_updates.md` and continue — ClickUp approval still works as the fallback.
+If `notify.py` returns `{"ok": false, ...}`, append a line to `memory/pending_discord_updates.md` and continue — Santiago can approve by editing `memory/open_positions.md` directly to add `Approved: YES` under the setup.
 
-**D. Post the pre-market summary to Discord `#daily-brief`** (silent, no @mention) — at the end of the routine, run:
+**B. Post the pre-market summary to Discord `#daily-brief`** (silent, no @mention):
 
 ```bash
 python3 scripts/notify.py brief 'Pre-Market Brief — YYYY-MM-DD' '<one-paragraph summary: top candidates, # setups proposed, market regime, key risks>'
@@ -119,12 +103,12 @@ python3 scripts/dashboard.py        # rewrites Dashboard.md at vault root
 python3 scripts/notify.py dashboard # PATCHes the pinned message in #daily-brief
 ```
 
-`Dashboard.md` is the agent's single source of truth for "current state" — account, positions, pending setups, risk state, recent learnings. Future routines and slash commands read it. Failures are non-fatal (log to `memory/pending_clickup_updates.md` and continue).
+`Dashboard.md` is the agent's single source of truth for "current state" — account, positions, pending setups, risk state, recent learnings. Future routines and slash commands read it. Failures are non-fatal (log to `memory/pending_discord_updates.md` and continue).
 
-**DO NOT place any trades in this routine.** This is research only — the user must reply to the ClickUp task to approve setups before market-open execution acts on them.
+**DO NOT place any trades in this routine.** This is research only — the user must approve setups via Discord button / `/approve` slash / direct file edit before market-open execution acts on them.
 
 ### 8. Index today's research into RuFlo memory
-After posting to ClickUp, store today's pre-market intelligence so future routines can recall it:
+After posting to Discord, store today's pre-market intelligence so future routines can recall it:
 
 For each proposed setup, call `mcp__ruflo__memory_store`:
 - `namespace: "trading"`

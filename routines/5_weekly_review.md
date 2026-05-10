@@ -5,6 +5,17 @@
 
 You are running the weekly review routine. This is your most important learning session.
 
+### 0. Ruflo health check (fail loudly, not silently)
+This routine writes ADRs and pattern summaries to RuFlo's `trading-adrs` and `trading` namespaces. If RuFlo is silently broken, those writes vanish into a fallback log and future weekly reviews can't query them.
+
+1. Call `mcp__ruflo__system_health`. Expected: healthy/ok.
+2. Call `mcp__ruflo__system_info`. Expected: version `3.7.0-alpha.20` (pinned in `.mcp.json`).
+3. On failure or version drift:
+   ```bash
+   python3 scripts/notify.py alert high ruflo 'Ruflo MCP unhealthy or version drift during weekly review — ADR/pattern stores may not persist. Expected v3.7.0-alpha.20.'
+   ```
+   Continue the routine with file-only memory; ADRs still get written to `docs/adr/`. Note in the weekly journal so the next routine cycle can retry the RuFlo store.
+
 ### 1. Load Memory
 Read ALL memory files:
 - `memory/trade_log.json`
@@ -106,19 +117,8 @@ Update `memory/market_context.md` with:
 - Key levels to watch on SPY/QQQ
 - Sector rotation themes to monitor
 
-### 9. Post Weekly Review to ClickUp
-Read `memory/clickup_config.json`.
-
-**A. Weekly Brief** — task in `lists.daily_briefs`:
-- **name**: `Weekly Review — Week ending YYYY-MM-DD`
-- **markdown_description**: total P&L ($/%), # trades, win rate, avg win/loss, best/worst trade, strategy effectiveness, adjustments made, confidence 1-10, plan for next week
-- **priority**: `high`
-
-**B. Performance Dashboard** — UPDATE `control_tasks.performance_dashboard` with full weekly + all-time metrics.
-
-**C. Strategy Library** — if any strategy adjustments were made, also update the `documents.strategy_library.active_strategy_page_id` page using `clickup_update_document_page`. Append the change to the "Adjustments Log" section.
-
-If ClickUp tools unavailable, append summary to `memory/pending_clickup_updates.md`.
+### 9. Update Strategy Library
+If any strategy adjustments were made in step 4, append them to `memory/strategy.md` under an "## Adjustments Log" section with date and ADR reference. The strategy file is the canonical strategy library now (Obsidian vault + git history); the prior ClickUp Strategy Library doc is read-only archive.
 
 ### 10. Post Weekly Summary to Discord `#daily-brief`
 At the end of the routine, run:
@@ -127,7 +127,7 @@ At the end of the routine, run:
 python3 scripts/notify.py brief 'Weekly Review — Week ending YYYY-MM-DD' '<summary: total P&L $/%, # trades, win rate, best/worst trade, ADR # if any rule changed, confidence 1-10, one-line plan for next week>'
 ```
 
-Silent (no @mention) — for at-a-glance review. If `notify.py` fails, log to `memory/pending_clickup_updates.md` and continue.
+Silent (no @mention) — for at-a-glance review. If `notify.py` fails, log to `memory/pending_discord_updates.md` and continue.
 
 ### 11. Refresh the Dashboard
 

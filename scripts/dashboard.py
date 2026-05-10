@@ -42,7 +42,7 @@ def run_alpaca(*args):
     """Call alpaca_client.py and parse JSON stdout. Returns None on failure."""
     try:
         out = subprocess.run(
-            ["python3", str(ALPACA_CLI), *args],
+            [sys.executable, str(ALPACA_CLI), *args],
             capture_output=True, text=True, timeout=15, check=False,
         )
         if out.returncode != 0:

@@ -33,4 +33,6 @@ if (( NOW_HHMM < 800 || NOW_HHMM > 1630 )); then
 fi
 
 cd "$PROJECT_ROOT"
-"$RUNNER" "routines/6_clickup_polling.md"
+# Routine swap: Discord dispatcher replaces the deprecated ClickUp polling
+# routine as of Phase 2 of the Discord migration (2026-05-10).
+"$RUNNER" "routines/6_discord_dispatcher.md"

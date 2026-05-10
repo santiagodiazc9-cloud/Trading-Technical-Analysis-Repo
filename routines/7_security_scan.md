@@ -2,14 +2,25 @@
 **Schedule**: Saturday 11:00 AM ET (market closed, low-pressure window)
 
 ## Purpose
-Catch vulnerabilities in the trading agent's Python dependencies and code. The agent handles real API keys (Alpaca, Anthropic, ClickUp) and places orders against a brokerage account. A compromised dependency or leaked secret is a serious incident.
+Catch vulnerabilities in the trading agent's Python dependencies and code. The agent handles real API keys (Alpaca, Anthropic, Discord bot token) and places orders against a brokerage account. A compromised dependency or leaked secret is a serious incident.
 
-This routine runs RuFlo's security tooling and reports findings. **It does not auto-fix.** Findings → ClickUp risk_and_errors task → user reviews and decides.
+This routine runs RuFlo's security tooling and reports findings. **It does not auto-fix.** Findings → Discord `#risk-alerts` (CRITICAL/HIGH) and `#daily-brief` (medium/low summary) → user reviews and decides.
 
 ## Instructions
 
+### 0. Ruflo health check (fail loudly, not silently)
+This routine writes CRITICAL/HIGH security findings to RuFlo's `trading-security` namespace so next week's scan can detect regressions. If RuFlo is silently broken, the security baseline doesn't accumulate.
+
+1. Call `mcp__ruflo__system_health`. Expected: healthy/ok.
+2. Call `mcp__ruflo__system_info`. Expected: version `3.7.0-alpha.20` (pinned in `.mcp.json`).
+3. On failure or version drift:
+   ```bash
+   python3 scripts/notify.py alert high ruflo 'Ruflo MCP unhealthy or version drift during security scan — findings will not be indexed for regression tracking. Expected v3.7.0-alpha.20.'
+   ```
+   Continue the scan; findings still get posted to Discord. Re-run scan after RuFlo is restored if you want findings indexed.
+
 ### 1. Load Memory
-Read `memory/clickup_config.json` for posting destinations.
+Read `memory/discord_config.json` for channel webhook URLs (used by `notify.py`).
 
 ### 2. Dependency CVE scan
 Spawn the security-auditor agent via the Agent tool:
@@ -49,26 +60,26 @@ Combine sub-agent report + secret-scan + permissions check into one report keyed
 
 If ZERO findings: post a brief "all clear" task. If ANY findings: post one task per CRITICAL/HIGH, one combined task for MEDIUM/LOW.
 
-### 6. Post to ClickUp
+### 6. Publish findings to Discord
 
-Use `lists.risk_and_errors` from `memory/clickup_config.json`.
+**A. All clear case** — silent post to `#daily-brief`:
 
-**A. All clear case** — `clickup_create_task`:
-- **name**: `🛡️ Security Scan — YYYY-MM-DD — All clear`
-- **markdown_description**: list of dependencies scanned, count of files reviewed, sub-agent confidence note
-- **priority**: `low`
+```bash
+python3 scripts/notify.py brief '🛡️ Security Scan — YYYY-MM-DD — All clear' '<deps scanned, files reviewed, sub-agent confidence>'
+```
 
-**B. Findings case** — one task per CRITICAL/HIGH:
-- **name**: `🛡️ [CRITICAL|HIGH] <short title>`
-- **markdown_description**: file:line, finding, why dangerous, suggested fix, sub-agent's confidence
-- **priority**: `urgent` for CRITICAL, `high` for HIGH
+**B. Findings case** — one alert per CRITICAL/HIGH to `#risk-alerts` (high+ tags @here):
 
-Plus one combined task for MEDIUM/LOW:
-- **name**: `🛡️ Security Scan — YYYY-MM-DD — <N> medium/low findings`
-- **markdown_description**: bulleted list, each with file:line + fix
-- **priority**: `normal`
+```bash
+python3 scripts/notify.py alert critical security '<short title>: <file:line> — <why dangerous> — <suggested fix>'
+python3 scripts/notify.py alert high     security '<short title>: <file:line> — <why dangerous> — <suggested fix>'
+```
 
-If ClickUp unavailable, append to `memory/pending_clickup_updates.md`.
+Plus one summary brief to `#daily-brief` with the full medium/low list:
+
+```bash
+python3 scripts/notify.py brief '🛡️ Security Scan — YYYY-MM-DD — <N> medium/low findings' '<bulleted list, each with file:line + fix>'
+```
 
 ### 7. Index findings into RuFlo memory
 For each CRITICAL/HIGH finding, store via `mcp__ruflo__memory_store`:
@@ -84,6 +95,6 @@ Append a short security section to `journal/YYYY-MM-DD.md` (or create `journal/s
 - Number of dependencies scanned
 - Number of findings by severity
 - Any actions taken (none, since this routine is read-only)
-- Link to ClickUp tasks created
+- Link to Discord posts (channel + message timestamps)
 
 **This routine NEVER modifies code. Findings are reported, not fixed.** Fixing happens in a separate manual session after Santiago reviews the findings.

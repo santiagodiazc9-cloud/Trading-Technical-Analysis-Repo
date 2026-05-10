@@ -28,7 +28,7 @@ Run: `python3 scripts/research.py analyze <SYMBOL>`
   - `python3 scripts/alpaca_client.py close <SYMBOL>`
   - `python3 scripts/notify.py fill <SYMBOL> sell <QTY> <FILL_PRICE> <ORDER_ID>`
 - **Trending well?** → Consider trailing the stop using ATR. Update `memory/open_positions.md`.
-- **Thesis broken (no longer matches the setup)?** → Recommend closure in the ClickUp update; **do NOT close on thesis change without user approval**.
+- **Thesis broken (no longer matches the setup)?** → Recommend closure in the `#daily-brief` summary; **do NOT close on thesis change without user approval**.
 
 ### 4. Scan for New Opportunities
 Run: `python3 scripts/research.py scan`
@@ -43,17 +43,8 @@ Run: `python3 scripts/research.py scan`
 - **`journal/YYYY-MM-DD.md`**: Add midday observations
 - **`memory/market_context.md`**: Update if market conditions have shifted
 
-### 6. Post Update to ClickUp
-Read `memory/clickup_config.json`.
-
-**A. Brief** — task in `lists.daily_briefs`:
-- **name**: `Midday Scan — YYYY-MM-DD`
-- **markdown_description**: position-by-position P&L, management actions, new setups flagged
-- **priority**: `high` if anything closed or new setup, else `normal`
-
-**B. New setups** — `clickup_create_task` in `lists.pending_setups` (one per setup), same format as pre-market.
-
-For every new setup proposed in this routine, also push it to Discord `#approvals` with a unique ID (e.g. `<SYMBOL>-YYYY-MM-DD-midday`):
+### 6. Push New Setups to Discord
+For every new setup proposed in this routine, push to Discord `#approvals` with a unique ID (e.g. `<SYMBOL>-YYYY-MM-DD-midday`):
 
 ```bash
 python3 scripts/notify.py setup <SETUP_ID> <SYMBOL> <LONG|SHORT> '<entry-zone>' '<stop>' '<target>' '<size>' '<rr>' <confidence-1-10> '<one-line catalyst>'
@@ -61,9 +52,7 @@ python3 scripts/notify.py setup <SETUP_ID> <SYMBOL> <LONG|SHORT> '<entry-zone>' 
 
 Use the same ID in the `memory/open_positions.md` heading so the bot can match button clicks.
 
-**C. Position updates** — for each position closed, find its task in `lists.trade_log` and add a comment with exit reason and P&L. If you have the task_id from the trade log entry, mark complete and tag `win` or `loss`.
-
-If ClickUp tools unavailable, append to `memory/pending_clickup_updates.md`.
+For each position closed, the fill notification in step 3 already documents the exit. The `memory/trade_log.json` update is the durable record.
 
 ### 7. Post Summary to Discord `#daily-brief`
 At the end of the routine, run:
@@ -72,7 +61,7 @@ At the end of the routine, run:
 python3 scripts/notify.py brief 'Midday Scan — YYYY-MM-DD' '<summary: per-position P&L, management actions taken, # new setups flagged>'
 ```
 
-Silent (no @mention). Per-fill and per-alert notifications already went to their channels in step 3. If `notify.py` fails, log to `memory/pending_clickup_updates.md` and continue.
+Silent (no @mention). Per-fill and per-alert notifications already went to their channels in step 3. If `notify.py` fails, log to `memory/pending_discord_updates.md` and continue.
 
 ### 8. Refresh the Dashboard
 

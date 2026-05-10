@@ -1,5 +1,8 @@
-# Routine: ClickUp Polling
-**Schedule**: Every 15 minutes, Mon–Fri, 14:00–22:30 CEST (≈ 8:00 AM–4:30 PM ET)
+# Routine: ClickUp Polling — **DEPRECATED**
+
+> **Status**: Superseded by `routines/6_discord_dispatcher.md` as of Phase 2 of the Discord migration (2026-05-10). ClickUp is now a read-only retro layer; user-initiated actions flow through Discord queue files instead. This file is kept temporarily for reference and will be deleted at Phase 3 once Discord has run for a full week without falling back.
+
+**Schedule (deprecated)**: Every 15 minutes, Mon–Fri, 14:00–22:30 CEST (≈ 8:00 AM–4:30 PM ET)
 
 ## Purpose
 Bridge between Santiago's phone (ClickUp) and the trading agent's local file system. This routine does NOT replace the 5 main trading routines — it only handles user-initiated actions between scheduled runs (approving setups, dropping training docs, sending feedback, manually triggering routines, syncing watchlist, posting chat messages).

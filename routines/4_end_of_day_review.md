@@ -53,26 +53,24 @@ Update `memory/open_positions.md` with:
 - Any symbols to watch closely tomorrow
 - Notes for tomorrow's pre-market research
 
-### 8. Post Update to ClickUp
-Read `memory/clickup_config.json`.
+### 8. Update the Performance Snapshot
+Append today's metrics to `memory/trade_log.json` under `daily_snapshots`:
+- date, equity, cash, P&L $/%, trades closed today, wins, losses
+- running win rate, running P&L
+- confidence-bucket calibration (predicted vs actual outcomes)
 
-**A. Brief** — task in `lists.daily_briefs`:
-- **name**: `End-of-Day Review — YYYY-MM-DD`
-- **markdown_description**: daily P&L $/% , trades closed (entry/exit/outcome), day-trade win rate, swing positions and P&L, top 1-3 observations, notes for tomorrow
-- **priority**: `high` if daily loss cap hit or rule violated, else `normal`
+The dashboard step below regenerates `Dashboard.md`, which surfaces these stats automatically. No separate dashboard task to update.
 
-**B. Performance Dashboard** — UPDATE the existing task at `control_tasks.performance_dashboard` (don't create a new one). Use `clickup_update_task` to overwrite the markdown_description with current metrics:
-- This Week: trades, win rate, avg win/loss, best/worst
-- All-time: starting bal $100k, current equity, total P&L
-- Confidence calibration: predicted vs actual outcomes by confidence bucket
+### 9. Reflective Question (optional)
+If a decision this week stood out (a denied setup that mooned, a series of stop-outs in one sector, etc.), post a single reflective question to Discord `#chat` so Santiago can reply at his own pace:
 
-**C. Trade Log updates** — for each trade closed today, find its task in `lists.trade_log` and mark complete with outcome.
+```bash
+python3 scripts/notify.py send chat 'Reflection — YYYY-MM-DD' 'You denied AMD on Tuesday — was that the right call given how it played out?'
+```
 
-**D. Daily Reflective Question** — also post a comment on the `control_tasks.agent_chat` task asking the user 1 question to reflect on (e.g. "You denied AMD on Tuesday — was that the right call given how it played out?"). Skip if no decisions were notable.
+Skip if nothing notable. Santiago's reply will be picked up by the dispatcher routine and folded into `memory/learnings.md`.
 
-If ClickUp tools unavailable, append to `memory/pending_clickup_updates.md`.
-
-### 9. Post Summary to Discord `#daily-brief`
+### 10. Post Summary to Discord `#daily-brief`
 At the end of the routine, run:
 
 ```bash
@@ -85,9 +83,9 @@ Silent (no @mention). If the daily loss cap was hit OR a hard rule was violated,
 python3 scripts/notify.py alert high portfolio '<one-line description: e.g. "Daily loss cap -2.4% — review tomorrow before any new entries">'
 ```
 
-If `notify.py` fails, log to `memory/pending_clickup_updates.md` and continue.
+If `notify.py` fails, log to `memory/pending_discord_updates.md` and continue.
 
-### 10. Refresh the Dashboard
+### 11. Refresh the Dashboard
 
 ```bash
 python3 scripts/dashboard.py

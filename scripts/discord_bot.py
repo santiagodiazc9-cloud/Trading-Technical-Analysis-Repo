@@ -41,6 +41,8 @@ WATCHLIST_PATH = ROOT / "memory" / "watchlist.json"
 PAUSE_PATH = ROOT / "memory" / "pause_state.json"
 RUN_QUEUE_PATH = ROOT / "memory" / "run_queue.json"
 CHAT_QUEUE_PATH = ROOT / "memory" / "discord_chat_queue.json"
+KNOWLEDGE_QUEUE_PATH = ROOT / "memory" / "knowledge_inbox_queue.json"
+FEEDBACK_QUEUE_PATH = ROOT / "memory" / "feedback_queue.json"
 DASHBOARD_PATH = ROOT / "Dashboard.md"
 ALPACA_CLI = ROOT / "scripts" / "alpaca_client.py"
 RESEARCH_CLI = ROOT / "scripts" / "research.py"
@@ -76,6 +78,24 @@ GUILD_ID = int(CONFIG["guild_id"])
 GUILD_OBJ = discord.Object(id=GUILD_ID)
 APPROVALS_CHANNEL_ID = int(CONFIG["channels"]["approvals"]["channel_id"])
 RISK_CHANNEL_ID = int(CONFIG["channels"]["risk_alerts"]["channel_id"])
+
+
+def _channel_id_or_none(name: str):
+    """Return int channel_id for the named channel, or None if missing/placeholder."""
+    chan = CONFIG.get("channels", {}).get(name)
+    if not chan:
+        return None
+    cid = chan.get("channel_id", "")
+    if not cid or "REPLACE" in str(cid):
+        return None
+    try:
+        return int(cid)
+    except (TypeError, ValueError):
+        return None
+
+
+KNOWLEDGE_INBOX_CHANNEL_ID = _channel_id_or_none("knowledge_inbox")
+FEEDBACK_CHANNEL_ID = _channel_id_or_none("feedback")
 
 
 intents = discord.Intents.default()
@@ -160,6 +180,53 @@ async def on_ready():
             await risk_ch.send("ℹ️ Trading agent bot online.")
         except Exception as e:
             log.warning("Healthcheck post failed: %s", e)
+
+
+@client.event
+async def on_message(message: discord.Message):
+    """
+    Watch #knowledge-inbox and #feedback for new messages from the authorized
+    user. Each match gets enqueued to a memory file for the dispatcher routine
+    to drain and process. Bot's own messages and other users are ignored.
+    """
+    if message.author.id == client.user.id:
+        return
+    if message.author.id != AUTHORIZED_USER_ID:
+        return  # ignore unauthorized users — same gate as slash commands
+
+    payload = {
+        "message_id": str(message.id),
+        "channel_id": str(message.channel.id),
+        "author_id": str(message.author.id),
+        "received_at": datetime.utcnow().isoformat() + "Z",
+        "content": message.content or "",
+        "attachments": [
+            {"filename": a.filename, "url": a.url, "size": a.size}
+            for a in message.attachments
+        ],
+    }
+
+    target = None
+    if KNOWLEDGE_INBOX_CHANNEL_ID and message.channel.id == KNOWLEDGE_INBOX_CHANNEL_ID:
+        target = ("knowledge_inbox", KNOWLEDGE_QUEUE_PATH)
+    elif FEEDBACK_CHANNEL_ID and message.channel.id == FEEDBACK_CHANNEL_ID:
+        target = ("feedback", FEEDBACK_QUEUE_PATH)
+
+    if not target:
+        return
+
+    name, path = target
+    try:
+        data = json.loads(path.read_text()) if path.exists() else {"queue": []}
+    except json.JSONDecodeError:
+        data = {"queue": []}
+    data.setdefault("queue", []).append(payload)
+    path.write_text(json.dumps(data, indent=2))
+    append_action_log(f"{name}_msg  msg_id={message.id}  attachments={len(payload['attachments'])}")
+    try:
+        await message.add_reaction("📥")  # ack so user sees it was queued
+    except discord.HTTPException:
+        pass
 
 
 @client.event
@@ -295,7 +362,7 @@ async def dashboard_cmd(interaction: discord.Interaction):
         await interaction.response.send_message("Not authorized.", ephemeral=True)
         return
     await interaction.response.defer(ephemeral=True, thinking=True)
-    rc, _ = shell("python3", str(DASHBOARD_SCRIPT))
+    rc, _ = shell(sys.executable, str(DASHBOARD_SCRIPT))
     body = DASHBOARD_PATH.read_text() if DASHBOARD_PATH.exists() else "_Dashboard.md not found._"
     append_action_log(f"dashboard  rc={rc}")
     await interaction.followup.send(reply_block(body, "markdown"), ephemeral=True)
@@ -307,7 +374,7 @@ async def positions_cmd(interaction: discord.Interaction):
         await interaction.response.send_message("Not authorized.", ephemeral=True)
         return
     await interaction.response.defer(ephemeral=True, thinking=True)
-    rc, body = shell("python3", str(ALPACA_CLI), "positions")
+    rc, body = shell(sys.executable, str(ALPACA_CLI), "positions")
     append_action_log(f"positions  rc={rc}")
     await interaction.followup.send(reply_block(body, "json"), ephemeral=True)
 
@@ -318,7 +385,7 @@ async def account_cmd(interaction: discord.Interaction):
         await interaction.response.send_message("Not authorized.", ephemeral=True)
         return
     await interaction.response.defer(ephemeral=True, thinking=True)
-    rc, body = shell("python3", str(ALPACA_CLI), "account")
+    rc, body = shell(sys.executable, str(ALPACA_CLI), "account")
     append_action_log(f"account  rc={rc}")
     await interaction.followup.send(reply_block(body, "json"), ephemeral=True)
 
@@ -334,7 +401,7 @@ async def scan_cmd(interaction: discord.Interaction, symbol: str):
         await interaction.response.send_message(f"⚠️ Invalid symbol `{symbol}`.", ephemeral=True)
         return
     await interaction.response.defer(ephemeral=True, thinking=True)
-    rc, body = shell("python3", str(RESEARCH_CLI), "analyze", sym, timeout=60)
+    rc, body = shell(sys.executable, str(RESEARCH_CLI), "analyze", sym, timeout=60)
     append_action_log(f"scan {sym}  rc={rc}")
     await interaction.followup.send(reply_block(body, "json"), ephemeral=True)
 
