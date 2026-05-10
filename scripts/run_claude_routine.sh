@@ -18,9 +18,21 @@ fi
 
 PROMPT="$(cat "$ROUTINE_PATH")"
 
-CLAUDE_BIN="/usr/local/bin/claude"
-if [[ ! -x "$CLAUDE_BIN" ]]; then
-  echo "Claude CLI not found or not executable at $CLAUDE_BIN" >&2
+# Locate the claude CLI. Try common install paths in priority order, then
+# fall back to PATH lookup so this works on both Mac (~/.local/bin) and
+# CI runners (npm global / /usr/local/bin).
+CLAUDE_BIN=""
+for candidate in "$HOME/.local/bin/claude" "/usr/local/bin/claude" "/opt/homebrew/bin/claude"; do
+  if [[ -x "$candidate" ]]; then
+    CLAUDE_BIN="$candidate"
+    break
+  fi
+done
+if [[ -z "$CLAUDE_BIN" ]]; then
+  CLAUDE_BIN="$(command -v claude || true)"
+fi
+if [[ -z "$CLAUDE_BIN" ]] || [[ ! -x "$CLAUDE_BIN" ]]; then
+  echo "Claude CLI not found in ~/.local/bin, /usr/local/bin, /opt/homebrew/bin, or PATH" >&2
   exit 1
 fi
 
