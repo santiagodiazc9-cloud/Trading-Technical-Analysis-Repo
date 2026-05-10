@@ -8,10 +8,11 @@ name: trading-security
 # to enable.
 
 on:
-  schedule:
-    # 11:00 ET Sat = 15:00 UTC (EDT) or 16:00 UTC (EST). Both fire; the
-    # dispatch script picks the matching ET slot.
-    - cron: "0 15,16 * * 6"
+  # Cron parked — local launchd handles the Saturday scan. To re-enable
+  # cloud-side, uncomment the cron line and follow .github/SECRETS.md.
+  #
+  # schedule:
+  #   - cron: "0 15,16 * * 6"   # 11:00 ET Sat (covers EDT 15:00 and EST 16:00)
   workflow_dispatch: {}
 
 permissions:

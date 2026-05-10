@@ -136,25 +136,30 @@ Verify with: `git ls-files | grep -i env` — should be empty.
 
 ## Activation checklist
 
-Local mode already works. To extend to **GitHub Actions** (scaffolded —
-see `.github/workflows/trading-dispatch.yml` and `.github/SECRETS.md`):
+Local mode is the **active** surface today. GitHub Actions is scaffolded
+but **parked** — workflow files exist with cron schedules commented out
+and a `TRADING_GHA_ENABLED` repo-variable kill-switch. Reactivate later:
 
 ```text
-1. Verify clean working tree:
-     python3 scripts/git_sync.py status   # ahead: 0, behind: 0, dirty: []
+1. Uncomment the `schedule:` block in both workflow files:
+     .github/workflows/trading-dispatch.yml
+     .github/workflows/trading-security.yml
 
 2. In GitHub, Settings → Secrets and variables → Actions:
      Secrets: ALPACA_API_KEY, ALPACA_API_SECRET, ALPACA_BASE_URL (optional),
               ANTHROPIC_API_KEY, DISCORD_CONFIG_JSON
      Variable: TRADING_GHA_ENABLED = true
 
-3. Test fire: Actions tab → trading-dispatch → "Run workflow" with
+3. Verify clean working tree:
+     python3 scripts/git_sync.py status   # ahead: 0, behind: 0, dirty: []
+
+4. Test fire: Actions tab → trading-dispatch → "Run workflow" with
    routine input `routines/6_discord_dispatcher.md`. Confirm a
    `routine(gha): …` commit lands on origin/main.
 
-4. Let the scheduled cron fire naturally on next trading day.
+5. Let the scheduled cron fire naturally on next trading day.
 
-5. (optional) Disable local launchd once GHA proves stable:
+6. (optional) Disable local launchd once GHA proves stable:
      launchctl unload -w ~/Library/LaunchAgents/com.claude.tradingagent.routines.plist
      launchctl unload -w ~/Library/LaunchAgents/com.claude.tradingagent.polling.plist
 ```
