@@ -43,8 +43,11 @@ build/
 .obsidian/workspace.json
 .obsidian/workspace-mobile.json
 .obsidian/cache
-.obsidian/plugins/*/data.json
 .obsidian/graph.json
+# Plugin code is bulk + reinstallable from community browser. Track only
+# which plugins are enabled (community-plugins.json) so the vault is
+# reproducible without committing megabytes of third-party JS.
+.obsidian/plugins/
 
 # Vault attachments folder is created lazily; track contents but not the empty dir marker
 attachments/.gitkeep
