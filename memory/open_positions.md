@@ -24,7 +24,7 @@ None.
 - Checklist Score: 5/6 (trend ✅, momentum ✅, volatility ✅, R:R ⚠️ conditional on pullback, size ✅, catalyst ✅)
 - Catalyst: AI cycle intact, analyst target $272, strong macro backdrop
 - Approved: (add YES here to activate)
-- Status: **AWAITING APPROVAL** — add `Approved: YES` above or reply "approve" in ClickUp
+- Status: **AWAITING APPROVAL** — add `Approved: YES` above, or tap Approve in Discord `#approvals`, or run `/approve <setup_id>`
 
 ### Watchlist Only
 - TSLA: Day-trade candidate. No pre-planned entry. Watch for breakout above $415 or pullback to $386–392.
@@ -55,4 +55,4 @@ None.
 - Run `python scripts/research.py scan` from VS Code first thing to get live indicator data.
 - If NVDA is pulling back toward 206–210, assess whether it qualifies for swing entry (RSI resetting, MACD not deeply negative, volume normal).
 - TSLA: Only day-trade if a clean 5-minute breakout forms above prior resistance — no guessing.
-- Post any new setups to ClickUp for approval before the 9:35 AM execution routine fires.
+- Post any new setups to Discord `#approvals` (via `notify.py setup ...`) before the 9:35 AM execution routine fires.

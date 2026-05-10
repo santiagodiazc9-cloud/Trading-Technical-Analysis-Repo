@@ -27,11 +27,18 @@ Welcome. This project root IS the Obsidian vault.
 │   ├── market_context.md
 │   ├── open_positions.md
 │   ├── sector_blocklist.md
-│   ├── pending_clickup_updates.md
+│   ├── pending_discord_updates.md
 │   ├── watchlist.json          ← JSON, not Obsidian-native, but readable
 │   ├── trade_log.json
-│   ├── clickup_config.json     ← config (don't edit through Obsidian)
-│   └── last_poll.json          ← polling state (auto-managed)
+│   ├── pause_state.json        ← managed by /pause /resume /halt slash commands
+│   ├── run_queue.json          ← /run slash command queue (drained by dispatcher)
+│   ├── discord_chat_queue.json ← /ask slash command queue
+│   ├── knowledge_inbox_queue.json   ← bot writes from #knowledge-inbox
+│   ├── feedback_queue.json     ← bot writes from #feedback
+│   ├── discord_config.json     ← Discord channel IDs + webhooks (gitignored)
+│   ├── dashboard_message.json  ← pinned dashboard message tracker
+│   ├── channel_explainers.json ← pinned channel explainer trackers
+│   └── last_dispatch.json      ← dispatcher state (auto-managed)
 ├── docs/adr/                   ← Architecture Decision Records
 │   ├── README.md
 │   └── NNNN-slug.md
@@ -71,7 +78,7 @@ Use these tags consistently:
 - `#journal` — daily journal entry
 - `#weekly-review` — weekly summary
 - `#market-context` — regime / macro state
-- `#feedback` — feedback from user via ClickUp
+- `#feedback` — feedback from user via Discord `#feedback` channel
 - `#knowledge` — content imported from Knowledge Inbox
 - `#meta` — vault config, README files
 - `#deny/<reason>` — denial reasons (e.g., `#deny/overbought`, `#deny/no-catalyst`)
@@ -124,10 +131,13 @@ For mobile (Obsidian iOS):
 
 These files are auto-managed and will be overwritten by routines — leave them alone in Obsidian:
 
-- `memory/clickup_config.json`
-- `memory/last_poll.json`
-- `memory/trade_log.json`
-- `memory/watchlist.json` (managed by ClickUp polling routine)
+- `memory/discord_config.json` (gitignored anyway)
+- `memory/dashboard_message.json` (auto-managed)
+- `memory/channel_explainers.json` (auto-managed)
+- `memory/last_dispatch.json` (dispatcher state, auto-managed)
+- `memory/trade_log.json` (routines append; manual edits get clobbered)
+- `memory/watchlist.json` (managed by `/watchlist` slash command)
+- `memory/{run,discord_chat,knowledge_inbox,feedback}_queue.json` (bot/dispatcher write here)
 - `.claude-flow/` and `.swarm/` (RuFlo internals — gitignored anyway)
 - `ruvector.db` (vector store — gitignored)
 

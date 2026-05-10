@@ -92,7 +92,7 @@
     {
       "label": "Trading: Show Pending ClickUp Updates (fallback log)",
       "type": "shell",
-      "command": "cat memory/pending_clickup_updates.md",
+      "command": "cat memory/pending_discord_updates.md",
       "options": { "cwd": "${workspaceFolder}" },
       "presentation": { "reveal": "always", "panel": "dedicated", "clear": true },
       "problemMatcher": []

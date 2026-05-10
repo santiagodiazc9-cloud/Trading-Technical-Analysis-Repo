@@ -63,7 +63,7 @@ EXCLUDED_FILES = {
     "memory/clickup_config.json",
     "memory/trade_log.json",
     "memory/watchlist.json",
-    "memory/pending_clickup_updates.md",
+    "memory/pending_discord_updates.md",
 }
 
 

@@ -37,7 +37,7 @@ export TRADING_GIT_AUTOCOMMIT=1
 Then trigger any routine manually. After it finishes, run `git log -1` to confirm a new commit landed. If the push succeeded, your remote should reflect it. **Do this for at least one full week of routines to verify stability before flipping to cloud.**
 
 ### Step 2: Move secrets to a secure store
-The `.env` file holds your Alpaca, Anthropic, and ClickUp keys. Cloud routines can't read your local `.env`. Options:
+The `.env` file holds your Alpaca and Discord bot keys (and optionally Anthropic API key). The gitignored `memory/discord_config.json` holds Discord webhook URLs. Cloud routines can't read your local files. Options:
 
 - **Anthropic Cloud Routines secret store** (preferred when supported) — paste `.env` contents into the routine's environment configuration in the Claude desktop app.
 - **GitHub repo encrypted Actions secrets** — if you migrate to GitHub Actions instead of Claude cloud routines, configure secrets at the repo level.
@@ -62,10 +62,11 @@ The `.env` file holds your Alpaca, Anthropic, and ClickUp keys. Cloud routines c
 
 ### Step 4: Verify end-to-end
 After cutover, leave the Mac OFF for one full trading day. Verify:
-- ClickUp received Pre-Market Brief at 8:00 AM ET
-- ClickUp received Market Open Execution post at 9:35 AM ET
-- ClickUp received Midday Scan at 12:30 PM ET
-- ClickUp received EOD Review at 3:45 PM ET
+- Discord `#daily-brief` received Pre-Market Brief at 8:00 AM ET
+- Discord `#daily-brief` received Market Open Execution post at 9:35 AM ET
+- Discord `#daily-brief` received Midday Scan at 12:30 PM ET
+- Discord `#daily-brief` received EOD Review at 3:45 PM ET
+- The pinned dashboard message in `#daily-brief` shows updated timestamps
 - Git remote shows commits for each routine
 
 If any are missing, investigate the cloud schedule, secret config, and `git pull` step.
@@ -111,7 +112,7 @@ After review, the cloud cowork architecture splits responsibilities across two s
 Owns work that requires Claude's reasoning loop — analysis, decisions, approvals, write-ups.
 
 - All 5 trading routines (pre-market, market open, midday, EOD, weekly review)
-- Polling routine (interprets ClickUp comments, drafts replies, updates memory)
+- Discord dispatcher routine (drains Discord queue files: `/run`, `/ask`, `#knowledge-inbox`, `#feedback`)
 - Anywhere a sub-agent swarm is spawned (RuFlo Phase 0 item 2)
 - ADR authoring during weekly review
 
@@ -122,7 +123,7 @@ Owns deterministic automation that must run independently of any Claude session.
 
 - Memory commit verification: every push triggers a check that `memory/` was updated and that no secrets leaked
 - Daily cron job: snapshot `memory/` + `journal/` to a separate "history" branch (immutable timeline of memory state)
-- Pre-merge gate on `main`: lint, validate `memory/clickup_config.json` schema, validate routine markdown front-matter, run `python3 -c "import scripts.alpaca_client; import scripts.research"` (smoke import test)
+- Pre-merge gate on `main`: lint, validate `memory/discord_config.json` schema, validate routine markdown front-matter, run `python3 -c "import scripts.alpaca_client; import scripts.research"` (smoke import test)
 - Saturday security scan: also runs as a GitHub Action so the codebase is checked even if local Mac and Anthropic cloud are both quiet
 - Optional: dependabot or equivalent on `requirements.txt`
 

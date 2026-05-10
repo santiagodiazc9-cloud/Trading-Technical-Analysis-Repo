@@ -55,7 +55,7 @@ What does RuFlo memory turn up for similar setups?
 
 ## Approval
 **Status**: AWAITING APPROVAL
-- [ ] `Approved: YES` (manually edited here OR ClickUp status changed to `in progress`)
+- [ ] `Approved: YES` (set via Discord Approve button, `/approve <setup_id>` slash, or manual edit here)
 
 ## Outcome (filled in after closing)
 - **Exit price**:

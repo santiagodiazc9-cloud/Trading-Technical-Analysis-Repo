@@ -12,7 +12,7 @@ You have an autonomous AI trading agent that runs on a paper-trading Alpaca acco
 
 ### The flow in one paragraph
 
-The agent runs on a schedule (5 routines a day). Each routine reads its memory files in your project folder, fetches data from Alpaca, decides what to do, posts results to ClickUp, and writes a journal entry. You see the proposals on your phone via ClickUp, approve or deny with a tap, and the next routine acts on your decision. You can also talk to the agent any time via Claude Code in VS Code or via ClickUp's Agent Chat.
+The agent runs on a schedule (5 routines a day, M–F). Each routine reads its memory files in your project folder, fetches data from Alpaca, decides what to do, posts results to **Discord**, and writes a journal entry. You see the proposals on your phone via Discord push notifications, approve or deny with a button tap (or a slash command, or a direct file edit), and the next routine acts on your decision. You can talk to the agent any time via slash commands, Discord channels (`#knowledge-inbox`, `#feedback`, `#chat`), or via Claude Code in VS Code.
 
 ---
 
@@ -20,91 +20,76 @@ The agent runs on a schedule (5 routines a day). Each routine reads its memory f
 
 | Tool | Role | When you use it | Where it lives |
 |------|------|------------------|-----------------|
-| **Claude Desktop App (Cowork)** | Runs scheduled routines, hosts ClickUp connector, runs polling routine | Set-and-forget mostly. Open to manage schedule, pause/resume routines, see logs | Mac app |
-| **VS Code + Claude Code** | Manual interactive control of the agent. Edit memory files, trigger ad-hoc analysis | When you want to ask questions, run a one-off scan, fix something | VS Code in Mac |
-| **RuFlo (in Claude Code)** | Optional power-user enhancement: vector memory, agent swarms, ADRs | Advanced — covered in Part 7. Skip until you've used the basics for a few days | VS Code terminal |
-| **ClickUp (web + mobile app)** | Your phone-based control surface. Approve trades, train agent, see briefs | Many times a day, especially morning + after market close | iPhone/web |
-| **Alpaca Markets (web + mobile app)** | The actual brokerage. Holds positions, executes trades, holds your $100k paper balance | Once a day to verify positions, occasionally to monitor live | iPhone/web |
-| **The project folder in `/Users/santiagodiaz/Documents/Claude/Projects/...`** | The agent's brain. Memory, journal, scripts, routines — all live here | Rarely directly. View through VS Code | Mac filesystem |
+| **Discord (web + mobile)** | Your phone-based control surface. Approve trades, see fills, get alerts, train the agent | Many times a day, especially morning + after market close | iPhone / web / Mac app |
+| **launchd (Mac background)** | Runs the 4 scheduled jobs: routines, dispatcher, security scan, Discord bot | Set-and-forget. Inspect logs in `launchd_*.log` if something looks off | Mac filesystem |
+| **VS Code + Claude Code** | Manual interactive control. Edit memory files, trigger ad-hoc analysis, debug | When you want to dig in, run a one-off scan, fix something | VS Code on Mac |
+| **RuFlo MCP** (in Claude Code) | Vector memory + agent swarms — used by routines for "find similar past setups" | Mostly invisible — the routines call it. Pinned to `3.7.0-alpha.20` in `.mcp.json` | Background MCP server |
+| **Alpaca Paper Markets (web + mobile app)** | The actual brokerage. Holds positions, executes trades, holds your $100k paper balance | Once a day to verify positions, occasionally to monitor live | iPhone / web |
+| **The project folder `~/code/trading-agent/`** | The agent's brain. Memory, journal, scripts, routines, ADRs — all live here | Rarely directly. View through VS Code. Source of truth for everything | Mac filesystem |
 
-**The 80/20 rule:** 80% of your day-to-day happens in **ClickUp on your phone**. 20% happens in **VS Code** when you want to dig in or fix something. The rest runs invisibly.
+**The 80/20 rule:** 80% of your day-to-day happens in **Discord on your phone**. 20% happens in **VS Code** when you want to dig in or fix something. The rest runs invisibly via launchd.
 
 ---
 
 ## Part 3 — Each Tool in Detail
 
-### 3.1 Claude Desktop App (Cowork)
+### 3.1 launchd (background scheduling)
 
-**What it is:** The Mac app where we have these chat conversations. It also hosts the agent's automatic schedule and the ClickUp integration.
+**What it is:** macOS's built-in cron equivalent. Four jobs are loaded:
 
-**What runs here:**
-- 5 scheduled trading routines (Mon-Fri)
-- 1 polling routine (every 15 min during market hours)
-- All ClickUp posts to your phone
+| Job | What it runs | When |
+|---|---|---|
+| `com.claude.tradingagent.routines` | Picks the right routine based on time-of-day, runs it via Claude Code | M–F at 08:00, 09:35, 12:30, 15:45 ET + Fri 16:30 ET |
+| `com.claude.tradingagent.polling` | Runs the Discord dispatcher (drains `/run`, `/ask`, `#knowledge-inbox`, `#feedback` queues) | Every 15 min, gated 08:00–16:30 ET M–F |
+| `com.claude.tradingagent.security` | Runs the Saturday security scan (CVE check, secret leak scan) | Sat 11:00 ET |
+| `com.claude.tradingagent.discordbot` | The Discord bot — listens for buttons, slash commands, channel posts | Always on (`KeepAlive=true`) |
 
-**When to open it:**
-- To pause a routine for a day
-- To trigger a "Run now" on a specific routine
-- To see the last-run timestamp and verify schedules are firing
-- To have a free-form conversation about what to build/change in the project (which is what we're doing now)
+**Where to look:**
+- Plists: `scripts/claude_*_launchd.plist` (templates) → installed at `~/Library/LaunchAgents/`
+- Logs: `launchd_*.log` in the project root
+- Status: `launchctl list | grep tradingagent`
 
-**Where things are:**
-- Left sidebar → **Scheduled** section: your 6 routines
-- Click any routine → opens detail view → "Run now" button + last-run logs
-
-**Critical thing to know:** Cowork routines **only run while your Mac is on and the app is running** (or in the background). If you close your Mac for the weekend, no routines fire. The PDF you read uses Claude Cloud Routines which run even when your Mac is off — that's a future upgrade.
-
----
+**Critical:** routines run **only while your Mac is on**. Closing the laptop = no routines. The eventual fix is Cloud Cowork (see [CLOUD_COWORK.md](CLOUD_COWORK.md)).
 
 ### 3.2 VS Code + Claude Code
 
-**What it is:** Your code editor with an AI agent built in. The Claude Code extension talks to Claude (the same AI) but interactively.
+**What it is:** Your code editor with an AI agent built in. Claude Code in VS Code talks to the same Claude (the one writing this guide), but interactively.
 
 **What you do here:**
-- Have one-off conversations with the agent ("analyze NVDA right now")
+- One-off conversations with the agent ("analyze NVDA right now")
 - Edit memory files manually (e.g., approve a setup by editing `memory/open_positions.md`)
-- Run the project's Python scripts (`python3 scripts/research.py scan`)
-- Check the project structure
-- Trigger any routine on demand (Cmd+Shift+P → "Run Task")
+- Run the project's Python scripts directly (`python3 scripts/research.py scan`)
+- Trigger any routine on demand (Cmd+Shift+P → "Run Task" — see [RUN_ROUTINES.md](RUN_ROUTINES.md))
 
 **When to use it:**
-- You want to dig into the agent's reasoning at a deeper level
 - A scheduled routine failed and you want to debug
 - You want to ask "what would you do if I bought NVDA at $208?" (simulation)
 - You're editing strategy or learnings files directly
 - You're testing a new idea before letting the schedule run with it
 
-**Tasks shortcut:** Cmd+Shift+P → "Tasks: Run Task" → pick from the 12 trading tasks (see RUN_ROUTINES.md).
+### 3.3 RuFlo (background MCP)
 
----
+**What it is:** A Claude Code MCP server. Pinned to `ruflo@3.7.0-alpha.20` in `.mcp.json`.
 
-### 3.3 RuFlo (advanced)
+**What routines actually use:**
+- `mcp__ruflo__memory_store` — index proposed setups, strategy decisions, knowledge dumps, security findings into a vector store
+- `mcp__ruflo__memory_search` — pre-market routine asks "have we seen a setup like this before?" before finalizing each proposal
+- `mcp__ruflo__system_health` — health check at the start of routines 1, 5, 7
 
-**What it is:** A Claude Code workflow plugin you installed. Adds power features like vector memory, multi-agent swarms, architecture decision records, and remote phone control.
+**You almost never touch it directly.** Routines fall back to file-only memory if it's down — they alert via `#risk-alerts` so you know.
 
-**Skip this section if you're new** — the basics work without it. Come back when you want to enhance:
-- **Vector memory**: agent retrieves "similar past setups" before deciding
-- **Swarm**: parallel sub-agents for fundamentals/technicals/news/sector research
-- **ADR**: long-term log of strategy changes (why we changed each rule)
-- **/remote-control**: control the trading session from your phone via voice/text
-- **CVE scanning**: security audit the Python code
+### 3.4 Discord
 
-We have a build plan for integrating it — just say "approved" and we'll wire steps 1-3 in.
-
----
-
-### 3.4 ClickUp
-
-**Your phone-based command center.** Detailed walkthrough in **CLICKUP_GUIDE.md**.
+**Your phone-based command center.** Detailed walkthrough in **[DISCORD.md](DISCORD.md)**.
 
 **The 5 things you'll do most:**
-1. **Approve a trade**: Pending Setups → tap setup → change status to "in progress"
-2. **Read a brief**: Daily Briefs → tap today's task → read the markdown
-3. **Talk to the agent**: 💬 Agent Chat task → add a comment → wait ~15 min for reply
-4. **Train the agent**: Knowledge Inbox → new task with link or PDF → wait for summary
-5. **Pause everything**: Pause Toggle → "Trading Active" task → status "in progress" or "complete"
+1. **Approve a trade**: tap **Approve** on the setup card in `#approvals`
+2. **Read a brief**: scroll `#daily-brief` — pinned message is the always-current dashboard
+3. **Talk to the agent**: type `/ask <question>` in any channel
+4. **Train the agent**: post articles/PDFs in `#knowledge-inbox`, one-liners in `#feedback`
+5. **Pause everything**: `/pause [reason]` (no new entries) or `/halt <reason>` (full halt)
 
----
+The full slash command catalog is in DISCORD.md — 14 commands grouped by purpose.
 
 ### 3.5 Alpaca Markets
 
@@ -116,9 +101,9 @@ We have a build plan for integrating it — just say "approved" and we'll wire s
 - See your $100k paper balance
 - Check pending orders (especially trailing stops)
 
-**Mobile app**: download "Alpaca: Investing & Trading" from App Store. Log in. Switch to **Paper Trading** mode (top-right toggle). You'll see exactly what the agent sees.
+**Mobile app**: download "Alpaca: Investing & Trading" from App Store. Log in. Switch to **Paper Trading** mode (top-right toggle).
 
-**Why you need both Alpaca and ClickUp**: ClickUp has the agent's *reasoning* (why it bought, what's the catalyst). Alpaca has the *truth* (did the order actually fill, what's the current price). Both are required for a full picture.
+**Why you need both Alpaca and Discord**: Discord has the agent's *reasoning* (why it bought, what's the catalyst, fill confirmations). Alpaca has the *truth* (current price, order status, real-time P&L). Both are required for a full picture.
 
 ---
 
@@ -126,104 +111,106 @@ We have a build plan for integrating it — just say "approved" and we'll wire s
 
 ### Trading day (Monday-Friday)
 
-#### **Morning — 8:00 AM CEST (before market opens)**
-- Open phone. ClickUp app should have a notification: today's Pre-Market Brief.
-- Read the brief (3-5 minute read).
-- Open Pending Setups list. Review any new setups.
-- For each setup you like: tap → change status `to do` → `in progress`. That's an APPROVAL.
-- If you want to think more: leave it. You can approve later up until ~3:30 PM CEST when market-open executes.
-- **Optional**: open Alpaca app to verify $100k starting balance, no surprise positions.
+#### **Morning — 8:00 AM ET / 2:00 PM CEST (before market opens)**
+- Phone buzzes: Pre-Market Brief in `#daily-brief`, setup cards in `#approvals` (one per proposed trade).
+- Read each card (entry, stop, target, R:R, confidence, catalyst — under 30 sec each).
+- For each setup you like: tap **✅ Approve**. That's it.
+- For setups you reject: tap **❌ Deny** (reason field optional but useful for training).
+- If you want to think: leave it. You can approve later up until ~9:30 AM ET when market-open executes.
+- The pinned **Dashboard** in `#daily-brief` shows current account state, pending setups, risk state.
 
-#### **Late morning — 3:30 PM CEST (market just opened)**
-- Market-open execution routine fires at 3:35 PM CEST.
-- Approved setups become real orders.
-- New ClickUp task posted: "Market Open Execution — YYYY-MM-DD".
-- Open Alpaca app, verify orders filled at expected prices.
+#### **Market open — 9:35 AM ET / 3:35 PM CEST**
+- Market-open execution routine fires.
+- Approved setups become real Alpaca orders. Trailing stops placed automatically.
+- Each fill posts to `#fills` (symbol, qty, price, order ID).
+- Any rejection (PDT, stop placement failure, daily loss cap) → high-severity alert in `#risk-alerts` (@here pings phone).
+- New brief in `#daily-brief`: "Market Open Execution — YYYY-MM-DD".
 
-#### **Midday — 6:30 PM CEST (mid-trading-day)**
-- Midday Scan fires at 6:34 PM CEST.
-- Reads positions, manages stops, may flag new setups.
-- Review the new "Midday Scan" brief. If new setups, approve same way.
+#### **Midday — 12:30 PM ET / 6:30 PM CEST**
+- Midday Scan fires.
+- Reads positions, manages stops, may flag new setups (`<SYMBOL>-YYYY-MM-DD-midday` IDs).
+- New approval cards if it found anything.
+- Any `-7%` cut closure → `#risk-alerts` first, then `#fills`.
 
-#### **End of trading day — 9:51 PM CEST**
+#### **End of trading day — 3:45 PM ET / 9:45 PM CEST**
 - EOD Review fires.
-- Reads "End-of-Day Review" brief — daily P&L, trades, lessons.
-- Check the **Performance Dashboard** task — week-to-date metrics updated.
-- Agent may post a reflective question on Agent Chat. Reply with your thinking — that's how it learns.
+- Closes day trades. Updates the trade log + daily snapshot.
+- Brief posted to `#daily-brief` (P&L, trades closed, win/loss).
+- Dashboard pin updates.
+- Occasionally: a reflective question in `#chat` (e.g., "You denied AMD on Tuesday — was that the right call?"). Reply when you have time — your reply gets folded into `memory/learnings.md` by the next dispatcher tick.
 
-#### **Friday evening — 10:33 PM CEST**
+#### **Friday evening — 4:30 PM ET / 10:30 PM CEST**
 - Weekly Review fires.
-- Most important brief of the week. Strategy adjustments happen here.
+- Most important brief of the week. Strategy adjustments happen here. ADRs written if any rules changed.
 
 ### Off-day (Saturday-Sunday)
-- Nothing fires automatically.
-- Optional: open VS Code, scroll through this week's journal entries (`journal/*.md`), reflect on whether the agent's reasoning aligned with what actually played out.
-- Drop strategy articles you read this week into the Knowledge Inbox — they'll process Monday morning.
+- **Saturday 11:00 AM ET**: security scan fires automatically. Posts findings to `#risk-alerts` (CRITICAL/HIGH) and `#daily-brief` (medium/low summary).
+- Otherwise nothing fires. Use the time for:
+  - Drop strategy articles into `#knowledge-inbox` — they'll process Monday morning
+  - Drop short notes / corrections into `#feedback`
+  - Open VS Code, scroll through this week's `journal/*.md` entries
 
 ---
 
 ## Part 5 — Common Tasks (Step-by-Step)
 
 ### "How do I approve a trade?"
-1. ClickUp app → Pending Setups list.
-2. Tap the setup task (named like "NVDA LONG — entry $208, stop $202.50, target $220").
-3. Read the description (catalyst, R:R, score, what would invalidate).
-4. Top of screen → status dropdown → change `to do` → `in progress`.
-5. That's it. The next market-open routine will execute it.
+- **Phone:** open `#approvals` → tap **✅ Approve** on the setup card. Done.
+- **Slash:** type `/approve NVDA-2026-05-11` in any channel.
+- **File:** open `memory/open_positions.md` in VS Code → find the `### NVDA-2026-05-11 …` heading → add a line `- Approved: YES` underneath.
+
+All three write to the same flag in the same file. The next market-open routine sees it and trades.
 
 ### "How do I deny a trade?"
-1. ClickUp → Pending Setups → tap the task.
-2. Either:
-   - Status `complete` + comment "deny: too overbought" — explicit deny
-   - Or just leave `to do` and the setup expires when market closes — implicit deny
-3. Explicit deny with a reason is BETTER for training the agent.
+- **Phone:** tap **❌ Deny** on the card. (Reason input is optional — providing one is better for training.)
+- **Slash:** `/deny NVDA-2026-05-11 too overbought`
+- **File:** add `- Denied: YES (reason)` under the heading.
 
 ### "How do I see my portfolio right now?"
-- **Phone:** Alpaca app → Paper Trading mode → Home tab. Shows balance + positions.
-- **VS Code:** Cmd+Shift+P → "Tasks: Run Task" → "Trading: Show Open Positions"
-- **Quick check on ClickUp:** Daily Briefs → most recent brief → read "Account state" section
-- **Right now (instant):** ask Claude Code directly: *"Show me my current Alpaca positions and P&L."*
+- **Phone:** type `/positions` (Alpaca live) or `/dashboard` (full state) in Discord. Both reply ephemerally — only you see them.
+- **Phone (Alpaca app):** open Alpaca → Paper Trading mode → Home tab.
+- **VS Code:** `python3 scripts/alpaca_client.py positions`
 
 ### "How do I add a stock to the watchlist?"
-- ClickUp → Controls → Watchlist → "+ New task". Title = ticker. Description = strategy + notes.
-- The polling routine syncs `memory/watchlist.json` automatically.
+- **Phone:** `/watchlist add NVDA Tech "AI chip leader"`
+- **VS Code:** edit `memory/watchlist.json` directly.
 
 ### "How do I remove a stock?"
-- Open the ticker's task → close as `complete`. Polling will remove it from the JSON.
+- **Phone:** `/watchlist remove TSLA`
+
+### "How do I see the current watchlist?"
+- **Phone:** `/watchlist show`
 
 ### "How do I train the agent on a new strategy I read about?"
 1. Find the article URL or download the PDF.
-2. ClickUp → Agent Training → Knowledge Inbox → "+ New task".
-3. Title: 5 words ("VWAP reclaim breakout strategy").
-4. Description: paste link OR attach PDF.
-5. Save with status `to do`.
-6. Within 15 minutes (during market hours) the polling routine reads it, summarizes, integrates rules into `memory/learnings.md`, and posts a comment back.
+2. Open Discord → `#knowledge-inbox` channel.
+3. Paste the URL or attach the PDF. Add a one-line description if you want.
+4. Within 15 minutes (during market hours) the dispatcher routine fetches the content, summarizes it via a researcher sub-agent, integrates rules into `memory/learnings.md`, indexes in RuFlo, and posts a confirmation back.
 
 ### "How do I tell the agent 'don't be so cautious about TSLA'?"
-- ClickUp → Agent Training → Feedback Log → "+ New task" → write that as the title → save.
-- Or: open Agent Chat task → add a comment → save.
-- Either works. The polling routine integrates feedback into `memory/learnings.md`.
+- **Discord:** post the line in `#feedback`. The dispatcher folds it into `memory/learnings.md` verbatim under `## Feedback — YYYY-MM-DD`.
+- **Or** use `/ask` if you want a back-and-forth answer.
 
 ### "How do I pause everything for a day?"
-- ClickUp → Controls → Pause Toggle → "Trading Active" task → status `in progress`. No new trades fire; existing stops still work.
-- To resume: change status back to `to do`.
-- For full halt: status `complete`. No trading actions of any kind.
+- `/pause [optional reason]` — no new entries fire; existing stops still work.
+- `/resume` — back to normal.
+- `/halt <reason>` — full halt: skip ALL trading actions until `/resume`. Required reason for the audit trail.
 
 ### "How do I manually trigger a routine right now?"
-- **From ClickUp:** Run Routines list → the routine's task → status `in progress`. Polling will catch it within 15 min.
-- **From VS Code:** Cmd+Shift+P → "Tasks: Run Task" → "Routine 1 (Pre-Market): Copy Prompt to Clipboard" → paste into Claude Code and Enter.
-- **From the desktop app:** Scheduled sidebar → click the routine → "Run now".
+- **Discord:** `/run pre-market` (or `market-open` / `midday` / `eod` / `weekly` / `security`). Queues to `memory/run_queue.json`. Next dispatcher tick (every 15 min) runs it.
+- **VS Code:** Cmd+Shift+P → "Tasks: Run Task" → "Routine N: Copy Prompt to Clipboard" → paste into Claude Code → Enter.
 
 ### "How do I see what the agent is 'thinking'?"
 - **Recent reasoning:** journal entries in `journal/YYYY-MM-DD.md`. Open in VS Code.
-- **Live**: Claude Code in VS Code — ask *"Walk me through your reasoning on the NVDA setup."*
+- **Live in Discord:** `/ask "Walk me through your reasoning on the NVDA setup."` — answer arrives in `#chat` on the next dispatcher tick.
 - **Long-term patterns:** `memory/learnings.md`.
 
 ### "Something broke / agent stopped responding"
-1. Check **ClickUp → Alerts → Risk and Errors** — agent posts breakage there.
-2. Check the desktop app's Scheduled sidebar — any routines disabled or failing?
-3. Open VS Code → Cmd+Shift+P → Tasks: "Trading: Test Alpaca Connection". If this fails, the .env keys may have rotated.
-4. Open VS Code → Cmd+Shift+P → "Tasks: Run Task" → "Trading: Show Pending ClickUp Updates" — fallback log if ClickUp posts failed.
+1. Check Discord `#risk-alerts` — agent posts breakage there with @here pings.
+2. Check `launchctl list | grep tradingagent` — should show 4 jobs (3 schedule-driven + 1 always-on bot).
+3. Check the launchd logs in the project root: `launchd_discord_bot.log`, `launchd_claude_routines.log`, `launchd_claude_polling.log`.
+4. Open VS Code → `python3 scripts/alpaca_client.py account`. If this fails, the `.env` keys may have rotated.
+5. Check `memory/pending_discord_updates.md` — fallback log if `notify.py` failed during a routine.
 
 ---
 
@@ -231,7 +218,7 @@ We have a build plan for integrating it — just say "approved" and we'll wire s
 
 ### About paper trading
 - This is **not real money**. You have $100k of fake money to learn with.
-- The market data IS real (delayed by 15 min on free Alpaca tier).
+- The market data IS real (15-min delayed on free Alpaca tier).
 - Trade fills in paper are sometimes more optimistic than real. Don't extrapolate paper performance to live without caution.
 - **Stay on paper for at least 30 trading days of clean operation before considering live.**
 
@@ -249,17 +236,19 @@ We have a build plan for integrating it — just say "approved" and we'll wire s
 ### About training
 - "Training" the agent is NOT fine-tuning the AI model. You can't change Claude itself.
 - What you CAN do is grow `memory/learnings.md` and `memory/strategy.md`. Every routine reads these before deciding.
-- More feedback = better-tuned agent. Drop a strategy article every week. Comment on every approve/deny. Reply to reflective questions.
+- More feedback = better-tuned agent. Drop a strategy article every week. Comment on every approve/deny. Reply to reflective questions in `#chat`.
 
-### About the polling routine
-- It's the bridge between ClickUp and the agent's local file system.
-- Runs every 15 min during market hours (14:00-23:59 CEST Mon-Fri).
-- If you change a status outside market hours, it'll be picked up by the next scheduled routine.
-- It logs every action it takes; check `memory/last_poll.json` for state.
+### About the dispatcher routine
+- It's the bridge between Discord (where you type) and the agent's local file system + RuFlo memory.
+- Runs every 15 min during market hours (08:00–16:30 ET M–F).
+- Drains 4 queue files: `run_queue.json`, `discord_chat_queue.json`, `knowledge_inbox_queue.json`, `feedback_queue.json`.
+- If you post in `#knowledge-inbox` outside market hours, it'll process Monday morning.
+- It logs every action in `memory/last_dispatch.json`.
 
-### About .env and API keys
-- `.env` file is in your project folder, gitignored. It has your Alpaca + Anthropic + ClickUp keys.
-- Never paste this into a chat or commit it to git.
+### About .env, configs, and API keys
+- `.env` (gitignored) has Alpaca + Discord bot keys.
+- `memory/discord_config.json` (gitignored) has Discord webhook URLs and channel IDs.
+- Never paste either into a chat or commit them. The `.gitignore` already protects against this — verify with `git ls-files | grep -iE "env|discord_config\.json$"`.
 - If keys ever leak, rotate them immediately at the providers' sites.
 
 ---
@@ -268,45 +257,55 @@ We have a build plan for integrating it — just say "approved" and we'll wire s
 
 | Question | Read |
 |----------|------|
-| What does each ClickUp list do? | `CLICKUP_GUIDE.md` |
+| What can each Discord channel do? | `DISCORD.md` |
+| What are all the slash commands? | `DISCORD.md` |
 | How do I run any routine manually? | `RUN_ROUTINES.md` |
 | What rules does the agent follow? | `CLAUDE.md` |
 | What's the agent's current strategy? | `memory/strategy.md` |
-| What did the agent do today? | `journal/YYYY-MM-DD.md` (the most recent dated file) |
+| What did the agent do today? | `journal/YYYY-MM-DD.md` |
 | What lessons has the agent learned? | `memory/learnings.md` |
-| What setups are pending approval? | `memory/open_positions.md` |
-| Did the agent fail to post to ClickUp? | `memory/pending_clickup_updates.md` |
+| What setups are pending approval? | `memory/open_positions.md` (or `/setups` in Discord) |
+| Did a `notify.py` call fail? | `memory/pending_discord_updates.md` |
 | Initial install/setup steps | `SETUP.md` |
 | THIS FILE | `TRADING_GUIDE.md` (you are here) |
 
 ---
 
-## Part 8 — When to Talk to Me (in this Cowork chat)
+## Part 8 — When to Talk to Me (in this chat)
 
-Open this Claude desktop app and chat with me when you want to:
+Open a Claude Code session (in VS Code or this chat) when you want to:
 - Add a new feature ("can the agent also analyze options?" — I'd push back: no options per the rules)
 - Change a strategy rule ("I want to allow 4 trades/week instead of 3")
-- Implement RuFlo features (vector memory, swarm, ADRs)
-- Migrate to true cloud routines (Claude Code Cloud Routines instead of Cowork) so it runs even with your Mac off
+- Implement a new RuFlo capability (multi-agent swarms, /remote-control, etc.)
+- Migrate to true cloud routines so it runs even with your Mac off (see `CLOUD_COWORK.md`)
 - Troubleshoot a deeper issue
-- Build a phone PWA dashboard (alternative to ClickUp)
+- Add or rewire Discord channels / slash commands
 
-Use **Claude Code in VS Code** for everything else — running scripts, asking questions about specific tickers, editing files. Cowork is for big-picture changes; Claude Code is for daily operations.
+Use **Discord on your phone** for daily operations: approvals, fills, alerts, knowledge dumps, feedback, manual routine triggers, conversational questions.
+
+Use **Claude Code in VS Code** when you want to inspect files, run scripts directly, or have a deeper interactive session.
 
 ---
 
 ## Quick Cheat Sheet (print this)
 
 ```
-APPROVE TRADE  →  ClickUp app → Pending Setups → status `in progress`
-DENY TRADE    →  same, close as `complete`
-PAUSE AGENT   →  Controls → Pause Toggle → `in progress` or `complete`
-TRAIN AGENT   →  Knowledge Inbox (deep) or Agent Chat (quick)
-SEE BRIEFS    →  Daily Briefs list
-SEE ALERTS    →  Risk and Errors list
-SEE BALANCE   →  Alpaca app, Paper Trading mode
-ASK A QUESTION →  Agent Chat task in ClickUp, OR Claude Code in VS Code
-EMERGENCY STOP →  Pause Toggle → `complete` (full halt)
+APPROVE TRADE        →  Discord #approvals → tap ✅, OR /approve <id>
+DENY TRADE           →  Discord #approvals → tap ❌, OR /deny <id> <reason>
+PAUSE AGENT          →  /pause [reason]    (resume with /resume)
+FULL HALT            →  /halt <reason>     (resume with /resume)
+TRAIN AGENT          →  Drop URL/PDF in #knowledge-inbox
+                        OR one-liner in #feedback
+SEE BRIEFS           →  Discord #daily-brief (pinned dashboard = live state)
+SEE ALERTS           →  Discord #risk-alerts (@here = critical/high)
+SEE FILLS            →  Discord #fills
+SEE BALANCE          →  /account     OR Alpaca app → Paper Trading
+SEE POSITIONS        →  /positions   OR Alpaca app
+SCAN A SYMBOL        →  /scan AAPL
+ADD TO WATCHLIST     →  /watchlist add NVDA Tech "AI chip leader"
+ASK A QUESTION       →  /ask <question>  (answer in #chat ~15min later)
+RUN A ROUTINE NOW    →  /run pre-market | market-open | midday | eod | weekly | security
+EMERGENCY STOP       →  /halt <reason>
 ```
 
 That's everything. Welcome aboard.
