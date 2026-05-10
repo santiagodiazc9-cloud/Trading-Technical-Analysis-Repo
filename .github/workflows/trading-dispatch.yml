@@ -1,0 +1,146 @@
+name: trading-dispatch
+
+# Runs every 15 minutes during a wide UTC window covering all 5 trading
+# routines in both EDT and EST regimes. The internal dispatcher
+# (scripts/gha_dispatch.sh) picks which routine to run based on current
+# America/New_York time, and exits 0 silently when no routine matches that slot.
+#
+# Disabled by default — set repo variable `TRADING_GHA_ENABLED` to `true`
+# under Settings → Secrets and variables → Actions → Variables to enable.
+
+on:
+  schedule:
+    # Mon-Fri, every 15 min from 11:00 UTC (covers 06:00 ET / 07:00 EDT)
+    # through 22:00 UTC (covers 17:00 ET / 18:00 EDT). Wide enough that DST
+    # transitions never miss a slot.
+    - cron: "*/15 11-22 * * 1-5"
+    # Extra slot for 09:35 ET market-open (cron */15 misses minute :35).
+    # 13:35 UTC = 09:35 EDT, 14:35 UTC = 09:35 EST — both fire; dispatcher
+    # exits silently for whichever one doesn't match local ET 09:35.
+    - cron: "35 13,14 * * 1-5"
+  workflow_dispatch:
+    inputs:
+      routine:
+        description: "Routine to force-run (e.g. routines/1_pre_market_research.md). Leave empty for time-based dispatch."
+        required: false
+        default: ""
+
+concurrency:
+  # Only one routine runs at a time. If a slow one is in flight when the
+  # next slot fires, cancel the older one — the new one is the source of truth.
+  group: trading-routines
+  cancel-in-progress: false
+
+permissions:
+  contents: write  # required so git_sync.py can push memory/journal updates
+
+jobs:
+  run-routine:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      TZ: America/New_York
+
+    steps:
+      - name: Guard — workflow disabled
+        if: vars.TRADING_GHA_ENABLED != 'true'
+        run: |
+          echo "TRADING_GHA_ENABLED is not 'true' — exiting early."
+          echo "Flip the repo variable under Settings → Variables to enable."
+          exit 0
+
+      - name: Checkout
+        if: vars.TRADING_GHA_ENABLED == 'true'
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # full history so git_sync.py can pull/push cleanly
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configure git identity
+        if: vars.TRADING_GHA_ENABLED == 'true'
+        run: |
+          git config user.email "trading-agent@github-actions.local"
+          git config user.name  "trading-agent"
+
+      - name: Set up Python
+        if: vars.TRADING_GHA_ENABLED == 'true'
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Set up Node (for claude CLI)
+        if: vars.TRADING_GHA_ENABLED == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install Python deps
+        if: vars.TRADING_GHA_ENABLED == 'true'
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Install Claude Code CLI
+        if: vars.TRADING_GHA_ENABLED == 'true'
+        run: |
+          npm install -g @anthropic-ai/claude-code
+          claude --version
+
+      - name: Recreate .env from secrets
+        if: vars.TRADING_GHA_ENABLED == 'true'
+        env:
+          ALPACA_API_KEY: ${{ secrets.ALPACA_API_KEY }}
+          ALPACA_API_SECRET: ${{ secrets.ALPACA_API_SECRET }}
+          ALPACA_BASE_URL: ${{ secrets.ALPACA_BASE_URL }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          cat <<EOF > .env
+          ALPACA_API_KEY=${ALPACA_API_KEY}
+          ALPACA_API_SECRET=${ALPACA_API_SECRET}
+          ALPACA_BASE_URL=${ALPACA_BASE_URL:-https://paper-api.alpaca.markets}
+          ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+          EOF
+          # Sanity: file exists and is not empty
+          test -s .env
+
+      - name: Recreate memory/discord_config.json from secrets
+        if: vars.TRADING_GHA_ENABLED == 'true'
+        env:
+          DISCORD_CONFIG_JSON: ${{ secrets.DISCORD_CONFIG_JSON }}
+        run: |
+          if [ -z "${DISCORD_CONFIG_JSON:-}" ]; then
+            echo "DISCORD_CONFIG_JSON secret not set — copying example as fallback."
+            cp memory/discord_config.example.json memory/discord_config.json
+          else
+            printf '%s' "$DISCORD_CONFIG_JSON" > memory/discord_config.json
+          fi
+          python -c "import json; json.load(open('memory/discord_config.json'))"
+
+      - name: Dispatch routine by current ET time
+        if: vars.TRADING_GHA_ENABLED == 'true'
+        id: dispatch
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ROUTINE_OVERRIDE: ${{ inputs.routine }}
+        run: |
+          set -e
+          if [ -n "${ROUTINE_OVERRIDE:-}" ]; then
+            echo "Manual override: ${ROUTINE_OVERRIDE}"
+            bash scripts/run_claude_routine.sh "${ROUTINE_OVERRIDE}"
+            echo "ran=true" >> "$GITHUB_OUTPUT"
+            echo "routine=${ROUTINE_OVERRIDE}" >> "$GITHUB_OUTPUT"
+          else
+            bash scripts/gha_dispatch.sh
+            echo "ran=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Sync memory back to git
+        if: vars.TRADING_GHA_ENABLED == 'true' && steps.dispatch.outputs.ran == 'true'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          STAMP="$(TZ=America/New_York date '+%Y-%m-%d %H:%M %Z')"
+          python3 scripts/git_sync.py sync "routine(gha): ${STAMP} — auto-sync" || {
+            echo "::warning::git_sync failed — see JSON output above"
+          }

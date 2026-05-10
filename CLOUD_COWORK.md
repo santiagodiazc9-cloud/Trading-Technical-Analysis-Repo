@@ -136,22 +136,31 @@ Verify with: `git ls-files | grep -i env` — should be empty.
 
 ## Activation checklist
 
-Local mode already works. To extend to cloud:
+Local mode already works. To extend to **GitHub Actions** (scaffolded —
+see `.github/workflows/trading-dispatch.yml` and `.github/SECRETS.md`):
 
-```bash
-# 1. Verify clean working tree
-python3 scripts/git_sync.py status   # ahead: 0, behind: 0, dirty: []
+```text
+1. Verify clean working tree:
+     python3 scripts/git_sync.py status   # ahead: 0, behind: 0, dirty: []
 
-# 2. Configure secrets in chosen cloud surface (manual UI step)
+2. In GitHub, Settings → Secrets and variables → Actions:
+     Secrets: ALPACA_API_KEY, ALPACA_API_SECRET, ALPACA_BASE_URL (optional),
+              ANTHROPIC_API_KEY, DISCORD_CONFIG_JSON
+     Variable: TRADING_GHA_ENABLED = true
 
-# 3. Schedule cloud routines (manual UI step)
+3. Test fire: Actions tab → trading-dispatch → "Run workflow" with
+   routine input `routines/6_discord_dispatcher.md`. Confirm a
+   `routine(gha): …` commit lands on origin/main.
 
-# 4. (optional) Disable local launchd if you want cloud-only
-launchctl unload ~/Library/LaunchAgents/com.claude.tradingagent.routines.plist
-launchctl unload ~/Library/LaunchAgents/com.claude.tradingagent.polling.plist
+4. Let the scheduled cron fire naturally on next trading day.
 
-# 5. Verify with Mac off — see "Step 4" below
+5. (optional) Disable local launchd once GHA proves stable:
+     launchctl unload -w ~/Library/LaunchAgents/com.claude.tradingagent.routines.plist
+     launchctl unload -w ~/Library/LaunchAgents/com.claude.tradingagent.polling.plist
 ```
+
+See `.github/SECRETS.md` for the full secret/variable reference and
+cost notes.
 
 ## Rollback
 
