@@ -15,6 +15,8 @@ Read:
 Run: `python3 scripts/alpaca_client.py positions`
 - Identify any positions tagged as "day_trade" in open_positions.md
 - Close ALL day trade positions: `python3 scripts/alpaca_client.py close <SYMBOL>`
+- For each close, push to Discord `#fills`:
+  - `python3 scripts/notify.py fill <SYMBOL> sell <QTY> <FILL_PRICE> <ORDER_ID>`
 - Log each close in trade_log.json with P&L
 
 ### 3. Review Swing Positions
@@ -69,3 +71,25 @@ Read `memory/clickup_config.json`.
 **D. Daily Reflective Question** — also post a comment on the `control_tasks.agent_chat` task asking the user 1 question to reflect on (e.g. "You denied AMD on Tuesday — was that the right call given how it played out?"). Skip if no decisions were notable.
 
 If ClickUp tools unavailable, append to `memory/pending_clickup_updates.md`.
+
+### 9. Post Summary to Discord `#daily-brief`
+At the end of the routine, run:
+
+```bash
+python3 scripts/notify.py brief 'End-of-Day Review — YYYY-MM-DD' '<summary: daily P&L $/%, # closes, # wins / # losses, swing positions held overnight, top observation>'
+```
+
+Silent (no @mention). If the daily loss cap was hit OR a hard rule was violated, ALSO raise a high-severity alert:
+
+```bash
+python3 scripts/notify.py alert high portfolio '<one-line description: e.g. "Daily loss cap -2.4% — review tomorrow before any new entries">'
+```
+
+If `notify.py` fails, log to `memory/pending_clickup_updates.md` and continue.
+
+### 10. Refresh the Dashboard
+
+```bash
+python3 scripts/dashboard.py
+python3 scripts/notify.py dashboard
+```

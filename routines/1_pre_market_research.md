@@ -5,6 +5,20 @@
 
 You are running the pre-market research routine. Follow these steps exactly:
 
+### 0. Ruflo health check (fail loudly, not silently)
+Before any other work, verify the Ruflo MCP server is up and on the pinned version. If Ruflo is silently broken, the routine will fall back to file-only memory and lose semantic recall — that's the failure mode this step exists to surface.
+
+1. Call `mcp__ruflo__system_health` (no args). Expected: a healthy/ok response.
+2. Call `mcp__ruflo__system_info` (no args). Expected: version field equals **`3.7.0-alpha.20`** (the version pinned in `.mcp.json`).
+3. Decide:
+   - **Both pass** → continue silently to step 1.
+   - **Health fails OR version mismatch OR tool not callable** → send a high-severity Discord alert and continue with file-only fallback. Do NOT halt the routine — pre-market still has value without vector recall, but Santiago needs to know:
+     ```bash
+     python3 scripts/notify.py alert high ruflo 'Ruflo MCP unhealthy or version drift — running pre-market with file-only fallback. Expected v3.7.0-alpha.20. See journal for details.'
+     ```
+   - Note the failure in `journal/YYYY-MM-DD.md` under a "Ruflo Status" line so the weekly review can spot a pattern.
+4. If the version on the server is *newer* than the pin (e.g. someone bumped to alpha.21 in a different surface), this is still a "version mismatch" — alert and continue. The fix is a manual edit to `.mcp.json` after Santiago has confirmed the new version is safe.
+
 ### 1. Load Memory
 Read these files to understand your current state:
 - `memory/watchlist.json` — symbols to scan
@@ -80,6 +94,32 @@ Read `memory/clickup_config.json`. Use these lists from it:
 Also write each setup to `memory/open_positions.md` under "Pending Setups" — include the ClickUp task ID for cross-reference.
 
 If ClickUp MCP tools are unavailable, append summary to `memory/pending_clickup_updates.md`.
+
+**C. Push each setup to Discord `#approvals`** — for every proposed setup, run:
+
+```bash
+python3 scripts/notify.py setup <SETUP_ID> <SYMBOL> <LONG|SHORT> '<entry-zone>' '<stop>' '<target>' '<size>' '<rr>' <confidence-1-10> '<one-line catalyst>'
+```
+
+`<SETUP_ID>` MUST be `<SYMBOL>-YYYY-MM-DD` (e.g. `NVDA-2026-05-11`) — same ID used in the `memory/open_positions.md` heading so the bot can match button clicks back to the file. The card posted to `#approvals` has Approve / Deny / More info buttons; tapping them edits `memory/open_positions.md` directly. See `routines/discord_bot_runner.md` for the full flow.
+
+If `notify.py` returns `{"ok": false, ...}` (webhook unset, network error, etc.), append a line to `memory/pending_clickup_updates.md` and continue — ClickUp approval still works as the fallback.
+
+**D. Post the pre-market summary to Discord `#daily-brief`** (silent, no @mention) — at the end of the routine, run:
+
+```bash
+python3 scripts/notify.py brief 'Pre-Market Brief — YYYY-MM-DD' '<one-paragraph summary: top candidates, # setups proposed, market regime, key risks>'
+```
+
+### 9. Refresh the Dashboard
+After all writes are done, regenerate the canonical state view and mirror it to Discord:
+
+```bash
+python3 scripts/dashboard.py        # rewrites Dashboard.md at vault root
+python3 scripts/notify.py dashboard # PATCHes the pinned message in #daily-brief
+```
+
+`Dashboard.md` is the agent's single source of truth for "current state" — account, positions, pending setups, risk state, recent learnings. Future routines and slash commands read it. Failures are non-fatal (log to `memory/pending_clickup_updates.md` and continue).
 
 **DO NOT place any trades in this routine.** This is research only — the user must reply to the ClickUp task to approve setups before market-open execution acts on them.
 

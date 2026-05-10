@@ -1,0 +1,159 @@
+# Discord Bot Runbook
+
+This is **not** a scheduled routine. The Discord bot is a long-running process
+that listens for button clicks (Approve/Deny/Info) on setup approval messages.
+
+The bot runs persistently via `launchd` on the local Mac. Cloud routines do
+not run the bot — they only call `scripts/notify.py` (webhook-based, stateless)
+to *send* notifications.
+
+---
+
+## First-time setup
+
+### 1. Fill in `memory/discord_config.json`
+
+Copy the template and fill in your values:
+
+```bash
+cp memory/discord_config.example.json memory/discord_config.json
+```
+
+Then edit `memory/discord_config.json`:
+- `guild_id` — right-click server icon → Copy Server ID
+- `authorized_user_id` — right-click your name → Copy User ID
+- For each channel: paste the webhook URL and channel ID
+  (right-click channel → Copy Channel ID)
+
+The real config is gitignored. Only the `.example.json` is in git.
+
+### 2. Add bot token to `.env`
+
+```
+DISCORD_BOT_TOKEN=your_token_from_discord_developer_portal
+```
+
+### 3. Install Python deps
+
+```bash
+pip3 install -r requirements.txt
+# or, if using a venv:
+.venv/bin/pip install -r requirements.txt
+```
+
+### 4. Smoke-test the outbound side (no bot needed)
+
+```bash
+python3 scripts/notify.py send daily_brief "Smoke test" "Hello from notify.py"
+```
+
+Should appear in `#daily-brief` within a second.
+
+### 5. Smoke-test the bot (foreground first)
+
+```bash
+python3 scripts/discord_bot.py
+```
+
+Expected console output:
+```
+[INFO] Logged in as Trading Agent Bot#1234 (id=...)
+```
+
+You should also see "ℹ️ Trading agent bot online." in `#risk-alerts`.
+
+In Discord, type `/ping` — bot should reply "pong".
+
+Stop with Ctrl-C.
+
+### 6. Install launchd plist (run on boot, restart on crash)
+
+```bash
+cp scripts/discord_bot_launchd.plist ~/Library/LaunchAgents/com.claude.tradingagent.discordbot.plist
+launchctl load ~/Library/LaunchAgents/com.claude.tradingagent.discordbot.plist
+```
+
+Logs go to `launchd_discord_bot.log` in the project root.
+
+To stop: `launchctl unload ~/Library/LaunchAgents/com.claude.tradingagent.discordbot.plist`
+To restart: unload then load again.
+
+---
+
+## Daily operations
+
+The bot needs no babysitting. `KeepAlive=true` in the plist means launchd
+restarts it on crash. On bot restart, it posts "ℹ️ Trading agent bot online."
+to `#risk-alerts` so you know it came back.
+
+### Sending notifications (from any routine, anywhere)
+
+`scripts/notify.py` is the universal sender. It uses webhooks, so it works
+from cloud routines too.
+
+```bash
+# Free-form
+python3 scripts/notify.py send daily_brief "Pre-market complete" "3 setups proposed"
+
+# Setup approval card with buttons
+python3 scripts/notify.py setup NVDA-2026-05-11 NVDA LONG '$206-210' '$202' '$220' '4 shares' '2.2:1' 7 'AI cycle intact, analyst target $272'
+
+# Trade fill confirmation
+python3 scripts/notify.py fill NVDA buy 4 207.45 abc123-order-id
+
+# Risk alert (high+ tags @here)
+python3 scripts/notify.py alert high NVDA 'Position down -7.2%, manual cut rule triggered'
+
+# Routine summary
+python3 scripts/notify.py brief 'EOD Review — 2026-05-11' 'PnL +1.2%, 1 fill, 0 stops triggered'
+```
+
+### Approving setups
+
+Three ways, listed by speed:
+1. **Tap a button** in `#approvals` (fastest, mobile-friendly).
+2. **Slash command**: `/approve setup_id:NVDA-2026-05-11` or `/deny setup_id:... reason:...`
+3. **Edit `memory/open_positions.md`** directly — add `Approved: YES` under the setup. The market-open routine will see it.
+
+All three write to the same `memory/open_positions.md` file. The polling
+routine syncs that file ↔ ClickUp on its 15-min cadence.
+
+---
+
+## Where this fits in the existing system
+
+| Surface | Use for |
+|---|---|
+| Discord (real-time) | Approvals, fills, risk alerts, push notifications to phone/Mac |
+| ClickUp (async) | Audit trail, performance dashboard, weekly review, knowledge inbox, pause toggle, watchlist |
+| `memory/*.md` | Source of truth — both surfaces read/write here |
+
+Discord does **not** replace ClickUp. The polling routine still runs every
+15 min and syncs ClickUp ↔ memory. Discord is the speed layer for when
+you can't wait 15 min.
+
+---
+
+## Troubleshooting
+
+**Bot doesn't come online after install**
+- Check `launchd_discord_bot.log` for stack traces.
+- Verify `DISCORD_BOT_TOKEN` is in `.env`.
+- Verify `memory/discord_config.json` has no `REPLACE_WITH_*` placeholders.
+- Verify the bot was invited to your server with `Send Messages` + `applications.commands` scopes.
+
+**Buttons do nothing when clicked**
+- Bot might be down. Check `launchd_discord_bot.log`.
+- Webhook posts and bot listens are independent — webhook still posts even with bot dead. Buttons need the bot.
+- Try `/ping` slash command. If it works, check that your `authorized_user_id` matches.
+
+**Approval written to chat but `Approved: YES` not added to file**
+- Bot logs warning if no setup heading matches. Check that the symbol in `setup_id` matches a `### ... SYMBOL ...` heading in `memory/open_positions.md`.
+- See `memory/discord_actions.log` for the audit trail of every button click.
+
+**Want to check what the bot has done**
+- `tail -f memory/discord_actions.log` — every button click and slash command logged with UTC timestamp.
+
+**Webhook URL leaked accidentally**
+- Anyone with the URL can post to that channel as the bot.
+- Fix: in Discord, channel settings → Integrations → Webhooks → delete and recreate. Update `memory/discord_config.json`.

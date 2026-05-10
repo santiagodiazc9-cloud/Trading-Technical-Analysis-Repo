@@ -113,7 +113,7 @@ This is what lets the agent use Claude's AI to make trading decisions. (You need
 
 1. Open VS Code
 2. Click **File → Open Folder**
-3. Navigate to this folder: `Documents/Claude/Projects/Agent With API Key, For Trading Technical Analysis`
+3. Navigate to this folder: `~/code/trading-agent`
 4. Click **Open**
 5. You should see all the project files in the left sidebar (CLAUDE.md, scripts/, memory/, etc.)
 

@@ -1,0 +1,42 @@
+{
+  "_comment": "Template. Copy to memory/discord_config.json and fill in. The real file is gitignored. Bot token lives in .env (DISCORD_BOT_TOKEN), not here.",
+  "guild_id": "REPLACE_WITH_SERVER_ID",
+  "authorized_user_id": "REPLACE_WITH_YOUR_DISCORD_USER_ID",
+  "channels": {
+    "approvals": {
+      "webhook_url": "https://discord.com/api/webhooks/REPLACE/REPLACE",
+      "channel_id": "REPLACE_WITH_CHANNEL_ID"
+    },
+    "fills": {
+      "webhook_url": "https://discord.com/api/webhooks/REPLACE/REPLACE",
+      "channel_id": "REPLACE_WITH_CHANNEL_ID"
+    },
+    "risk_alerts": {
+      "webhook_url": "https://discord.com/api/webhooks/REPLACE/REPLACE",
+      "channel_id": "REPLACE_WITH_CHANNEL_ID"
+    },
+    "daily_brief": {
+      "webhook_url": "https://discord.com/api/webhooks/REPLACE/REPLACE",
+      "channel_id": "REPLACE_WITH_CHANNEL_ID"
+    },
+    "chat": {
+      "webhook_url": "https://discord.com/api/webhooks/REPLACE/REPLACE",
+      "channel_id": "REPLACE_WITH_CHANNEL_ID"
+    },
+    "knowledge_inbox": {
+      "webhook_url": "https://discord.com/api/webhooks/REPLACE/REPLACE",
+      "channel_id": "REPLACE_WITH_CHANNEL_ID"
+    },
+    "feedback": {
+      "webhook_url": "https://discord.com/api/webhooks/REPLACE/REPLACE",
+      "channel_id": "REPLACE_WITH_CHANNEL_ID"
+    }
+  },
+  "colors": {
+    "approval": 3447003,
+    "fill": 3066993,
+    "alert": 15158332,
+    "brief": 9807270,
+    "info": 10070709
+  }
+}

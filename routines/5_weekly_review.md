@@ -119,3 +119,19 @@ Read `memory/clickup_config.json`.
 **C. Strategy Library** — if any strategy adjustments were made, also update the `documents.strategy_library.active_strategy_page_id` page using `clickup_update_document_page`. Append the change to the "Adjustments Log" section.
 
 If ClickUp tools unavailable, append summary to `memory/pending_clickup_updates.md`.
+
+### 10. Post Weekly Summary to Discord `#daily-brief`
+At the end of the routine, run:
+
+```bash
+python3 scripts/notify.py brief 'Weekly Review — Week ending YYYY-MM-DD' '<summary: total P&L $/%, # trades, win rate, best/worst trade, ADR # if any rule changed, confidence 1-10, one-line plan for next week>'
+```
+
+Silent (no @mention) — for at-a-glance review. If `notify.py` fails, log to `memory/pending_clickup_updates.md` and continue.
+
+### 11. Refresh the Dashboard
+
+```bash
+python3 scripts/dashboard.py
+python3 scripts/notify.py dashboard
+```

@@ -37,6 +37,10 @@ For each pending setup:
 - Approved setups only: ATR-size, cap at $1,000 or 5% of portfolio, then place order:
   - `python3 scripts/alpaca_client.py buy <SYMBOL> <QTY> market`
   - Verify: `python3 scripts/alpaca_client.py orders`
+- After the order is confirmed `filled`, push the fill confirmation to Discord `#fills`:
+  - `python3 scripts/notify.py fill <SYMBOL> buy <QTY> <FILL_PRICE> <ORDER_ID>`
+- Then place the post-entry trailing stop per CLAUDE.md "Post-Entry Order" rules. If the trailing stop AND fixed-stop fallbacks are BOTH rejected (queued to tomorrow), raise a high-severity Discord alert:
+  - `python3 scripts/notify.py alert high <SYMBOL> 'Stop placement rejected — position queued in memory/open_positions.md as STOP_QUEUED. Manual stop required if market moves against position.'`
 - After placing, update the ClickUp pending-setup task: post a comment with execution details, then move the task to `lists.trade_log` using `clickup_move_task`.
 
 ### 5. Update Memory
@@ -47,7 +51,10 @@ For each pending setup:
 ### 6. Risk Check
 - Count total open positions (max 5)
 - Verify no single position exceeds limits
-- If daily loss cap is hit, note "NO MORE TRADES TODAY" in open_positions.md
+- If daily loss cap is hit, note "NO MORE TRADES TODAY" in open_positions.md AND raise a high-severity Discord alert:
+  - `python3 scripts/notify.py alert high portfolio 'Daily loss cap (-2%) hit — no new entries allowed for the rest of today.'`
+- If PDT count is at 3/3 and a same-day buy was attempted, raise a medium alert:
+  - `python3 scripts/notify.py alert medium portfolio 'PDT day-trade count maxed (3/5 rolling). Same-day entries blocked.'`
 
 ### 7. Post Update to ClickUp
 Read `memory/clickup_config.json`. Post a brief to `lists.daily_briefs`:
@@ -58,3 +65,19 @@ Read `memory/clickup_config.json`. Post a brief to `lists.daily_briefs`:
 For each executed trade, also create a task in `lists.trade_log` with status `to do` (= open trade). When closed later, midday/EOD routines will mark it complete with win/loss tag.
 
 If ClickUp tools unavailable, append to `memory/pending_clickup_updates.md`.
+
+### 8. Post Summary to Discord `#daily-brief`
+At the end of the routine, run:
+
+```bash
+python3 scripts/notify.py brief 'Market Open Execution — YYYY-MM-DD' '<summary: # trades placed, # setups skipped (and why), open-position count, account state>'
+```
+
+This is silent (no @mention) — for at-a-glance review. Per-fill notifications already went to `#fills` in step 4; per-alert notifications already went to `#risk-alerts` in step 6. If `notify.py` fails, log to `memory/pending_clickup_updates.md` and continue.
+
+### 9. Refresh the Dashboard
+
+```bash
+python3 scripts/dashboard.py
+python3 scripts/notify.py dashboard
+```
