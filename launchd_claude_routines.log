@@ -2,3 +2,10 @@ shell-init: error retrieving current directory: getcwd: cannot access parent dir
 /bin/bash: /Users/santiagodiaz/Documents/Claude/Projects/Agent With API Key, For Trading Technical Analysis/scripts/run_claude_routines.sh: Operation not permitted
 shell-init: error retrieving current directory: getcwd: cannot access parent directories: Operation not permitted
 /bin/bash: /Users/santiagodiaz/Documents/Claude/Projects/Agent With API Key, For Trading Technical Analysis/scripts/run_claude_routines.sh: Operation not permitted
+You're out of extra usage · resets May 16 at 5am (Europe/Madrid)
+SessionEnd hook [sh -c 'exec node "${CLAUDE_PROJECT_DIR:-.}/.claude/helpers/hook-handler.cjs" session-end'] failed: sh: line 0: exec: node: not found
+
+No scheduled routine for 1 09 47
+You're out of extra usage · resets May 16 at 5am (Europe/Madrid)
+SessionEnd hook [sh -c 'exec node "${CLAUDE_PROJECT_DIR:-.}/.claude/helpers/hook-handler.cjs" session-end'] failed: sh: line 0: exec: node: not found
+

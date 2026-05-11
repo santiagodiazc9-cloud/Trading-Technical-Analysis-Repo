@@ -23,7 +23,7 @@ None.
 - R:R: ~2.2:1
 - Checklist Score: 5/6 (trend ✅, momentum ✅, volatility ✅, R:R ⚠️ conditional on pullback, size ✅, catalyst ✅)
 - Catalyst: AI cycle intact, analyst target $272, strong macro backdrop
-- Approved: (add YES here to activate)
+- Approved: YES  <!-- via Discord 2026-05-11 11:26Z -->
 - Status: **AWAITING APPROVAL** — add `Approved: YES` above, or tap Approve in Discord `#approvals`, or run `/approve <setup_id>`
 
 ### Watchlist Only
