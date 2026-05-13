@@ -1,7 +1,12 @@
 # Market Context
 
 ## Last Updated
-2026-05-09 (EOD review — end-of-week scan data)
+2026-05-13 (EOD review — note: live indicator scan unavailable today, key levels carried forward from 2026-05-09 weekend close).
+
+## 2026-05-13 EOD Note
+- Alpaca account/positions/clock/orders endpoints reachable and healthy. Market open through 4:00 PM ET as expected.
+- `scripts/research.py scan` could not run because the `ta` package failed to build in the routine sandbox. No fresh RSI/MACD/Bollinger readings captured this run.
+- No positions held intraday, no entries/exits, no P&L impact. Below context still reflects 2026-05-09 weekend close — treat all levels as **stale until pre-market 2026-05-14 re-baselines them**.
 
 ## Market Summary (Weekend of May 9–11)
 - **Strong macro backdrop**: April jobs +115,000 (vs. 65,000 consensus). Unemployment 4.3%. Risk-on environment continues.

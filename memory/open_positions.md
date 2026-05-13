@@ -1,58 +1,55 @@
 # Open Positions
 
 ## Current Positions
-None — no positions were taken today.
+None. Portfolio is 100% cash at $100,000.00. 0% deployed.
 
 ## Pending Orders
 None.
 
 ## Watchlist Alerts
-- AAPL: long-term bullish trend and price above VWAP, but overbought. Prefer a pullback entry if price tests support.
-- NVDA: still the strongest swing candidate, with trend alignment intact. Watch for support near 205 if price retraces.
-- TSLA: day trade candidate with intraday momentum, but long-term bearish SMA alignment. Use caution and wait for a clean breakout.
-- MSFT: shows oversold stochastic readings but mixed longer-term trend. Keep as a watchlist mean-reversion setup.
+- NVDA: prior swing setup entry zone ($206–$210) appears outrun (was $215.21 at last scan). Needs fresh evaluation before re-arming.
+- MSFT: cleanest mean-reversion candidate from 2026-05-09 scan — RSI 53.8, stochastic deeply oversold (~18.6). Pending formal proposal in pre-market 2026-05-14.
+- TSLA: day-trade only — long-term daily SMA still bearish.
+- AAPL / AMD / GOOGL: all overbought on the last available scan — observe, do not chase.
 
 ## Pending Setups
 
-### Setup #1 — NVDA Swing Long (Updated Pre-Market May 8)
+### Setup #1 — NVDA Swing Long (proposed 2026-05-08)
 - Direction: LONG
-- Entry Zone: $206.00–$210.00 (wait for pullback — current price $211.50 is above zone)
-- Stop-Loss: $202.50 (below $205 support)
+- Entry Zone: $206.00–$210.00
+- Stop-Loss: $202.50
 - Target: $218.00–$220.00
 - Position Size: 4 shares (~$832 at $208 mid-entry)
 - R:R: ~2.2:1
-- Checklist Score: 5/6 (trend ✅, momentum ✅, volatility ✅, R:R ⚠️ conditional on pullback, size ✅, catalyst ✅)
 - Catalyst: AI cycle intact, analyst target $272, strong macro backdrop
-- Approved: YES  <!-- via Discord 2026-05-11 11:26Z -->
-- Status: **AWAITING APPROVAL** — add `Approved: YES` above, or tap Approve in Discord `#approvals`, or run `/approve <setup_id>`
+- Approved: NO — STALE (was Approved YES via Discord 2026-05-11 11:26Z, but NVDA traded $215.21 at last scan on 2026-05-09 — above the entry zone — and no fill ever occurred. Per the staleness rule proposed today, this setup must be re-evaluated against fresh indicators on 2026-05-14 pre-market before any re-approval.)
+- Status: **STALE — DO NOT EXECUTE.** Awaiting fresh evaluation.
 
-### Watchlist Only
-- TSLA: Day-trade candidate. No pre-planned entry. Watch for breakout above $415 or pullback to $386–392.
-- AMD: Overbought (RSI 76–80). Watch for pullback to $395–405 before considering entry.
-- AAPL: Watch for pullback to $288 (new support from breakout) for swing re-entry.
+### Setup #2 — MSFT Mean-Reversion Long (carried forward, never formally proposed)
+- Direction: LONG
+- Entry Zone: $410–$413 (TBD with fresh data)
+- Stop-Loss: $405
+- Target: $422–$425
+- R:R: ~2.5:1
+- Catalyst: Stochastic deeply oversold (~18.6 on 2026-05-09), RSI neutral (~53.8). Mean-reversion off SMA 20.
+- Approved: NO — not yet proposed
+- Status: **PENDING FORMAL PROPOSAL** — pre-market 2026-05-14 to run `research.py analyze MSFT` and either write a setup card to Discord `#approvals` or drop it.
 
-## Market Open Execution Log — 2026-05-08 9:35 AM ET
-- NVDA: **SKIPPED — awaiting approval** (no `Approved: YES` flag present)
-- TSLA: **SKIPPED — watchlist only**, no pre-planned setup
-- Trades placed: 0
-- API note: Alpaca API unreachable from scheduler sandbox (403 proxy block). Live signal re-validation was not possible. Run scripts from VS Code/Claude Code for live market data.
+## Market Open Execution Log — 2026-05-13 9:35 AM ET
+- No record of a pre-market or open-execution routine running today. Account state (0 trades, 0 positions) is consistent with no routine output.
 
-## Notes
-- End-of-day review completed with no trades executed.
-- Daily loss cap not hit (0.0 PnL today, cap is $2,000 on $100,000 portfolio).
-- No open positions to carry overnight.
-- Midday scan (2026-05-08 12:30 ET): No open positions, no new setups flagged. Live data unavailable from scheduled task sandbox — all analysis based on prior session context. Santiago should run a manual scan from VS Code for live data.
-- EOD review (2026-05-08 3:45 ET): No day-trade positions to close. Portfolio remains 100% cash overnight. NVDA swing setup still pending approval — remains valid into 2026-05-09 if support holds.
+## Midday / Notes
+- Midday scan 2026-05-13: no record of execution.
+- EOD review 2026-05-13 (3:45 PM ET): 0 day-trade positions to close. 0 swing positions. Portfolio 100% cash overnight. Daily loss cap not hit (0.00% P&L). No rule violations. NVDA approved setup flipped to STALE — see Setup #1.
 
-## Tomorrow's Watch List (2026-05-09)
-- **NVDA** (Priority 1 — swing): Pullback to 206–210 support zone. Stop below 200. Target 216+. Approval required before entry.
-- **TSLA** (Priority 2 — day trade only): Watch for breakout above ~413. No overnight bias; daily trend still bearish.
-- **AAPL** (Priority 3 — swing): Pullback to 280 support + MACD curl = mean-reversion entry candidate.
-- **MSFT**: Oversold stochastic — monitor for mean-reversion setup, not an urgent entry.
-- **SPY / QQQ**: Broader market health check — if either breaks below 717 / 665, shift to defensive posture.
+## Tomorrow's Watch List (2026-05-14)
+- **NVDA** (Priority 1): re-evaluate from scratch. If price has reset into $208–$213 with RSI < 65 and MACD not extended, re-propose. If still > $215, keep stale and look elsewhere.
+- **MSFT** (Priority 2): formal swing proposal candidate if stochastic crossover above 20 confirms with RSI < 60.
+- **TSLA** (Priority 3 — day trade only): clean 5-min breakout above prior resistance only.
+- **SPY / QQQ**: defensive shift if SPY < $725 or QQQ < $695 on the open.
 
-## Pre-Market Notes for 2026-05-09
-- Run `python scripts/research.py scan` from VS Code first thing to get live indicator data.
-- If NVDA is pulling back toward 206–210, assess whether it qualifies for swing entry (RSI resetting, MACD not deeply negative, volume normal).
-- TSLA: Only day-trade if a clean 5-minute breakout forms above prior resistance — no guessing.
-- Post any new setups to Discord `#approvals` (via `notify.py setup ...`) before the 9:35 AM execution routine fires.
+## Pre-Market Notes for 2026-05-14
+- First action: confirm `scripts/research.py scan` actually runs (the `ta` package failed to install in today's EOD routine). If it still fails, log infra alert and fall back to manual review.
+- Investigate scheduler gap: no journal entries for 2026-05-11 or 2026-05-12. Verify the launchd/cron jobs are firing on schedule.
+- Re-check every `Approved: YES` setup against current price before market open (staleness rule).
+- May 16 (Friday) is monthly OpEx — reduce overnight exposure later in the week if anything has been entered.
