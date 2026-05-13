@@ -258,6 +258,7 @@ async def on_interaction(interaction: discord.Interaction):
         )
         append_action_log(f"approve  {setup_id}  matched={ok}")
         await interaction.response.send_message(msg)
+        git_sync_memory(f"approve {setup_id}")
 
     elif action == "deny":
         ok = update_open_positions(setup_id, "deny", "denied via Discord")
@@ -268,6 +269,7 @@ async def on_interaction(interaction: discord.Interaction):
         )
         append_action_log(f"deny     {setup_id}  matched={ok}")
         await interaction.response.send_message(msg)
+        git_sync_memory(f"deny {setup_id}")
 
     elif action == "info":
         # Pull the relevant section from open_positions.md and reply ephemerally.
@@ -302,6 +304,7 @@ async def approve_cmd(interaction: discord.Interaction, setup_id: str):
     await interaction.response.send_message(
         f"{'✅' if ok else '⚠️'} approve `{setup_id}` (matched={ok})"
     )
+    git_sync_memory(f"approve {setup_id} (slash)")
 
 
 @tree.command(name="deny", description="Deny a setup by ID (alternative to buttons).")
@@ -315,6 +318,7 @@ async def deny_cmd(interaction: discord.Interaction, setup_id: str, reason: str 
     await interaction.response.send_message(
         f"{'❌' if ok else '⚠️'} deny `{setup_id}` (matched={ok})"
     )
+    git_sync_memory(f"deny {setup_id} (slash)")
 
 
 # ---------------------------------------------------------------------------
@@ -350,6 +354,29 @@ def read_json(path: Path, default):
 
 def write_json(path: Path, data) -> None:
     path.write_text(json.dumps(data, indent=2))
+
+
+GIT_SYNC = ROOT / "scripts" / "git_sync.py"
+
+
+def git_sync_memory(label: str) -> None:
+    """Push memory file changes to GitHub so GHA routines see them.
+
+    Only runs if GIT_SYNC script exists and a git remote is reachable.
+    Failures are logged but never block the bot response.
+    """
+    try:
+        rc, out = shell(
+            sys.executable, str(GIT_SYNC), "sync",
+            f"bot(discord): {label}",
+            timeout=30,
+        )
+        if rc != 0:
+            log.warning("git_sync failed (rc=%d): %s", rc, out[:200])
+        else:
+            log.info("git_sync ok: %s", label)
+    except Exception as exc:
+        log.warning("git_sync exception: %s", exc)
 
 
 # ---------------------------------------------------------------------------
@@ -435,6 +462,7 @@ async def pause_cmd(interaction: discord.Interaction, reason: str = ""):
     })
     append_action_log(f"pause  reason={reason}")
     await interaction.response.send_message(f"⏸️ Trading paused. Reason: {reason or '(none)'}")
+    git_sync_memory("pause")
 
 
 @tree.command(name="resume", description="Resume normal trading after a pause.")
@@ -449,6 +477,7 @@ async def resume_cmd(interaction: discord.Interaction):
     })
     append_action_log("resume")
     await interaction.response.send_message("🟢 Trading resumed.")
+    git_sync_memory("resume")
 
 
 @tree.command(name="halt", description="Full halt: skip ALL trading routines until /resume.")
@@ -464,6 +493,7 @@ async def halt_cmd(interaction: discord.Interaction, reason: str):
     })
     append_action_log(f"halt  reason={reason}")
     await interaction.response.send_message(f"🛑 **HALTED** — {reason}")
+    git_sync_memory(f"halt reason={reason}")
 
 
 @tree.command(name="watchlist", description="Manage the trading watchlist.")
@@ -506,6 +536,7 @@ async def watchlist_cmd(
         write_json(WATCHLIST_PATH, data)
         append_action_log(f"watchlist add {sym}")
         await interaction.response.send_message(f"➕ Added `{sym}` to watchlist.")
+        git_sync_memory(f"watchlist add {sym}")
         return
 
     if action == "remove":
@@ -517,6 +548,7 @@ async def watchlist_cmd(
         write_json(WATCHLIST_PATH, data)
         append_action_log(f"watchlist remove {sym}")
         await interaction.response.send_message(f"➖ Removed `{sym}` from watchlist.")
+        git_sync_memory(f"watchlist remove {sym}")
         return
 
     await interaction.response.send_message(f"Unknown action `{action}`. Use add | remove | show.", ephemeral=True)
@@ -543,8 +575,9 @@ async def run_cmd(interaction: discord.Interaction, routine: str):
     write_json(RUN_QUEUE_PATH, data)
     append_action_log(f"run  routine={r}")
     await interaction.response.send_message(
-        f"📋 Queued `{r}` — the dispatcher will pick it up on the next tick."
+        f"📋 Queued `{r}` — the dispatcher will pick it up on the next tick (≤15 min)."
     )
+    git_sync_memory(f"run queue {r}")
 
 
 @tree.command(name="ask", description="Ask the agent a question (queued; answer arrives in #chat).")
@@ -565,6 +598,7 @@ async def ask_cmd(interaction: discord.Interaction, question: str):
     await interaction.response.send_message(
         f"📨 Question queued. The next routine cycle will answer in `#chat`.\n> {question[:200]}"
     )
+    git_sync_memory(f"ask queue")
 
 
 def main():
