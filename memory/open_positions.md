@@ -38,6 +38,16 @@ None.
 ## Market Open Execution Log — 2026-05-13 9:35 AM ET
 - No record of a pre-market or open-execution routine running today. Account state (0 trades, 0 positions) is consistent with no routine output.
 
+## Market Open Execution Log — 2026-05-14 9:35 AM ET
+- Market confirmed OPEN (09:37 ET). Account: $100,000.00 equity, 100% cash, 0 positions, daytrade_count 0/3, P&L today 0.00%.
+- Pause check: `memory/pause_state.json` MISSING — cross-checked ClickUp "Trading Active" toggle (869d7q8qf) = status "to do" = active. Trading permitted.
+- **0 trades placed.** No setup carried an `Approved: YES` flag; ClickUp Pending Setups list (901217854034) is empty.
+  - **Setup #1 NVDA** — skipped: STALE (`Approved: NO`, explicitly "DO NOT EXECUTE"). Pre-market 2026-05-14 was supposed to re-evaluate it but did not run — no fresh indicators, setup stays stale.
+  - **Setup #2 MSFT** — skipped: awaiting approval (`Approved: NO — not yet proposed`). Pre-market 2026-05-14 was supposed to formally propose it but did not run.
+- Scheduler gap continues: no pre-market routine output for 2026-05-14 (no journal entry, pre-market notes not updated). Gaps now span 2026-05-11, 05-12, and the 05-14 pre-market.
+- Infra: `ta` package still fails to build (`AttributeError: install_layout` — Debian setuptools/distutils incompatibility). `research.py analyze/scan` unavailable for the 2nd consecutive routine. Setup validation fell back to manual review against carried-forward (stale since 2026-05-09) levels.
+- Discord: `memory/discord_config.json` missing — `notify.py` fill/brief/alert calls not delivered. Logged to `memory/pending_discord_updates.md`.
+
 ## Midday / Notes
 - Midday scan 2026-05-13: no record of execution.
 - EOD review 2026-05-13 (3:45 PM ET): 0 day-trade positions to close. 0 swing positions. Portfolio 100% cash overnight. Daily loss cap not hit (0.00% P&L). No rule violations. NVDA approved setup flipped to STALE — see Setup #1.

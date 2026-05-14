@@ -1,7 +1,13 @@
 # Market Context
 
 ## Last Updated
-2026-05-13 (EOD review — note: live indicator scan unavailable today, key levels carried forward from 2026-05-09 weekend close).
+2026-05-14 (Market Open Execution — note: live indicator scan STILL unavailable, `ta` package build failure persists; key levels remain carried forward from 2026-05-09 weekend close and are now 3 trading days stale).
+
+## 2026-05-14 Market Open Note
+- Market open and healthy (09:37 ET). Account 100% cash, 0 positions, 0 trades placed (no approved setups).
+- Pre-market routine did NOT run today — no fresh market context was produced. Everything below is still the 2026-05-09 weekend baseline and should be treated as **stale**.
+- `scripts/research.py` still cannot run: `ta` package fails to build (`AttributeError: install_layout`, Debian setuptools incompatibility). 2nd consecutive routine blocked. No fresh RSI/MACD/Bollinger readings.
+- Treat all key levels below as unreliable until a successful `research.py scan` re-baselines them.
 
 ## 2026-05-13 EOD Note
 - Alpaca account/positions/clock/orders endpoints reachable and healthy. Market open through 4:00 PM ET as expected.
