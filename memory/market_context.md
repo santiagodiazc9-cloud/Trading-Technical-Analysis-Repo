@@ -1,7 +1,14 @@
 # Market Context
 
 ## Last Updated
-2026-05-13 (EOD review — note: live indicator scan unavailable today, key levels carried forward from 2026-05-09 weekend close).
+2026-05-14 (EOD review — live indicator scan STILL unavailable; key levels remain carried forward from the 2026-05-09 weekend close and are now 5 days stale).
+
+## 2026-05-14 EOD Note
+- Alpaca account/positions/clock/orders endpoints reachable and healthy. Market open through 4:00 PM ET as expected.
+- `scripts/research.py scan` could not run — the `ta` package still fails its wheel build. No fresh RSI/MACD/Bollinger readings captured this run (4th consecutive day without a scan).
+- No positions held intraday, no entries/exits, no P&L impact.
+- Pre-market 2026-05-14 did NOT run, so the levels below were never re-baselined as planned. They now reflect the 2026-05-09 weekend close and are **5 trading days stale — do NOT trade off them.** Next pre-market routine that actually fires must re-baseline before any setup is proposed.
+- Reminder: monthly OpEx is **2026-05-16 (Friday)** — expect elevated volatility into end of week.
 
 ## 2026-05-13 EOD Note
 - Alpaca account/positions/clock/orders endpoints reachable and healthy. Market open through 4:00 PM ET as expected.

@@ -42,6 +42,36 @@
       "daily_loss_cap_hit": false,
       "hard_rule_violations": [],
       "notes": "No positions, no trades. Day-trade close step had nothing to close. NVDA swing approval flipped to STALE (price outran entry zone, no fresh scan since 2026-05-09). MSFT mean-reversion idea carried forward to 2026-05-14 pre-market. Infra: ta package failed to install in routine sandbox; research.py scan unavailable this run. Journal continuity gap — no entries for 2026-05-11 or 2026-05-12."
+    },
+    {
+      "date": "2026-05-14",
+      "routine": "end_of_day_review",
+      "equity": 100000.00,
+      "cash": 100000.00,
+      "buying_power": 200000.00,
+      "deployed_pct": 0.0,
+      "pnl_today_dollars": 0.00,
+      "pnl_today_pct": 0.0,
+      "open_positions": 0,
+      "trades_closed_today": 0,
+      "wins_today": 0,
+      "losses_today": 0,
+      "trades_opened_today": 0,
+      "weekly_trade_count": 0,
+      "daytrade_count": 0,
+      "pattern_day_trader": false,
+      "running_win_rate": null,
+      "running_pnl_dollars": 0.00,
+      "running_pnl_pct": 0.0,
+      "confidence_calibration": {
+        "_comment": "predicted-confidence-bucket -> {sample_size, wins, losses}. Empty until we have closed trades.",
+        "bucket_9_10": {"n": 0, "wins": 0, "losses": 0},
+        "bucket_7_8":  {"n": 0, "wins": 0, "losses": 0},
+        "bucket_5_6":  {"n": 0, "wins": 0, "losses": 0}
+      },
+      "daily_loss_cap_hit": false,
+      "hard_rule_violations": [],
+      "notes": "No positions, no trades. Day-trade close step had nothing to close. Scheduler gap confirmed as a pattern: only the EOD routine fired on 5/13 and 5/14 — pre-market, market-open, midday, and the dispatcher did not run on 5/14 (last_poll.json last_poll_at still null; open_positions.md still carried the unprocessed 2026-05-14 pre-market block). NVDA setup never re-evaluated, still STALE. MSFT formal proposal now 3 trading days overdue. Infra: ta package still fails wheel build, aborting the whole pip batch install; worked around by installing other deps individually. research.py scan unavailable for the 4th consecutive day."
     }
   ],
   "summary": {
