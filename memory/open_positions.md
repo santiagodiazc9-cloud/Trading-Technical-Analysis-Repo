@@ -66,6 +66,15 @@ None.
 - Setup #2 MSFT: SKIP (PASS — no execution).
 - Setup #3 AMZN: only execute IF (a) `Approved: YES` is set, AND (b) price within $264.00–$265.50 at 9:35 ET. Otherwise queue for midday scan.
 
+## Market Open Execution Log — 2026-05-15 (actual, 09:35 ET / 13:35 UTC)
+Run state: market OPEN, account $100,000 cash, 0 positions, daytrade_count 0, pause toggle ABSENT (treated as not paused). RuFlo MCP unavailable — file-only mode. ClickUp `pending_setups` list 901217854034 returned 0 tasks (Phase 3 — routines no longer write there); approval state read from `memory/open_positions.md` flags only.
+
+- **Setup #1 NVDA-2026-05-08**: SKIPPED — stale (confirmed pre-market). No order placed.
+- **Setup #2 MSFT (mean-reversion)**: SKIPPED — resolved PASS pre-market. No order placed.
+- **Setup #3 AMZN-2026-05-15**: SKIPPED — `Approved: NO` (awaiting Santiago approval). Independent invalidation also triggers: 09:36 ET re-scan shows AMZN $261.30, BELOW the $264.00–$265.50 entry zone (price now below SMA 20 $264.38; conditional execution note required price IN zone). Setup remains armed pending approval AND a pullback back into the zone, or a fresh re-evaluation at midday scan. Stale-by date EOD 2026-05-19 pre-market still applies.
+
+Result: **0 trades placed, 3 setups skipped (2 resolved pre-market, 1 awaiting approval).** Portfolio remains 100% cash. No risk-cap breaches. PDT count unchanged.
+
 ## Pre-Market Notes for 2026-05-15 (THIS routine)
 - First successful scan since 2026-05-09 — `ta` build issue worked around by upgrading setuptools+wheel before install.
 - RuFlo MCP not available in cloud environment → vector recall (step 4a) and pattern storage (step 8) skipped. File-only memory mode logged.

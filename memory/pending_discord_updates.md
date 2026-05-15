@@ -80,3 +80,18 @@ All three Discord notify calls failed because `memory/discord_config.json` (webh
 1. Provision `memory/discord_config.json` (copy of `discord_config.example.json` with real webhook URLs) on the routine host.
 2. Set `DISCORD_BOT_TOKEN` in the routine host's `.env`.
 3. Install `ta` Python package successfully (currently fails wheel build) so `scripts/research.py scan` is usable from cloud routines.
+
+## 2026-05-15 13:35 UTC — Market Open Execution (cloud routine)
+
+`notify.py brief` failed: `memory/discord_config.json` still missing in cloud routine host. Routine completed all on-disk steps; the brief below needs to be flushed once Discord credentials are provisioned.
+
+### #daily-brief (silent summary)
+**Title**: Market Open Execution — 2026-05-15
+**Body**: 0 trades placed. 3 setups skipped — NVDA stale, MSFT pass, AMZN-2026-05-15 awaiting Santiago approval (AND fresh quote $261.30 below the $264.00–$265.50 entry zone, conditional gate failed). Portfolio 100% cash, 0/5 positions, 0/3 weekly trades used. Pause toggle absent (treated unpaused). RuFlo MCP unavailable — file-only mode. ClickUp `pending_setups` list polled read-only, 0 tasks (Phase 3 — routines no longer write).
+
+### Dashboard mirror
+`Dashboard.md` regenerated successfully (live=false [Alpaca live-equity call skipped or fell back], positions=0, pending_setups=3). Pinned-message mirror in `#daily-brief` was NOT updated because `DISCORD_BOT_TOKEN` is still missing in the cloud routine host.
+
+### Infra fix still needed (re-confirmed)
+1. Provision `memory/discord_config.json` (copy of `discord_config.example.json` with real webhook URLs) on the cloud routine host.
+2. Set `DISCORD_BOT_TOKEN` in the cloud routine host's `.env`.
