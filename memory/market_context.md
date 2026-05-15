@@ -1,7 +1,22 @@
 # Market Context
 
 ## Last Updated
-2026-05-15 Midday Scan (12:30 ET / 16:30 UTC) — appended below the pre-market block. Pre-market readings retained as the "open of day" baseline for delta tracking.
+2026-05-15 End-of-Day Review (15:46 ET / 19:46 UTC) — appended below the midday block. Pre-market and midday readings retained for delta tracking.
+
+## 2026-05-15 End-of-Day Snapshot (15:46 ET fresh single-name re-scan)
+
+### Single-Name Drift (midday → EOD)
+- **AMZN $263.56** (midday $263.13, **+0.16%**) — drifted higher into the close but stayed below SMA 20 ($264.49) by $0.93. RSI 57.8 (vs 57.3 midday). MACD hist −2.06 (vs −2.09 midday). Stoch K 6.7 (oversold, signal intact). Below VWAP ($267.76). Setup #3 conditional execution gate ($264.00–$265.50) **STILL NOT MET into the close.**
+- **MSFT $423.39** (midday $424.48, **−0.26%**) — held the SMA 20 reclaim ($417.47) for the full session. RSI 58.6, MACD hist −1.22 (vs −1.15 midday). 1 of 2 re-arm conditions for Setup #2 confirmed into the close; MACD positive cross still pending.
+- *(Other watchlist names not re-scanned EOD — no setups in flight, no positions to manage.)*
+
+### Sentiment Shift (midday → EOD)
+- **Late-session drift kept index pullback contained.** No follow-through to a defensive trip-wire (no SPY $736 break, no QQQ $700 break). The morning rip → midday cool-off → late drift profile is consistent with consolidation ahead of OpEx Friday — not a trend break.
+- **Confidence in cautious-bullish base case unchanged: 6/10.** Tomorrow's monthly OpEx (5/16) is the immediate macro pivot; Microsoft Build 2026 (5/19–22) and NVDA earnings (5/20 AMC) are the next-week catalysts.
+- **AMZN setup status:** technically improved (RSI cooled all session, R:R wider from a hypothetical fill) but conditional execution gate ($264–$265.50 entry zone) still unmet at the close. `Approved: NO` held into the close.
+- **MSFT setup status:** SMA 20 reclaim sustained — 1 of 2 re-arm conditions held into close; second condition (MACD positive cross) still pending.
+
+## 2026-05-15 Midday Snapshot (12:42 ET fresh `research.py scan`)
 
 ## 2026-05-15 Midday Snapshot (12:42 ET fresh `research.py scan`)
 

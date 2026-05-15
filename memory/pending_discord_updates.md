@@ -81,6 +81,26 @@ All three Discord notify calls failed because `memory/discord_config.json` (webh
 2. Set `DISCORD_BOT_TOKEN` in the routine host's `.env`.
 3. Install `ta` Python package successfully (currently fails wheel build) so `scripts/research.py scan` is usable from cloud routines.
 
+## 2026-05-15 19:46 UTC — End-of-Day Review (cloud routine)
+
+`notify.py brief` and `notify.py dashboard` both failed: `memory/discord_config.json` (webhooks) and `DISCORD_BOT_TOKEN` (.env) still not provisioned in cloud routine host. Routine completed all on-disk steps; flush these once Discord credentials are present.
+
+### #daily-brief (silent summary)
+**Title**: End-of-Day Review — 2026-05-15
+**Body**: Flat day: 0 trades, 0 positions, P&L $0.00 (0.00%). 100% cash overnight. AMZN-2026-05-15 still armed (`Approved: NO`) — EOD price $263.56 closed $0.44 below the $264–$265.50 entry zone (RSI cooled 62.9 → 57.8, R:R now 4.05:1 if filled). MSFT held SMA 20 reclaim ($423.39 vs $417.5) all session — 1 of 2 re-arm conditions confirmed into close, MACD cross still pending. NVDA Setup #1 still STALE; 5/20 AMC earnings binary risk unchanged. 0/5 positions, 0/3 weekly trades, daily loss cap not approached. Top observation: approval gate held under intraday pressure — that is the gate working as designed.
+
+### Dashboard mirror
+`Dashboard.md` regenerated successfully (live=false, positions=0, pending_setups=3). Pinned-message mirror in `#daily-brief` NOT updated — `DISCORD_BOT_TOKEN` still missing.
+
+### Risk alert / reflective question
+None pushed today. No daily loss cap breach, no hard rule violation. Reflective question deferred to tomorrow's Friday weekly review (4:30 PM ET) to be asked against the full week's data.
+
+### Infra fix still needed (re-confirmed; no progress since 2026-05-15 16:30 UTC)
+1. Provision `memory/discord_config.json` (copy of `discord_config.example.json` with real webhook URLs) on the cloud routine host.
+2. Set `DISCORD_BOT_TOKEN` in the cloud routine host's `.env`.
+
+---
+
 ## 2026-05-15 16:30 UTC — Midday Scan (cloud routine)
 
 `notify.py brief` failed: `memory/discord_config.json` still missing in cloud routine host. Routine completed all on-disk steps; the brief below needs to be flushed once Discord credentials are provisioned.

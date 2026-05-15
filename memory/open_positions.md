@@ -136,6 +136,50 @@ Run state: market OPEN (closes 16:00 ET), account $100,000 cash, 0 positions, da
 ### Next Decision Point
 End-of-Day routine (15:45 ET / 19:45 UTC). If AMZN approval lands intraday AND price drifts back into $264.00–$265.50, EOD routine should re-evaluate execution then; otherwise, plan to coast into Friday OpEx flat and re-baseline at the 2026-05-18 (Mon) pre-market.
 
+## End-of-Day Review — 2026-05-15 (15:46 ET / 19:46 UTC)
+
+Run state: market still OPEN (closes 16:00 ET — 14 min remaining), account $100,000.00 cash / $100,000.00 equity, 0 positions, daytrade_count 0/3, pause toggle ABSENT. RuFlo MCP unavailable — file-only mode. ClickUp MCP available (Phase 3 — read-only). Discord webhook config still missing on cloud host — brief logged to `pending_discord_updates.md`.
+
+### Position Management
+**Nothing to manage** — `alpaca_client.py positions` returns `[]`; `orders` returns `[]`. 0 day-trade positions to close. 0 swing positions to review. 0 stop adjustments. 0 −7% manual cuts. 0 sector blocklist actions.
+
+### Daily Performance
+- **P&L today: $0.00 (0.00%)** — no executions all session.
+- Trades opened today: 0. Trades closed today: 0. Wins: 0. Losses: 0.
+- Weekly trade count: 0/3 (week starting 2026-05-11).
+- Daytrade count: 0/3 (PDT rule). Pattern day trader flag: false.
+- Daily loss cap: NOT hit (0.00% well inside −2% floor). Hard rule violations: none.
+- Confidence calibration buckets: still empty (zero closed trades all phase). AMZN-2026-05-15 (predicted 6/10, bucket 5–6) sits unfilled.
+
+### Pending Setup Status at Close
+
+#### Setup #3 AMZN-2026-05-15 (LONG, swing) — STILL ARMED, AWAITING APPROVAL
+- EOD price **$263.56** (vs midday $263.13, +$0.43). RSI 57.8, Stoch K 6.7 (oversold, intact), MACD hist −2.06, BB %B 0.47, ATR 6.58, below SMA 20 ($264.49) by $0.93, below VWAP ($267.76).
+- Entry-zone status: **STILL OUT OF ZONE.** EOD price is **$0.44 below** the $264.00 lower bound. Conditional execution gate not met.
+- R:R if filled at $263.56: reward $14.44 ($263.56→$278) / risk $3.56 ($263.56→$260) = **4.05:1** (better than the 3.0:1 at planned mid-entry, slightly worse than 4.7:1 at midday floor).
+- Approval status: `Approved: NO` held into the close. Santiago has not approved intraday.
+- Decision: **NO CHANGE.** Carry forward to 2026-05-16 pre-market. Stale-by date EOD 2026-05-19 pre-market still applies.
+
+#### Setup #2 MSFT (mean-reversion, on watch for re-arm) — 1 of 2 conditions held into close
+- EOD price **$423.39** (vs midday $424.48, −$1.09). RSI 58.6, MACD hist −1.22 (vs −1.15 midday — slightly worse), Stoch K 26.3, ATR 10.99, ABOVE SMA 20 ($417.47) by $5.92, ABOVE VWAP ($413.54).
+- Re-arm gate (set in pre-market PASS): **(a)** SMA 20 reclaim → **YES, sustained through close.** **(b)** Positive MACD cross → **NOT YET** (line $3.49, signal $4.71 — line $1.22 below signal).
+- 1 of 2 conditions confirmed into close. **DO NOT propose** today/tomorrow on a half-trigger; wait for MACD cross.
+- Catalyst window: Microsoft Build 2026 conference 5/19–22 ahead.
+
+#### Setup #1 NVDA-2026-05-08 — STALE, no change
+- No re-evaluation today (price still extended, 5/20 AMC earnings still binary). Re-baseline only on pullback to $215–$220 AFTER 5/20 earnings.
+
+## Tomorrow's Plan — 2026-05-16 (Friday OpEx)
+- **Default posture: coast flat** into OpEx. 0 positions, 0/3 weekly trades used — preserve weekly trade budget; do not force into pin/gamma vol.
+- **AMZN-2026-05-15** (Priority 1, conditional): only execute IF (a) `Approved: YES` lands AND (b) price retraces into $264.00–$265.50 within first hour. After first hour, skip new entries into Friday OpEx per strategy bias.
+- **MSFT** (Priority 2, watch only): track MACD positive cross intraday. If MACD crosses positive AND SMA 20 reclaim still held at the close, re-propose Setup #2 in **Monday 2026-05-18 pre-market** (do not propose Friday — let Build 2026 catalyst frame the proposal).
+- **NVDA** (Priority 3, watch only): pullback toward $215–$220 — no entry until after 5/20 AMC earnings.
+- **Index trip-wires**: if SPY breaks $736 (SMA 20 zone) or QQQ < $700, flip defensive — no new longs until reset confirmed.
+- **Friday Weekly Review** runs 16:30 ET — will audit week's "patience" honestly (categorize each flat day into {patient | infra-blocked | approval-blocked | mixed}).
+
+### Risk Posture (EOD)
+0/5 positions, 0/3 weekly trades, 0% deployed (target 75–85%; under-deployed by design — patience week, broad tape overbought, OpEx Friday tomorrow). Daily P&L $0.00. No sector on blocklist. No PDT issue (count 0/3). Pause toggle absent.
+
 ## Pre-Market Notes for 2026-05-15 (THIS routine)
 - First successful scan since 2026-05-09 — `ta` build issue worked around by upgrading setuptools+wheel before install.
 - RuFlo MCP not available in cloud environment → vector recall (step 4a) and pattern storage (step 8) skipped. File-only memory mode logged.

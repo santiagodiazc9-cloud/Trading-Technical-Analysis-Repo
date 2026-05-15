@@ -72,6 +72,36 @@
       "daily_loss_cap_hit": false,
       "hard_rule_violations": [],
       "notes": "No positions, no trades. Day-trade close step had nothing to close. Scheduler gap confirmed as a pattern: only the EOD routine fired on 5/13 and 5/14 — pre-market, market-open, midday, and the dispatcher did not run on 5/14 (last_poll.json last_poll_at still null; open_positions.md still carried the unprocessed 2026-05-14 pre-market block). NVDA setup never re-evaluated, still STALE. MSFT formal proposal now 3 trading days overdue. Infra: ta package still fails wheel build, aborting the whole pip batch install; worked around by installing other deps individually. research.py scan unavailable for the 4th consecutive day."
+    },
+    {
+      "date": "2026-05-15",
+      "routine": "end_of_day_review",
+      "equity": 100000.00,
+      "cash": 100000.00,
+      "buying_power": 200000.00,
+      "deployed_pct": 0.0,
+      "pnl_today_dollars": 0.00,
+      "pnl_today_pct": 0.0,
+      "open_positions": 0,
+      "trades_closed_today": 0,
+      "wins_today": 0,
+      "losses_today": 0,
+      "trades_opened_today": 0,
+      "weekly_trade_count": 0,
+      "daytrade_count": 0,
+      "pattern_day_trader": false,
+      "running_win_rate": null,
+      "running_pnl_dollars": 0.00,
+      "running_pnl_pct": 0.0,
+      "confidence_calibration": {
+        "_comment": "predicted-confidence-bucket -> {sample_size, wins, losses}. Empty until we have closed trades.",
+        "bucket_9_10": {"n": 0, "wins": 0, "losses": 0},
+        "bucket_7_8":  {"n": 0, "wins": 0, "losses": 0},
+        "bucket_5_6":  {"n": 0, "wins": 0, "losses": 0}
+      },
+      "daily_loss_cap_hit": false,
+      "hard_rule_violations": [],
+      "notes": "Full schedule fired today (pre-market, market-open, midday, EOD all ran). 0 trades, 0 positions, P&L $0.00 (0.00%). Day-trade close step had nothing to close. AMZN-2026-05-15 setup proposed pre-market (confidence 6/10, swing long $264-$265.50, R:R 3.0:1) — Approved: NO held into the close; price drifted $267.21 (pre-mkt) → $261.30 (open) → $263.13 (midday) → $263.56 (EOD), never reached entry zone after open and never approved. NVDA Setup #1 STALE confirmed (price $228.29 EOD, prior zone $206-210 fully outrun; 5/20 earnings binary risk). MSFT Setup #2 PASS held; SMA 20 reclaim ($423.39 vs $417.47) sustained through close = 1 of 2 re-arm conditions met for Monday's pre-market re-evaluation, MACD cross still pending. Infra: ta package install fix held (setuptools+wheel upgrade before pip install -r requirements.txt) — no degraded steps today. RuFlo MCP unavailable (file-only mode) — no vector recall / pattern storage. Discord webhooks still unprovisioned in cloud host — brief logged to memory/pending_discord_updates.md."
     }
   ],
   "summary": {
