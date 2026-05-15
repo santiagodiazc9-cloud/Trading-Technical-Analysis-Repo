@@ -6,6 +6,39 @@ The legacy filename was `pending_clickup_updates.md` — kept the renamed file a
 
 ---
 
+## 2026-05-15 12:11 UTC — Pre-Market Research (cloud routine)
+
+Discord notify calls failed — `memory/discord_config.json` (webhooks) and `DISCORD_BOT_TOKEN` still not provisioned on this routine host. Routine completed all other steps; flush these once Discord credentials are present.
+
+### #approvals (NEW SETUP CARD — buttons needed)
+**Setup ID**: `AMZN-2026-05-15`
+**Symbol / Direction**: AMZN LONG (swing, 2–10 day hold)
+**Entry Zone**: $264.00–$265.50 (pullback to SMA 20 at $263.84) — NO CHASE above $265.50
+**Stop-Loss**: $260.00
+**Target**: $278.00–$280.00 (upper Bollinger Band)
+**Position Size**: 74 shares (~$19,610 at $265 mid-entry — fits 20% cap)
+**R:R**: 3.0:1
+**Confidence**: 6/10
+**Catalyst**: Q1 2026 beat (rev $181.5B, EPS $2.78 vs $1.64 est, record 13.1% op margin). AWS reaccelerated to +28% YoY. Multiple PT raises post-print. Stoch K = 6.7 oversold off healthy long-term uptrend.
+**Caveats**: XLY (Consumer Discretionary ETF) rolling over vs SPY — sector headwind. MACD histogram cooling. Broad tape overbought (SPY RSI 78). Monthly OpEx tomorrow (5/16) — pin risk into close. Conditional execution: only fill in $264.00–$265.50 zone; skip on a gap-up open.
+**Approve via**: edit `memory/open_positions.md` Setup #3 → add `Approved: YES` under the AMZN-2026-05-15 block.
+
+### #daily-brief (silent summary)
+**Title**: Pre-Market Brief — 2026-05-15
+**Body**: **Pipeline restored.** First successful pre-market scan since 2026-05-09 (`ta` build issue fixed via setuptools+wheel upgrade). Market broadly overbought: SPY RSI 78.7, QQQ 80.6, XLK 80.5. 4 parallel research sub-agents (fundamentals, technicals, news, sector) ran for MSFT/AMZN/NVDA. 1 setup proposed (AMZN swing long, confidence 6/10) — only on pullback to $264-$265. NVDA Setup #1 confirmed STALE (price $235.78, prior zone $206-210 fully outrun). MSFT Setup #2 resolved PASS (long-term bearish SMA structure). Account flat: $100k cash, 0 positions. Caution: monthly OpEx tomorrow + NVDA earnings 5/20.
+
+### Dashboard mirror
+`Dashboard.md` regenerated. Pinned-message mirror in `#daily-brief` NOT updated — `DISCORD_BOT_TOKEN` still missing.
+
+### Infra fix needed (carried from 2026-05-13 / 2026-05-14)
+1. Provision `memory/discord_config.json` (copy of `discord_config.example.json` with real webhook URLs).
+2. Set `DISCORD_BOT_TOKEN` in routine host's `.env`.
+3. **NEW — ta install fix found**: bootstrap setuptools+wheel BEFORE `pip install -r requirements.txt`. Specifically: `pip install --user --break-system-packages --upgrade setuptools wheel && pip install --user --break-system-packages ta`. Worked cleanly today. Recommend adding to routine bootstrap.
+4. Scheduler audit (only EOD has been firing): pre-market today DID fire — partial progress. Still verify market-open / midday / dispatcher trigger on schedule.
+5. RuFlo MCP unavailable in cloud env — file-only fallback used today; vector recall / pattern storage skipped.
+
+---
+
 ## 2026-05-14 19:47 UTC — End-of-Day Review (cloud routine)
 
 Discord notify calls failed again — `memory/discord_config.json` (webhooks) and `DISCORD_BOT_TOKEN` in `.env` are still missing on this routine host. Routine completed all other steps; flush these once Discord credentials are provisioned.

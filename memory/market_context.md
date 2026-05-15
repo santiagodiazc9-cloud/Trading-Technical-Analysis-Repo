@@ -1,66 +1,61 @@
 # Market Context
 
 ## Last Updated
-2026-05-14 (EOD review — live indicator scan STILL unavailable; key levels remain carried forward from the 2026-05-09 weekend close and are now 5 days stale).
+2026-05-15 Pre-Market (08:00 ET) — **first successful scan since 2026-05-09.** `ta` build issue resolved (upgraded setuptools + wheel before install); fresh indicator readings captured below.
 
-## 2026-05-14 EOD Note
-- Alpaca account/positions/clock/orders endpoints reachable and healthy. Market open through 4:00 PM ET as expected.
-- `scripts/research.py scan` could not run — the `ta` package still fails its wheel build. No fresh RSI/MACD/Bollinger readings captured this run (4th consecutive day without a scan).
-- No positions held intraday, no entries/exits, no P&L impact.
-- Pre-market 2026-05-14 did NOT run, so the levels below were never re-baselined as planned. They now reflect the 2026-05-09 weekend close and are **5 trading days stale — do NOT trade off them.** Next pre-market routine that actually fires must re-baseline before any setup is proposed.
-- Reminder: monthly OpEx is **2026-05-16 (Friday)** — expect elevated volatility into end of week.
+## 2026-05-15 Pre-Market Snapshot
 
-## 2026-05-13 EOD Note
-- Alpaca account/positions/clock/orders endpoints reachable and healthy. Market open through 4:00 PM ET as expected.
-- `scripts/research.py scan` could not run because the `ta` package failed to build in the routine sandbox. No fresh RSI/MACD/Bollinger readings captured this run.
-- No positions held intraday, no entries/exits, no P&L impact. Below context still reflects 2026-05-09 weekend close — treat all levels as **stale until pre-market 2026-05-14 re-baselines them**.
+### Macro
+- **Monthly OpEx tomorrow (2026-05-16, Fri)** — expect elevated late-week vol; gamma pinning risk into the close.
+- Univ. of Michigan preliminary Consumer Sentiment at 10:00 ET — only major data print today.
+- Fed transition: Powell's term ends today; Kevin Warsh expected as successor — headline risk in rates / dollar.
+- CPI (Tue) printed hot-ish on energy spike; PPI/Retail Sales already digested.
 
-## Market Summary (Weekend of May 9–11)
-- **Strong macro backdrop**: April jobs +115,000 (vs. 65,000 consensus). Unemployment 4.3%. Risk-on environment continues.
-- **Geopolitical tailwind**: Iran/U.S. peace deal hopes maintained.
-- SPY at **$737.54** — RSI 75.4 (overbought), near upper Bollinger Band. Long-term bullish but extended.
-- QQQ at **$711.12** — RSI 82.9, ABOVE upper Bollinger Band. Broke well above $700 resistance. Very extended.
-- Tech/AI continues leading. NVDA ran to $215.21 (above our $206–210 entry zone). GOOGL at $400 with RSI 83.9.
-- AMD at $455 with RSI 80.7 — extremely overbought.
-- **Market condition: OVERBOUGHT across the board.** 6 of 8 watchlist symbols have RSI > 65. QQQ above upper BB. Short-term consolidation or pullback is the base case for week of May 11.
-- **Options expiration May 16** will likely bring elevated mid-week volatility.
+### Index Readings (live, 2026-05-15 pre-market)
+- **SPY $748.10** — RSI **78.7**, AT upper Bollinger Band (%B 0.99), Stoch 95. Multi-day overbought.
+- **QQQ $719.75** — RSI **80.6**, %B 0.93, MACD hist +2.83 (still trending up). Extended.
+- **XLK $179.49** — RSI **80.5** (hotter than SPY); 9% above SMA20. Tech leading-but-extended.
+- **XLY $118.67** — RSI 55.7, AT SMA20, BELOW VWAP, MACD hist negative. Consumer Disc rolling over / underperforming SPY.
+- **SOXX $529.94** — RSI 74.3, 12% above SMA20. Semis still leading; cooler stoch than SPY (room left).
 
-## Sector Rotation
-- Tech/AI and semiconductors are the clear leaders.
-- Broader market risk appetite improving on jobs beat and geopolitical optimism.
-- MU (not on watchlist) hit new ATH $683 — semiconductor cycle very healthy.
+### Single-Name Readings (live)
+- **NVDA $235.78** — RSI **76.7**, ABOVE upper BB (%B 1.14), Stoch 85. Prior $206-210 entry zone fully outrun. Earnings Tue 5/20 AMC = binary event risk inside swing window.
+- **AMZN $267.21** — RSI 62.9 (healthy), Stoch K **6.7 oversold**, MACD hist -1.59 (cooling), price > SMA20 ($263.84), long-term bullish (SMA 50 > 200). **Cleanest pullback candidate of the watchlist.**
+- **MSFT $409.44** — RSI 50.3 neutral, Stoch K **5.6 deeply oversold**, but price BELOW SMA20 ($417.4), MACD hist -2.23, SMA 50 ($398.8) < SMA 200 ($463.6). Long-term bearish. Counter-trend only.
+- **AAPL $298.25** — RSI 74.6 overbought, Stoch 98. NO CHASE.
+- **GOOGL $401.12** — RSI 74.2 overbought. NO CHASE.
+- **AMD $449.70** — RSI 76.6 overbought, ATR 22.6 (volatile). NO CHASE.
+- **TSLA $443.21** — RSI 68.9, MACD hist +6.6 (hot), Stoch 80. Above SMA 20, but SMA 50 < 200 still bearish — DAY TRADE ONLY.
+- **META $618.51** — RSI 47.1, below SMA20, MACD bearish. No setup.
 
-## Key Levels (Updated May 8 Pre-Market)
-- AAPL: **$292.71** — 288 now acting as support (broke above), next resistance ~$300
-- NVDA: **$211.50** — support $205–210, resistance $216 / analyst target $272
-- TSLA: **$409.05** — support $386, resistance $413 (price near resistance)
-- AMD: **$415.32** — RSI 76–80 overbought; prior ATH zone; pullback target $395–405
-- QQQ: **$705.09** — **700 is now support** (broke above), next resistance ~$720
-- SPY: **$737.27** — **736 is now support** (broke above), next resistance ~$750
-- MSFT: **$415.57** — mild pullback, support ~$410
-- AMZN: **$272.52** — steady, no setup
-- META: **$610.67** — minor pullback, watching for re-entry
+### Sector Rotation
+- **Tech (XLK)**: leading-but-extended. RSI 80 — crowded trade.
+- **Semis (SOXX)**: leading w/ room (stoch cooler than broad index).
+- **Consumer Disc (XLY)**: **rolling over** / underperforming SPY. Headwind for AMZN/TSLA today.
+- Communication Services (META, GOOGL): mixed — GOOGL extended, META broken below SMA20.
 
-## Upcoming Events — Week of May 11, 2026
-- **Earnings watch**: Monitor for any major tech earnings reports early in the week (check pre-market Monday).
-- **Economic data**: Watch for CPI / PPI data releases mid-week — inflation readings can cause sharp moves in growth stocks.
-- **Fed speakers**: Any FOMC member commentary could move rate-sensitive sectors.
-- **Options expiration**: Standard monthly expiration is May 16 — expect elevated volatility heading into that date.
+### Sentiment
+- **Cautious — overbought across the board.** 7 of 10 watchlist symbols and all major ETFs (SPY/QQQ/XLK) carry RSI > 70 or Stoch > 80. Mean-reversion candidates (MSFT, AMZN) fight either weak trend (MSFT) or sector headwind (AMZN). Best edge: **patience > activity**. One borderline setup proposed (AMZN).
+- Confidence in cautious-bullish base case: **6/10**. OpEx tomorrow and Fed-chair-transition headline risk argue for keeping deployment LOW.
 
-## Key Levels to Watch Next Week
-- **SPY**: Support 717 / Resistance 736. A break above 736 opens 745–750 area.
-- **QQQ**: Support 665 / Resistance 700. 700 is a major round-number level; watch reaction closely.
-- **NVDA**: Support 205 / Resistance 216. A pullback to 206–210 is the target entry zone for a swing long.
-- **AAPL**: Support 280 / Resistance 288. Mean reversion short candidate if it fails 288 with volume.
-- **MSFT**: Watch for Stochastic RSI reset toward 20-30 — potential mean-reversion long off SMA 20.
-- **TSLA**: 386 is key support. Day trade only — no overnight swing unless daily SMA 50 reclaims.
+## Key Levels (2026-05-15)
+- SPY: support 736 / resistance 750 (price at upper BB — pin-action risk)
+- QQQ: support 700 / resistance 727 (upper BB)
+- NVDA: support 215-220 (EMA 21 retest) / resistance 240. Prior $206-210 zone STALE.
+- AMZN: support 263-265 (SMA 20) / resistance 280 (upper BB)
+- MSFT: must reclaim SMA 20 ($417) before any long. Support 405 / resistance 417
+- AAPL: support 288 / resistance 301 (upper BB)
+- TSLA: support 408 / resistance 449 (upper BB)
+- AMD: support 415 / resistance 488
 
-## Sector Rotation Themes for Next Week
-- AI/Semiconductors: Still dominant, but risk of short-term correction if any large-cap misses.
-- Cloud SaaS: Watch for rotation into MSFT, CRM if semis pull back.
-- Energy and Financials: Keep on radar as potential rotation targets if tech sells off.
+## Upcoming Events — Remainder of Week (May 15-16, 2026)
+- 2026-05-15 10:00 ET: Univ. of Michigan Consumer Sentiment (preliminary)
+- 2026-05-16 (Fri): Monthly OpEx — expect elevated volatility
+- 2026-05-19–22: Microsoft Build 2026 conference (AI/Copilot announcements) — MSFT catalyst
+- 2026-05-20 AMC: **NVDA Q1 FY27 earnings** — binary event risk for any NVDA swing
 
-## Sentiment
-- Cautious bullish. Multiple overbought readings on daily charts. Prefer pullback entries next week.
-- Best strategy: Be patient, wait for the market to come to defined support levels rather than chasing current highs.
-- Confidence level: 7/10 in the current cautious-bullish outlook.
+## Sector Rotation Themes
+- AI/Semis still dominant but extended — short-term correction or sideways consolidation base case.
+- Cloud SaaS: MSFT lagging the cohort despite Azure strength; rotation INTO MSFT would need SMA 20 reclaim first.
+- Consumer Discretionary: weak ex-AMZN — TSLA momentum is intraday-only.
+- Defensive shift not yet confirmed in broad data, but OpEx week + Fed-chair transition headline = trim, don't add.
