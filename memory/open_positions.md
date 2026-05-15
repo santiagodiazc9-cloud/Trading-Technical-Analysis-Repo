@@ -6,6 +6,13 @@ None. Portfolio is 100% cash at $100,000.00. 0% deployed. Daytrade count 0.
 ## Pending Orders
 None.
 
+## Governance (as of Friday Weekly Review 2026-05-15)
+All setups below are governed by:
+- **ADR-0001** — No new longs when daily RSI > 70 unless breakout + volume.
+- **ADR-0002** — Approved setups auto-stale 2 trading days after approval. Brand-new proposal required to re-arm. Market-open routine refuses to fill an approval > 2 trading days old without a same-session fresh re-evaluation.
+- **ADR-0003** — Entry zone, stop, target, and size are immutable until Santiago redefines OR setup auto-stales. Agent may not mutate parameters intraday.
+- **ADR-0004** — Multi-condition re-arm gates log partial state in this file at the routine where they first fire. Subsequent routines inherit the partial state. Setup is only re-proposable when ALL gate conditions fire in the same routine. Half-triggers clear after 5 trading days of no progress.
+
 ## Watchlist Alerts (2026-05-15 pre-market, fresh scan)
 - **NVDA**: prior swing setup entry zone ($206–$210) fully outrun. Now $235.78, RSI 76.7, above upper BB. Earnings Tue 5/20 AMC = binary risk inside swing hold. DO NOT chase; revisit only on pullback to $215–$220 after earnings.
 - **MSFT**: Stoch K = 5.6 deeply oversold, BUT long-term bearish (SMA 50 < 200), price below SMA 20 ($417.4), MACD hist negative. Counter-trend mean-reversion only. Wait for SMA 20 reclaim before any swing long.

@@ -96,3 +96,50 @@
 - Cloud SaaS: MSFT lagging the cohort despite Azure strength; rotation INTO MSFT would need SMA 20 reclaim first.
 - Consumer Discretionary: weak ex-AMZN — TSLA momentum is intraday-only.
 - Defensive shift not yet confirmed in broad data, but OpEx week + Fed-chair transition headline = trim, don't add.
+
+---
+
+## Week 3 Outlook (2026-05-18 to 2026-05-22) — written at Friday Weekly Review 2026-05-15 16:30 ET
+
+### Macro Calendar
+- **Mon 2026-05-18**: no major data print. Read tape positioning post-OpEx-Friday — watch for unwind of OpEx-week pin.
+- **Tue 2026-05-19**: Microsoft Build 2026 conference begins (5/19–22) — MSFT product-and-AI catalyst window.
+- **Tue 2026-05-20 AMC**: **NVDA Q1 FY27 earnings** — binary event for the chip cohort and broader AI tape. No NVDA exposure into the print without explicit Santiago green-light.
+- **Wed 2026-05-21 14:00 ET**: FOMC minutes (post-Powell-exit / pre-Warsh era) — rates / dollar headline risk.
+- **Thu 2026-05-22 / Fri 2026-05-23**: read post-NVDA and post-FOMC tape; sector rotation watch.
+
+### Key Levels to Watch (SPY / QQQ)
+- **SPY**: $748 closed pre-mkt 5/15 → $741 midday → ~$740s into close.
+  - Support: **$736** (SMA 20 zone — **defensive trip-wire**).
+  - Resistance: **$750** (upper BB — overbought).
+  - Trip-wire: SPY < $736 flips posture to no-new-longs until reset confirmed.
+- **QQQ**: $719 pre-mkt 5/15 → $711 midday.
+  - Support: **$700** (psych / **defensive trip-wire**).
+  - Resistance: **$727** (upper BB).
+  - Trip-wire: QQQ < $700 flips posture to no-new-longs.
+- **XLK** (Tech): $179 with RSI 80 entering the week — extended.
+- **SOXX** (Semis): $530 — leading-but-extended, NVDA earnings 5/20 is the cohort pivot.
+- **XLY** (Consumer Discretionary): rolling over vs SPY — sector headwind for AMZN / TSLA until that flips.
+
+### Sector Rotation Themes to Monitor
+- **AI / Semis**: NVDA 5/20 earnings is the binary pivot for the whole cohort. A clean beat-and-raise re-validates the leadership. A miss or guide-down cracks the floor under the chip names — AMD, SOXX, even MSFT (Azure AI exposure) get re-priced.
+- **Cloud / Enterprise SaaS**: Microsoft Build 2026 (5/19–22) is the most concrete catalyst window of the week. MSFT half-trigger (SMA 20 reclaim done, MACD cross pending) becomes a real setup IF the second gate fires inside the conference window. The setup is not the conference — the setup is "MACD cross on rising volume with the conference as catalyst frame."
+- **Consumer Discretionary**: XLY needs to stop underperforming SPY before any AMZN-flavored long is anything other than counter-sector. Watch the XLY vs SPY ratio daily.
+- **Defensives**: not yet confirmed as a rotation theme in broad data. If OpEx-Friday unwind on 5/18 produces a clean defensive bid (XLP / XLU / XLV outperforming), revisit watchlist composition.
+
+### Watchlist-Specific Carry-Forward
+- **AMZN-2026-05-15** (Setup #3): immutable parameters per ADR-0003 (entry $264.00–$265.50, stop $260, target $278–$280). Stale-by EOD 2026-05-19 pre-market per ADR-0002. Re-evaluate against fresh open Monday 5/18.
+- **MSFT** (Setup #2 watch): half-trigger live. SMA 20 reclaim CONFIRMED into 5/15 close; MACD positive cross PENDING. Re-propose only when both conditions fire same routine (ADR-0004).
+- **NVDA**: STALE — no entry until pullback to $215–$220 with RSI < 65 AFTER 5/20 AMC earnings.
+- **TSLA**: day-trade-only candidate (daily SMA 50 < 200). Watch for clean intraday setup post-OpEx.
+- **AAPL / GOOGL / SPY / QQQ / XLK / AMD**: all RSI > 70 zone in last scan — no chase unless a clean pullback resets the indicator.
+
+### Phase Posture Entering Week 3
+- 0 positions, 0% deployed vs 75–85% target band. Under-deployed by design — no approved setups firing.
+- 0 / 3 weekly trade slots used (resets Monday 5/18 00:00 ET to 3 fresh slots).
+- Daytrade count 0 / 3 (PDT). No PDT pressure.
+- Pause toggle absent → treated as not paused.
+
+### Confidence Snapshot
+- **Cautious-bullish base case: 6 / 10** carrying into Week 3 (unchanged vs 5/15 close). Tape is overbought, OpEx pin still has to unwind, NVDA earnings is binary. Defensive trip-wires armed.
+- **Confidence in current rule set: 7 / 10** (post-ADR formalization). Up from 6/10 mid-week.

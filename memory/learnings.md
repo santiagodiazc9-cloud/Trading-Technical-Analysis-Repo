@@ -2,18 +2,24 @@
 
 ## Trading Rules Discovered
 - No trades were taken today, reinforcing the importance of patience and waiting for clean setups rather than forcing executions.
+- An `Approved: YES` setup that does not fill within 2 trading days is more likely to be drifting than waiting. Re-evaluate fresh rather than auto-executing on a stale approval. **(Formalized as ADR-0002 on 2026-05-15.)**
+- An approval gate that holds only when the trade is unattractive is not a gate, it's a rubber stamp. Parameters of a pending setup are immutable until Santiago redefines or the setup auto-stales. **(Formalized as ADR-0003 on 2026-05-15.)**
+- Multi-condition re-arm gates accumulate state. Logging partial triggers at the routine where they first fire is cheap; reconstructing later is expensive. **(Formalized as ADR-0004 on 2026-05-15.)**
 
 ## Common Mistakes
-- [Will be tracked here to avoid repeating]
+- [Will be tracked here as live trades produce outcomes — empty through Week 2, still 0 trades closed.]
 
 ## Pattern Notes
 - Watchlist scan showed that many large-cap tech names can appear bullish while still being overbought; avoid chasing extended moves.
+- AMZN-2026-05-15 case: a setup's technicals can improve materially through the day (RSI cooled 62.9 → 57.8, R:R widened 3.0:1 → 4.6:1) while price stays within $1 of the entry zone but never crosses in. The right move is to leave parameters alone, document the case, and wait — not to widen the zone or lower the limit.
+- MSFT 2026-05-15 case: a setup that PASSED in pre-market can re-arm partially during the same day (SMA 20 reclaimed by midday, sustained into close). One condition firing is information; it is not a proposal.
 
 ## Strategy Refinements
 - 2026-05-08: End-of-day review completed with no trades; prioritize high-quality setups and avoid overtrading on stretched positions.
 - 2026-05-08 (EOD): Full trading day passed with zero executions. Watchlist healthy but prices extended — staying in cash was the correct decision.
-- 2026-05-13 (EOD): Candidate rule for Friday weekly review — `Approved: YES` setups should auto-stale after 2 trading days without a fill, requiring re-evaluation against fresh indicators before re-arming. NVDA swing approval from 2026-05-08 silently drifted into staleness because no rule forced a re-check.
+- 2026-05-13 (EOD): Candidate rule for Friday weekly review — `Approved: YES` setups should auto-stale after 2 trading days without a fill, requiring re-evaluation against fresh indicators before re-arming. NVDA swing approval from 2026-05-08 silently drifted into staleness because no rule forced a re-check. **→ Adopted as ADR-0002 on 2026-05-15.**
 - 2026-05-14 (EOD): Distinguish "patience" from "inability to evaluate." Staying in cash is a valid outcome ONLY when it's a decision made against fresh data. Four straight trading days (5/11–5/14) with no scan and no fresh setup is an infrastructure failure masquerading as discipline. Do not let a clean-looking flat P&L hide a broken pipeline.
+- 2026-05-15 (Weekly Review): Three new lifecycle rules formalized — ADR-0002 (2-day staleness), ADR-0003 (approval-zone immutability), ADR-0004 (half-trigger ledger). No changes to entry criteria, position sizing, stop-loss methodology, or sector discipline. The intent is to harden the boundary between "the agent observes" and "the agent acts" — observation is unconstrained, action requires Santiago.
 
 ## Infrastructure Notes
 - 2026-05-08: Cowork scheduler sandbox blocks outbound Alpaca API connections (403 proxy error). Live order placement and real-time data require Santiago to run scripts manually from VS Code terminal. Automated routines best used for journaling, memory updates, and ClickUp notifications.
@@ -22,18 +28,23 @@
 - 2026-05-14: Scheduler gap confirmed as a recurring pattern. Only the EOD routine fired on 5/13 and 5/14; pre-market, market-open, midday, and the 15-min dispatcher did NOT run on 5/14 (`memory/last_poll.json` `last_poll_at` is still null; `open_positions.md` still carries the unprocessed "Pre-Market Notes for 2026-05-14" block). Net effect: NVDA stale setup never re-evaluated, MSFT proposal now 3 trading days overdue. ACTION: Santiago needs to audit why only EOD triggers fire — likely a cron/launchd schedule or GHA workflow issue affecting the other routine times.
 - 2026-05-14: `pip install -r requirements.txt` fails as a batch because the `ta` package wheel build fails — and pip aborts the WHOLE batch, leaving zero deps installed (alpaca-py, dotenv, etc. all missing). Worked around by installing the other 6 deps individually. Permanent fix: pin a buildable `ta` version or pre-build a wheel, OR split requirements so a bad package can't cascade.
 - 2026-05-15: **`ta` build fix found.** Root cause is older setuptools (`install_layout` AttributeError during the legacy setup.py path). Workaround: `pip install --user --break-system-packages --upgrade setuptools wheel` BEFORE `pip install --user ta`. After that, `ta-0.11.0` installs cleanly and `scripts/research.py scan` runs against all 10 watchlist symbols. Suggest baking this into the routine bootstrap or a `requirements-bootstrap.txt` so it runs once before the main requirements.
+- 2026-05-15 (Weekly Review): The `ta` fix held for one day. Today's weekly review routine confirmed the bootstrap-setuptools-first sequence works deterministically. Still TODO Santiago side: bake into a `requirements-bootstrap.txt` and patch the routine runners so this isn't a "remember to do it" step.
+- 2026-05-15 (Weekly Review): Scheduler health update — 2026-05-15 was the first day all five routines (pre-market, market-open, midday, EOD, weekly review) fired on schedule. Whether that holds next week is unknown; the 5/11–5/14 gap pattern is still unexplained.
+- 2026-05-15 (Weekly Review): Discord credentials (`memory/discord_config.json` + `DISCORD_BOT_TOKEN`) remain unprovisioned in the cloud routine host. Every brief / alert / setup card produced this week was logged to `memory/pending_discord_updates.md` instead. RuFlo MCP unavailable in cloud env all week — file-only mode used for everything.
 
 ## Synthesis Lessons
 - 2026-05-15: **Stoch oversold + RSI neutral is not enough** when long-term SMA structure is broken. MSFT today (Stoch K 5.6, RSI 50, but SMA50 < SMA200 and below SMA20) looks textbook for mean-reversion but is fighting both its own trend AND an overbought broad tape. Rule of thumb: require at least one of {SMA 20 reclaim, MACD bullish cross, sector ETF green vs SPY} before acting on a mean-reversion signal against a long-term-bearish structure.
 - 2026-05-15: **Sector ETF check materially moves confidence.** AMZN setup today read like 7+ on fundamentals + technicals alone, but XLY rolling-over vs SPY (consumer-discretionary weakness) capped synthesis confidence at 6. The sector momentum sub-agent is doing real work — don't skip it.
 - 2026-05-15: **Data-pipeline outages masquerade as discipline.** Four straight days (5/11–5/14) of "no trades" looked like patience but was actually blindness. After pipeline returns, the first routine often reveals that "what we missed" was nothing to chase (today: NVDA fully outrun, MSFT structurally wrong, AMZN still requires patience for $264 pullback). The correct read: be glad we couldn't trade blind — but also be aware that the next outage will not always be so benign.
-- 2026-05-15 (EOD): **The approval gate is only meaningful when held against attractive trades.** AMZN improved through the day — RSI cooled 62.9 → 57.8, R:R from a hypothetical fill widened from 3.0:1 to 4.6:1, and price closed $0.44 below the lower bound of the entry zone. The temptation to widen the zone, lower the limit, or quietly flip `Approved: YES` was real. Holding the line preserved the gate's purpose: Santiago decides what's "in zone," not the agent. If the gate only holds when trades are unattractive, it isn't a gate — it's a rubber stamp. **Rule of thumb:** an approval-pending setup's entry zone, stop, and target are immutable until either (a) Santiago explicitly redefines them, or (b) the stale-by date triggers a fresh proposal. No "intraday adjustments."
-- 2026-05-15 (EOD): **Half-trigger logging at midday pays compound interest at EOD.** MSFT held the SMA-20 reclaim through the full session (1 of 2 re-arm conditions confirmed). Because midday already logged the partial state into `open_positions.md` + `learnings.md`, tonight's snapshot ships clean to Monday's pre-market routine without re-deriving — the routine just reads "1/2 conditions held, watch for MACD cross" and proceeds. Cheap to write at midday, expensive to reconstruct from scratch later. **Rule of thumb:** when a setup hits a fraction of its re-arm gate, log the partial state immediately — even if no proposal results today.
-- 2026-05-15 (EOD): **Audit "patience" honestly at weekly review.** Five trading days into Phase 2 (5/11–5/15) and the trade ledger reads zero. That number conflates four causes — infrastructure outage (5/11–5/14), patient pass on extended/structurally-broken setups (5/13–5/14 NVDA/MSFT), approval-blocked setup (5/15 AMZN), and clean patient pass (5/15 broad watchlist). Friday's weekly review must score these separately or the system will mistake blindness for discipline. **Rule of thumb:** weekly review categorizes each flat day into {patient | infra-blocked | approval-blocked | mixed} before computing a "discipline" stat.
+- 2026-05-15 (EOD): **The approval gate is only meaningful when held against attractive trades.** AMZN improved through the day — RSI cooled 62.9 → 57.8, R:R from a hypothetical fill widened from 3.0:1 to 4.6:1, and price closed $0.44 below the lower bound of the entry zone. The temptation to widen the zone, lower the limit, or quietly flip `Approved: YES` was real. Holding the line preserved the gate's purpose: Santiago decides what's "in zone," not the agent. If the gate only holds when trades are unattractive, it isn't a gate — it's a rubber stamp. **Rule of thumb:** an approval-pending setup's entry zone, stop, and target are immutable until either (a) Santiago explicitly redefines them, or (b) the stale-by date triggers a fresh proposal. No "intraday adjustments." **→ Adopted as ADR-0003.**
+- 2026-05-15 (EOD): **Half-trigger logging at midday pays compound interest at EOD.** MSFT held the SMA-20 reclaim through the full session (1 of 2 re-arm conditions confirmed). Because midday already logged the partial state into `open_positions.md` + `learnings.md`, tonight's snapshot ships clean to Monday's pre-market routine without re-deriving — the routine just reads "1/2 conditions held, watch for MACD cross" and proceeds. Cheap to write at midday, expensive to reconstruct from scratch later. **Rule of thumb:** when a setup hits a fraction of its re-arm gate, log the partial state immediately — even if no proposal results today. **→ Adopted as ADR-0004.**
+- 2026-05-15 (EOD): **Audit "patience" honestly at weekly review.** Five trading days into Phase 2 (5/11–5/15) and the trade ledger reads zero. That number conflates four causes — infrastructure outage (5/11–5/14), patient pass on extended/structurally-broken setups (5/13–5/14 NVDA/MSFT), approval-blocked setup (5/15 AMZN), and clean patient pass (5/15 broad watchlist). Friday's weekly review must score these separately or the system will mistake blindness for discipline. **Rule of thumb:** weekly review categorizes each flat day into {patient | infra-blocked | approval-blocked | mixed} before computing a "discipline" stat. **→ Executed in this 2026-05-15 weekly review; see Pattern Notes for the Week 2 categorization.**
+- 2026-05-15 (Weekly Review): **The hard ratio of Week 2 was 4 days infra-blocked vs 1 day clean.** Out of five trading days: 5/11 Mon (infra-blocked — no routines fired), 5/12 Tue (infra-blocked — no routines fired), 5/13 Wed (infra-blocked — only EOD fired, no scan), 5/14 Thu (infra-blocked — only EOD fired, no scan), 5/15 Fri (clean — all routines fired with fresh data; 1 setup proposed, 0 fills, mix of patient passes and one approval-blocked setup). The "0 trades for Week 2" headline obscures that 80% of the week was unable to evaluate. Real discipline data: **1 of 1 evaluable days had a discipline outcome consistent with rules** (AMZN proposed at conf 6, gate held, no fill). Tiny n. Cannot generalize anything about "Week 2 discipline" until the infra holds for a full clean week.
 
 ## Pending Approval Tracker
-- 2026-05-08: NVDA swing setup (pullback to 206–210, stop below 200, target 216+) proposed across pre-market, midday, and EOD. Marked Approved YES on 2026-05-11 11:26Z. **STALE as of 2026-05-13**: NVDA was $215.21 at last scan (above entry zone) and no live indicator scan has run since. Do NOT auto-execute. Re-evaluate fresh in pre-market 2026-05-14 — if outside entry zone or indicators no longer support, flip to `Approved: NO — stale`.
-- 2026-05-09: MSFT mean-reversion idea (entry $410–$413, stop $405, target $422–$425, ~2.5:1 R:R) was queued for formal proposal on Monday 2026-05-11 but never written up because the pre-market routine appears not to have run. Carry forward to 2026-05-14 pre-market checklist.
+- **NVDA-2026-05-08** (swing setup, pullback to 206–210, stop below 200, target 216+): proposed across pre-market, midday, and EOD on 2026-05-08. Marked Approved YES on 2026-05-11 11:26Z. **STALE — CONFIRMED 2026-05-15.** NVDA $235.78 at fresh scan (12% above zone high). Approval flipped to NO — stale. Will revisit only on pullback to $215–$220 with RSI < 65 AFTER 5/20 earnings.
+- **MSFT mean-reversion** (Setup #2, originally entry $410–$413, stop $405, target $422–$425, ~2.5:1 R:R): proposed 2026-05-09, never formally posted (pre-market 5/11–5/14 did not run). Resolved PASS in 2026-05-15 pre-market on long-term-bearish SMA structure. Re-arm gate: SMA 20 reclaim AND positive MACD cross (both required, same routine). **Half-trigger 2026-05-15 EOD: 1 of 2 conditions confirmed (SMA 20 reclaim sustained); MACD cross still pending.** Catalyst window: Microsoft Build 2026 conference 5/19–22.
+- **AMZN-2026-05-15** (swing long, entry $264.00–$265.50, stop $260, target $278–$280, R:R 3.0:1, 74 shares, confidence 6/10): proposed 2026-05-15 pre-market. `Approved: NO` held through pre-market, market-open, midday, and EOD. EOD price $263.56 — $0.44 below the lower bound of the entry zone. Conditional execution gate not met any time during the session. **Stale-by date EOD 2026-05-19 pre-market (per ADR-0002, formalized in this weekly review).** Parameters held immutable per ADR-0003.
 
 ## Weekly Review — Week Ending 2026-05-08
 
@@ -49,7 +60,39 @@
 - TSLA momentum is intraday-driven; daily SMA alignment is bearish — treat as day-trade only until daily trend clarifies.
 
 ### Rules to Reinforce
-1. RSI > 70 on daily = NO NEW LONGS unless breakout + volume confirmation.
+1. RSI > 70 on daily = NO NEW LONGS unless breakout + volume confirmation. **→ ADR-0001.**
 2. Prefer setups where price has pulled back to VWAP or SMA 20 rather than chasing highs.
 3. Never force a trade in Week 1 of a new system. Patience is the highest-quality decision.
-4. Always post setups to ClickUp and wait for user approval before execution.
+4. Always post setups to the approval queue and wait for user approval before execution.
+
+## Weekly Review — Week Ending 2026-05-15
+
+### Week 2 Summary
+- **System reliability week** — infra problems dominated, surfacing a clear pattern of process gaps.
+- **Trades taken**: 0 (5/11 Mon, 5/12 Tue, 5/13 Wed, 5/14 Thu, 5/15 Fri).
+- **P&L**: $0.00 (0.00%). Equity flat at $100,000. Cash $100,000. Daytrade count 0. PDT false.
+- **Setups proposed**: 1 (AMZN-2026-05-15 swing long, confidence 6/10) — `Approved: NO` held through close, never reached entry zone.
+- **Setups resolved**: 2 (NVDA-2026-05-08 → STALE; MSFT Setup #2 → PASS with half-trigger watch).
+- **Discipline categorization**: 4 days infra-blocked (5/11–5/14), 1 day clean (5/15: 1 patient pass on broad watchlist + 1 approval-blocked AMZN + 1 half-trigger watch on MSFT).
+- **ADRs written**: 3 (ADR-0002 staleness, ADR-0003 zone immutability, ADR-0004 half-trigger ledger).
+
+### Patterns from Week 2
+- Infra reliability is currently the gating constraint on agent value. Four of five trading days were either fully blind or only had the EOD routine firing. The strategy and approval gate cannot do work the data pipeline doesn't enable.
+- When the pipeline DOES run, the rule set works as designed. 5/15 is a one-day sample showing every rule that was tested (no-chase on overbought, mean-reversion regime check, sector ETF gate, approval immutability) held cleanly.
+- The act of writing setups, half-triggers, and re-arm gates into `memory/open_positions.md` makes the next session's reasoning materially cheaper. The MSFT half-trigger inherited cleanly from midday → EOD → (will inherit into Monday pre-market) without any re-derivation.
+- Stale approvals are a real failure mode, not a theoretical one. NVDA-2026-05-08 was 7 trading days old (5/8 → 5/15) by the time the pipeline came back, with the underlying price $25+ above the original entry zone. Without ADR-0002, a "trust the approval" execution layer could have produced a chase fill.
+
+### Rules to Reinforce / Add
+1. **ADR-0002 (NEW)** — Approved setups auto-stale after 2 trading days without a fill. Re-evaluation required, brand-new proposal needed to re-arm.
+2. **ADR-0003 (NEW)** — Approval-zone immutability. Agent may not mutate published setup parameters intraday.
+3. **ADR-0004 (NEW)** — Half-trigger ledger. Partial re-arm conditions logged at the routine where they first fire; subsequent routines inherit the state.
+4. **Carry forward** — RSI > 70 daily no-chase rule (ADR-0001) still active. Validated this week against multiple watchlist names (AAPL, GOOGL, SPY, QQQ, XLK all > 70 at various points).
+5. **No core risk-rule changes.** CLAUDE.md hard rules 1–15 unchanged this week. No position sizing changes, no stop methodology changes, no sector discipline changes.
+
+### Plan for Week 3 (2026-05-18 to 2026-05-22)
+- **Monday 5/18 pre-market**: refresh MSFT half-trigger state (SMA 20 reclaim should still hold; MACD cross watch is the live trigger). Refresh AMZN-2026-05-15 against fresh open — if not filled by EOD 5/19 pre-market, auto-stale per ADR-0002.
+- **Tuesday 5/19**: Microsoft Build 2026 conference begins (5/19–22). Live catalyst window for MSFT — if Setup #2 re-arms cleanly (both gate conditions firing in same routine), propose with conference framing.
+- **Tuesday 5/20 AMC**: NVDA Q1 FY27 earnings. Binary event — no NVDA exposure into the print without explicit Santiago green-light. Post-earnings pullback to $215–$220 is the only re-arm condition for NVDA.
+- **Wednesday–Friday**: read the post-earnings tape on NVDA. If digital-AI semis hold, watchlist remains tech-heavy. If sector breaks, re-rotate watchlist toward defensive ETFs or value names.
+- **Capacity budget**: 0/3 weekly trade slots used this week → 3 fresh slots Monday morning. Stay disciplined: no force-fills to "use the slots."
+- **Confidence in current approach**: 7/10. Up from 6/10 (Week 1 close) because the rule set survived its first live pressure test (AMZN gate) and three lifecycle gaps were formally closed. Down from a hypothetical 8/10 because infra reliability is still the limiting factor and we have no live-trade outcome data yet to validate the entry criteria.

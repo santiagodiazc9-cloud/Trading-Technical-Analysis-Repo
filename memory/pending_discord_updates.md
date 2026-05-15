@@ -81,6 +81,29 @@ All three Discord notify calls failed because `memory/discord_config.json` (webh
 2. Set `DISCORD_BOT_TOKEN` in the routine host's `.env`.
 3. Install `ta` Python package successfully (currently fails wheel build) so `scripts/research.py scan` is usable from cloud routines.
 
+## 2026-05-15 20:33 UTC — Friday Weekly Review (cloud routine)
+
+`notify.py brief` and `notify.py dashboard` both failed: `memory/discord_config.json` (webhooks) and `DISCORD_BOT_TOKEN` (.env) still not provisioned in cloud routine host. Routine completed all on-disk steps (ADRs written, strategy + learnings + watchlist + weekly journal + market context updated, dashboard regenerated). Flush this once Discord credentials are present.
+
+### #daily-brief (silent summary — Friday Weekly Review)
+**Title**: Weekly Review — Week ending 2026-05-15
+**Body**: 0 trades / P&L $0.00 (0.00%) / win rate N/A — 2nd consecutive flat week (Week 2 close). Setups this week: AMZN-2026-05-15 (conf 6/10) held under approval gate all day, never filled; NVDA-2026-05-08 confirmed STALE; MSFT Setup #2 PASS with half-trigger (1 of 2 re-arm conditions confirmed). **3 new ADRs formalized today:** ADR-0002 approved-setup 2-day staleness, ADR-0003 approval-zone immutability, ADR-0004 half-trigger ledger — all govern setup lifecycle, no entry-rule changes. Discipline audit: 4 of 5 trading days were infra-blocked (5/11–5/14 cloud-scheduler/`ta`-package outage); only 1 clean day (5/15) of evaluable discipline data. Confidence in current approach: **7/10** (up 1 vs mid-week). Plan for Week 3: AMZN stale-by 5/19, MSFT half-trigger watch into Microsoft Build 2026 conf 5/19–22, NVDA Q1 FY27 earnings 5/20 AMC = binary risk no entry until post-print pullback to $215-$220.
+
+### Dashboard mirror
+`Dashboard.md` regenerated (live=true, positions=0, pending_setups=3). Pinned-message mirror in `#daily-brief` NOT updated — `DISCORD_BOT_TOKEN` still missing.
+
+### Reflective question (deferred from EOD 5/15)
+Best honest answer to "Did patience cost us a real trade this week, or just a phantom one?" — phantom. The two setups that drifted past us during the 5/11–5/14 outage were either binary-event-risked (NVDA = 5/20 earnings inside the swing window) or counter-trend-against-broken-structure (MSFT = SMA 50 < 200 below SMA 20). The rule set as currently calibrated would have passed on both even with a live pipeline. Cost of the outage was epistemic (we couldn't see), not trade (we missed a winner). Revisit on 5/22 weekly review once NVDA earnings and Microsoft Build have played out.
+
+### Infra fix still needed (re-confirmed; no progress this week)
+1. Provision `memory/discord_config.json` (copy of `discord_config.example.json` with real webhook URLs) on the cloud routine host.
+2. Set `DISCORD_BOT_TOKEN` in the cloud routine host's `.env`.
+3. Bake the `ta`-package install fix (`pip install --user --break-system-packages --upgrade setuptools wheel` BEFORE the main `pip install -r requirements.txt`) into the routine bootstrap so it doesn't need to be remembered every run.
+4. Cloud scheduler audit — 5/11–5/14 only fired EOD partial; 5/15 fired all 5 routines on schedule. Confirm whether 5/15 was the start of a stable pattern or a one-day reprieve.
+5. RuFlo MCP unavailable in cloud env — file-only fallback used all week.
+
+---
+
 ## 2026-05-15 19:46 UTC — End-of-Day Review (cloud routine)
 
 `notify.py brief` and `notify.py dashboard` both failed: `memory/discord_config.json` (webhooks) and `DISCORD_BOT_TOKEN` (.env) still not provisioned in cloud routine host. Routine completed all on-disk steps; flush these once Discord credentials are present.
