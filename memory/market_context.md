@@ -1,9 +1,31 @@
 # Market Context
 
 ## Last Updated
-2026-05-15 Pre-Market (08:00 ET) — **first successful scan since 2026-05-09.** `ta` build issue resolved (upgraded setuptools + wheel before install); fresh indicator readings captured below.
+2026-05-15 Midday Scan (12:30 ET / 16:30 UTC) — appended below the pre-market block. Pre-market readings retained as the "open of day" baseline for delta tracking.
 
-## 2026-05-15 Pre-Market Snapshot
+## 2026-05-15 Midday Snapshot (12:42 ET fresh `research.py scan`)
+
+### Index Drift vs Pre-Market
+- **SPY $741.15** (pre-mkt $748.10, **−0.93%**) — RSI 78.7 → **70.2** (cooled but still overbought), %B 0.99 → 0.82, Stoch 95 → 75.8. **Some consolidation but no break of $736 SMA 20 zone.**
+- **QQQ $711.24** (pre-mkt $719.75, **−1.18%**) — RSI 80.6 → **73.2**. Tech-heavy index taking the harder breath. Still > $700 support.
+- *(XLK / XLY / SOXX not re-scanned midday — single-name reads below.)*
+
+### Single-Name Drift
+- **NVDA $228.29** (pre-mkt $235.78, **−3.18%**) — biggest pullback of the watchlist. RSI 76.7 → **67.7**. Approaching but NOT IN the $215–$220 watch zone. 5/20 AMC earnings binary risk unchanged.
+- **AMZN $263.13** (pre-mkt $267.21, **−1.53%**) — flipped from above to below SMA 20 ($264.47). RSI cooled to 57.3, Stoch K still 6.7. Setup #3 entry-zone gate ($264–$265.50) still NOT met.
+- **MSFT $424.48** (pre-mkt $409.44, **+3.67%**) — biggest pop of the watchlist. **Reclaimed SMA 20 ($417.5).** MACD hist still negative (-1.15). One of two re-arm conditions met for Setup #2.
+- **AAPL $301.66** (pre-mkt $298.25, +1.14%) — RSI 76.5, Stoch 98 — even more overbought intraday. NO CHASE.
+- **GOOGL $396.83** (pre-mkt $401.12, −1.07%) — RSI 70.3 (cooled marginally). Still no chase.
+- **AMD $431.95** (pre-mkt $449.70, **−3.95%**) — significant pullback, RSI 76.6 → **69.9** (just out of overbought). Cleanest cooler in chip cohort. Watch.
+- **TSLA $423.84** (pre-mkt $443.21, **−4.37%**) — RSI 68.9 → 58.7. SMA 50 < 200 still — day-trade only.
+- **META $615.71** (pre-mkt $618.51, −0.45%) — flat, still below SMA 20, MACD hist deeply negative. No setup.
+
+### Sentiment Shift
+- **Mild de-risk underway intraday.** Index pullback (~−1% on SPY/QQQ) without trend break is the constructive flavor of de-risk — momentum names (NVDA −3.2%, AMD −4.0%, TSLA −4.4%) leading the cool-off. MSFT counter-cyclical pop (+3.7%) suggests rotation INTO laggards as opposed to broad risk-off. Defensive read intact, but no need to escalate to "trim at all costs."
+- **Confidence in cautious-bullish base case unchanged: 6/10.** Today's price action is consistent with "overbought broad tape consolidates ahead of OpEx Friday," not with "trend break."
+- **AMZN setup status:** improving fundamentally (RSI cooler, R:R wider) but conditional execution gate ($264–$265.50 entry zone) still unmet. Approval still pending.
+
+## Pre-Market Snapshot (2026-05-15 08:00 ET — retained as opening baseline)
 
 ### Macro
 - **Monthly OpEx tomorrow (2026-05-16, Fri)** — expect elevated late-week vol; gamma pinning risk into the close.

@@ -81,6 +81,23 @@ All three Discord notify calls failed because `memory/discord_config.json` (webh
 2. Set `DISCORD_BOT_TOKEN` in the routine host's `.env`.
 3. Install `ta` Python package successfully (currently fails wheel build) so `scripts/research.py scan` is usable from cloud routines.
 
+## 2026-05-15 16:30 UTC — Midday Scan (cloud routine)
+
+`notify.py brief` failed: `memory/discord_config.json` still missing in cloud routine host. Routine completed all on-disk steps; the brief below needs to be flushed once Discord credentials are provisioned.
+
+### #daily-brief (silent summary)
+**Title**: Midday Scan — 2026-05-15
+**Body**: 0 positions to manage. 0 trades placed. 0 new setups proposed. AMZN-2026-05-15 still armed (`Approved: NO`); midday price $263.13 just below the $264–$265.50 entry zone (RSI cooled to 57.3, R:R now 4.7:1 if filled here, but conditional gate still unmet — kept zone as Santiago-defined). MSFT reclaimed SMA 20 ($424.48 vs $417.5) — 1 of 2 re-arm conditions met for Setup #2; MACD cross still pending. NVDA pulled back to $228.29 (RSI 76.7→67.7) but not yet in $215–$220 watch zone; 5/20 earnings binary risk unchanged. Broad tape de-risked mildly (SPY −0.93%, QQQ −1.18%) — momentum names led the cool-off (NVDA −3.2%, AMD −4.0%, TSLA −4.4%). Defensive posture intact. 0/5 positions, 0/3 weekly trades, 0% deployed.
+
+### Dashboard mirror
+`Dashboard.md` regenerated. Pinned-message mirror in `#daily-brief` NOT updated — `DISCORD_BOT_TOKEN` still missing.
+
+### Infra fix still needed (re-confirmed; no progress since 2026-05-15 13:35 UTC)
+1. Provision `memory/discord_config.json` (copy of `discord_config.example.json` with real webhook URLs) on the cloud routine host.
+2. Set `DISCORD_BOT_TOKEN` in the cloud routine host's `.env`.
+
+---
+
 ## 2026-05-15 13:35 UTC — Market Open Execution (cloud routine)
 
 `notify.py brief` failed: `memory/discord_config.json` still missing in cloud routine host. Routine completed all on-disk steps; the brief below needs to be flushed once Discord credentials are provisioned.
