@@ -3,19 +3,56 @@
 ## Current Approach
 Starting with a **conservative, paper-trading** approach. Focus on high-probability setups with clear risk/reward.
 
+## Indicator Suite
+| Indicator | Parameters | Purpose |
+|---|---|---|
+| EMA | 9, 21 | Trend direction, intraday crossovers |
+| SMA | 20, 50, 200 | Trend identification, support/resistance |
+| ADX | 14 | Trend strength gate — require >25 before entry |
+| RSI | 14 | Momentum, overbought/oversold, divergence |
+| MACD | 12/26/9 | Momentum confirmation |
+| Bollinger Bands | 20, 2σ | Volatility, mean reversion setups |
+| ATR | 14 | Dynamic stop sizing, volatility measurement |
+| VWAP | intraday | Intraday fair value |
+| Fibonacci | 38.2%, 61.8% | Preferred pullback entry zones on swing setups |
+| Stochastic RSI | 14/3/3 | Momentum extremes |
+
 ## Day Trading Rules
 - Only trade the first 2 hours and last hour of the session
 - Use 5-min chart for entry, 15-min for trend confirmation
 - Require EMA 9/21 crossover + RSI confirmation + VWAP alignment
+- **ADX must be > 25** — skip day trades in choppy, trendless tape
 - Max 2 day trades per day
 - Close ALL day trades by 3:45 PM ET
+- Preferred entries: pullbacks to VWAP or EMA 21, not breakout chases
 
 ## Swing Trading Rules
 - Enter on daily chart setups only
 - Require SMA 20/50 alignment + MACD crossover
+- **ADX must be > 25** on the daily — no swing trades in sideways markets
+- **Preferred entry zones**: Fibonacci 38.2%–61.8% pullback from the prior impulse leg, or a retest of the SMA 20
 - Hold 2-10 days, never longer without re-evaluation
 - Trail stops using ATR once in profit
 - Max 3 swing positions at a time
+- **RSI divergence**: if price makes a new high but RSI does not, treat as a caution signal — tighten target or skip
+
+## Economic Calendar Rules (added 2026-05-16)
+- Before every pre-market routine, check for scheduled high-impact events that day (NFP, CPI, FOMC, rate decisions, earnings)
+- **Hard rule**: Do not open a NEW position within 30 minutes of a high-impact news event
+- **Hard rule**: Do not hold a swing position through scheduled high-impact macro news unless already profitable with a stop above breakeven
+- If an unscheduled event causes a >1.5% gap in SPY within a single candle, flag as potential black swan — halt new entries and log to `#risk-alerts`
+- Low-impact events (PMI, housing data) are noted but do not trigger a halt
+
+## Confluence Requirements (added 2026-05-16)
+Every setup must satisfy ALL of the following before being proposed:
+1. Trend alignment (SMA or EMA direction)
+2. Trend strength (ADX > 25)
+3. Momentum confirmation (RSI in range, MACD aligned)
+4. Valid entry zone (Fib pullback, VWAP retest, or BB mean reversion — not a chase)
+5. R:R ≥ 2:1 with stop defined before entry
+6. Specific catalyst documented
+
+Fewer than all 6 = **no proposal**. Note in journal as "partial confluence, passed."
 
 ## Setup Lifecycle Rules
 
@@ -47,6 +84,7 @@ When a multi-condition re-arm gate (set as part of a setup PASS or close-out) ha
 - RuFlo MCP unavailable in cloud env all week — vector recall and pattern storage not running. File-only memory only.
 
 ## Adjustments Log
+- 2026-05-16: Upgraded strategy framework. Added: ADX (14) > 25 trend strength gate on all entries (day + swing), Fibonacci 38.2%/61.8% as preferred pullback entry zones, RSI divergence as caution signal, economic calendar hard rules (no new entries within 30min of high-impact news, no holding swings through macro events), explicit confluence checklist (all 6 required to propose). Forex-specific concepts (session hours, spreads, SMC order blocks) not applied — equities only. Core risk rules in CLAUDE.md unchanged.
 - 2026-05-08: Initial strategy framework established
 - 2026-05-08 (Weekly Review): Week 1 was system calibration — no trades taken. Core rules unchanged. Adding emphasis on patience: do NOT enter trades when RSI > 70 on the daily timeframe unless there is a confirmed momentum breakout with volume surge. This rule formalizes the observation that several watchlist names were extended this week. **Formalized as ADR-0001.**
 - 2026-05-13 (EOD): Proposed rule for Friday weekly review — **approved-setup staleness check**. Any setup carrying `Approved: YES` that does not fill within 2 trading days must be re-evaluated against fresh indicators in the next pre-market routine. Goal: prevent stale approvals from quietly drifting forward and producing late, low-quality fills.
