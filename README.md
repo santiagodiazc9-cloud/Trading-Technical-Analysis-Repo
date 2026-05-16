@@ -35,6 +35,10 @@ This agent is configured to use **Alpaca's paper-trading endpoint** (`paper-api.
                        ▼ │
                   ┌─────────────────────────────┐
                   │  Routines (launchd cron)    │
+                  
+
+
+
                   │  1 pre-market  09:35 ET     │
                   │  2 market-open  …           │
                   │  3 midday                   │
