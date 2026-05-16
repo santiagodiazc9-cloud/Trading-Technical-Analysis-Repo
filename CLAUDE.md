@@ -163,16 +163,15 @@ Discord is the **primary user interface**. ClickUp is now a **read-only retro la
 
 ### Phase status
 - **Phase 1 (done)**: Dashboard at `Dashboard.md`, slash commands, channels, routines 1–5 call dashboard refresh at end. `notify.py` calls wired into routines 1–5 for setups/fills/alerts/briefs.
-- **Phase 2 (done)**: `routines/6_discord_dispatcher.md` replaces `6_clickup_polling.md` (kept as deprecated reference). Bot listens to `#knowledge-inbox` and `#feedback` channels, queueing to `memory/knowledge_inbox_queue.json` and `memory/feedback_queue.json`. `run_claude_polling.sh` invokes the dispatcher routine on the same 15-min cadence.
-- **Phase 3 (done)**: Routines 1–5 and 7 no longer write to ClickUp — Discord + dashboard cover audit/visibility. Memory Protocol updated. `memory/clickup_config.json` and the legacy `6_clickup_polling.md` remain on disk as a read-only archive; delete after one stable week.
+- **Phase 2 (done)**: `routines/6_discord_dispatcher.md` replaces the deprecated polling routine. Bot listens to `#knowledge-inbox` and `#feedback` channels, queueing to `memory/knowledge_inbox_queue.json` and `memory/feedback_queue.json`. `run_claude_polling.sh` invokes the dispatcher routine on the same 15-min cadence.
+- **Phase 3 (done)**: Routines 1–5 and 7 no longer write to ClickUp — Discord + dashboard cover audit/visibility. Memory Protocol updated.
+- **Phase 4 (done, 2026-05-16)**: ClickUp emergency-fallback artifacts (`routines/6_clickup_polling.md`, `memory/clickup_config.json`, `memory/last_poll.json`) deleted after a stable trading week on Discord. Preserved in git history; see commits up to `a201388`.
 
 ---
 
 ## ClickUp Archive (legacy)
 
-ClickUp is no longer an active surface. The historical tasks/docs (Strategy Library, prior daily briefs, performance dashboard) remain in ClickUp as a read-only archive for retrospective review. `memory/clickup_config.json` is preserved so the deprecated `routines/6_clickup_polling.md` remains runnable as an emergency fallback if Discord becomes unavailable.
-
-If you need to consult or revive the ClickUp protocol, see the deprecated `routines/6_clickup_polling.md` and the prior version of this file in git history.
+ClickUp was retired in Phases 2–3 of the Discord migration (May 2026) and its emergency-fallback files were deleted in Phase 4 (2026-05-16). The historical tasks/docs (Strategy Library, prior daily briefs, performance dashboard) remain *inside ClickUp itself* as a read-only archive for retrospective review — the agent no longer reads or writes them. If you need to revive the ClickUp protocol, check out a pre-`a201388` commit.
 
 ---
 
