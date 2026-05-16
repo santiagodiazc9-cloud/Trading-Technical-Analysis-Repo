@@ -166,7 +166,15 @@
       "Bash(npx @claude-flow*)",
       "Bash(npx claude-flow*)",
       "Bash(node .claude/*)",
-      "mcp__claude-flow__:*"
+      "mcp__claude-flow__:*",
+      "Write(memory/**)",
+      "Edit(memory/**)",
+      "MultiEdit(memory/**)",
+      "Write(journal/**)",
+      "Edit(journal/**)",
+      "MultiEdit(journal/**)",
+      "Write(Dashboard.md)",
+      "Edit(Dashboard.md)"
     ],
     "deny": [
       "Read(./.env)",

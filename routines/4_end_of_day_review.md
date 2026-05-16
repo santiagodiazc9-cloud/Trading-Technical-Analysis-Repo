@@ -47,6 +47,10 @@ Create/update `journal/YYYY-MM-DD.md` with the full journal entry format:
 - Update `memory/learnings.md` with new insights
 - Update `memory/market_context.md` with end-of-day state
 
+**Stale-state sweep** — catch silent memory drift (the failure mode where these files freeze for weeks because nothing "noteworthy" happens):
+- Check `memory/learnings.md` mtime. If untouched ≥5 trading days, append a one-line entry under "Pattern Notes" summarizing today's market posture (e.g. "2026-05-22: broad market overbought, no setups proposed for 4th day running — patience working as designed"). This keeps the file alive so the weekly review has something to reflect on.
+- Check `memory/strategy.md` mtime. If untouched ≥10 trading days, append a one-line `> NOTE:` comment at the top flagging it for the next Friday weekly review — e.g. `> NOTE: strategy.md untouched since 2026-05-08 — Friday review should confirm rules are still right for current regime.` Do NOT change strategy rules here — that's the weekly review's job.
+
 ### 7. Prepare for Tomorrow
 Update `memory/open_positions.md` with:
 - Current swing positions and their status

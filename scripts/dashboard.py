@@ -78,6 +78,8 @@ def parse_pending_setups(positions_md: str):
         if not block or block.startswith("Watchlist Only"):
             continue
         first_line = block.splitlines()[0].lstrip("# ").strip()
+        if first_line.rstrip(".") in ("", "None", "none"):
+            continue
         approved = "YES" if re.search(r"^- ?Approved:\s*YES", block, re.MULTILINE) else (
             "NO" if re.search(r"^- ?Denied:\s*YES", block, re.MULTILINE) else "AWAITING"
         )

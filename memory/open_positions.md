@@ -13,18 +13,22 @@ None.
 - MSFT: shows oversold stochastic readings but mixed longer-term trend. Keep as a watchlist mean-reversion setup.
 
 ## Pending Setups
+None.
 
-### Setup #1 — NVDA Swing Long (Updated Pre-Market May 8)
+## Expired Setups
+
+### Setup #1 — NVDA Swing Long (Updated Pre-Market May 8) — EXPIRED 2026-05-16
 - Direction: LONG
-- Entry Zone: $206.00–$210.00 (wait for pullback — current price $211.50 is above zone)
-- Stop-Loss: $202.50 (below $205 support)
+- Entry Zone: $206.00–$210.00 (never filled)
+- Stop-Loss: $202.50
 - Target: $218.00–$220.00
 - Position Size: 4 shares (~$832 at $208 mid-entry)
 - R:R: ~2.2:1
-- Checklist Score: 5/6 (trend ✅, momentum ✅, volatility ✅, R:R ⚠️ conditional on pullback, size ✅, catalyst ✅)
+- Checklist Score: 5/6
 - Catalyst: AI cycle intact, analyst target $272, strong macro backdrop
-- Approved: YES  <!-- via Discord 2026-05-11 11:26Z -->
-- Status: **EXPIRED** — NVDA ran to $225.91 by 2026-05-14 (pre-market), above upper BB ($224.53). Entry zone $206–210 never filled; price now 8% above zone with RSI 72 and bb_pct > 1.0. No valid re-entry at current levels. Monitor for pullback to SMA 20 (~$207) for a fresh setup.
+- Approved: was YES (Discord 2026-05-11 11:26Z) — approval retired on expiration
+- **Status**: EXPIRED. NVDA ran to $225.91 by 2026-05-14 pre-market (above upper BB $224.53; RSI 72; bb_pct > 1.0) and continued to ~$232 by 2026-05-15. Entry zone $206–210 never filled; price now well above target. Monitor for pullback to SMA 20 (~$207) for a fresh setup.
+- **Expiration reason**: price ran past $220 target without filling $206–210 entry zone. Retired 2026-05-16. Future expirations of this kind are automatically caught by `scripts/setup_validator.py archive-invalid` (see routines 1 and 2).
 
 ### Watchlist Only
 - TSLA: Day-trade candidate. No pre-planned entry. Watch for breakout above $415 or pullback to $386–392.

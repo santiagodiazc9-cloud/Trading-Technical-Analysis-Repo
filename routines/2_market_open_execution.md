@@ -25,6 +25,18 @@ Run: `python3 scripts/research.py analyze <SYMBOL>`
 - Is the entry zone still reachable?
 - Re-run the 6-point checklist with current data
 
+### 3a. Stale-approval price check (HARD GATE — runs before Approved-YES read)
+For each pending setup with `Approved: YES`, verify it hasn't been invalidated by price action since approval. This is the safety net for the case where approval was granted days ago but the entry zone has since been overshot or the stop has been blown.
+
+```bash
+python3 scripts/setup_validator.py check <SETUP_ID>
+```
+
+Parse the JSON result:
+- `valid: true` → proceed to step 4 for this setup.
+- `valid: false` → **DO NOT execute**. Post `python3 scripts/notify.py alert high <SYMBOL> 'market-open SKIPPED: stale approval (<reason>, current_price=<n>). Removing Approved flag — setup will be archived by next pre-market sweep.'` and edit `memory/open_positions.md` to remove the `Approved: YES` line under that setup (the next pre-market `archive-invalid` will move it to Expired). Log "skipped: stale approval" and continue to the next setup.
+- `valid: true, reason: PRICE_UNAVAILABLE` → permissive: continue to step 4 but log a note that the price check was inconclusive (Alpaca quote fetch failed).
+
 ### 4. Check for Approval Before Executing
 For each pending setup:
 - Read the master pause toggle from `memory/pause_state.json`. If `state` is `paused` or `halted`, do NOT place new trades — log "skipped: paused" and continue. Closes still allowed.

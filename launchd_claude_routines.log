@@ -9,3 +9,115 @@ No scheduled routine for 1 09 47
 You're out of extra usage · resets May 16 at 5am (Europe/Madrid)
 SessionEnd hook [sh -c 'exec node "${CLAUDE_PROJECT_DIR:-.}/.claude/helpers/hook-handler.cjs" session-end'] failed: sh: line 0: exec: node: not found
 
+You're out of extra usage · resets May 16 at 5am (Europe/Madrid)
+SessionEnd hook [sh -c 'exec node "${CLAUDE_PROJECT_DIR:-.}/.claude/helpers/hook-handler.cjs" session-end'] failed: sh: line 0: exec: node: not found
+
+No scheduled routine for 2 08 03
+No scheduled routine for 2 09 50
+You're out of extra usage · resets May 16 at 5am (Europe/Madrid)
+SessionEnd hook [sh -c 'exec node "${CLAUDE_PROJECT_DIR:-.}/.claude/helpers/hook-handler.cjs" session-end'] failed: sh: line 0: exec: node: not found
+
+You're out of extra usage · resets May 16 at 5am (Europe/Madrid)
+SessionEnd hook [sh -c 'exec node "${CLAUDE_PROJECT_DIR:-.}/.claude/helpers/hook-handler.cjs" session-end'] failed: sh: line 0: exec: node: not found
+
+You're out of extra usage · resets May 16 at 5am (Europe/Madrid)
+SessionEnd hook [sh -c 'exec node "${CLAUDE_PROJECT_DIR:-.}/.claude/helpers/hook-handler.cjs" session-end'] failed: sh: line 0: exec: node: not found
+
+You're out of extra usage · resets May 16 at 5am (Europe/Madrid)
+SessionEnd hook [sh -c 'exec node "${CLAUDE_PROJECT_DIR:-.}/.claude/helpers/hook-handler.cjs" session-end'] failed: sh: line 0: exec: node: not found
+
+No scheduled routine for 3 12 32
+No scheduled routine for 3 15 57
+No scheduled routine for 4 08 13
+I've completed the analysis and decision-making for this routine, but **all writes to memory/journal files are blocked pending permission** — so the bookkeeping steps (5–8) couldn't be saved yet. Here's where things stand:
+
+## Market Open Execution — 2026-05-14
+
+### Decision: NO TRADES ✅ (correct outcome)
+
+**1. Market is CLOSED.** Alpaca clock shows `is_open: false`, current time ~03:37 ET, next open 09:30 ET. This routine fired **~6 hours off-schedule** — it's meant to run at 09:35 ET.
+
+**2. The only pending setup expired.** NVDA Setup #1 (swing long, $206–210 pullback entry) was approved via Discord 2026-05-11 but never executed. Re-validating with current data:
+- NVDA is now **$225.91** — already *past* the $218–220 target and +7.5% above the entry zone. The pullback never came.
+- RSI 72.1 (overbought), price above upper Bollinger Band.
+- Entering here = chasing (CLAUDE.md #12) + violates the 2026-05-08 RSI>70 entry rule.
+- → Setup is dead. No trade. (Account stays 100% cash: $100k equity, 0 positions, daytrade_count 0.)
+
+### Two infrastructure problems found
+
+| Issue | Status |
+|---|---|
+| **Broken launchd schedule** — the `routines` plist still points at the old path `~/Documents/Claude/Projects/Agent With API Key.../scripts/run_claude_routines.sh`. Scheduled routines aren't firing (`launchd_claude_routines.log` shows "Operation not permitted" + repeated "No scheduled routine" misses). | ⚠️ Needs fix |
+| **Missing Python deps** — system `python3` (3.9.6) lacked `dotenv`/`alpaca`/`pandas`. | ✅ Fixed — installed `requirements.txt` to user site |
+
+### Blocked — need your OK to proceed
+
+I tried to write these and got permission prompts that weren't granted:
+1. `memory/open_positions.md` — move NVDA Setup #1 to an "Expired Setups" section, Pending Setups → None
+2. `journal/2026-05-14.md` — journal entry (drafted, ready to write)
+3. `memory/trade_log.json` — no change needed (no trades)
+4. Discord `#daily-brief` post + dashboard refresh — the final steps
+
+Want me to go ahead with those writes? (You can grant the permission prompts, or tell me to skip them.) I held off on the Discord post and dashboard refresh deliberately — they should reflect the memory updates, not run ahead of them.
+SessionEnd hook [sh -c 'exec node "${CLAUDE_PROJECT_DIR:-.}/.claude/helpers/hook-handler.cjs" session-end'] failed: sh: line 0: exec: node: not found
+
+You're out of extra usage · resets 2:20pm (Europe/Madrid)
+SessionEnd hook [sh -c 'exec node "${CLAUDE_PROJECT_DIR:-.}/.claude/helpers/hook-handler.cjs" session-end'] failed: sh: line 0: exec: node: not found
+
+The write was denied — same permission block the previous session hit. I'll stop trying to write and report where things stand.
+
+## End-of-Day Review — 2026-05-14 — ⚠️ routine fired ~6 hours early
+
+**This routine is scheduled for 3:45 PM ET. Alpaca's clock says it's 09:48 AM ET — the market opened 18 minutes ago.** There is no trading day to review yet. I did the read-only checks (which are valid regardless of time) but did **not** write the end-of-day artifacts, because a journal/snapshot/Discord brief claiming the day is over would be false.
+
+### What I verified (steps 1–4)
+| Check | Result |
+|---|---|
+| Open positions | None — nothing to close, no day trades, no swings |
+| Open orders | None |
+| Account | $100,000 equity / $100,000 cash / 0% deployed |
+| P&L today | $0.00 |
+| Day-trade count | 0/3 — PDT headroom fine |
+| Pause state | `active` |
+
+Account is flat. No risk rules in play, no daily loss cap concern.
+
+### Two problems found
+
+**1. The launchd schedule is broken — this is the root cause.** Routines are firing at random hours (this EOD review at 09:48 AM; the prior Market-Open session in the log fired at ~03:37 AM). The launchd plist still points at a stale path. Until that's fixed, every routine runs at the wrong time and produces wrong artifacts. This was already flagged by the previous session and is still unfixed.
+
+**2. The NVDA setup in `open_positions.md` is stale and dead.** Setup #1 (swing long, $206–210 pullback entry, approved via Discord 2026-05-11) never filled. I checked live: **NVDA is now $232.86** — RSI 75.5, above the upper Bollinger Band, already *past* the $218–220 target. The pullback never came. Entering now would be chasing (CLAUDE.md #12) + an RSI>70 rule violation. I tried to move it to an "Expired Setups" section and clear "Pending Setups" — **the write was denied.** It's still sitting in the file marked `Approved: YES`, which is a real hazard: a future market-open routine could read it as actionable.
+
+### Steps I deliberately did NOT do
+- **Step 5 (daily journal)** — skipped. Won't write a "day complete" entry at 9:48 AM.
+- **Step 8 (EOD performance snapshot)** — skipped. The day isn't over; nothing to snapshot.
+- **Step 10 (Discord `#daily-brief` post)** — skipped. An outward-facing "End-of-Day Review" message would be misleading.
+- **Step 11 (dashboard refresh + Discord mirror)** — skipped. Current `Dashboard.md` already reflects the flat state accurately.
+
+### What I recommend
+1. **Fix the launchd plist path** so routines fire on schedule — this is the actual bug. (Grep showed the prior session identified the stale path; the GHA cloud workflows are parked, so launchd is the live scheduler.)
+2. **Grant the file-write permission** if you want me to clean up `open_positions.md` now — the NVDA-expired edit is drafted and ready, it's a one-shot edit.
+3. **Re-run this EOD routine at ~3:45 PM ET** for a real end-of-day review.
+
+Want me to (a) fix the launchd plist, (b) just do the `open_positions.md` cleanup once you grant the write, or (c) both?
+SessionEnd hook [sh -c 'exec node "${CLAUDE_PROJECT_DIR:-.}/.claude/helpers/hook-handler.cjs" session-end'] failed: sh: line 0: exec: node: not found
+
+No scheduled routine for 5 08 02
+No scheduled routine for 5 09 45
+Routine complete. Discord brief posted, dashboard refreshed and mirrored.
+
+**Summary:**
+- **Account:** $100k cash, 0 positions, 0 day trades.
+- **Scan:** Broadly overbought — AAPL 74.8, GOOGL 71.6, AMD 70.7, QQQ 71.5; SPY 69, NVDA 66. Only mean-reversion signal was AMZN (Stoch oversold) but RSI 57.6 isn't extreme enough to act on.
+- **NVDA swing setup (stale):** Price now $226.75, past the $218–220 target without ever filling the $206–210 entry — setup should be retired. **I was unable to update `memory/open_positions.md` — three edit attempts were denied. The dashboard still shows 1 pending setup as a result.**
+- **Journal write also denied** — `journal/2026-05-15.md` was not created.
+- **New setups proposed:** 0 (overbought tape + no high-conviction signal).
+- **Schedule note:** This routine fired at 07:48 ET, not the scheduled 12:30 PM ET. Worth checking the launchd plist.
+
+If you want the file updates to land, re-run after granting write permission to `memory/` and `journal/`, or accept the edits in your IDE.
+SessionEnd hook [sh -c 'exec node "${CLAUDE_PROJECT_DIR:-.}/.claude/helpers/hook-handler.cjs" session-end'] failed: sh: line 0: exec: node: not found
+
+You're out of extra usage · resets 5:30pm (Europe/Madrid)
+SessionEnd hook [sh -c 'exec node "${CLAUDE_PROJECT_DIR:-.}/.claude/helpers/hook-handler.cjs" session-end'] failed: sh: line 0: exec: node: not found
+
+No scheduled routine for 6 14 23

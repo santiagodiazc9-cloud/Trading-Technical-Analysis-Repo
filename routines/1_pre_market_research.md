@@ -19,6 +19,21 @@ Before any other work, verify the Ruflo MCP server is up and on the pinned versi
    - Note the failure in `journal/YYYY-MM-DD.md` under a "Ruflo Status" line so the weekly review can spot a pattern.
 4. If the version on the server is *newer* than the pin (e.g. someone bumped to alpha.21 in a different surface), this is still a "version mismatch" — alert and continue. The fix is a manual edit to `.mcp.json` after Santiago has confirmed the new version is safe.
 
+### 0a. Stale-setup sweep
+Before loading memory, retire any pending setups whose entry/target/stop has already been overshot by price action since they were proposed. This catches the failure mode where an approved setup sits in `memory/open_positions.md` for days while the market runs past it (real example: NVDA 2026-05-08, approved May 11, target $220 hit ~May 13 without filling the $206-210 entry zone).
+
+```bash
+python3 scripts/setup_validator.py archive-invalid
+```
+
+Parse the JSON output. If `archived_count > 0`, for each entry in the `archived` array post a medium-severity Discord alert so Santiago sees the retirement in `#risk-alerts`:
+
+```bash
+python3 scripts/notify.py alert medium <SYMBOL> 'pre-market expired stale setup: <reason> (current_price=<n>)'
+```
+
+If `archived_count == 0`, continue silently — no alert needed. If the validator itself fails (non-zero exit), post a `notify.py alert high setup_validator '...'` and proceed; pre-market still has value without the sweep, but flag it for the next weekly review.
+
 ### 1. Load Memory
 Read these files to understand your current state:
 - `memory/watchlist.json` — symbols to scan
@@ -71,6 +86,25 @@ If no past setups match (similarity < 0.4 across all results), note "No prior pr
 If you identify setups worth executing at market open:
 - Note the symbol, direction, entry zone, stop-loss, and target in `memory/open_positions.md` under "Pending Setups"
 - Make sure each setup passes at least 4 of 6 checklist items
+- **Include a `setup-data:json` block at the end of each setup entry.** This is the machine-readable mirror that `scripts/setup_validator.py` parses to decide whether the setup has been invalidated by price action since proposal. Without it, the validator falls back to regex on the prose (less reliable). Use the format from `templates/setup-template.md` — example:
+
+  ```html
+  <!-- setup-data:json
+  {
+    "setup_id": "NVDA-2026-05-19",
+    "symbol": "NVDA",
+    "direction": "LONG",
+    "entry_low": 206.00,
+    "entry_high": 210.00,
+    "stop": 202.50,
+    "target_low": 218.00,
+    "target_high": 220.00,
+    "created_at": "2026-05-19T13:00:00Z"
+  }
+  -->
+  ```
+
+  Keep the JSON block in sync with the prose Entry Zone / Stop-Loss / Target lines — if you change one, change both.
 
 **DO NOT place any trades in this routine.** This is research only.
 

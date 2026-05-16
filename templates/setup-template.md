@@ -62,3 +62,25 @@ What does RuFlo memory turn up for similar setups?
 - **P&L**:
 - **Hold duration**:
 - **What worked / didn't**:
+
+<!-- setup-data:json
+{
+  "setup_id": "SYMBOL-YYYY-MM-DD",
+  "symbol": "SYMBOL",
+  "direction": "LONG",
+  "entry_low": 0.00,
+  "entry_high": 0.00,
+  "stop": 0.00,
+  "target_low": 0.00,
+  "target_high": 0.00,
+  "created_at": "YYYY-MM-DDTHH:MM:SSZ"
+}
+-->
+<!--
+  The setup-data:json block above is the machine-readable mirror of the
+  prose fields. scripts/setup_validator.py parses it (via regex on the
+  comment) to decide whether the setup is still valid given current price.
+  If you change Entry Zone / Stop-Loss / Target above, update this block too.
+  Missing block → validator falls back to parsing the prose (less reliable).
+-->
+
