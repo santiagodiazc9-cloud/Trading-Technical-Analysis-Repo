@@ -6,6 +6,26 @@ The legacy filename was `pending_clickup_updates.md` — kept the renamed file a
 
 ---
 
+## 2026-05-16 15:01 UTC — Security Scan (cloud routine, Saturday weekly)
+
+`notify.py brief` / `notify.py alert` could not run: `httpx` is not installed in the cloud routine host AND `memory/discord_config.json` is still missing. Routine completed all on-disk + ClickUp steps. Findings were posted to ClickUp `risk_and_errors` instead (3 tasks: 2× HIGH, 1× combined MEDIUM/LOW). Flush these once Discord credentials + httpx are present.
+
+### #risk-alerts (HIGH — two findings, would tag @here)
+1. **`scripts/discord_bot_cloud.py:70`** — GH_TOKEN embedded in git remote URL persists in `.git/config` on cloud host. If filesystem exposed (debug shell, snapshot, log of `git remote -v`) the token leaks. Fix: per-command `-c http.extraheader='Authorization: bearer <token>'` or in-memory credential helper. ClickUp: `869daw4dd`.
+2. **`scripts/discord_bot_cloud.py:85`** — Discord bot token written to a `.env` file inside the repo tree. One stray `git add -A` and the token is committed/pushed. Fix: read `DISCORD_BOT_TOKEN` from process env in `discord_bot.py`, drop the `.env` write. ClickUp: `869daw4e8`.
+
+### #daily-brief (silent summary)
+**Title**: 🛡️ Security Scan — 2026-05-16 — 2 HIGH, 3 MEDIUM, 1 LOW
+**Body**: Saturday weekly scan complete. 9 scripts reviewed (~2,765 LOC), 7 dependencies inventoried. **0 CRITICAL, 2 HIGH** (both cloud-deployment secret hygiene in `discord_bot_cloud.py`), **3 MEDIUM** (user-input → routine prompt-injection in `discord_bot.py`, attacker-controlled `reason` injected into `open_positions.md`, unvalidated symbol/qty in `alpaca_client.py` CLI — no notional ceiling), **1 LOW** (ACTION_LOG unbounded growth). **Positive**: `paper=True` hardcoded in alpaca_client, no live-API codepath exists, `.env` + `discord_config.json` clean in git history, no eval/exec/pickle/shell=True/verify=False anywhere, all httpx calls have timeouts. **CVE flags** (need live-feed re-verification): `httpx>=0.25.0` (CVE-2024-25199, bump to >=0.27), `pandas>=2.0.0` (CVE-2024-9880 <2.2.2). Recommend adding `pip-audit` to weekly routine and pinning upper bounds on `requirements.txt`. Findings posted to ClickUp `risk_and_errors` (3 tasks). No fixes applied — routine is read-only by design.
+
+### Infra fix still needed
+1. Provision `memory/discord_config.json` (webhooks) on cloud routine host.
+2. Set `DISCORD_BOT_TOKEN` in cloud routine host's `.env`.
+3. Install `httpx` in cloud routine host so `notify.py` can run (and re-verify the full `pip install -r requirements.txt` bootstrap including the `ta` workaround).
+4. RuFlo MCP unavailable → security findings NOT indexed into `trading-security` namespace. Re-run scan after RuFlo restored if you want regression tracking.
+
+---
+
 ## 2026-05-15 12:11 UTC — Pre-Market Research (cloud routine)
 
 Discord notify calls failed — `memory/discord_config.json` (webhooks) and `DISCORD_BOT_TOKEN` still not provisioned on this routine host. Routine completed all other steps; flush these once Discord credentials are present.
