@@ -12,36 +12,72 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
 RUNNER="$SCRIPT_DIR/run_claude_routine.sh"
 
-DOW="$(date '+%u')"     # 1=Mon … 7=Sun
+DOW="$(date '+%u')"   # 1=Mon … 7=Sun
 HOUR="$(date '+%H')"
 MIN="$(date '+%M')"
-KEY="${DOW} ${HOUR} ${MIN}"
+HHMM=$((10#$HOUR * 100 + 10#$MIN))
+
+# GHA is FAILSAFE-ONLY for the 5 main routines. Strategy:
+#   - Main routine windows start 15 min after scheduled time, giving local Mac
+#     priority. If local ran and pushed the lockfile, GHA skips.
+#   - Discord dispatcher fills all other active-window slots (idempotent, cheap).
+#
+# Schedule (ET) → GHA failsafe window:
+#   Pre-market   08:00 → 08:15–08:29
+#   Market-open  09:35 → 09:50–10:04
+#   Midday       12:30 → 12:45–12:59
+#   EOD          15:45 → 16:00–16:14
+#   Weekly (Fri) 16:30 → 16:45–16:59
 
 ROUTINE=""
-case "$KEY" in
-  "1 08 00"|"2 08 00"|"3 08 00"|"4 08 00"|"5 08 00")
-    ROUTINE="routines/1_pre_market_research.md" ;;
-  "1 09 35"|"2 09 35"|"3 09 35"|"4 09 35"|"5 09 35")
-    ROUTINE="routines/2_market_open_execution.md" ;;
-  "1 12 30"|"2 12 30"|"3 12 30"|"4 12 30"|"5 12 30")
-    ROUTINE="routines/3_midday_scan.md" ;;
-  "1 15 45"|"2 15 45"|"3 15 45"|"4 15 45"|"5 15 45")
-    ROUTINE="routines/4_end_of_day_review.md" ;;
-  "5 16 30")
-    ROUTINE="routines/5_weekly_review.md" ;;
-  *)
-    # Non-routine slot. Run the Discord dispatcher if we're inside the
-    # active polling window (Mon-Fri 08:00–16:30 ET), else exit silently.
-    HHMM=$((10#$HOUR * 100 + 10#$MIN))
-    if (( DOW <= 5 )) && (( HHMM >= 800 )) && (( HHMM <= 1630 )); then
-      ROUTINE="routines/6_discord_dispatcher.md"
-    else
-      echo "$(date '+%F %T %Z') — no routine for slot $KEY (idle)"
-      exit 0
-    fi
-    ;;
-esac
+IS_MAIN_ROUTINE=0
+if   (( DOW >= 1 && DOW <= 5 )) && (( HHMM >= 815  && HHMM <= 829  )); then
+  ROUTINE="routines/1_pre_market_research.md";  IS_MAIN_ROUTINE=1
+elif (( DOW >= 1 && DOW <= 5 )) && (( HHMM >= 950  && HHMM <= 1004 )); then
+  ROUTINE="routines/2_market_open_execution.md"; IS_MAIN_ROUTINE=1
+elif (( DOW >= 1 && DOW <= 5 )) && (( HHMM >= 1245 && HHMM <= 1259 )); then
+  ROUTINE="routines/3_midday_scan.md";           IS_MAIN_ROUTINE=1
+elif (( DOW >= 1 && DOW <= 5 )) && (( HHMM >= 1600 && HHMM <= 1614 )); then
+  ROUTINE="routines/4_end_of_day_review.md";     IS_MAIN_ROUTINE=1
+elif (( DOW == 5 ))              && (( HHMM >= 1645 && HHMM <= 1659 )); then
+  ROUTINE="routines/5_weekly_review.md";         IS_MAIN_ROUTINE=1
+else
+  # Non-routine slot: run Discord dispatcher during active window.
+  if (( DOW <= 5 )) && (( HHMM >= 800 )) && (( HHMM <= 1630 )); then
+    ROUTINE="routines/6_discord_dispatcher.md"
+  else
+    echo "$(date '+%F %T %Z') — no routine for DOW=$DOW HHMM=$HHMM (idle)"
+    exit 0
+  fi
+fi
 
 cd "$PROJECT_ROOT"
+
+# For main routines: skip if local Mac already ran this slot (lockfile in git).
+LOCKFILE="$PROJECT_ROOT/memory/last_routine_run.json"
+if [[ "$IS_MAIN_ROUTINE" == "1" ]] && [[ -f "$LOCKFILE" ]]; then
+  SKIP=$(python3 - "$LOCKFILE" "$ROUTINE" <<'EOF'
+import json, time, sys
+try:
+    d = json.load(open(sys.argv[1]))
+    same     = d.get("routine")   == sys.argv[2]
+    by_local = d.get("fired_by")  == "local"
+    age      = time.time() - d.get("fired_at_epoch", 0)
+    print("1" if same and by_local and age < 1800 else "0")
+except Exception:
+    print("0")
+EOF
+  )
+  if [[ "$SKIP" == "1" ]]; then
+    echo "$(date '+%F %T %Z') — skipping $ROUTINE (local Mac ran it; GHA failsafe not needed)"
+    exit 0
+  fi
+  echo "$(date '+%F %T %Z') — local Mac missed $ROUTINE; firing as failsafe"
+fi
+
+if [[ "$IS_MAIN_ROUTINE" == "1" ]]; then
+  python3 -c "import json,time; json.dump({'routine':'$ROUTINE','fired_by':'gha','fired_at_epoch':int(time.time())},open('$LOCKFILE','w'))"
+fi
+
 echo "$(date '+%F %T %Z') — dispatching $ROUTINE"
 "$RUNNER" "$ROUTINE"

@@ -1,0 +1,6 @@
+# Run this BEFORE requirements.txt on macOS.
+# Older setuptools causes `ta` to fail with an `install_layout` AttributeError
+# during its legacy setup.py build. Upgrading setuptools first fixes it.
+# On Linux/GHA runners this is usually a no-op but harmless.
+setuptools>=65
+wheel
