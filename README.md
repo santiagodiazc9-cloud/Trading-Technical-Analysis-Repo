@@ -1,6 +1,6 @@
 # Trading Agent
 
-An autonomous AI trading agent that researches the U.S. equity market, proposes trade setups, executes orders with explicit user approval, and journals every decision. Runs on a personal Mac via `launchd` schedules and Claude Code, controlled from a phone via Discord.
+An autonomous AI trading agent that researches the U.S. equity market, proposes trade setups, executes orders with explicit user approval, and journals every decision. Runs on a personal Mac via `launchd` schedules with GitHub Actions as a cloud failsafe — controlled from a phone via Discord.
 
 ## ⚠️ Paper trading only
 
@@ -24,29 +24,20 @@ This agent is configured to use **Alpaca's paper-trading endpoint** (`paper-api.
                        │ ▲
                        ▼ │
                   ┌─────────────────────────────┐
-                  │   Discord Bot (always-on)   │
+                  │   Discord Bot (always-on)   │ ← Mac only (launchd KeepAlive)
                   └─────────────────────────────┘
                        │ writes to / reads from
                        ▼
                   ┌─────────────────────────────┐
-                  │   memory/  +  Dashboard.md  │   ← single source of truth
+                  │   memory/  +  Dashboard.md  │ ← single source of truth (git)
                   └─────────────────────────────┘
-                       │ ▲
-                       ▼ │
-                  ┌─────────────────────────────┐
-                  │  Routines (launchd cron)    │
-                  
-
-
-
-                  │  1 pre-market  09:35 ET     │
-                  │  2 market-open  …           │
-                  │  3 midday                   │
-                  │  4 EOD                      │
-                  │  5 weekly (Fri)             │
-                  │  6 dispatcher (every 15min) │
-                  │  7 security (Sat 11 AM)     │
-                  └─────────────────────────────┘
+                    │ ▲                    │ ▲
+                    ▼ │                    ▼ │
+          ┌──────────────────┐  ┌───────────────────────┐
+          │  Mac (primary)   │  │  GitHub Actions       │
+          │  launchd cron    │  │  cloud failsafe       │
+          │  subscription    │  │  API key, fires +15m  │
+          └──────────────────┘  └───────────────────────┘
                        │
                        ▼
                   ┌─────────────────────────────┐
@@ -73,6 +64,8 @@ python3 scripts/alpaca_client.py account     # smoke test
 ```
 
 For the full install (Discord bot setup, launchd plists, channel creation), see **[SETUP.md](SETUP.md)**.
+
+To enable the GitHub Actions cloud failsafe, see **[.github/SECRETS.md](.github/SECRETS.md)**.
 
 ## Documentation
 
@@ -110,10 +103,12 @@ Reproduced from CLAUDE.md so they're in the README too:
 | 1 | Foundation: Discord bot, slash commands, dashboard, channel webhooks, routines wiring | ✅ Done |
 | 2 | Replace ClickUp polling with Discord dispatcher; bot listeners for `#knowledge-inbox` and `#feedback` | ✅ Done |
 | 3 | Strip ClickUp writes from all routines; ClickUp now read-only archive | ✅ Done |
+| 4 | Delete ClickUp emergency-fallback artifacts; stable on Discord for one full trading week | ✅ Done |
+| 5 | GitHub Actions cloud failsafe; hybrid Mac-primary / GHA-backup scheduler with lockfile guard | ✅ Done |
 
-**Active surfaces:** Discord (primary), Alpaca Paper, RuFlo MCP (`3.7.0-alpha.20`).
-**Archived surfaces:** ClickUp (read-only; configs preserved as fallback for one stable trading week).
+**Active surfaces:** Discord (primary UI), Alpaca Paper (broker), GitHub Actions (cloud failsafe), RuFlo MCP (`3.7.0-alpha.20`).
+**Archived surfaces:** ClickUp (read-only archive; see git history pre-`a201388`).
 
 ## License
 
-Private project. Not seeking contributors. If you found this repo and want to learn from it, fork freely; I make no claims about its correctness or fitness for any purpose.
+MIT. Fork freely. No warranties — this is a paper-trading research project, not financial advice.

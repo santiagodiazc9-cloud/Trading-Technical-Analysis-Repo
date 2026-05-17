@@ -18,7 +18,8 @@ Set under **Settings → Secrets and variables → Actions → Secrets** (Reposi
 | `ALPACA_API_SECRET` | Alpaca paper-trading secret. Paired with the key above. |
 | `ALPACA_BASE_URL` | Optional. Defaults to `https://paper-api.alpaca.markets`. Override only for staging. |
 | `ANTHROPIC_API_KEY` | Anthropic API key the Claude Code CLI uses inside the workflow. **Note**: this is the API key, not a Claude Code subscription. Routines billed per token. |
-| `DISCORD_CONFIG_JSON` | Full JSON content of `memory/discord_config.example.json` with your real webhook URLs and bot token filled in. The workflow writes this to `memory/discord_config.json` at runtime. |
+| `DISCORD_CONFIG_JSON` | Full JSON content of `memory/discord_config.example.json` with your real webhook URLs filled in. The workflow writes this to `memory/discord_config.json` at runtime. |
+| `DISCORD_BOT_TOKEN` | Discord bot token (starts with `Bot …`). Written to `.env` so `notify.py dashboard` can update the pinned message via the bot API. |
 
 To paste `DISCORD_CONFIG_JSON`, take the full contents of your local
 `memory/discord_config.json` (the gitignored file) and paste verbatim into
