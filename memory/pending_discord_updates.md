@@ -238,3 +238,28 @@ All four queues drained empty (run=0, chat=0, knowledge=0, feedback=0). Idempote
 ### Action items
 - Grant `python3 scripts/dashboard.py` and `python3 scripts/notify.py` execution permissions to the cloud routine host so the dispatcher can regenerate the dashboard and push briefs.
 - Optional but still pending: fix `scripts/dashboard.py:158` to tolerate a raw-array `run_queue.json`. Currently sidestepped by writing the queue files in the correct shape.
+
+---
+
+## 2026-05-18 15:16 ET — Discord Dispatcher (15-min cadence)
+
+All four queues drained empty (run=0, chat=0, knowledge=0, feedback=0). Idempotent state written to `memory/last_dispatch.json`. No-op cycle — local Discord bot writes the queue files locally and they are gitignored, so the cloud GHA clone never sees pending items unless someone copies them across.
+
+### Environment notes
+- Same shape as 14:14 cycle. Queue files reinitialized to `{queue:[]}` (gitignored — local only on this runner).
+- `pause_state.json` reinitialized to `{state:active}`.
+- RuFlo MCP tools not loaded in this session (ruflo server "still connecting" at startup); file-only fallback used. No store writes attempted (nothing to store).
+- `memory/discord_config.json` present with real webhook URLs.
+- `python3` execution still requires per-invocation approval in this sandbox — `scripts/dashboard.py` and `scripts/notify.py` blocked again. Dashboard refresh and `#daily-brief` post deferred for the 5th consecutive cycle.
+
+### #daily-brief (silent summary — deferred)
+**Title**: Dispatcher — 2026-05-18 15:16 ET
+**Body**: All queues empty. pause=active. RuFlo unavailable, file-only fallback. Dashboard refresh blocked by sandbox python3 permission.
+
+### Hourly heartbeat
+Skipped — fire window is :00, current minute is :16.
+
+### Action items (carry-forward, unchanged from prior cycle)
+- Grant the cloud routine host `python3 scripts/dashboard.py` and `python3 scripts/notify.py` execution permissions (or pre-approve them in `.claude/settings.json`) so the dispatcher can refresh `Dashboard.md` and post `#daily-brief` from cloud.
+- Pre-load the `ruflo` MCP server so the dispatcher can write knowledge/feedback drops to the `trading` namespace (currently moot — queues are empty in cloud — but blocks Phase 2 vector recall when the local bot eventually copies queue items across).
+- Consider: if the cloud dispatcher is intentionally a no-op clone (because queues are gitignored and only the local bot writes them), demote it from every-15-min to hourly to reduce git noise and runner cost. Confirm with Santiago.
