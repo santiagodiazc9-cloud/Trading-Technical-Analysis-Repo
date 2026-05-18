@@ -9,7 +9,7 @@
     {
       "symbol": "MSFT",
       "sector": "Tech",
-      "notes": "Cloud/AI leader, low volatility mover. Setup #2 PASS 2026-05-15 (long-term bearish SMA structure). Half-trigger live: SMA 20 reclaim CONFIRMED into close; MACD positive cross PENDING. Catalyst: Build 2026 conference 5/19-22. Re-propose when both re-arm conditions fire same routine (ADR-0004).",
+      "notes": "Cloud/AI leader, low volatility mover. Setup #2 PASS 2026-05-15 (long-term bearish SMA structure). Half-trigger live: SMA 20 reclaim CONFIRMED into close; MACD positive cross PENDING (4th session 2026-05-19). Catalyst: Build 2026 conference JUNE 2-3 (not May). Stale EOD 5/22. Re-propose when both re-arm conditions fire same routine (ADR-0004).",
       "strategy": "swing",
       "priority": "high"
     },

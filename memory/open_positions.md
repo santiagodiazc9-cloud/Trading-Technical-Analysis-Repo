@@ -1,62 +1,77 @@
 # Open Positions
 
 ## Current Positions
-None — no positions were taken today.
+None — no positions open.
 
 ## Pending Orders
 None.
 
-## Watchlist Alerts
-- AAPL: long-term bullish trend and price above VWAP, but overbought. Prefer a pullback entry if price tests support.
-- NVDA: still the strongest swing candidate, with trend alignment intact. Watch for support near 205 if price retraces.
-- TSLA: day trade candidate with intraday momentum, but long-term bearish SMA alignment. Use caution and wait for a clean breakout.
-- MSFT: shows oversold stochastic readings but mixed longer-term trend. Keep as a watchlist mean-reversion setup.
+---
+
+## Active Setup Monitors
+
+### MSFT — Half-Trigger Watch (re-arm gate 1/2, 4th session)
+- **Type**: Swing long candidate (mean-reversion)
+- **Original proposal**: Setup #2, first framed 2026-05-09. Resolved PASS on long-term-bearish SMA structure 2026-05-15 pre-market. Re-arm gate set: SMA 20 reclaim AND MACD bullish cross (both required, same routine).
+- **Entry Zone (if re-armed)**: ~$417–$422 (to be freshly calculated on proposal)
+- **Stop**: TBD on fresh proposal
+- **Target**: TBD on fresh proposal
+- **Catalyst**: Microsoft Build 2026 conference — **CORRECTED: June 2-3 in San Francisco, NOT May 19**
+
+**Half-Trigger Log:**
+| Session | SMA 20 Reclaim | MACD Bullish Cross | Notes |
+|---------|---------------|-------------------|-------|
+| 2026-05-15 midday | MET ($423.39 > $417.47) | NOT YET | First fire |
+| 2026-05-15 EOD | MET | NOT YET | Sustained through close |
+| 2026-05-18 EOD | MET ($419.92 > $417.49) | NOT YET (histogram -0.84, narrowing) | 3rd session |
+| 2026-05-19 pre-market | MET ($422.35 > $417.62) | NOT YET (histogram -0.684, continuing to narrow) | 4th session; SMA 20 reclaim solid |
+
+- **Next action**: Midday and EOD 2026-05-19 — watch for MACD histogram to flip positive. No catalyst today (Build is June 2-3). Post-NVDA earnings sentiment may affect MSFT indirectly. If histogram turns positive in same session as SMA 20 reclaim, evaluate full confluence checklist and propose.
+- **Stale date**: EOD 2026-05-22 (5 trading days from first fire 2026-05-15). 3 sessions remain.
+
+---
+
+### AMZN-2026-05-15 — RETIRED (ADR-0002 stale)
+- **Status**: FORMALLY RETIRED at 2026-05-19 pre-market per ADR-0002. Setup was stale-by EOD 5/19 pre-market and never filled.
+- **Final price at retirement**: $268.48 — $2.98 above upper entry zone ceiling ($265.50). Price moved away from the entry zone rather than into it.
+- **Parameters were**: Entry $264–$265.50 / Stop $260 / Target $278–$280 / R:R 3.0:1 / Approved: NO
+- **Re-arm conditions for a fresh AMZN setup**: MACD histogram must turn positive (currently -2.01); a valid pullback entry zone must be identified (VWAP $268.40 is the current level). No proposal today — await NVDA earnings read-through tonight before re-evaluating AMZN parameters.
+
+---
 
 ## Pending Setups
-None.
+None with `Approved: YES`.
 
-## Expired Setups
+---
 
-### Setup #1 — NVDA Swing Long (Updated Pre-Market May 8) — EXPIRED 2026-05-16
-- Direction: LONG
-- Entry Zone: $206.00–$210.00 (never filled)
-- Stop-Loss: $202.50
-- Target: $218.00–$220.00
-- Position Size: 4 shares (~$832 at $208 mid-entry)
-- R:R: ~2.2:1
-- Checklist Score: 5/6
-- Catalyst: AI cycle intact, analyst target $272, strong macro backdrop
-- Approved: was YES (Discord 2026-05-11 11:26Z) — approval retired on expiration
-- **Status**: EXPIRED. NVDA ran to $225.91 by 2026-05-14 pre-market (above upper BB $224.53; RSI 72; bb_pct > 1.0) and continued to ~$232 by 2026-05-15. Entry zone $206–210 never filled; price now well above target. Monitor for pullback to SMA 20 (~$207) for a fresh setup.
-- **Expiration reason**: price ran past $220 target without filling $206–210 entry zone. Retired 2026-05-16. Future expirations of this kind are automatically caught by `scripts/setup_validator.py archive-invalid` (see routines 1 and 2).
+## Watchlist Alerts (2026-05-19 pre-market)
 
-### Watchlist Only
-- TSLA: Day-trade candidate. No pre-planned entry. Watch for breakout above $415 or pullback to $386–392.
-- AMD: Overbought (RSI 76–80). Watch for pullback to $395–405 before considering entry.
-- AAPL: Watch for pullback to $288 (new support from breakout) for swing re-entry.
+| Symbol | Price | Key Signal | Note |
+|--------|-------|-----------|------|
+| MSFT | $422.35 | Half-trigger 1/2, MACD hist -0.684 (narrowing) | 4th session; no catalyst today (Build is June 2-3) |
+| AMZN | $268.48 | Stoch K 5.75 oversold, on VWAP, MACD hist -2.01 | AMZN-2026-05-15 RETIRED. Watch post-NVDA for fresh setup |
+| NVDA | $225.83 | Earnings AMC tonight — BINARY EVENT | No position. Post-print watch $215–$220 for pullback setup |
+| AMD | $428.24 | RSI 67.9, Stoch 21.5, 7.2% above VWAP | Extended — DO NOT CHASE. Watch VWAP $399-400 post-NVDA |
+| AAPL | $298.08 | RSI 71.9, Stoch 90.8 — overbought | No entry (ADR-0001) |
+| GOOGL | $404.95 | RSI 73.2 — overbought | No entry (ADR-0001) |
+| TSLA | $415.39 | MACD hist +2.55, above SMA 20, near VWAP | Day-trade only (long-term SMA bearish) |
+| SPY | $740.88 | RSI 68.9, uptrend intact | Above trip-wire $725; MACD recovering |
+| QQQ | $709.88 | RSI 71.7 — at overbought threshold | Watch for resolution |
 
-## Market Open Execution Log — 2026-05-08 9:35 AM ET
-- NVDA: **SKIPPED — awaiting approval** (no `Approved: YES` flag present)
-- TSLA: **SKIPPED — watchlist only**, no pre-planned setup
-- Trades placed: 0
-- API note: Alpaca API unreachable from scheduler sandbox (403 proxy block). Live signal re-validation was not possible. Run scripts from VS Code/Claude Code for live market data.
+---
 
-## Notes
-- End-of-day review completed with no trades executed.
-- Daily loss cap not hit (0.0 PnL today, cap is $2,000 on $100,000 portfolio).
-- No open positions to carry overnight.
-- Midday scan (2026-05-08 12:30 ET): No open positions, no new setups flagged. Live data unavailable from scheduled task sandbox — all analysis based on prior session context. Santiago should run a manual scan from VS Code for live data.
-- EOD review (2026-05-08 3:45 ET): No day-trade positions to close. Portfolio remains 100% cash overnight. NVDA swing setup still pending approval — remains valid into 2026-05-09 if support holds.
+## Watch List (2026-05-19)
 
-## Tomorrow's Watch List (2026-05-09)
-- **NVDA** (Priority 1 — swing): Pullback to 206–210 support zone. Stop below 200. Target 216+. Approval required before entry.
-- **TSLA** (Priority 2 — day trade only): Watch for breakout above ~413. No overnight bias; daily trend still bearish.
-- **AAPL** (Priority 3 — swing): Pullback to 280 support + MACD curl = mean-reversion entry candidate.
-- **MSFT**: Oversold stochastic — monitor for mean-reversion setup, not an urgent entry.
-- **SPY / QQQ**: Broader market health check — if either breaks below 717 / 665, shift to defensive posture.
+1. **NVDA — Binary Event tonight (AMC)**: No position. Post-print: beat + guide-up → watch AMD for VWAP pullback entry tomorrow; miss → defensive posture on entire chip cohort.
+2. **MSFT — Gate Watch (Priority 1)**: MACD cross is the only missing trigger. Histogram -0.684, narrowing from -0.84. Watch midday and EOD. Stale EOD 5/22 if no cross.
+3. **AMD — Post-NVDA setup candidate**: Price too extended today. If NVDA strong tonight → AMD may pull back toward VWAP $399-400 on profit-taking tomorrow. That would be the entry zone for a swing proposal.
+4. **AMZN — Fresh setup candidate (post-NVDA)**: AMZN-2026-05-15 retired. If NVDA prints strong and market risk-on persists, fresh AMZN setup with updated parameters could be proposed at tomorrow pre-market. Key condition: MACD must show improvement.
+5. **SPY/QQQ**: Hold above $725/$700 = bullish posture maintained.
 
-## Pre-Market Notes for 2026-05-09
-- Run `python scripts/research.py scan` from VS Code first thing to get live indicator data.
-- If NVDA is pulling back toward 206–210, assess whether it qualifies for swing entry (RSI resetting, MACD not deeply negative, volume normal).
-- TSLA: Only day-trade if a clean 5-minute breakout forms above prior resistance — no guessing.
-- Post any new setups to Discord `#approvals` (via `notify.py setup ...`) before the 9:35 AM execution routine fires.
+## Notes (2026-05-19 pre-market)
+- No trades, no positions. Week 3 Day 2. 0/3 weekly trade slots used.
+- AMZN-2026-05-15 formally retired per ADR-0002.
+- MSFT half-trigger held 4 sessions — stale EOD 5/22 if MACD cross doesn't fire.
+- Microsoft Build 2026 date corrected in memory: it's June 2-3, not May 19. Prior watchlist entry was wrong.
+- RuFlo MCP degraded (v3.7.0-alpha.21 vs pinned alpha.20; memory store not initialized). File-only fallback active.
+- Discord notifications blocked — `memory/discord_config.json` missing. Logged to pending_discord_updates.md.

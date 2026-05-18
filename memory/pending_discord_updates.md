@@ -6,6 +6,33 @@ The legacy filename was `pending_clickup_updates.md` — kept the renamed file a
 
 ---
 
+## 2026-05-19 pre-market — Pre-Market Research
+
+`notify.py` calls blocked: `memory/discord_config.json` missing. Flush once Discord credentials are provisioned.
+
+### #risk-alerts (high — RuFlo version drift)
+Ruflo MCP running v3.7.0-alpha.21; pinned to alpha.20. Memory store degraded (not initialized). Pre-market ran in file-only fallback. Confirm alpha.21 is safe before updating `.mcp.json` pin.
+
+### #daily-brief (silent summary)
+**Title**: Pre-Market Brief — 2026-05-19
+**Body**: 0 setups proposed. NVDA earnings AMC tonight — binary event, no Tech entries today. AMZN-2026-05-15 formally retired (ADR-0002 stale). MSFT half-trigger 4th session — MACD hist -0.684, SMA 20 reclaim held. AMD extended 7.2% above VWAP — no chase. Memory correction: Microsoft Build 2026 is June 2-3, not May 19. Priority watch: post-NVDA print at 5/20 pre-market → AMD VWAP pullback ($399-400) and MSFT MACD cross are the two highest-quality setups in the queue. 0/3 weekly trades used. $100k cash.
+
+---
+
+## 2026-05-18 ~15:45 ET — End-of-Day Review
+
+`notify.py brief` and `notify.py send chat` could not run: `memory/discord_config.json` missing. Flush once Discord credentials are provisioned.
+
+### #daily-brief (silent summary)
+**Title**: End-of-Day Review — 2026-05-18
+**Body**: P&L $0.00 (0.00%) | 0 trades, 0 closes | 0 open positions | NVDA earnings tonight (no exposure, binary risk rule respected), MSFT half-trigger 1/2 x3 sessions (MACD cross pending; Microsoft Build starts 5/19), AMZN-2026-05-15 stales tomorrow pre-market | SPY MACD bearish cross — first momentum stall since May rally | 0/3 weekly slots used.
+
+### #chat (reflective question)
+**Title**: Reflection — 2026-05-18
+**Body**: The AMZN-2026-05-15 setup has been at Approved: NO for 3 trading days. Tonight it closes $266.48 — literally $0.98 above the upper bound of the entry zone you never approved. Stochastic is at 3.19 (extreme oversold). The setup stales tomorrow pre-market. Looking back: was the hesitation right? And if AMZN pulls back into $264–$265.50 tomorrow, would you want a fresh proposal — or is this tape not one you want to trade into ahead of the NVDA earnings print?
+
+---
+
 ## 2026-05-16 15:01 UTC — Security Scan (cloud routine, Saturday weekly)
 
 `notify.py brief` / `notify.py alert` could not run: `httpx` is not installed in the cloud routine host AND `memory/discord_config.json` is still missing. Routine completed all on-disk + ClickUp steps. Findings were posted to ClickUp `risk_and_errors` instead (3 tasks: 2× HIGH, 1× combined MEDIUM/LOW). Flush these once Discord credentials + httpx are present.
@@ -175,3 +202,18 @@ None pushed today. No daily loss cap breach, no hard rule violation. Reflective 
 ### Infra fix still needed (re-confirmed)
 1. Provision `memory/discord_config.json` (copy of `discord_config.example.json` with real webhook URLs) on the cloud routine host.
 2. Set `DISCORD_BOT_TOKEN` in the cloud routine host's `.env`.
+
+---
+
+## 2026-05-18 — Discord Dispatcher (15-min cadence)
+
+`notify.py brief` failed: `memory/discord_config.json` still missing. All queues drained (all empty). `memory/last_dispatch.json` initialized fresh.
+
+### #daily-brief (silent summary)
+**Title**: Dispatcher — 2026-05-18
+**Body**: All queues empty (run=0, chat=0, knowledge=0, feedback=0). pause_state.json absent → treated active. RuFlo MCP unavailable (permission not granted) — file-only fallback. Dashboard refresh failed: `dashboard.py` crashes when `run_queue.json` is a raw array rather than `{"queue":[...]}` (line ~158, `AttributeError: 'list' object has no attribute 'get'`). Fix: change `read_json(RUN_QUEUE, {"queue":[]}).get("queue",[])` to handle both list and dict formats.
+
+### Bug logged
+- **File**: `scripts/dashboard.py` line 158
+- **Error**: `AttributeError: 'list' object has no attribute 'get'` when `run_queue.json` contains a raw `[]` array
+- **Fix**: `_rq = read_json(RUN_QUEUE, []); state["run_queue"] = _rq if isinstance(_rq, list) else _rq.get("queue", [])`

@@ -1,49 +1,56 @@
 # Market Context
 
 ## Last Updated
-2026-05-14 (Midday scan — pre-market data)
+2026-05-19 pre-market
 
-## Market Summary (Week of May 14, 2026)
-- **Broad market continuing overbought extension**: SPY $742.30 RSI 76.5 (Stoch 95.3), QQQ $714.57 RSI 79.4. Both at/near upper Bollinger Bands.
-- **No pullback yet** since early May rally. Trend is intact but statistically stretched.
-- SPY MACD histogram +1.19 — momentum still positive but narrowing.
-- QQQ MACD histogram +3.04 — QQQ leading.
-- **Options expiration May 16** — expect intraday volatility spikes mid-week.
+## Market Summary (Week of May 18, 2026 — Day 2, pre-market 5/19)
+- **Broad market uptrend intact, momentum stalling**: SPY $738.06 RSI 66.9 (down from 76.5 last week), MACD bearish crossover (histogram -0.04). First momentum stall signal since the May rally.
+- QQQ $707.47 RSI 70.2 — at overbought threshold. MACD histogram +0.53 (still positive but slim).
+- The extreme RSI extension from last week (SPY 76.5, QQQ 79.4) has partially resolved. Market pulled back modestly intraday while remaining above all key MAs.
+- **NVDA earnings TONIGHT** (Q1 FY27, AMC 5/19–5/20). Binary event — no exposure. Will reset watchlist assessment post-print.
+- **Microsoft Build 2026** conference starts tomorrow (5/19–22). Live catalyst window for MSFT.
 
-## Updated Key Prices (2026-05-14 pre-market)
-- **NVDA**: $225.91 — ran from $211.50 (May 8) to $225.91 (+7%). Above upper BB ($224.53), RSI 72.1. Overbought. Prior $206-210 setup expired.
-- **AAPL**: $298.95 — at upper BB ($299.19), Stochastic 98.5. Extremely overbought.
-- **MSFT**: $405.09 — RSI 47.3, Stochastic 1.7 (extreme oversold). BUT SMA50 < SMA200 (long-term bearish). Below VWAP. Below SMA 20. MACD negative. Long-term downtrend — mean reversion only, not a swing trend-follow.
-- **TSLA**: $445.33 — RSI 70.2, above upper BB, Stochastic 86.6. SMA50 < SMA200 (bearish daily). Day-trade only rule remains.
-- **AMZN**: $270.15 — RSI 67.4, Stochastic 6.7 (oversold), long-term uptrend (SMA50>200). Closest to a setup — watch for pullback to $263-265 (SMA 20 zone) for 2:1 R:R swing entry.
-- **META**: $616.61 — RSI 46.4, Stochastic 13, long-term bearish. No setup.
-- **GOOGL**: $402.63 — RSI 75.6, overbought, long-term bullish. No entry.
-- **AMD**: $445.40 — RSI 76.1, overbought, long-term bullish. No entry.
-- **SPY**: $742.30 — RSI 76.5, Stoch 95.3, near upper BB ($744.81). Support at $719.98 (SMA 20).
-- **QQQ**: $714.57 — RSI 79.4, Stoch 77.5, near upper BB ($721.42). Support at $673.34 (SMA 20).
+## Key Prices (2026-05-19 pre-market scan)
 
-## Sector Context
-- Tech/AI/Semiconductors: Still the clear leader, but overextended. NVDA +7% in 6 days.
-- MSFT showing unusual weakness relative to sector (below SMA 200 at $464) — possible rotation signal or company-specific headwind.
-- AMZN (Consumer Discretionary/Cloud): Relative strength — holding above SMA 20, Stochastic reset while price stays near highs.
+| Symbol | Price | RSI | MACD Hist | SMA 20 | Key Signal |
+|--------|-------|-----|-----------|--------|-----------|
+| SPY | $740.88 | 68.9 | +0.14 | $725.36 | Uptrend intact; MACD recovering from yesterday's stall |
+| QQQ | $709.88 | 71.7 | +0.68 | $683.47 | Overbought (ADR-0001); MACD positive |
+| NVDA | $225.83 | 64.9 | +1.48 | $211.49 | Earnings AMC tonight — BINARY RISK. No position. |
+| AAPL | $298.08 | 71.9 | +1.37 | $282.77 | Overbought RSI + Stoch 90.8. No entry (ADR-0001). |
+| MSFT | $422.35 | 58.1 | -0.684 | $417.62 | Half-trigger 1/2; above SMA 20; MACD hist narrowing. Build = June 2-3 (not today). |
+| TSLA | $415.39 | 54.9 | +2.56 | $402.43 | Near VWAP $414.48. Long-term bearish SMA. Day-trade only. |
+| AMZN | $268.48 | 62.6 | -2.01 | $265.53 | Stoch K 5.75 oversold; on VWAP. AMZN-2026-05-15 RETIRED (ADR-0002). |
+| META | $608.87 | 43.7 | -2.49 | $631.59 | Below SMA 20. Long-term bearish. No setup. |
+| GOOGL | $404.95 | 73.2 | +0.23 | $376.27 | Overbought. No entry (ADR-0001). |
+| AMD | $428.24 | 67.9 | +0.94 | $379.33 | Long-term bullish. Extended 7.2% above VWAP — do not chase. Watch $399-400 post-NVDA. |
 
-## Key Levels (Updated May 14)
-- **SPY**: Support SMA 20 ~$719.98 / Resistance upper BB ~$744.81. Daily stop-watch level.
-- **QQQ**: Support SMA 20 ~$673.34 / Resistance upper BB ~$721.42.
-- **NVDA**: Support SMA 20 ~$207.24 / SMA 50 ~$191.17. New resistance ~$226-230.
-- **AMZN**: Watch zone $263-265 (SMA 20 = $262.96) for swing entry trigger.
+## Sector Context (EOD 2026-05-18)
+- **Tech/AI/Semiconductors**: NVDA earnings tonight determines near-term tone for the sector. Strong tech tape all of last week (AAPL, GOOGL, AMD all ran). MSFT bucking the trend (below SMA 200) but showing recovery.
+- **Broad indices**: SPY and QQQ both above SMA 20; uptrend intact. SPY MACD histogram turning negative for the first time since the May rally — watch closely over next 2–3 sessions.
+- **AMZN (Consumer Discretionary/Cloud)**: Stoch at extreme oversold (3.19) while price sits barely above the swing entry zone. If NVDA earnings are positive tonight, AMZN could benefit from risk-on spillover.
 
-## Upcoming Events — Week of May 14, 2026
-- **Options expiration**: May 16 (Friday) — expect elevated intraday volatility mid-week, especially Thu-Fri.
-- **Economic data**: Watch for any mid-week data releases (retail sales, housing, Fed speakers).
-- **Fed**: No scheduled FOMC this week — any member commentary is event-driven risk.
+## Key Levels (Updated May 18)
+- **SPY**: Support SMA 20 ~$725.22. Hold above $725 = uptrend intact. Break below = shift posture to defensive.
+- **QQQ**: Support SMA 20 ~$683.35.
+- **NVDA**: Post-earnings watch zone $215–$220 (pullback to SMA 20 ~$211; re-entry only after RSI resets below 65).
+- **MSFT**: SMA 20 $417.49 (price above ✓). MACD cross is the missing trigger. If price holds $417.49+ AND MACD flips positive → fresh proposal.
+- **AMZN**: Entry zone $264–$265.50 (immutable per ADR-0003). Stale-by tomorrow pre-market.
+
+## Upcoming Events — Week of May 18, 2026
+- **NVDA earnings**: Q1 FY27 — AMC 5/19 / pre-market 5/20. Binary event. No exposure until post-print.
+- **Microsoft Build 2026**: June 2-3, San Francisco (NOT this week — prior memory was wrong).
+- **AMZN-2026-05-15**: RETIRED this morning (ADR-0002). Fresh setup evaluation post-NVDA earnings.
+- **Economic data**: Watch for any high-impact macro releases this week (CPI, Fed speakers). Check calendar pre-market daily.
 
 ## Sentiment
-- Cautious bullish. Market still in uptrend but at extreme overbought readings on multiple timeframes.
-- Best strategy: wait for pullbacks to defined support levels. AMZN is the primary watch candidate.
-- Patience is the position. 0/3 trades used this week — no FOMO.
-- Confidence level: 6/10 (near-term caution given overbought conditions, longer-term uptrend intact).
+- Cautiously bullish. SPY $740.88 uptrend intact; MACD recovering (+0.14 vs -0.04 yesterday). The one-session stall resolved without damage.
+- Tonight's NVDA earnings are the dominant event for the week. The entire chip sector (AMD, NVDA) and broader tech sentiment pivots on this print. No new longs in Tech until the NVDA overhang clears.
+- Best post-NVDA setups: (1) AMD pullback to VWAP $399-400 if NVDA beats, (2) MSFT MACD cross (4th session, narrowing), (3) Fresh AMZN setup at VWAP if sector turns risk-on.
+- No positions. Full cash. 0/3 weekly trade slots used.
+- Confidence level: 6/10 — directional bias is up but binary event tonight constrains new entries appropriately.
 
-## Prior Context (May 9 summary — for reference)
-- **Strong macro backdrop**: April jobs +115,000 (vs. 65,000 consensus). Unemployment 4.3%. Risk-on environment continues.
-- **Geopolitical tailwind**: Iran/U.S. peace deal hopes maintained.
+## Prior Context (May 14 — for reference)
+- **Broad market continuing overbought extension**: SPY $742.30 RSI 76.5, QQQ $714.57 RSI 79.4. Both at/near upper Bollinger Bands.
+- Options expiration May 16 passed — elevated intraday vol resolved.
+- Strong macro backdrop: April jobs +115k vs 65k consensus, Iran/U.S. peace deal hopes.
