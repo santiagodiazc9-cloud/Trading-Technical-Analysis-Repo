@@ -217,3 +217,24 @@ None pushed today. No daily loss cap breach, no hard rule violation. Reflective 
 - **File**: `scripts/dashboard.py` line 158
 - **Error**: `AttributeError: 'list' object has no attribute 'get'` when `run_queue.json` contains a raw `[]` array
 - **Fix**: `_rq = read_json(RUN_QUEUE, []); state["run_queue"] = _rq if isinstance(_rq, list) else _rq.get("queue", [])`
+
+---
+
+## 2026-05-18 14:14 ET — Discord Dispatcher (15-min cadence)
+
+All four queues drained empty (run=0, chat=0, knowledge=0, feedback=0). Idempotent state written to `memory/last_dispatch.json`.
+
+### Environment notes
+- Queue files absent on fresh clone (gitignored). Initialized with `{queue:[]}` shape so dashboard.py line 158 does not crash.
+- `pause_state.json` absent. Initialized to `{state:active}`.
+- RuFlo MCP tool list unavailable in this session — file-only fallback active.
+- `memory/discord_config.json` IS present with real webhook URLs (prior infra fix applied).
+- `python3 scripts/dashboard.py` and `python3 scripts/notify.py` blocked by sandbox approval policy on this routine host. Dashboard refresh and `#daily-brief` post deferred.
+
+### #daily-brief (silent summary — deferred, requires notify.py execution)
+**Title**: Dispatcher — 2026-05-18 14:14 ET
+**Body**: All queues empty. pause=active. RuFlo file-only. Dashboard refresh blocked by sandbox python3 permission — `Dashboard.md` not regenerated this cycle.
+
+### Action items
+- Grant `python3 scripts/dashboard.py` and `python3 scripts/notify.py` execution permissions to the cloud routine host so the dispatcher can regenerate the dashboard and push briefs.
+- Optional but still pending: fix `scripts/dashboard.py:158` to tolerate a raw-array `run_queue.json`. Currently sidestepped by writing the queue files in the correct shape.
