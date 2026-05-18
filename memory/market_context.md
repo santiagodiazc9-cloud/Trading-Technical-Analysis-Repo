@@ -50,6 +50,25 @@
 - No positions. Full cash. 0/3 weekly trade slots used.
 - Confidence level: 6/10 — directional bias is up but binary event tonight constrains new entries appropriately.
 
+## Midday 2026-05-18 Snapshot (actual current routine, 12:40 ET)
+
+Live re-scan diverges from the future-dated 5/19 pre-market table above. System date is 2026-05-18; carry the table above as forward-looking reference, but anchor decisions on this midday snapshot.
+
+| Symbol | Price | RSI | MACD Hist | SMA 20 | vs VWAP | Notable |
+|--------|-------|-----|-----------|--------|---------|---------|
+| SPY | $735.70 | 64.5 | -0.19 | $725.10 | +$5.30 | MACD bearish cross intact — first stall caution |
+| QQQ | $701.79 | 66.0 | +0.16 | $683.07 | +$7.35 | Above $700 trip-wire ✓ |
+| NVDA | $221.02 | 60.4 | +1.18 | $211.25 | +$8.60 | Earnings binary tonight; no position |
+| AAPL | $295.42 | 67.6 | +1.20 | $282.64 | +$8.92 | Stoch K 82.9 OB; ADR-0001 no-touch |
+| MSFT | $420.01 | 56.4 | -0.83 | $417.50 | +$6.99 | Half-trigger 1/2, no change |
+| TSLA | $411.00 | 53.1 | +2.28 | $402.21 | -$3.40 | Below VWAP — no intraday confirmation |
+| AMZN | $265.02 | 59.5 | -2.23 | $265.36 | -$3.27 | **Price inside retired entry zone**; Stoch K 1.17 extreme oversold |
+| META | $609.45 | 43.9 | -2.45 | $631.62 | -$4.74 | Below SMA 20; no setup |
+| GOOGL | $401.39 | 71.95 | -0.00 | $376.10 | +$13.77 | RSI OB + fresh MACD bearish cross |
+| AMD | $414.79 | 64.2 | +0.09 | $378.66 | +$14.80 | ~3.7% above VWAP; cooled from 5/19 read |
+
+Midday read: no new high-conviction setups. AMZN re-entered the retired zone but ADR-0002/0003 prevent intraday self-arming — flagged for fresh re-evaluation at next pre-market. MSFT half-trigger unchanged. NVDA binary event constraint still binding for Tech entries. Hold cash.
+
 ## Prior Context (May 14 — for reference)
 - **Broad market continuing overbought extension**: SPY $742.30 RSI 76.5, QQQ $714.57 RSI 79.4. Both at/near upper Bollinger Bands.
 - Options expiration May 16 passed — elevated intraday vol resolved.

@@ -6,6 +6,16 @@ The legacy filename was `pending_clickup_updates.md` — kept the renamed file a
 
 ---
 
+## 2026-05-18 12:40 ET — Midday Scan (actual current routine)
+
+`notify.py` calls blocked: `memory/discord_config.json` missing. Flush once Discord credentials are provisioned.
+
+### #daily-brief (silent summary)
+**Title**: Midday Scan — 2026-05-18
+**Body**: 0 positions / $100k cash / 0% deployed | No setups proposed at midday (binary NVDA event tonight constrains Tech entries) | MSFT half-trigger unchanged (1/2, MACD hist -0.83, RSI 56.4) | AMZN $265.02 re-entered the retired AMZN-2026-05-15 entry zone ($264-$265.50) with Stoch K 1.17 extreme oversold — ADR-0002/0003 forbid intraday self-arming, flagged for fresh evaluation at next pre-market | AMD cooled to ~3.7% above VWAP (was 7.2%), watch VWAP $399-400 | SPY MACD bearish cross persists (hist -0.19) — caution intact, still above $725 SMA 20 | 0/3 weekly trades used.
+
+---
+
 ## 2026-05-19 pre-market — Pre-Market Research
 
 `notify.py` calls blocked: `memory/discord_config.json` missing. Flush once Discord credentials are provisioned.
