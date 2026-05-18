@@ -27,6 +27,23 @@ Ruflo MCP running v3.7.0-alpha.21; pinned to alpha.20. Memory store degraded (no
 **Title**: End-of-Day Review — 2026-05-18
 **Body**: P&L $0.00 (0.00%) | 0 trades, 0 closes | 0 open positions | NVDA earnings tonight (no exposure, binary risk rule respected), MSFT half-trigger 1/2 x3 sessions (MACD cross pending; Microsoft Build starts 5/19), AMZN-2026-05-15 stales tomorrow pre-market | SPY MACD bearish cross — first momentum stall since May rally | 0/3 weekly slots used.
 
+## 2026-05-18 19:48 UTC — End-of-Day Review (re-confirmation 15:46 ET)
+
+EOD routine re-ran. `notify.py brief` and `notify.py dashboard` both failed: `memory/discord_config.json` missing and `DISCORD_BOT_TOKEN` not set. Memory + Dashboard.md refreshed locally.
+
+### #daily-brief (silent summary)
+**Title**: End-of-Day Review — 2026-05-18 (re-confirm)
+**Body**: P&L $0.00 (0.00%) | 0 trades, 0 closes | 0 open positions | NVDA earnings tonight (no exposure, binary respected) | MSFT half-trigger 1/2 — 3rd session SMA 20 reclaim held ($422.11 > $417.60); MACD hist narrowed to -0.70 (from -0.84, -1.39), cross still pending | **AMZN closed back inside entry zone at $264.76** (zone $264–$265.50); Stoch K 0.79 extreme oversold; `Approved: NO` held; setup stales tomorrow per ADR-0002 — no order placed | **SPY MACD bearish cross CONFIRMED at close (hist -0.06)** — first momentum stall since May rally; **GOOGL also bearish cross** (hist -0.23 at RSI 70.6) | Microsoft Build date corrected to June 2-3 (NOT this week) | 0/3 weekly slots used.
+
+### Dashboard mirror
+- `python3 scripts/dashboard.py` succeeded (`Dashboard.md` regenerated at 19:48 UTC; live=true, positions=0, pending_setups=1).
+- `python3 scripts/notify.py dashboard` failed — `DISCORD_BOT_TOKEN` missing. Pinned message NOT updated. Flush when token is provisioned.
+
+### Infra unchanged
+- `memory/discord_config.json` still missing on this routine host.
+- `DISCORD_BOT_TOKEN` not in env.
+- ClickUp deliberately not used (retired per CLAUDE.md Phase 4, 2026-05-16) — the routing hook's "ClickUp MCP IS available" note is stale.
+
 ### #chat (reflective question)
 **Title**: Reflection — 2026-05-18
 **Body**: The AMZN-2026-05-15 setup has been at Approved: NO for 3 trading days. Tonight it closes $266.48 — literally $0.98 above the upper bound of the entry zone you never approved. Stochastic is at 3.19 (extreme oversold). The setup stales tomorrow pre-market. Looking back: was the hesitation right? And if AMZN pulls back into $264–$265.50 tomorrow, would you want a fresh proposal — or is this tape not one you want to trade into ahead of the NVDA earnings print?

@@ -1,54 +1,56 @@
 # Market Context
 
 ## Last Updated
-2026-05-19 pre-market
+2026-05-18 EOD (15:46 ET)
 
-## Market Summary (Week of May 18, 2026 — Day 2, pre-market 5/19)
-- **Broad market uptrend intact, momentum stalling**: SPY $738.06 RSI 66.9 (down from 76.5 last week), MACD bearish crossover (histogram -0.04). First momentum stall signal since the May rally.
-- QQQ $707.47 RSI 70.2 — at overbought threshold. MACD histogram +0.53 (still positive but slim).
-- The extreme RSI extension from last week (SPY 76.5, QQQ 79.4) has partially resolved. Market pulled back modestly intraday while remaining above all key MAs.
+## Market Summary (Week of May 18, 2026 — Day 1, EOD 5/18)
+- **Broad market uptrend intact, momentum stalling**: SPY $737.86 RSI 66.7, **MACD bearish crossover** at close (histogram -0.06). First momentum stall signal since the May rally.
+- QQQ $704.76 RSI 68.2 (cooled from 71.7 overnight peak) — off overbought threshold. MACD histogram +0.35 (positive but slim).
+- The extreme RSI extension from last week (SPY 76.5, QQQ 79.4) has partially resolved. Market traded down modestly intraday while remaining above all key MAs.
+- GOOGL also flashed a **MACD bearish crossover** at overbought RSI (70.6) — corroborating signal that mega-cap Tech leadership is taking a breather.
 - **NVDA earnings TONIGHT** (Q1 FY27, AMC 5/19–5/20). Binary event — no exposure. Will reset watchlist assessment post-print.
-- **Microsoft Build 2026** conference starts tomorrow (5/19–22). Live catalyst window for MSFT.
+- **Microsoft Build 2026** confirmed June 2-3 in San Francisco (NOT this week — prior memory was wrong, corrected).
 
-## Key Prices (2026-05-19 pre-market scan)
+## Key Prices (EOD 2026-05-18 scan, 15:46 ET)
 
 | Symbol | Price | RSI | MACD Hist | SMA 20 | Key Signal |
 |--------|-------|-----|-----------|--------|-----------|
-| SPY | $740.88 | 68.9 | +0.14 | $725.36 | Uptrend intact; MACD recovering from yesterday's stall |
-| QQQ | $709.88 | 71.7 | +0.68 | $683.47 | Overbought (ADR-0001); MACD positive |
-| NVDA | $225.83 | 64.9 | +1.48 | $211.49 | Earnings AMC tonight — BINARY RISK. No position. |
-| AAPL | $298.08 | 71.9 | +1.37 | $282.77 | Overbought RSI + Stoch 90.8. No entry (ADR-0001). |
-| MSFT | $422.35 | 58.1 | -0.684 | $417.62 | Half-trigger 1/2; above SMA 20; MACD hist narrowing. Build = June 2-3 (not today). |
-| TSLA | $415.39 | 54.9 | +2.56 | $402.43 | Near VWAP $414.48. Long-term bearish SMA. Day-trade only. |
-| AMZN | $268.48 | 62.6 | -2.01 | $265.53 | Stoch K 5.75 oversold; on VWAP. AMZN-2026-05-15 RETIRED (ADR-0002). |
-| META | $608.87 | 43.7 | -2.49 | $631.59 | Below SMA 20. Long-term bearish. No setup. |
-| GOOGL | $404.95 | 73.2 | +0.23 | $376.27 | Overbought. No entry (ADR-0001). |
-| AMD | $428.24 | 67.9 | +0.94 | $379.33 | Long-term bullish. Extended 7.2% above VWAP — do not chase. Watch $399-400 post-NVDA. |
+| SPY | $737.86 | 66.7 | -0.06 | $725.21 | Uptrend intact; **MACD bearish crossover** at close — first stall since May rally |
+| QQQ | $704.76 | 68.2 | +0.35 | $683.22 | Off overbought; MACD still positive but slim |
+| NVDA | $221.70 | 61.0 | +1.22 | $211.28 | Earnings AMC TONIGHT — BINARY RISK. No position. |
+| AAPL | $297.50 | 70.9 | +1.33 | $282.74 | Overbought RSI + Stoch 89.0. No entry (ADR-0001). |
+| MSFT | $422.11 | 58.0 | -0.70 | $417.60 | Half-trigger 1/2; above SMA 20; MACD hist narrowing to -0.70. Stoch 49.2. |
+| TSLA | $410.47 | 52.9 | +2.24 | $402.18 | Below VWAP $414.28. Long-term bearish SMA. Day-trade only. |
+| AMZN | $264.76 | 59.2 | -2.24 | $265.35 | **In entry zone** ($264–$265.50); Stoch K 0.79 extreme oversold. `Approved: NO` — no order. Stales 5/19 pre-market. |
+| META | $611.42 | 44.6 | -2.32 | $631.72 | Below SMA 20. Long-term bearish. No setup. |
+| GOOGL | $397.79 | 70.6 | -0.23 | $375.92 | Overbought + **MACD bearish crossover**. No entry. |
+| AMD | $419.15 | 65.6 | +0.36 | $378.88 | Long-term bullish. Pulled back from $428 earlier; still 4.7% above VWAP — no chase. Watch $399-400 post-NVDA. |
 
 ## Sector Context (EOD 2026-05-18)
-- **Tech/AI/Semiconductors**: NVDA earnings tonight determines near-term tone for the sector. Strong tech tape all of last week (AAPL, GOOGL, AMD all ran). MSFT bucking the trend (below SMA 200) but showing recovery.
-- **Broad indices**: SPY and QQQ both above SMA 20; uptrend intact. SPY MACD histogram turning negative for the first time since the May rally — watch closely over next 2–3 sessions.
-- **AMZN (Consumer Discretionary/Cloud)**: Stoch at extreme oversold (3.19) while price sits barely above the swing entry zone. If NVDA earnings are positive tonight, AMZN could benefit from risk-on spillover.
+- **Tech/AI/Semiconductors**: NVDA earnings tonight determines near-term tone for the sector. Strong Tech tape all of last week (AAPL, GOOGL, AMD all ran) is now showing first cracks — GOOGL MACD bearish cross at overbought, SPY MACD bearish cross at overbought. MSFT bucking the broader trend (below SMA 200) but showing recovery via narrowing MACD histogram.
+- **Broad indices**: SPY and QQQ both above SMA 20; uptrend intact. SPY MACD histogram crossed negative at close — watch closely over next 2–3 sessions for whether this is a one-day stall or a deeper rotation.
+- **AMZN (Consumer Discretionary/Cloud)**: Stoch at extreme oversold (0.79) with price closing back inside the 5/15 entry zone. XLY (Consumer Discretionary) still a sector headwind (lagging SPY YTD). If NVDA earnings risk-on read, AMZN could see relief; if risk-off, the structurally weak XLY backdrop dominates.
 
-## Key Levels (Updated May 18)
-- **SPY**: Support SMA 20 ~$725.22. Hold above $725 = uptrend intact. Break below = shift posture to defensive.
-- **QQQ**: Support SMA 20 ~$683.35.
-- **NVDA**: Post-earnings watch zone $215–$220 (pullback to SMA 20 ~$211; re-entry only after RSI resets below 65).
-- **MSFT**: SMA 20 $417.49 (price above ✓). MACD cross is the missing trigger. If price holds $417.49+ AND MACD flips positive → fresh proposal.
-- **AMZN**: Entry zone $264–$265.50 (immutable per ADR-0003). Stale-by tomorrow pre-market.
+## Key Levels (EOD May 18)
+- **SPY**: Support SMA 20 $725.21. Hold above $725 = uptrend intact. Break below = shift posture to defensive.
+- **QQQ**: Support SMA 20 $683.22.
+- **NVDA**: Post-earnings watch zone $215–$220 (pullback to SMA 20 $211; re-entry only after RSI resets below 65).
+- **MSFT**: SMA 20 $417.60 (price $422.11 above ✓). MACD cross is the missing trigger. If price holds $417.60+ AND MACD flips positive → fresh proposal.
+- **AMZN**: Entry zone $264.00–$265.50 (immutable per ADR-0003) — price closed at $264.76, INSIDE zone. `Approved: NO`. Stale-by tomorrow pre-market.
+- **AMD**: VWAP $400.43 = first viable pullback entry zone. Currently $419.15 — too extended to chase.
 
 ## Upcoming Events — Week of May 18, 2026
 - **NVDA earnings**: Q1 FY27 — AMC 5/19 / pre-market 5/20. Binary event. No exposure until post-print.
-- **Microsoft Build 2026**: June 2-3, San Francisco (NOT this week — prior memory was wrong).
-- **AMZN-2026-05-15**: RETIRED this morning (ADR-0002). Fresh setup evaluation post-NVDA earnings.
+- **Microsoft Build 2026**: June 2-3, San Francisco (NOT this week).
+- **AMZN-2026-05-15**: Stales tomorrow morning per ADR-0002. Either retire formally and propose fresh, or no AMZN action.
 - **Economic data**: Watch for any high-impact macro releases this week (CPI, Fed speakers). Check calendar pre-market daily.
 
 ## Sentiment
-- Cautiously bullish. SPY $740.88 uptrend intact; MACD recovering (+0.14 vs -0.04 yesterday). The one-session stall resolved without damage.
-- Tonight's NVDA earnings are the dominant event for the week. The entire chip sector (AMD, NVDA) and broader tech sentiment pivots on this print. No new longs in Tech until the NVDA overhang clears.
-- Best post-NVDA setups: (1) AMD pullback to VWAP $399-400 if NVDA beats, (2) MSFT MACD cross (4th session, narrowing), (3) Fresh AMZN setup at VWAP if sector turns risk-on.
+- Cautiously bullish but watching for stall confirmation. SPY MACD bearish crossover today + GOOGL bearish cross are two warning shots from overbought leaders.
+- Tonight's NVDA earnings are the dominant event for the week. The entire chip sector (AMD, NVDA) and broader Tech sentiment pivots on this print. No new longs in Tech until the NVDA overhang clears.
+- Best post-NVDA setups in the pipeline: (1) AMD pullback to VWAP $399-400 if NVDA miss / sector pullback, (2) MSFT MACD cross (3rd session, narrowing rapidly), (3) Fresh AMZN setup at current VWAP if sector turns risk-on.
 - No positions. Full cash. 0/3 weekly trade slots used.
-- Confidence level: 6/10 — directional bias is up but binary event tonight constrains new entries appropriately.
+- Confidence level: 6/10 — directional bias still up but binary event tonight + two MACD bearish crosses among leaders together constrain new entries appropriately.
 
 ## Prior Context (May 14 — for reference)
 - **Broad market continuing overbought extension**: SPY $742.30 RSI 76.5, QQQ $714.57 RSI 79.4. Both at/near upper Bollinger Bands.
