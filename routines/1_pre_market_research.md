@@ -52,6 +52,37 @@ Run: `python3 scripts/research.py scan`
 - Review all indicator readings for every watchlist symbol
 - Identify which symbols have active signals (crossovers, oversold/overbought, etc.)
 
+### 3a. Short Candidate Screen
+After the long scan, run a dedicated short screen. Short setups are first-class — a flat or declining market is not "no opportunity", it is a SHORT market.
+
+Screen for these bearish signals across the full watchlist (including all sector ETFs):
+- Price **below SMA 20** AND SMA 20 slope is negative (declining, not flat)
+- MACD histogram **negative and deepening** (more negative than 2 sessions ago)
+- RSI **between 35–65 and declining** — confirms momentum rollover without extreme oversold (RSI < 35 = bounce risk, skip)
+- ADX > 25 — trending down, not just choppy
+- Volume: recent down-days have equal or higher volume than up-days (distribution)
+
+**Strong short signals (propose setup if 5+ criteria met):**
+- Failed bounce: stock rallied to SMA 20, showed a rejection candle (upper wick, close near low), and is resuming decline
+- Sector rolling: the sector ETF (XLK, XLE, etc.) is ALSO below its SMA 20 — this amplifies the short thesis
+- Relative weakness: stock is down while SPY is flat or up (shows institutional distribution)
+
+**Short-specific exclusions (hard skip even if signals are perfect):**
+- Earnings within 2 trading days — short squeeze risk, skip
+- RSI < 35 — too oversold, bounce risk exceeds reward
+- Stock is at or within 2% of SMA 200 — major support, wait for confirmed break
+- Ex-dividend date today or tomorrow
+
+For each short candidate that passes the screen, apply the same 6-point checklist from CLAUDE.md with these direction-adjusted items:
+1. Trend: SMA 20 declining (instead of rising)
+2. Momentum: MACD histogram negative + deepening (instead of positive + rising)
+3. Volatility: ATR allows stop placement above entry (instead of below)
+4. R:R: Target is a support level or % below entry; stop is above entry resistance — still requires ≥ 2:1
+5. Position size: same 20% portfolio cap applies
+6. Catalyst: documented bearish catalyst (sector rotation, earnings miss, guidance cut, technical breakdown with volume)
+
+If fewer than 5 of 6 pass → PASS. Note in journal as "short candidate, partial confluence."
+
 ### 4. Parallel Deep-Dive (RuFlo swarm)
 For the top 3 candidates from the scan, spawn FOUR sub-agents IN PARALLEL using the Agent tool — send all four Agent tool calls in a single message (independent, no shared state):
 

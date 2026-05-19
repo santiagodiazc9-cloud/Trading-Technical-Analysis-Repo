@@ -36,6 +36,33 @@ Starting with a **conservative, paper-trading** approach. Focus on high-probabil
 - Max 3 swing positions at a time
 - **RSI divergence**: if price makes a new high but RSI does not, treat as a caution signal — tighten target or skip
 
+## Short Selling Rules (added 2026-05-19)
+
+Short setups are allowed and actively scanned in every pre-market routine. The mirror of the long rules applies. Shorts unlock opportunity in sideways and bearish markets.
+
+### Short swing entry criteria (all required)
+1. **Trend**: Price below SMA 20 AND SMA 20 is declining (slope negative over 5 sessions)
+2. **Strength**: ADX > 25 — do not short into choppy, trendless tape
+3. **Momentum**: MACD histogram negative AND deepening (more negative than prior session)
+4. **RSI range**: RSI between 40–65 and declining — confirms momentum shift without capitulation. Do NOT short RSI < 35 (bounce risk)
+5. **Entry zone**: Failed bounce to SMA 20 (rejection candle), Fibonacci 61.8% retracement of prior decline that fails to hold, or break below consolidation support with volume confirmation
+6. **Sector confirmation**: Sector ETF (XLK, XLE, XLV, XLF, XLI, or XLY) also bearish — below SMA 20 with MACD negative. No counter-trend shorts against a ripping sector.
+
+### Short-specific hard rules
+- **No shorting within 2 trading days of earnings** — short squeeze risk. Cover open shorts the session before earnings.
+- **No shorting into SMA 200** without a prior confirmed breach. The 200 is a magnet for bounces.
+- **7% cut rule applies symmetrically** — if a short moves 7% against you (i.e., the stock rises 7% above your entry), cover immediately per CLAUDE.md Rule 5.
+- **No shorting on ex-dividend dates** — price artificially drops on ex-div, distorts the setup.
+- **Cover trigger**: If RSI drops below 30, cover at least half the position — extreme oversold conditions produce violent reversals.
+- **Gap-up risk**: If a shorted stock gaps up >3% at open, assess whether the thesis is broken before averaging. Default: cover and reassess.
+
+### Short day trade entry (5-min / 15-min)
+- EMA 9 crosses below EMA 21 on 5-min chart
+- Price below VWAP and VWAP is declining
+- RSI < 50 and falling
+- First 90 minutes or last 60 minutes of session only
+- Cover by 3:45 PM ET (same as long day trades)
+
 ## Economic Calendar Rules (added 2026-05-16)
 - Before every pre-market routine, check for scheduled high-impact events that day (NFP, CPI, FOMC, rate decisions, earnings)
 - **Hard rule**: Do not open a NEW position within 30 minutes of a high-impact news event

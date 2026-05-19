@@ -63,8 +63,82 @@
       "sector": "ETF — Broad Market",
       "notes": "Nasdaq 100 ETF — tech sector proxy. 2026-05-14: $714.57 RSI 79.4 — overbought. Defensive trip-wire: QQQ < $700 flips posture to no-new-longs until reset confirmed.",
       "strategy": "day"
+    },
+    {
+      "symbol": "XLK",
+      "sector": "ETF — Tech",
+      "notes": "SPDR Tech Sector ETF. Use as tech sector trend proxy AND tradeable swing setup. Strong trending instrument. No indicator data yet — pre-market routine will initialize.",
+      "strategy": "swing"
+    },
+    {
+      "symbol": "XLE",
+      "sector": "ETF — Energy",
+      "notes": "SPDR Energy Sector ETF. Energy sector proxy AND tradeable swing setup. Excellent short candidate in risk-off environments. No indicator data yet — pre-market routine will initialize.",
+      "strategy": "swing"
+    },
+    {
+      "symbol": "XLV",
+      "sector": "ETF — Healthcare",
+      "notes": "SPDR Healthcare Sector ETF. Defensive sector proxy AND tradeable. Good long in risk-off rotation. No indicator data yet — pre-market routine will initialize.",
+      "strategy": "swing"
+    },
+    {
+      "symbol": "XLF",
+      "sector": "ETF — Financials",
+      "notes": "SPDR Financials Sector ETF. Rate-sensitive — short candidate when yield curve flattens. No indicator data yet — pre-market routine will initialize.",
+      "strategy": "swing"
+    },
+    {
+      "symbol": "XLI",
+      "sector": "ETF — Industrials",
+      "notes": "SPDR Industrials Sector ETF. Cyclical sector proxy. No indicator data yet — pre-market routine will initialize.",
+      "strategy": "swing"
+    },
+    {
+      "symbol": "LLY",
+      "sector": "Healthcare",
+      "notes": "Eli Lilly — GLP-1/obesity drug leader, mega-cap biotech with strong multi-year momentum. High ATR, large moves. No indicator data yet — pre-market routine will initialize.",
+      "strategy": "swing",
+      "priority": "high"
+    },
+    {
+      "symbol": "JPM",
+      "sector": "Financials",
+      "notes": "JPMorgan Chase — financial sector bellwether. Rate-sensitive, good both-direction plays around FOMC events. No indicator data yet — pre-market routine will initialize.",
+      "strategy": "swing"
+    },
+    {
+      "symbol": "GS",
+      "sector": "Financials",
+      "notes": "Goldman Sachs — investment bank, high beta to risk sentiment. Good short candidate in risk-off. No indicator data yet — pre-market routine will initialize.",
+      "strategy": "swing"
+    },
+    {
+      "symbol": "CRM",
+      "sector": "Tech",
+      "notes": "Salesforce — enterprise SaaS, cloud leader. Earnings-driven moves, good swing setups around analyst days. No indicator data yet — pre-market routine will initialize.",
+      "strategy": "swing"
+    },
+    {
+      "symbol": "PANW",
+      "sector": "Tech",
+      "notes": "Palo Alto Networks — cybersecurity leader. Strong institutional sponsorship, clean technical setups. No indicator data yet — pre-market routine will initialize.",
+      "strategy": "swing"
+    },
+    {
+      "symbol": "XOM",
+      "sector": "Energy",
+      "notes": "Exxon Mobil — energy megacap. Oil price proxy, good short in energy downturns. No indicator data yet — pre-market routine will initialize.",
+      "strategy": "swing"
+    },
+    {
+      "symbol": "PLTR",
+      "sector": "Tech",
+      "notes": "Palantir — AI/defense analytics. High momentum, high ATR, good for both directions. Volatile — size accordingly. No indicator data yet — pre-market routine will initialize.",
+      "strategy": "both",
+      "priority": "high"
     }
   ],
-  "last_updated": "2026-05-18",
-  "update_reason": "Monday 5/18 pre-market (Week 3). MSFT updated with May 15 close data and ADR-0004 half-trigger status. AMZN noted as staling EOD 5/19 per ADR-0002. NVDA flagged for binary earnings event 5/20 AMC. AMD flagged to re-evaluate post-NVDA print. Other symbols unchanged from prior data (no fresh indicators available without Alpaca script access in main session)."
+  "last_updated": "2026-05-19",
+  "update_reason": "Expanded from 10 to 23 symbols (2026-05-19). Added 5 sector ETFs (XLK, XLE, XLV, XLF, XLI) as direct trading targets — enables sector rotation plays and short opportunities. Added 8 individual stocks across Healthcare (LLY), Financials (JPM, GS), Tech (CRM, PANW, PLTR), Energy (XOM) for cross-sector diversification. Goal: more setup opportunities, especially for short setups in bearish/rotation markets."
 }
