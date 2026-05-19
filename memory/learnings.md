@@ -10,6 +10,7 @@
 - [Will be tracked here as live trades produce outcomes — empty through Week 2, still 0 trades closed.]
 
 ## Pattern Notes
+- 2026-05-18: SPY trip-wire (<$736) triggered for first time this cycle — NVDA pre-earnings (-6.5%) led the broad pullback. Zero setups proposed; patience intact. Trip-wire rule worked as designed: unconditional rules hold best under intraday pressure when judgment-based rules would be tempted to override.
 - Watchlist scan showed that many large-cap tech names can appear bullish while still being overbought; avoid chasing extended moves.
 - AMZN-2026-05-15 case: a setup's technicals can improve materially through the day (RSI cooled 62.9 → 57.8, R:R widened 3.0:1 → 4.6:1) while price stays within $1 of the entry zone but never crosses in. The right move is to leave parameters alone, document the case, and wait — not to widen the zone or lower the limit.
 - MSFT 2026-05-15 case: a setup that PASSED in pre-market can re-arm partially during the same day (SMA 20 reclaimed by midday, sustained into close). One condition firing is information; it is not a proposal.

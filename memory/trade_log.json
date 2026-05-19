@@ -102,6 +102,36 @@
       "daily_loss_cap_hit": false,
       "hard_rule_violations": [],
       "notes": "Full schedule fired today (pre-market, market-open, midday, EOD all ran). 0 trades, 0 positions, P&L $0.00 (0.00%). Day-trade close step had nothing to close. AMZN-2026-05-15 setup proposed pre-market (confidence 6/10, swing long $264-$265.50, R:R 3.0:1) — Approved: NO held into the close; price drifted $267.21 (pre-mkt) → $261.30 (open) → $263.13 (midday) → $263.56 (EOD), never reached entry zone after open and never approved. NVDA Setup #1 STALE confirmed (price $228.29 EOD, prior zone $206-210 fully outrun; 5/20 earnings binary risk). MSFT Setup #2 PASS held; SMA 20 reclaim ($423.39 vs $417.47) sustained through close = 1 of 2 re-arm conditions met for Monday's pre-market re-evaluation, MACD cross still pending. Infra: ta package install fix held (setuptools+wheel upgrade before pip install -r requirements.txt) — no degraded steps today. RuFlo MCP unavailable (file-only mode) — no vector recall / pattern storage. Discord webhooks still unprovisioned in cloud host — brief logged to memory/pending_discord_updates.md."
+    },
+    {
+      "date": "2026-05-18",
+      "routine": "end_of_day_review",
+      "equity": 100000.00,
+      "cash": 100000.00,
+      "buying_power": 200000.00,
+      "deployed_pct": 0.0,
+      "pnl_today_dollars": 0.00,
+      "pnl_today_pct": 0.0,
+      "open_positions": 0,
+      "trades_closed_today": 0,
+      "wins_today": 0,
+      "losses_today": 0,
+      "trades_opened_today": 0,
+      "weekly_trade_count": 0,
+      "daytrade_count": 0,
+      "pattern_day_trader": false,
+      "running_win_rate": null,
+      "running_pnl_dollars": 0.00,
+      "running_pnl_pct": 0.0,
+      "confidence_calibration": {
+        "_comment": "predicted-confidence-bucket -> {sample_size, wins, losses}. Empty until we have closed trades.",
+        "bucket_9_10": {"n": 0, "wins": 0, "losses": 0},
+        "bucket_7_8":  {"n": 0, "wins": 0, "losses": 0},
+        "bucket_5_6":  {"n": 0, "wins": 0, "losses": 0}
+      },
+      "daily_loss_cap_hit": false,
+      "hard_rule_violations": [],
+      "notes": "Week 3 Day 1. 0 trades, 0 positions, P&L $0.00 (0.00%). SPY trip-wire triggered midday ($734.81 < $736) — no-new-longs rule activated and held through close. NVDA -6.5% to $220.40 intraday (pre-earnings IV repricing; binary event 5/20 AMC). MSFT tested SMA 20 ($417.93 vs $417.39) intraday — half-trigger 1/2 conditions still pending (MACD histogram -0.97 at midday). AMZN-2026-05-15 stales at 5/19 EOD per ADR-0002. No setups proposed. Note: 2026-05-16 EOD snapshot missing (sessions ran 5/16 but snapshot not captured in that routine). httpx unavailable in main session — Discord brief logged to pending_discord_updates.md."
     }
   ],
   "summary": {

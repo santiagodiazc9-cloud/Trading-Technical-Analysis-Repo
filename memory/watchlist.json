@@ -3,68 +3,68 @@
     {
       "symbol": "AAPL",
       "sector": "Tech",
-      "notes": "Mega-cap tech, strong trend follower. 2026-05-15: extended (RSI 76.5, Stoch 98) — no chase. Wait for daily pullback toward SMA 20.",
+      "notes": "Mega-cap tech, strong trend follower. 2026-05-14: ~$298.95 RSI ~76, Stoch ~98 — overbought. 2026-05-18: no fresh data; prior overbought condition likely persists. Wait for daily pullback toward SMA 20 (~$288 area). No setup.",
       "strategy": "swing"
     },
     {
       "symbol": "MSFT",
       "sector": "Tech",
-      "notes": "Cloud/AI leader, low volatility mover. Setup #2 PASS 2026-05-15 (long-term bearish SMA structure). Half-trigger live: SMA 20 reclaim CONFIRMED into close; MACD positive cross PENDING. Catalyst: Build 2026 conference 5/19-22. Re-propose when both re-arm conditions fire same routine (ADR-0004).",
+      "notes": "Cloud/AI leader. 2026-05-18: $422.00, SMA 20 ($417.40) reclaimed ✓, SMA 200 ($463.13) overhead — long-term bearish. MACD histogram -1.31 (cross pending). Re-arm gate: SMA 20 reclaim CONFIRMED; MACD positive cross PENDING (ADR-0004 half-trigger). Entry zone $410–$413 overrun — no chase. Catalyst: Microsoft Build 2026 (5/19–22). Watch for post-Build pullback to $412–$415 + MACD cross in same routine. MACD stale-by 2026-05-22 EOD if no progress.",
       "strategy": "swing",
       "priority": "high"
     },
     {
       "symbol": "NVDA",
       "sector": "Tech",
-      "notes": "AI chip leader, high volatility. Setup #1 STALE 2026-05-15 (price outran 206-210 zone, now $228+). Earnings Tue 5/20 AMC = binary event. No new entry until pullback to $215-$220 with RSI < 65 AFTER 5/20 earnings.",
+      "notes": "AI chip leader. 2026-05-18: ~$235–236. EARNINGS WEDNESDAY 5/20 AMC — binary event. NO NEW ENTRY until post-earnings pullback to $215–$220 with RSI < 65. Prior $206–210 setup EXPIRED 2026-05-16. Post-earnings read: if strong print + guide, watch for consolidation near $220–$225; if miss, may pull all the way back to SMA 50 (~$191). Do not pre-position.",
       "strategy": "both",
       "priority": "high"
     },
     {
       "symbol": "TSLA",
       "sector": "Consumer Discretionary",
-      "notes": "High beta, momentum-driven. Daily SMA 50 < 200 still — day trade only until daily trend clarifies. 2026-05-15: cooled to $423 RSI 58, ATR 16.9 — favorable conditions for a day trade IF clean intraday setup forms.",
+      "notes": "High beta, momentum-driven. Daily SMA 50 < 200 still — day trade only until daily trend clarifies. 2026-05-14: ~$445 RSI ~70, above upper BB. Cooled somewhat but still extended. Day trade only on clean 5-min setups.",
       "strategy": "day",
       "priority": "normal"
     },
     {
       "symbol": "AMZN",
       "sector": "Consumer Discretionary",
-      "notes": "E-commerce + cloud, swing on pullbacks. Setup #3 AMZN-2026-05-15 still armed (Approved: NO, never filled). EOD price $263.56, $0.44 below the $264-$265.50 entry zone. Stale-by EOD 2026-05-19 pre-market per ADR-0002. XLY sector ETF rolling over — sector headwind.",
+      "notes": "E-commerce + cloud. 2026-05-18: $264.22, inside entry zone $264–$265.50 from setup AMZN-2026-05-15. BUT MACD histogram -2.02 (deepening negative) + XLY sector ($116.52, below SMA 20, MACD negative) = PASS. Setup AMZN-2026-05-15 stales at EOD 5/19 pre-market per ADR-0002. After archive: re-evaluate on next pullback to SMA 20 with MACD confirmation and XLY recovery.",
       "strategy": "swing",
-      "priority": "high"
+      "priority": "normal"
     },
     {
       "symbol": "META",
       "sector": "Communication Services",
-      "notes": "Social/AI play. 2026-05-15: $615.71, below SMA 20, MACD hist deeply negative. No setup. Watch for SMA 20 reclaim or earnings catalyst.",
+      "notes": "Social/AI play. 2026-05-14: $616.61 RSI 46.4 — neutral/weak. Below SMA 20, MACD histogram deeply negative. No setup. Watch for SMA 20 reclaim.",
       "strategy": "swing"
     },
     {
       "symbol": "GOOGL",
       "sector": "Communication Services",
-      "notes": "Search + cloud, typically lower vol. 2026-05-15: $396.83 RSI 70.3 — just out of overbought. No chase; watch for clean daily pullback.",
+      "notes": "Search + cloud. 2026-05-14: $402.63 RSI 75.6 — overbought. Long-term bullish. No entry; wait for clean daily pullback to SMA 20.",
       "strategy": "swing"
     },
     {
       "symbol": "AMD",
       "sector": "Tech",
-      "notes": "Chip sector, high beta. 2026-05-15: $431.95 RSI 69.9 — cleanest cooler in the chip cohort intraday. Still toppy; observe rather than chase. Re-evaluate against SOXX cohort behavior post-NVDA earnings (5/20).",
+      "notes": "Chip sector. 2026-05-14: $445.40 RSI 76.1 — overbought. Long-term bullish. Observe-only until post-NVDA earnings (5/20 AMC) — NVDA print sets semiconductor sector direction for the week. Re-evaluate 5/21 pre-market.",
       "strategy": "both"
     },
     {
       "symbol": "SPY",
       "sector": "ETF — Broad Market",
-      "notes": "S&P 500 ETF — market direction proxy. Defensive trip-wire: SPY < $736 (SMA 20 zone) flips posture to no-new-longs until reset confirmed.",
+      "notes": "S&P 500 ETF — market direction proxy. 2026-05-14: $742.30 RSI 76.5, Stoch 95.3 — overbought. Defensive trip-wire: SPY < $736 flips posture to no-new-longs until reset confirmed. No evidence trip-wire has triggered.",
       "strategy": "day"
     },
     {
       "symbol": "QQQ",
       "sector": "ETF — Broad Market",
-      "notes": "Nasdaq 100 ETF — tech sector proxy. Defensive trip-wire: QQQ < $700 flips posture to no-new-longs until reset confirmed.",
+      "notes": "Nasdaq 100 ETF — tech sector proxy. 2026-05-14: $714.57 RSI 79.4 — overbought. Defensive trip-wire: QQQ < $700 flips posture to no-new-longs until reset confirmed.",
       "strategy": "day"
     }
   ],
-  "last_updated": "2026-05-15",
-  "update_reason": "Friday weekly review (Week 2). All 10 symbols received a fresh `research.py scan` on 2026-05-15 → none stale. Notes refreshed with current setup status (NVDA stale, MSFT half-trigger, AMZN-2026-05-15 still armed). No additions, no removals. Tech concentration (AAPL/MSFT/NVDA/AMD all Tech) remains a portfolio-level constraint to enforce at entry time. ADR-0002/0003/0004 governance now applies to every setup that originates from these symbols."
+  "last_updated": "2026-05-18",
+  "update_reason": "Monday 5/18 pre-market (Week 3). MSFT updated with May 15 close data and ADR-0004 half-trigger status. AMZN noted as staling EOD 5/19 per ADR-0002. NVDA flagged for binary earnings event 5/20 AMC. AMD flagged to re-evaluate post-NVDA print. Other symbols unchanged from prior data (no fresh indicators available without Alpaca script access in main session)."
 }

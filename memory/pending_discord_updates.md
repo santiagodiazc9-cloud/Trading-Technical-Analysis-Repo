@@ -6,6 +6,65 @@ The legacy filename was `pending_clickup_updates.md` — kept the renamed file a
 
 ---
 
+## 2026-05-18 22:21 UTC — End-of-Day Review (local session)
+
+`notify.py brief` and `notify.py dashboard` both failed: `httpx` module not installed. Routine completed all on-disk steps (journal EOD section written, trade_log.json snapshot appended, learnings.md pattern note added, market_context.md updated to EOD, open_positions.md EOD log written, Dashboard.md regenerated). Flush once `pip install httpx` is run.
+
+### #daily-brief (silent summary)
+**Title**: End-of-Day Review — 2026-05-18
+**Body**: P&L $0.00 (0.00%) — 0 positions, 0 trades, 0% deployed. SPY trip-wire triggered ($734.81 < $736) and held through close — no-new-longs rule active for 5/19 pre-market until SPY reclaims $736. NVDA -6.5% from Friday close to ~$220.40 (pre-earnings IV repricing; binary event 5/20 AMC, no entry). MSFT tested SMA 20 ($417.93 vs $417.39) intraday; MACD histogram improved to -0.97 — half-trigger 1/2 conditions still pending (Microsoft Build Day 1 tomorrow = live catalyst window). AMZN-2026-05-15 stales at tomorrow's pre-market EOD per ADR-0002. Week 3 Day 1: 0/3 weekly trade slots used. Patience is the position.
+
+### Infra fix still needed
+- `pip install httpx` on this session host to unblock notify.py.
+
+---
+
+## 2026-05-18 16:53 UTC — Discord Dispatcher (local session)
+
+`notify.py dashboard` failed: `httpx` module not installed in system Python; `.venv/bin/python3` path blocked by permission mode. All four queues were empty — nothing to drain. Dashboard.md was regenerated successfully (live=true, positions=0, pending_setups=0). `last_dispatch.json` updated. Flush dashboard mirror once `httpx` is available.
+
+### Dashboard mirror (silent)
+`Dashboard.md` regenerated — live=true, positions=0, pending_setups=0. All queues empty.
+
+---
+
+## 2026-05-18 17:30 UTC — Midday Scan (local session)
+
+`notify.py brief` failed: `httpx` module not installed. Routine completed all on-disk steps. Flush once `pip install httpx` is run.
+
+### #daily-brief (silent summary)
+**Title**: Midday Scan — 2026-05-18
+**Body**: No positions. SPY trip-wire triggered ($734.81 < $736) — no-new-longs rule active for today. QQQ $700.37 at trip-wire level. NVDA -6.5% pre-earnings ($220.40) — binary event tomorrow AMC, no entry. MSFT $417.93 testing SMA 20 ($417.39); MACD histogram -0.97 (improving from -1.31) — half-trigger still 1/2 conditions. AMZN stales tomorrow EOD. 0 new setups proposed. 0 positions, 0/3 weekly trades, $100k full cash. Patience.
+
+---
+
+## 2026-05-18 12:11 UTC — Discord Dispatcher (local session)
+
+`notify.py dashboard` failed: `httpx` module not installed. Dashboard.md was regenerated successfully (live=true, positions=0, pending_setups=0). All four queues were empty — nothing to drain. `last_dispatch.json` initialized. Flush the dashboard mirror once `pip install httpx` is run.
+
+### Dashboard mirror (silent)
+`Dashboard.md` regenerated — live=true, equity=$100,000.00, positions=0, pending_setups=0.
+
+---
+
+## 2026-05-18 12:10 UTC — Pre-Market Research (local session)
+
+`notify.py brief` and `notify.py dashboard` both failed: `httpx` module not installed in this session. Dashboard.md was regenerated successfully (positions=0, pending_setups=0). Flush once `pip install httpx` is run.
+
+### #daily-brief (silent summary)
+**Title**: Pre-Market Brief — 2026-05-18
+**Body**: Week 3 opens clean: 0 positions, 0 pending setups, 3 fresh trade slots. MSFT $422 overran the $410–$413 entry zone on a pre-Build surge (+3% May 15, above-avg volume) — MACD cross still pending (histogram -1.31), half-trigger holds (1 of 2 conditions MET). AMZN $264.22 in entry zone but MACD deepening negative + XLY sector bearish = PASS; stales EOD 5/19 pre-market per ADR-0002. NVDA earnings Wed 5/20 AMC — no new semi exposure. No setups proposed today. Regime: cautious bullish, overbought extension, patience is the position. Confidence 5/10 (two binary events: NVDA earnings + MSFT Build).
+
+### Dashboard mirror
+`Dashboard.md` regenerated (live=true, equity=$100,000.00, positions=0, pending_setups=0). Pinned-message mirror NOT updated — `httpx` missing.
+
+### Infra fix needed (Week 3 standing items)
+1. `pip install httpx python-dotenv alpaca-py requests pandas ta` in local session to unblock notify.py and research.py scripts.
+2. Provision `memory/discord_config.json` (webhooks) if not already present on this host.
+3. Grant WebSearch permission in Claude Code settings so research sub-agents can fetch live data without relying solely on Alpaca API bars.
+
+---
+
 ## 2026-05-16 15:01 UTC — Security Scan (cloud routine, Saturday weekly)
 
 `notify.py brief` / `notify.py alert` could not run: `httpx` is not installed in the cloud routine host AND `memory/discord_config.json` is still missing. Routine completed all on-disk + ClickUp steps. Findings were posted to ClickUp `risk_and_errors` instead (3 tasks: 2× HIGH, 1× combined MEDIUM/LOW). Flush these once Discord credentials + httpx are present.
