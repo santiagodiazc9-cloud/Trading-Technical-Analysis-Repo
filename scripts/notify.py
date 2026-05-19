@@ -25,8 +25,19 @@ import json
 from datetime import datetime
 from pathlib import Path
 
-import httpx
-from dotenv import load_dotenv
+try:
+    import httpx as _httpx
+    _HAS_HTTPX = True
+except ImportError:
+    _httpx = None
+    _HAS_HTTPX = False
+    import urllib.request as _urllib_req
+    import urllib.error as _urllib_err
+
+try:
+    from dotenv import load_dotenv
+except ImportError:
+    def load_dotenv(*a, **kw): pass
 
 ROOT = Path(__file__).resolve().parent.parent
 CONFIG_PATH = ROOT / "memory" / "discord_config.json"
@@ -59,9 +70,14 @@ def post(channel, payload):
         die(f"Webhook URL for #{channel} is still a placeholder. Edit {CONFIG_PATH}.")
 
     try:
-        r = httpx.post(url, json=payload, timeout=10.0)
-        r.raise_for_status()
-    except httpx.HTTPError as e:
+        if _HAS_HTTPX:
+            r = _httpx.post(url, json=payload, timeout=10.0)
+            r.raise_for_status()
+        else:
+            data = json.dumps(payload).encode()
+            req = _urllib_req.Request(url, data=data, headers={"Content-Type": "application/json"})
+            _urllib_req.urlopen(req, timeout=10)
+    except Exception as e:
         die(f"Discord webhook failed: {e}", code=2)
 
     print(json.dumps({"ok": True, "channel": channel, "status": r.status_code}))
@@ -89,11 +105,15 @@ def post_as_bot(channel, payload):
         "Content-Type": "application/json",
     }
     try:
-        r = httpx.post(url, headers=headers, json=payload, timeout=10.0)
-        r.raise_for_status()
-    except httpx.HTTPError as e:
-        body = getattr(e, "response", None)
-        body = body.text if body is not None else ""
+        if _HAS_HTTPX:
+            r = _httpx.post(url, headers=headers, json=payload, timeout=10.0)
+            r.raise_for_status()
+        else:
+            data = json.dumps(payload).encode()
+            req = _urllib_req.Request(url, data=data, headers=headers)
+            _urllib_req.urlopen(req, timeout=10)
+    except Exception as e:
+        body = getattr(getattr(e, "response", None), "text", "")
         die(f"Discord bot API failed: {e} body={body[:300]}", code=2)
 
     print(json.dumps({"ok": True, "channel": channel, "status": r.status_code, "via": "bot"}))
@@ -108,6 +128,7 @@ def color_for(channel):
         "risk_alerts": "alert",
         "daily_brief": "brief",
         "chat": "info",
+        "general": "info",
     }.get(channel, "info"), 10070709)
 
 
@@ -254,22 +275,36 @@ def cmd_dashboard():
     ref = json.loads(DASHBOARD_MSG_REF.read_text()) if DASHBOARD_MSG_REF.exists() else {}
     msg_id = ref.get("message_id")
 
+    def _bot_request(method, url, **kwargs):
+        if _HAS_HTTPX:
+            return getattr(_httpx, method)(url, headers=headers, timeout=10.0, **kwargs)
+        data = json.dumps(kwargs.get("json", kwargs.get("data", {}))).encode()
+        req = _urllib_req.Request(url, data=data if method != "get" else None, headers=headers, method=method.upper())
+        class _Resp:
+            def __init__(self, r):
+                self._r = r
+                self.status_code = r.status
+                self._body = r.read()
+            def raise_for_status(self):
+                if self.status_code >= 400:
+                    raise RuntimeError(f"HTTP {self.status_code}")
+            def json(self):
+                return json.loads(self._body)
+        return _Resp(_urllib_req.urlopen(req, timeout=10))
+
     try:
         if msg_id:
-            r = httpx.patch(f"{api}/channels/{channel_id}/messages/{msg_id}",
-                            headers=headers, json=payload, timeout=10.0)
+            r = _bot_request("patch", f"{api}/channels/{channel_id}/messages/{msg_id}", json=payload)
             if r.status_code == 404:
                 msg_id = None  # message was deleted, fall through to recreate
             else:
                 r.raise_for_status()
         if not msg_id:
-            r = httpx.post(f"{api}/channels/{channel_id}/messages",
-                           headers=headers, json=payload, timeout=10.0)
+            r = _bot_request("post", f"{api}/channels/{channel_id}/messages", json=payload)
             r.raise_for_status()
             msg_id = r.json()["id"]
             # Pin it so it stays at top of channel.
-            pin = httpx.put(f"{api}/channels/{channel_id}/pins/{msg_id}",
-                            headers=headers, timeout=10.0)
+            pin = _bot_request("put", f"{api}/channels/{channel_id}/pins/{msg_id}")
             # Pinning may fail (max 50 pins per channel); not fatal.
             DASHBOARD_MSG_REF.write_text(json.dumps({
                 "message_id": msg_id,

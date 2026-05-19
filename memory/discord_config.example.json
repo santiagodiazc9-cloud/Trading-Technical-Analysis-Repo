@@ -30,6 +30,10 @@
     "feedback": {
       "webhook_url": "https://discord.com/api/webhooks/REPLACE/REPLACE",
       "channel_id": "REPLACE_WITH_CHANNEL_ID"
+    },
+    "general": {
+      "webhook_url": "https://discord.com/api/webhooks/REPLACE/REPLACE",
+      "channel_id": "REPLACE_WITH_CHANNEL_ID"
     }
   },
   "colors": {

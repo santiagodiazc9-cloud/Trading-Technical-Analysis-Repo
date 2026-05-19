@@ -17,6 +17,42 @@ if [[ ! -f "$ROUTINE_PATH" ]]; then
 fi
 
 PROMPT="$(cat "$ROUTINE_PATH")"
+ROUTINE_NAME="$(basename "$ROUTINE_FILE" .md)"
+
+# Post a one-liner to Discord (#general if configured, else #daily_brief).
+# Uses only stdlib (json + urllib) — no httpx or dotenv needed.
+_discord_ping() {
+  local title="$1" body="$2"
+  python3 - "$title" "$body" "$PROJECT_ROOT" <<'PYEOF' 2>/dev/null || true
+import json, sys, urllib.request, urllib.error
+from pathlib import Path
+title, body, project_root = sys.argv[1], sys.argv[2], sys.argv[3]
+cfg_path = Path(project_root) / "memory" / "discord_config.json"
+if not cfg_path.exists():
+    sys.exit(0)
+try:
+    cfg = json.loads(cfg_path.read_text())
+except Exception:
+    sys.exit(0)
+for ch in ("general", "daily_brief"):
+    chan = cfg.get("channels", {}).get(ch, {})
+    url = chan.get("webhook_url", "")
+    if not url or "REPLACE" in url:
+        continue
+    payload = json.dumps({
+        "embeds": [{"title": title, "description": body, "color": 10070709}]
+    }).encode()
+    req = urllib.request.Request(url, data=payload, headers={"Content-Type": "application/json"})
+    try:
+        urllib.request.urlopen(req, timeout=10)
+    except Exception:
+        pass
+    break
+PYEOF
+}
+
+TIMESTAMP_ET="$(TZ=America/New_York date '+%a %Y-%m-%d %H:%M ET')"
+_discord_ping "▶ Routine starting: ${ROUTINE_NAME}" "${TIMESTAMP_ET}"
 
 # Locate the claude CLI. Try common install paths in priority order, then
 # fall back to PATH lookup so this works on both Mac (~/.local/bin) and
@@ -38,6 +74,12 @@ fi
 
 "$CLAUDE_BIN" -p "$PROMPT"
 ROUTINE_EXIT=$?
+
+if [[ "$ROUTINE_EXIT" -eq 0 ]]; then
+  _discord_ping "✅ Routine done: ${ROUTINE_NAME}" "Completed successfully · $(TZ=America/New_York date '+%H:%M ET')"
+else
+  _discord_ping "❌ Routine failed: ${ROUTINE_NAME}" "Exit code ${ROUTINE_EXIT} · $(TZ=America/New_York date '+%H:%M ET') — check launchd log"
+fi
 
 # Git cowork mode — auto-commit memory + journal updates after each routine.
 # Toggle with: export TRADING_GIT_AUTOCOMMIT=1 (default OFF until user enables).
