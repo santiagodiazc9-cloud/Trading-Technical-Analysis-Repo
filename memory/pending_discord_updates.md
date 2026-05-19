@@ -6,6 +6,16 @@ The legacy filename was `pending_clickup_updates.md` — kept the renamed file a
 
 ---
 
+## 2026-05-19 14:19 ET (18:19 UTC) — Discord Dispatcher
+
+No-op dispatcher cycle in cloud CI clone. Queue files (`run_queue.json`, `discord_chat_queue.json`, `knowledge_inbox_queue.json`, `feedback_queue.json`) and `pause_state.json` are gitignored runtime state and absent in this clone — treated as empty per routine spec (drained: run=0 chat=0 knowledge=0 feedback=0). `last_dispatch.json` initialized fresh. Ruflo MCP unavailable in this session — file-only fallback noted. `scripts/dashboard.py` and `scripts/notify.py dashboard` not executed (Bash invocation blocked by CI permissions); Dashboard.md regeneration deferred to next local routine. Local-host dispatcher (where queues actually accumulate) is the source-of-truth instance.
+
+### #daily-brief (silent summary, queued)
+**Title**: Discord Dispatcher — 2026-05-19 14:19 ET (no-op)
+**Body**: pause=active (assumed; pause_state.json absent in cloud clone), drained run=0 chat=0 knowledge=0 feedback=0. Ruflo MCP offline this session — file-only. Dashboard refresh deferred (cloud-env Bash restriction). Local dispatcher remains source of truth for queue-driven actions.
+
+---
+
 ## 2026-05-19 pre-market — Pre-Market Research
 
 `notify.py` calls blocked: `memory/discord_config.json` missing. Flush once Discord credentials are provisioned.
