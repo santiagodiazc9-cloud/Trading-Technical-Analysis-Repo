@@ -25,8 +25,10 @@ None.
 | 2026-05-15 EOD | MET | NOT YET | Sustained through close |
 | 2026-05-18 EOD | MET ($419.92 > $417.49) | NOT YET (histogram -0.84, narrowing) | 3rd session |
 | 2026-05-19 pre-market | MET ($422.35 > $417.62) | NOT YET (histogram -0.684, continuing to narrow) | 4th session; SMA 20 reclaim solid |
+| 2026-05-19 pre-market re-run | MET ($423.61 > $417.68) | NOT YET (histogram -0.60, narrowing further) | 5th routine; histogram inflection track: -1.39 → -0.84 → -0.68 → -0.60 |
 
 - **Next action**: Midday and EOD 2026-05-19 — watch for MACD histogram to flip positive. No catalyst today (Build is June 2-3). Post-NVDA earnings sentiment may affect MSFT indirectly. If histogram turns positive in same session as SMA 20 reclaim, evaluate full confluence checklist and propose.
+- **MACD histogram trajectory**: -1.39 (5/15) → -0.84 (5/18 EOD) → -0.68 (5/19 early) → -0.60 (5/19 re-run). Convergence accelerating; positive cross could fire 5/20 if NVDA print is supportive of Tech tone.
 - **Stale date**: EOD 2026-05-22 (5 trading days from first fire 2026-05-15). 3 sessions remain.
 
 ---
@@ -44,19 +46,19 @@ None with `Approved: YES`.
 
 ---
 
-## Watchlist Alerts (2026-05-19 pre-market)
+## Watchlist Alerts (2026-05-19 pre-market re-run 12:15 UTC)
 
 | Symbol | Price | Key Signal | Note |
 |--------|-------|-----------|------|
-| MSFT | $422.35 | Half-trigger 1/2, MACD hist -0.684 (narrowing) | 4th session; no catalyst today (Build is June 2-3) |
-| AMZN | $268.48 | Stoch K 5.75 oversold, on VWAP, MACD hist -2.01 | AMZN-2026-05-15 RETIRED. Watch post-NVDA for fresh setup |
-| NVDA | $225.83 | Earnings AMC tonight — BINARY EVENT | No position. Post-print watch $215–$220 for pullback setup |
-| AMD | $428.24 | RSI 67.9, Stoch 21.5, 7.2% above VWAP | Extended — DO NOT CHASE. Watch VWAP $399-400 post-NVDA |
-| AAPL | $298.08 | RSI 71.9, Stoch 90.8 — overbought | No entry (ADR-0001) |
-| GOOGL | $404.95 | RSI 73.2 — overbought | No entry (ADR-0001) |
-| TSLA | $415.39 | MACD hist +2.55, above SMA 20, near VWAP | Day-trade only (long-term SMA bearish) |
-| SPY | $740.88 | RSI 68.9, uptrend intact | Above trip-wire $725; MACD recovering |
-| QQQ | $709.88 | RSI 71.7 — at overbought threshold | Watch for resolution |
+| MSFT | $423.61 | Half-trigger 1/2, MACD hist -0.60 (still narrowing) | 5th routine; SMA 20 reclaim solid. Stale EOD 5/22. |
+| AMZN | $264.78 | Stoch K 0.82 extreme oversold; MACD hist -2.24 (WORSENING); below SMA 20 | RETIRED (ADR-0002). Confluence fails — NO new proposal. Watch MACD post-NVDA. |
+| NVDA | $222.35 | RSI 61.7; earnings AMC TONIGHT — BINARY EVENT | No position. Drifted -1.5% into print. Post-print watch $215–$220. |
+| AMD | $420.98 | RSI 66.2 cooled, Stoch 19.8, 5.1% above VWAP $400.55 | Less extended; still no chase. Wait VWAP retest post-NVDA. |
+| AAPL | $297.85 | RSI 71.5, Stoch 90.1 — overbought | No entry (ADR-0001) |
+| GOOGL | $396.82 | RSI 70.2 at threshold; MACD bearish cross fired | No entry (ADR-0001) |
+| TSLA | $409.97 | RSI 52.7, below VWAP, MACD hist +2.21 | Day-trade only (long-term SMA bearish). Below VWAP — no day-trade signal yet. |
+| SPY | $738.40 | RSI 67.3, MACD bearish cross active (-0.02) | Above trip-wire $725; uptrend intact |
+| QQQ | $705.69 | RSI 68.9 — cooled off overbought; MACD slim positive | Watch for resolution post-NVDA |
 
 ---
 
