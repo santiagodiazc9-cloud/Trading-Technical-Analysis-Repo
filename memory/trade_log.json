@@ -10,7 +10,8 @@
   "trades": [],
   "weekly_trade_count": {
     "_comment": "Resets every Monday 00:00 ET. Used to enforce max-3-trades-per-week rule.",
-    "week_starting_2026-05-11": 0
+    "week_starting_2026-05-11": 0,
+    "week_starting_2026-05-18": 0
   },
   "daily_snapshots": [
     {

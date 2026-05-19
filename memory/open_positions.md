@@ -15,7 +15,7 @@ None.
 - **AMD** (~$445, 5/14): Overbought, observe-only until post-NVDA earnings tape read.
 
 ## Pending Setups
-None.
+None with `Approved: YES`.
 
 ## MSFT Half-Trigger Status (ADR-0004)
 **Setup #2 — MSFT Mean-Reversion / Trend-Follow**

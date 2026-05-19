@@ -83,7 +83,7 @@ You are an autonomous trading agent managing a **paper trading account** on Alpa
 
 ## Obsidian Vault
 
-This project root IS an Obsidian vault. See `VAULT.md` for orientation. Key conventions:
+This project root IS an Obsidian vault. See `docs/guides/VAULT.md` for orientation. Key conventions:
 - New unsorted notes go in `inbox/` (configured as default in `.obsidian/app.json`)
 - Templates in `templates/` for setups, journals, ADRs, lessons
 - Use `[[wiki-links]]` for cross-references

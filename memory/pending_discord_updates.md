@@ -234,3 +234,83 @@ None pushed today. No daily loss cap breach, no hard rule violation. Reflective 
 ### Infra fix still needed (re-confirmed)
 1. Provision `memory/discord_config.json` (copy of `discord_config.example.json` with real webhook URLs) on the cloud routine host.
 2. Set `DISCORD_BOT_TOKEN` in the cloud routine host's `.env`.
+
+---
+
+## 2026-05-18 — Discord Dispatcher (15-min cadence)
+
+`notify.py brief` failed: `memory/discord_config.json` still missing. All queues drained (all empty). `memory/last_dispatch.json` initialized fresh.
+
+### #daily-brief (silent summary)
+**Title**: Dispatcher — 2026-05-18
+**Body**: All queues empty (run=0, chat=0, knowledge=0, feedback=0). pause_state.json absent → treated active. RuFlo MCP unavailable (permission not granted) — file-only fallback. Dashboard refresh failed: `dashboard.py` crashes when `run_queue.json` is a raw array rather than `{"queue":[...]}` (line ~158, `AttributeError: 'list' object has no attribute 'get'`). Fix: change `read_json(RUN_QUEUE, {"queue":[]}).get("queue",[])` to handle both list and dict formats.
+
+### Bug logged
+- **File**: `scripts/dashboard.py` line 158
+- **Error**: `AttributeError: 'list' object has no attribute 'get'` when `run_queue.json` contains a raw `[]` array
+- **Fix**: `_rq = read_json(RUN_QUEUE, []); state["run_queue"] = _rq if isinstance(_rq, list) else _rq.get("queue", [])`
+
+---
+
+## 2026-05-18 14:14 ET — Discord Dispatcher (15-min cadence)
+
+All four queues drained empty (run=0, chat=0, knowledge=0, feedback=0). Idempotent state written to `memory/last_dispatch.json`.
+
+### Environment notes
+- Queue files absent on fresh clone (gitignored). Initialized with `{queue:[]}` shape so dashboard.py line 158 does not crash.
+- `pause_state.json` absent. Initialized to `{state:active}`.
+- RuFlo MCP tool list unavailable in this session — file-only fallback active.
+- `memory/discord_config.json` IS present with real webhook URLs (prior infra fix applied).
+- `python3 scripts/dashboard.py` and `python3 scripts/notify.py` blocked by sandbox approval policy on this routine host. Dashboard refresh and `#daily-brief` post deferred.
+
+### #daily-brief (silent summary — deferred, requires notify.py execution)
+**Title**: Dispatcher — 2026-05-18 14:14 ET
+**Body**: All queues empty. pause=active. RuFlo file-only. Dashboard refresh blocked by sandbox python3 permission — `Dashboard.md` not regenerated this cycle.
+
+### Action items
+- Grant `python3 scripts/dashboard.py` and `python3 scripts/notify.py` execution permissions to the cloud routine host so the dispatcher can regenerate the dashboard and push briefs.
+- Optional but still pending: fix `scripts/dashboard.py:158` to tolerate a raw-array `run_queue.json`. Currently sidestepped by writing the queue files in the correct shape.
+
+---
+
+## 2026-05-18 15:16 ET — Discord Dispatcher (15-min cadence)
+
+All four queues drained empty (run=0, chat=0, knowledge=0, feedback=0). Idempotent state written to `memory/last_dispatch.json`. No-op cycle — local Discord bot writes the queue files locally and they are gitignored, so the cloud GHA clone never sees pending items unless someone copies them across.
+
+### Environment notes
+- Same shape as 14:14 cycle. Queue files reinitialized to `{queue:[]}` (gitignored — local only on this runner).
+- `pause_state.json` reinitialized to `{state:active}`.
+- RuFlo MCP tools not loaded in this session (ruflo server "still connecting" at startup); file-only fallback used. No store writes attempted (nothing to store).
+- `memory/discord_config.json` present with real webhook URLs.
+- `python3` execution still requires per-invocation approval in this sandbox — `scripts/dashboard.py` and `scripts/notify.py` blocked again. Dashboard refresh and `#daily-brief` post deferred for the 5th consecutive cycle.
+
+### #daily-brief (silent summary — deferred)
+**Title**: Dispatcher — 2026-05-18 15:16 ET
+**Body**: All queues empty. pause=active. RuFlo unavailable, file-only fallback. Dashboard refresh blocked by sandbox python3 permission.
+
+### Hourly heartbeat
+Skipped — fire window is :00, current minute is :16.
+
+### Action items (carry-forward, unchanged from prior cycle)
+- Grant the cloud routine host `python3 scripts/dashboard.py` and `python3 scripts/notify.py` execution permissions (or pre-approve them in `.claude/settings.json`) so the dispatcher can refresh `Dashboard.md` and post `#daily-brief` from cloud.
+- Pre-load the `ruflo` MCP server so the dispatcher can write knowledge/feedback drops to the `trading` namespace (currently moot — queues are empty in cloud — but blocks Phase 2 vector recall when the local bot eventually copies queue items across).
+- Consider: if the cloud dispatcher is intentionally a no-op clone (because queues are gitignored and only the local bot writes them), demote it from every-15-min to hourly to reduce git noise and runner cost. Confirm with Santiago.
+
+---
+
+## 2026-05-19 13:35 UTC — Market Open Execution
+
+`notify.py brief` and `notify.py dashboard` both failed:
+- `notify.py brief`: `memory/discord_config.json` missing.
+- `notify.py dashboard`: `DISCORD_BOT_TOKEN` missing from `.env`.
+
+### #daily-brief (silent summary — deferred)
+**Title**: Market Open Execution — 2026-05-19 09:35 ET
+**Body**: 0 trades placed (no `Approved: YES` setups). 0 open positions, $100k cash, 0/3 weekly slots used, 0/3 day-trades. MSFT half-trigger still watching MACD cross (histogram -0.60, narrowing). NVDA earnings AMC tonight — disciplined cash posture.
+
+### Routine result
+No-op execution. Step 4 (Approval Check) had no candidates: `memory/open_positions.md` lists "Pending Setups: None with `Approved: YES`." Stale-approval gate (step 3a) skipped — nothing to validate. Risk check passed (0 positions, daily loss cap not hit, PDT 0/3). Dashboard refreshed locally (`Dashboard.md`).
+
+### Action items (delta vs prior cycles)
+- Same outstanding gaps: provision `memory/discord_config.json` and `DISCORD_BOT_TOKEN` in cloud `.env` so cloud routines can post to `#daily-brief` and update the pinned Dashboard. Without these, all brief/dashboard posts back up here and the on-call user has no real-time visibility into cloud-run cadence.
+- Cloud sandbox needed `setuptools`/`wheel` upgraded before `ta` would build from sdist. Consider pinning `setuptools>=80,<83` and `wheel>=0.45` at the top of `requirements.txt` or shipping a prebuilt wheel for `ta` so future routines aren't gated on a build-time dep upgrade.

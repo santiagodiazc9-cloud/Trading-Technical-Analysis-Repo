@@ -37,6 +37,7 @@ import subprocess
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
+from typing import Optional, Tuple
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 POSITIONS_PATH = PROJECT_ROOT / "memory" / "open_positions.md"
@@ -48,7 +49,7 @@ SHORT_TARGET_OVERSHOOT_MULT = 0.98
 SHORT_STOP_BREAK_MULT = 1.05
 
 
-def latest_close(symbol: str) -> float | None:
+def latest_close(symbol: str) -> Optional[float]:
     """Fetch latest daily close via alpaca_client.py price <SYMBOL>."""
     try:
         result = subprocess.run(
@@ -72,7 +73,7 @@ def latest_close(symbol: str) -> float | None:
         return None
 
 
-def _parse_money_range(text: str) -> tuple[float | None, float | None]:
+def _parse_money_range(text: str) -> Tuple[Optional[float], Optional[float]]:
     """Extract two dollar values from text like '$206.00–$210.00' or '$206-210'."""
     nums = re.findall(r"(\d+(?:\.\d+)?)", text)
     if not nums:
@@ -83,12 +84,12 @@ def _parse_money_range(text: str) -> tuple[float | None, float | None]:
     return float(nums[0]), float(nums[1])
 
 
-def _parse_money_single(text: str) -> float | None:
+def _parse_money_single(text: str) -> Optional[float]:
     m = re.search(r"(\d+(?:\.\d+)?)", text)
     return float(m.group(1)) if m else None
 
 
-def _parse_setup_block(block: str) -> dict | None:
+def _parse_setup_block(block: str) -> Optional[dict]:
     """Extract structured fields from one Pending Setup block. Returns None on parse failure."""
     json_match = re.search(r"<!--\s*setup-data:json\s*(\{.*?\})\s*-->", block, re.DOTALL)
     if json_match:
@@ -161,7 +162,7 @@ def parse_pending_setups(text: str) -> list[dict]:
     return setups
 
 
-def validate(setup: dict, current_price: float) -> tuple[bool, str]:
+def validate(setup: dict, current_price: float) -> Tuple[bool, str]:
     direction = (setup.get("direction") or "").upper()
     if direction not in ("LONG", "SHORT"):
         return True, "UNKNOWN_DIRECTION"
