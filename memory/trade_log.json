@@ -133,6 +133,36 @@
       "daily_loss_cap_hit": false,
       "hard_rule_violations": [],
       "notes": "Week 3 Day 1. 0 trades, 0 positions, P&L $0.00 (0.00%). SPY trip-wire triggered midday ($734.81 < $736) — no-new-longs rule activated and held through close. NVDA -6.5% to $220.40 intraday (pre-earnings IV repricing; binary event 5/20 AMC). MSFT tested SMA 20 ($417.93 vs $417.39) intraday — half-trigger 1/2 conditions still pending (MACD histogram -0.97 at midday). AMZN-2026-05-15 stales at 5/19 EOD per ADR-0002. No setups proposed. Note: 2026-05-16 EOD snapshot missing (sessions ran 5/16 but snapshot not captured in that routine). httpx unavailable in main session — Discord brief logged to pending_discord_updates.md."
+    },
+    {
+      "date": "2026-05-19",
+      "routine": "end_of_day_review",
+      "equity": 100000.00,
+      "cash": 100000.00,
+      "buying_power": 200000.00,
+      "deployed_pct": 0.0,
+      "pnl_today_dollars": 0.00,
+      "pnl_today_pct": 0.0,
+      "open_positions": 0,
+      "trades_closed_today": 0,
+      "wins_today": 0,
+      "losses_today": 0,
+      "trades_opened_today": 0,
+      "weekly_trade_count": 0,
+      "daytrade_count": 0,
+      "pattern_day_trader": false,
+      "running_win_rate": null,
+      "running_pnl_dollars": 0.00,
+      "running_pnl_pct": 0.0,
+      "confidence_calibration": {
+        "_comment": "predicted-confidence-bucket -> {sample_size, wins, losses}. Empty until we have closed trades.",
+        "bucket_9_10": {"n": 0, "wins": 0, "losses": 0},
+        "bucket_7_8":  {"n": 0, "wins": 0, "losses": 0},
+        "bucket_5_6":  {"n": 0, "wins": 0, "losses": 0}
+      },
+      "daily_loss_cap_hit": false,
+      "hard_rule_violations": [],
+      "notes": "Week 3 Day 2. 0 trades, 0 positions, P&L $0.00 (0.00%). SPY trip-wire active and WORSENED into close ($735.51 midday → $733.85 EOD; $736 threshold not reclaimed). NVDA $221.46 EOD heading into Q1 FY27 earnings AMC tonight — confirmed no semiconductor exposure entering print. MSFT half-trigger 1/2: MACD histogram barely moved (-0.5525 midday → -0.5435 EOD); pace of approach to zero has slowed significantly vs prior sessions. SMA 20 condition still MET ($417.77 > $417.37). AMZN-2026-05-15 archived midday per ADR-0002. GOOGL extreme oversold (Stoch RSI 0.06 midday). No setups proposed. Stale-state sweep: both learnings.md and strategy.md modified today — no stale-file flags needed. NVDA earnings reaction (5/20 AMC → 5/21 pre-market tape read) is the week's defining catalyst for semiconductor sector direction and potential SPY trip-wire resolution."
     }
   ],
   "summary": {

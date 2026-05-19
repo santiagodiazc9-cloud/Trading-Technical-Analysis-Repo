@@ -92,14 +92,32 @@ None with `Approved: YES`.
 - No new setups proposed (SPY trip-wire active).
 - AMZN-2026-05-15 archived. Weekly trade count: 0/3.
 
-## Notes (Updated Midday 2026-05-19)
-- Week 3 Day 2 midday: 0/3 weekly trade slots used. 0 positions. $0 deployed (0% of portfolio). $0 P&L.
-- NVDA earnings 5/20 AMC: confirmed no semiconductor exposure entering print. NVDA $223.25.
-- SPY trip-wire (< $736) ACTIVE as of midday 5/19 ($735.51). No new longs until SPY reclaims $736.
-- AMZN-2026-05-15: ARCHIVED (midday 5/19) per ADR-0002.
-- **Priority for 5/19 EOD / 5/20 pre-market**:
-  1. Post-NVDA earnings tape (5/21 pre-market): reassess AMD, SOXX/SMH sector direction, NVDA post-earnings pullback zone $215–$220.
-  2. SPY trip-wire watch: needs to reclaim $736 before any new longs.
-  3. MSFT: MACD histogram -0.5525 and approaching cross. If tomorrow pre-market shows histogram > 0 AND SPY > $736 → both gate conditions met → propose fresh MSFT setup.
-  4. GOOGL mean-reversion watch: Stoch RSI 0.06, ~3.2% down today. Monitor for stabilization + MACD recovery. No-chase applies today.
-- MSFT half-trigger stale-by: 5 trading days from 2026-05-15 → stale after 2026-05-22 EOD if MACD cross never fires. Microsoft Build closes 5/22 — last window.
+## EOD Review Log — 2026-05-19
+- Account confirmed (Alpaca EOD): $100,000 equity, $100,000 cash, 0 positions, 0 day-trades.
+- No day trades to close. No swing positions to manage.
+- Daily P&L: $0.00 (0.00%). Daily loss cap: NOT hit. Hard rule violations: NONE.
+- SPY closed at $733.85 — trip-wire ($736) WORSENED vs midday $735.51. No-new-longs rule remains active for 5/20 unless SPY reclaims $736.
+- MSFT EOD: $417.77, MACD histogram -0.5435 (barely moved from midday -0.5525). SMA 20 $417.37 — still MET. Half-trigger 1/2. No cross today.
+- NVDA $221.46 into earnings (5/20 AMC). No exposure. Binary event confirmed.
+- Weekly trade count: 0/3. Week 3 Day 2 complete.
+
+## MSFT Half-Trigger Status (ADR-0004) — Updated EOD 2026-05-19
+**Setup #2 — MSFT Mean-Reversion / Trend-Follow**
+- **Re-arm gate** (both required, same routine to propose):
+  - Condition 1 — SMA 20 reclaim: **MET** (confirmed 2026-05-15 EOD; EOD 5/19: price $417.77 vs SMA 20 $417.37 — still above)
+  - Condition 2 — MACD positive cross (histogram > 0): **NOT YET** (histogram -0.5435 as of EOD 5/19; progress: -1.31 → -0.97 → -0.5525 → -0.5435 — pace has slowed significantly. Cross has NOT fired.)
+- **Additional blocker**: SPY trip-wire ACTIVE ($733.85 < $736) — even if BOTH gate conditions fire, no new longs until SPY reclaims $736.
+- **Half-trigger stale-by**: 5 trading days from 2026-05-15 → **stale after 2026-05-22 EOD** if MACD cross never fires.
+- **Remaining sessions**: 5/20 (1) and 5/21 (2) before stale-by. Microsoft Build closes 5/22 — last catalyst day.
+- **Status**: Half-trigger — 1 of 2 conditions met. MACD pace has slowed. SPY trip-wire is second hard blocker.
+
+## Notes (Updated EOD 2026-05-19)
+- Week 3 Day 2 EOD: 0/3 weekly trade slots used. 0 positions. $0 deployed (0% of portfolio). $0 P&L.
+- NVDA earnings 5/20 AMC: confirmed no semiconductor exposure entering print. NVDA $221.46 EOD.
+- SPY trip-wire (< $736) ACTIVE as of EOD 5/19 ($733.85 — worsened from midday $735.51). No new longs until SPY reclaims $736.
+- AMZN-2026-05-15: ARCHIVED (midday 5/19) per ADR-0002. No further action.
+- **Priority for 5/20 pre-market**:
+  1. NVDA earnings reaction (AMC 5/20 → tape read 5/21 pre-market): primary catalyst. AMD, SOXX/SMH follow. Post-earnings pullback zone NVDA $215–$220 (RSI < 65) only re-entry condition.
+  2. SPY trip-wire watch: $736 needed before any new longs.
+  3. MSFT: MACD histogram -0.5435 — 5/20 pre-market is next check. 2 sessions before stale-by. SPY trip-wire second blocker.
+  4. GOOGL: Stoch RSI was 0.06 extreme oversold at midday. Monitor for stabilization + MACD recovery for mean-reversion potential (no-chase rule applies).

@@ -44,6 +44,7 @@
 
 ## Pattern Notes
 - 2026-05-18 (EOD): Market taking a measured pause after last week's overbought extension. SPY MACD bearish cross (histogram -0.04) is the first momentum stall signal since the May rally. Not a reversal — uptrend intact — but caution appropriate. NVDA earnings binary tomorrow, no exposure (correct). MSFT half-trigger 1/2 held for 3rd session. 0 trades, full cash, patience working as designed.
+- 2026-05-19 (EOD): SPY trip-wire worsened into the close ($735.51 midday → $733.85 EOD), reinforcing that intraday tick readings are noise — only EOD or routine-time price matters for rule triggers. MSFT MACD histogram grind stalled (-0.5525 → -0.5435); rate of approach is informative, not predictive — do not pre-announce a cross. NVDA $221.46 heading into earnings 5/20 AMC — no exposure, correct. 0 trades, full cash, week 3 day 2. NVDA earnings tomorrow is the week's defining catalyst.
 
 ## Pending Approval Tracker
 - **NVDA-2026-05-08** (swing setup, pullback to 206–210, stop below 200, target 216+): proposed across pre-market, midday, and EOD on 2026-05-08. Marked Approved YES on 2026-05-11 11:26Z. **STALE — CONFIRMED 2026-05-15.** NVDA $235.78 at fresh scan (12% above zone high). Approval flipped to NO — stale. Will revisit only on pullback to $215–$220 with RSI < 65 AFTER 5/20 earnings.
