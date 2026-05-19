@@ -273,3 +273,22 @@ Skipped — fire window is :00, current minute is :16.
 - Grant the cloud routine host `python3 scripts/dashboard.py` and `python3 scripts/notify.py` execution permissions (or pre-approve them in `.claude/settings.json`) so the dispatcher can refresh `Dashboard.md` and post `#daily-brief` from cloud.
 - Pre-load the `ruflo` MCP server so the dispatcher can write knowledge/feedback drops to the `trading` namespace (currently moot — queues are empty in cloud — but blocks Phase 2 vector recall when the local bot eventually copies queue items across).
 - Consider: if the cloud dispatcher is intentionally a no-op clone (because queues are gitignored and only the local bot writes them), demote it from every-15-min to hourly to reduce git noise and runner cost. Confirm with Santiago.
+
+---
+
+## 2026-05-19 13:35 UTC — Market Open Execution
+
+`notify.py brief` and `notify.py dashboard` both failed:
+- `notify.py brief`: `memory/discord_config.json` missing.
+- `notify.py dashboard`: `DISCORD_BOT_TOKEN` missing from `.env`.
+
+### #daily-brief (silent summary — deferred)
+**Title**: Market Open Execution — 2026-05-19 09:35 ET
+**Body**: 0 trades placed (no `Approved: YES` setups). 0 open positions, $100k cash, 0/3 weekly slots used, 0/3 day-trades. MSFT half-trigger still watching MACD cross (histogram -0.60, narrowing). NVDA earnings AMC tonight — disciplined cash posture.
+
+### Routine result
+No-op execution. Step 4 (Approval Check) had no candidates: `memory/open_positions.md` lists "Pending Setups: None with `Approved: YES`." Stale-approval gate (step 3a) skipped — nothing to validate. Risk check passed (0 positions, daily loss cap not hit, PDT 0/3). Dashboard refreshed locally (`Dashboard.md`).
+
+### Action items (delta vs prior cycles)
+- Same outstanding gaps: provision `memory/discord_config.json` and `DISCORD_BOT_TOKEN` in cloud `.env` so cloud routines can post to `#daily-brief` and update the pinned Dashboard. Without these, all brief/dashboard posts back up here and the on-call user has no real-time visibility into cloud-run cadence.
+- Cloud sandbox needed `setuptools`/`wheel` upgraded before `ta` would build from sdist. Consider pinning `setuptools>=80,<83` and `wheel>=0.45` at the top of `requirements.txt` or shipping a prebuilt wheel for `ta` so future routines aren't gated on a build-time dep upgrade.
