@@ -19,6 +19,16 @@ Ruflo MCP running v3.7.0-alpha.21; pinned to alpha.20. Memory store degraded (no
 
 ---
 
+## 2026-05-19 pre-market re-run (12:15 UTC / 8:15 AM ET) — Pre-Market Research
+
+`notify.py brief` blocked: `memory/discord_config.json` missing (cloud env). `notify.py dashboard` blocked: `DISCORD_BOT_TOKEN` missing. Flush once Discord credentials are provisioned.
+
+### #daily-brief (silent summary)
+**Title**: Pre-Market Brief — 2026-05-19 (re-run)
+**Body**: Scheduled 8:15 AM ET routine after early-AM prep (commit a77f7fa). 0 setups proposed. NVDA earnings AMC tonight = binary event, no Tech longs today. Fresh scan deltas: SPY -0.33% to $738.40 (MACD bearish cross active, hist -0.02); QQQ -0.59% to $705.69 (cooled off overbought, RSI 68.9); MSFT half-trigger 5th routine — MACD hist tightened to -0.60 (track: -1.39 → -0.84 → -0.68 → -0.60, accelerating); AMZN pulled INTO retired zone ($264.78), Stoch K 0.82 extreme oversold, but MACD WORSENED to -2.24 (confluence fails — NO new proposal); AMD cooled to $420.98 (still 5.1% above VWAP); GOOGL MACD bearish cross fired. Account $100k cash, 0 positions, 0/3 weekly slots, PnL today $0, day-trades 0.
+
+---
+
 ## 2026-05-18 ~15:45 ET — End-of-Day Review
 
 `notify.py brief` and `notify.py send chat` could not run: `memory/discord_config.json` missing. Flush once Discord credentials are provisioned.
