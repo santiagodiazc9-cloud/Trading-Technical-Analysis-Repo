@@ -36,6 +36,30 @@ Starting with a **conservative, paper-trading** approach. Focus on high-probabil
 - Max 3 swing positions at a time
 - **RSI divergence**: if price makes a new high but RSI does not, treat as a caution signal — tighten target or skip
 
+## Market Posture System (added 2026-05-19, replaces price-level trip-wire)
+
+Every pre-market routine classifies the current market posture based on SPY's position relative to its moving averages. This replaces the old hard price-level trip-wire ($736), which became stale and context-free.
+
+**Posture classification (check in order — first match wins):**
+
+| Posture | Condition | Trading stance |
+|---|---|---|
+| 🟢 GREEN | SPY above SMA 20 AND SMA 20 above SMA 50 | Full — new longs AND shorts allowed |
+| 🟡 CAUTION | SPY below SMA 20 but above SMA 50 | Reduced — only setups with confidence ≥ 8; prefer shorts over new longs |
+| 🔴 RED | SPY below SMA 50 | Shorts only — no new long entries |
+| ⚫ BEAR | SPY below SMA 200 | Aggressive short bias; no new longs; reduce all long exposure |
+
+**Volatility override:** If VIX > 25, treat posture as CAUTION regardless of SMA readings (fear spikes invalidate setups). If VIX > 35, treat as RED.
+
+**CAUTION exceptions (new long still allowed if ALL apply):**
+- Confidence score ≥ 8/10
+- SPY is within 1% of SMA 20 (shallow dip, not a breakdown)
+- Setup's own sector ETF is still above its SMA 20
+
+**Posture logging:** The pre-market routine logs the classified posture to `memory/market_context.md` under "Market Posture" so subsequent routines (midday, EOD) inherit it without re-running the full SPY analysis.
+
+**Why this replaces the old trip-wire:** A fixed price level ($736) has no relationship to market health after the market moves significantly. A $734 SPY in an uptrend is a buying opportunity; a $737 SPY after a -15% crash is a dead-cat bounce. The SMA relationship captures this correctly in both cases.
+
 ## Short Selling Rules (added 2026-05-19)
 
 Short setups are allowed and actively scanned in every pre-market routine. The mirror of the long rules applies. Shorts unlock opportunity in sideways and bearish markets.

@@ -47,6 +47,33 @@ Run: `python3 scripts/alpaca_client.py account`
 - Note available cash and buying power
 - Check if the daily loss cap has been hit (2% of portfolio)
 
+### 2a. Market Posture Check
+Classify today's market posture before scanning any individual setups. This determines what trading is allowed today.
+
+```bash
+python3 scripts/research.py analyze SPY
+python3 scripts/research.py analyze QQQ
+```
+
+Read the SMA 20, SMA 50, and SMA 200 values. Classify posture using the table in `memory/strategy.md` → "Market Posture System":
+
+- 🟢 **GREEN**: SPY above SMA 20 AND SMA 20 > SMA 50 → full setup window, longs + shorts
+- 🟡 **CAUTION**: SPY below SMA 20 but above SMA 50 → confidence ≥ 8 only; prefer shorts
+- 🔴 **RED**: SPY below SMA 50 → shorts only, no new longs
+- ⚫ **BEAR**: SPY below SMA 200 → aggressive short bias, exit remaining longs
+
+Also check VIX if available: VIX > 25 → force at least CAUTION. VIX > 35 → force RED.
+
+Write the classified posture to `memory/market_context.md` under a "## Market Posture" heading (overwrite the prior value). Format:
+
+```
+## Market Posture
+🟢 GREEN — SPY $XXX.XX | SMA 20 $XXX | SMA 50 $XXX | SMA 200 $XXX
+(or CAUTION / RED / BEAR with the same data)
+```
+
+Subsequent routines (midday, EOD) read this line to inherit posture without re-running the analysis.
+
 ### 3. Scan Watchlist
 Run: `python3 scripts/research.py scan`
 - Review all indicator readings for every watchlist symbol

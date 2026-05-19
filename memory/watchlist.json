@@ -55,13 +55,13 @@
     {
       "symbol": "SPY",
       "sector": "ETF — Broad Market",
-      "notes": "S&P 500 ETF — market direction proxy. 2026-05-14: $742.30 RSI 76.5, Stoch 95.3 — overbought. Defensive trip-wire: SPY < $736 flips posture to no-new-longs until reset confirmed. No evidence trip-wire has triggered.",
+      "notes": "S&P 500 ETF — PRIMARY market posture indicator. Pre-market routine classifies posture via SPY SMA relationships (see strategy.md Market Posture System): GREEN (above SMA 20 + SMA 20 > SMA 50) / CAUTION (below SMA 20 but above SMA 50) / RED (below SMA 50) / BEAR (below SMA 200). Old price-level trip-wire ($736) retired 2026-05-19 — it was stale. Also tradeable as day-trade vehicle on high-volume trend days.",
       "strategy": "day"
     },
     {
       "symbol": "QQQ",
       "sector": "ETF — Broad Market",
-      "notes": "Nasdaq 100 ETF — tech sector proxy. 2026-05-14: $714.57 RSI 79.4 — overbought. Defensive trip-wire: QQQ < $700 flips posture to no-new-longs until reset confirmed.",
+      "notes": "Nasdaq 100 ETF — tech/growth sector posture proxy. Monitor QQQ SMA relationships alongside SPY: if QQQ is CAUTION while SPY is GREEN, tech-heavy setups face additional headwind. Also tradeable as day-trade vehicle. Old price-level trip-wire ($700) retired 2026-05-19.",
       "strategy": "day"
     },
     {
