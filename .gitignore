@@ -17,6 +17,7 @@ memory/knowledge_inbox_queue.json
 memory/feedback_queue.json
 memory/discord_chat_queue.json
 memory/pause_state.json
+memory/daytrader_session.json
 memory/last_dispatch.json
 memory/last_poll.json
 memory/last_routine_run.json
@@ -41,6 +42,14 @@ launchd_*.log
 dist/
 build/
 *.egg-info/
+
+# Dashboard (Next.js)
+dashboard/node_modules/
+dashboard/.next/
+dashboard/.env.local
+
+# Day trading ML models — large binary files, retrain locally
+scripts/daytrader/models/
 
 # Obsidian vault — user-specific UI state (track only project config)
 .obsidian/workspace

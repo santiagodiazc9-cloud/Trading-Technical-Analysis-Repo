@@ -101,15 +101,40 @@ None with `Approved: YES`.
 - NVDA $221.46 into earnings (5/20 AMC). No exposure. Binary event confirmed.
 - Weekly trade count: 0/3. Week 3 Day 2 complete.
 
-## MSFT Half-Trigger Status (ADR-0004) — Updated EOD 2026-05-19
+## MSFT Half-Trigger Status (ADR-0004) — Updated Midday 2026-05-20
 **Setup #2 — MSFT Mean-Reversion / Trend-Follow**
 - **Re-arm gate** (both required, same routine to propose):
-  - Condition 1 — SMA 20 reclaim: **MET** (confirmed 2026-05-15 EOD; EOD 5/19: price $417.77 vs SMA 20 $417.37 — still above)
-  - Condition 2 — MACD positive cross (histogram > 0): **NOT YET** (histogram -0.5435 as of EOD 5/19; progress: -1.31 → -0.97 → -0.5525 → -0.5435 — pace has slowed significantly. Cross has NOT fired.)
-- **Additional blocker**: SPY trip-wire ACTIVE ($733.85 < $736) — even if BOTH gate conditions fire, no new longs until SPY reclaims $736.
-- **Half-trigger stale-by**: 5 trading days from 2026-05-15 → **stale after 2026-05-22 EOD** if MACD cross never fires.
-- **Remaining sessions**: 5/20 (1) and 5/21 (2) before stale-by. Microsoft Build closes 5/22 — last catalyst day.
-- **Status**: Half-trigger — 1 of 2 conditions met. MACD pace has slowed. SPY trip-wire is second hard blocker.
+  - Condition 1 — SMA 20 reclaim: **MET** (price $417.52 vs SMA 20 $417.35 — above by only $0.17. Barely holding.)
+  - Condition 2 — MACD positive cross (histogram > 0): **NOT YET** (histogram -0.5598 — slightly worse than EOD 5/19 -0.5435. Progress log: -1.31 → -0.97 → -0.5525 → -0.5435 → -0.5598. **Stalled/reversed.** Cross NOT fired.)
+- **SPY Posture blocker**: ~~Trip-wire~~ Posture is now 🟢 GREEN (new system). This blocker is CLEARED — full trading allowed. If BOTH gate conditions fire in a single routine, a setup CAN be proposed.
+- **Half-trigger stale-by**: **2026-05-22 EOD** (5 trading days from 2026-05-15). Remaining sessions: 5/20 EOD and 5/21.
+- **Catalyst window**: Microsoft Build 2026 closes 5/22 — "sell the news" risk after that date.
+- **Status**: Half-trigger — 1 of 2 conditions met. MACD pace stalled (cross not approaching). SPY posture blocker cleared under new system. **2 sessions left before stale-by.** If MACD cross doesn't fire by EOD 5/21, setup stales and no new MSFT proposal until a fresh setup forms.
+
+## Market Open Execution Log — 2026-05-20
+- Routine ran at 5:53 AM ET (pre-market; market opens 9:30 AM ET).
+- No approved setups found in `memory/open_positions.md`. Pre-market routine (8:00 AM ET) has not yet run — no proposals in queue.
+- Account: $100,000 equity, $100,000 cash, 0 positions, 0 day-trades. Daily P&L: $0.00.
+- Pause state: ACTIVE. No halt. No daily loss cap triggered.
+- NVDA earnings AMC tonight — no semiconductor exposure. Correct.
+- Market Posture classification deferred to 8:00 AM pre-market routine (replaces old $736 trip-wire per strategy update 2026-05-19).
+- Trades executed: 0. Setups skipped: 0. Hard rule violations: NONE.
+
+## Midday Scan Log — 2026-05-20 (NOTE: Fired at ~6:32 AM ET — pre-market, not 12:30 PM)
+- Routine fired early (same scheduling issue as market open routine). Data based on prior-close daily bars.
+- Account: $100,000 equity, $100,000 cash, 0 positions, 0 day-trades. Daily P&L: $0.00. Hard rule violations: NONE.
+- **Market Posture: 🟢 GREEN** (FIRST CLASSIFICATION UNDER NEW SYSTEM — replaces $736 trip-wire)
+  - SPY $733.80 > SMA 20 $726.73 > SMA 50 $692.43. Full trading allowed (new longs AND shorts).
+  - Note: SPY only 0.97% above SMA 20 — shallow GREEN margin. MACD hist -0.8453 (negative). Monitor for posture degradation.
+- NVDA: $220.65. Earnings AMC tonight — binary event, no entry. AMD and SOXX/SMH follow NVDA print. No semi exposure entering print ✓.
+- MSFT: $417.52, MACD hist -0.5598 (slightly worse than EOD -0.5435 — pace stalled/reversed). SMA 20 $417.35 — price above (barely +$0.17). Condition 1 still MET. Condition 2 (MACD > 0) NOT MET. Half-trigger 1/2. **2 sessions before stale-by (5/22 EOD).**
+- AAPL: $299.14, RSI 72.4, Stoch 85.6 — overbought. No entry.
+- GOOGL: $387.75, Stoch K 0.06 (extreme oversold, unchanged from 5/19 midday). MACD hist -1.4647 (still negative). No recovery confirmed. Observe.
+- AMZN: $259.39, below SMA 20 ($265.83). MACD hist -2.70. Archived setup confirmed dead. No re-proposal.
+- META: $602.70, below SMA 20 ($628.41) and SMA 50 ($620.31). RSI 41.5 (close to 40 bounce risk). Short candidate watch — needs bounce-rejection to SMA 20 for clean entry.
+- LLY: $1,021.15, MACD hist +7.18 (strong), RSI 62.2. Extended 7.1% above SMA 20. Stoch 85.6 overbought. Wait for pullback to ~$953 SMA 20 zone.
+- XOM/XLE: Above upper BB, Stoch overbought. No entry.
+- New setups proposed: NONE. NVDA binary event + extended names = no high-conviction setups today. Weekly trade count: 0/3.
 
 ## Notes (Updated EOD 2026-05-19)
 - Week 3 Day 2 EOD: 0/3 weekly trade slots used. 0 positions. $0 deployed (0% of portfolio). $0 P&L.

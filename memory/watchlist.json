@@ -137,8 +137,57 @@
       "notes": "Palantir — AI/defense analytics. High momentum, high ATR, good for both directions. Volatile — size accordingly. No indicator data yet — pre-market routine will initialize.",
       "strategy": "both",
       "priority": "high"
+    },
+    {
+      "symbol": "AVGO",
+      "sector": "Tech",
+      "notes": "Broadcom — custom AI accelerators (Google TPU, Meta MTIA), networking silicon (switching/routing), VMware cloud infrastructure. Strong cash flow, dividend grower. High institutional ownership. No indicator data yet — pre-market routine will initialize. Watch earnings (~Aug 2026). Post-NVDA earnings (5/20 AMC) may set semiconductor sector direction — re-evaluate 5/21.",
+      "strategy": "swing",
+      "priority": "high"
+    },
+    {
+      "symbol": "TSM",
+      "sector": "Tech",
+      "notes": "TSMC — world's largest semiconductor foundry, manufactures chips for NVDA, AAPL, AMD, ARM. Critical AI supply chain chokepoint. NYSE ADR (not Taiwan exchange). Watch for geopolitical risk premium (Taiwan Strait). NVDA earnings 5/20 AMC will move TSM sympathetically. No indicator data yet — pre-market routine will initialize.",
+      "strategy": "swing",
+      "priority": "high"
+    },
+    {
+      "symbol": "ARM",
+      "sector": "Tech",
+      "notes": "Arm Holdings — CPU architecture licensor. Every smartphone runs ARM; growing AI edge and data center deployment. High P/E, momentum-driven. Watch for licensing renewal catalysts (NVDA, AAPL, Qualcomm). High ATR relative to price — size accordingly. No indicator data yet — pre-market routine will initialize.",
+      "strategy": "swing",
+      "priority": "normal"
+    },
+    {
+      "symbol": "CEG",
+      "sector": "Energy",
+      "notes": "Constellation Energy — largest US nuclear fleet operator. Signed 20-year PPA with Microsoft to restart Three Mile Island Unit 1 for AI data center power. Direct beneficiary of the AI energy buildout thesis. More stable than speculative SMR names — existing revenue, contracted cashflows. Watch for new hyperscaler PPA announcements as catalysts. No indicator data yet — pre-market routine will initialize.",
+      "strategy": "swing",
+      "priority": "high"
+    },
+    {
+      "symbol": "VST",
+      "sector": "Energy",
+      "notes": "Vistra — nuclear + natural gas power operator. Heavy Texas/ERCOT grid exposure — AI data centers in Texas are direct customers. Higher beta than CEG. Good both-direction play around energy policy and ERCOT pricing events. No indicator data yet — pre-market routine will initialize.",
+      "strategy": "swing",
+      "priority": "high"
+    },
+    {
+      "symbol": "NNE",
+      "sector": "Energy",
+      "notes": "Nano Nuclear Energy — SPECULATIVE. Developing portable micro-nuclear reactors for remote/off-grid applications including AI edge computing. Very high ATR, low float, no revenue. Size at 50% of normal position max. Trade momentum and news catalysts, not fundamentals. No indicator data yet — pre-market routine will initialize.",
+      "strategy": "both",
+      "priority": "normal"
+    },
+    {
+      "symbol": "SMR",
+      "sector": "Energy",
+      "notes": "NuScale Power — SPECULATIVE. First SMR (small modular reactor) design to receive NRC design approval. Developing commercial SMR deployments. Very high ATR, binary event risk around regulatory milestones and partnership announcements. Size at 50% of normal position max. No indicator data yet — pre-market routine will initialize.",
+      "strategy": "both",
+      "priority": "normal"
     }
   ],
-  "last_updated": "2026-05-19",
-  "update_reason": "Expanded from 10 to 23 symbols (2026-05-19). Added 5 sector ETFs (XLK, XLE, XLV, XLF, XLI) as direct trading targets — enables sector rotation plays and short opportunities. Added 8 individual stocks across Healthcare (LLY), Financials (JPM, GS), Tech (CRM, PANW, PLTR), Energy (XOM) for cross-sector diversification. Goal: more setup opportunities, especially for short setups in bearish/rotation markets."
+  "last_updated": "2026-05-20",
+  "update_reason": "Added 7 symbols across two themes: (1) AI infrastructure semiconductor supply chain — AVGO (Broadcom), TSM (TSMC), ARM (Arm Holdings); (2) Nuclear energy / AI power thesis — CEG (Constellation, large-cap operator), VST (Vistra, large-cap operator), NNE (Nano Nuclear, speculative), SMR (NuScale, speculative). Goal: capture the full AI infrastructure stack from chip manufacturing through to power generation."
 }

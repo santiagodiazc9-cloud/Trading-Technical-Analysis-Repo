@@ -1,57 +1,71 @@
 # Market Context
 
 ## Last Updated
-2026-05-19 (EOD Review, ~3:45 PM ET)
+2026-05-20 (Midday Scan, ~6:32 AM ET — pre-market; routine fired early)
 
 ## Market Summary — Week of May 18, 2026 (Week 3)
 
-### Broad Market (EOD 5/19 — LIVE)
-- **SPY**: $733.85 | RSI 62.3 | MACD hist -0.84 | Stoch K 3.8 (extreme oversold intraday) | Above SMA 20 ($726.73) | **TRIP-WIRE ACTIVE AND WORSENED: $733.85 < $736 (midday was $735.51).**
-- **QQQ**: $703.15 (midday; EOD not re-scanned) — still clear of $700 trip-wire.
-- **Regime**: Cautious. SPY trip-wire active Day 2 and worsened into close. Trend intact (above SMA 20), but momentum stalled. NVDA earnings AMC tonight is the key catalyst. No new longs until SPY reclaims $736.
-- **Defensive trip-wires**: SPY < $736 → **TRIGGERED** (5/18 midday, held through 5/19 EOD, worsened). QQQ < $700 → not triggered.
+### Market Posture (NEW — first classification 5/20 pre-market)
+- **🟢 GREEN** — SPY $733.80 > SMA 20 $726.73 > SMA 50 $692.43.
+- Full trading allowed: new longs AND shorts.
+- Margin is thin (SPY only 0.97% above SMA 20). Monitor closely — any pullback through SMA 20 would shift to CAUTION.
+- Old $736 price-level trip-wire is RETIRED per strategy update 2026-05-19.
 
-### Individual Names (EOD 5/19 — LIVE where scanned)
+### Broad Market (5/20 pre-market scan, daily bars — prior close data)
+- **SPY**: $733.80 | RSI 62.3 | MACD hist -0.8453 | Stoch K 3.8 (extreme low) | Above SMA 20 ($726.73) ✓ | Above SMA 50 ($692.43) ✓ | **POSTURE: 🟢 GREEN**
+- **QQQ**: $701.52 | RSI 65.6 | MACD bearish cross | Above SMA 20 ($686.13) ✓ | Above SMA 50 ($635.42) ✓
+- **Regime**: Green posture but fragile. SPY MACD still negative. NVDA earnings AMC tonight is the week's defining catalyst. Stoch K extreme low (3.8) suggests potential SPY rebound but not confirmed.
+- **Old trip-wires**: RETIRED. Use posture system.
 
-| Symbol | Price | RSI | MACD Hist | SMA 20 | SMA 50 | SMA 200 | Status |
-|--------|-------|-----|-----------|--------|--------|---------|--------|
-| SPY | $733.85 | 62.3 | -0.84 | $726.73 | $692.43 | $677.14 | **TRIP-WIRE ACTIVE** — worsened vs midday |
-| MSFT | $417.77 | 54.4 | -0.5435 | $417.37 (above ✓) | $399.52 | $462.05 | HALF-TRIGGER 1/2 — MACD barely moved; pace slowed |
-| NVDA | $221.46 | 60.8 | +0.697 | $212.39 (above ✓) | $194.73 | $186.43 | **BINARY TONIGHT** — earnings 5/20 AMC. No entry. |
-| AAPL | $297.73* | 71.3* | +0.95* | $284.34* | $267.73* | $260.05* | OVERBOUGHT — wait for SMA 20 pullback (*midday read) |
-| TSLA | $398.86* | 48.4* | -0.21* | $402.78* | $387.03* | $408.36* | DAY-TRADE ONLY — below SMA 20 (*midday read) |
-| AMZN | $256.71* | 49.0* | -2.87* | $265.69* | $238.61* | $229.78* | ARCHIVED (ADR-0002, 5/19 midday) |
-| GOOGL | $387.56* | 62.0* | -1.48* | $378.63* | $336.33* | $293.33* | WATCH — extreme oversold midday; no-chase (*midday read) |
-| AMD | $418.52* | 65.3* | -1.99* | $385.67* | $288.08* | $226.63* | OBSERVE-ONLY pre-NVDA earnings (*midday read) |
-| QQQ | $703.15* | 66.8* | -0.75* | $686.21* | $635.46* | $612.39* | Trip-wire clear (*midday read) |
+### Individual Names (5/20 pre-market scan — daily bars, prior close)
 
-### Sector ETFs
-- **XLK (Tech)**: Soft. MSFT holding SMA 20 on Build Day 1 ($417.63 vs $417.36). MACD improving but not crossed.
-- **XLY (Consumer Discretionary)**: Bearish. AMZN now $256.71 (well below $264–$265.50 entry zone). Setup archived.
-- **SOXX/SMH (Semiconductors)**: Binary — NVDA earnings 5/20 AMC. NVDA recovered to $223.25 from $220.40. AMD observe-only. No semi exposure.
-- **XLC (Communication Services)**: GOOGL -3.2% today ($400→$387.56). Stoch RSI extreme oversold. META still below SMAs.
+| Symbol | Price | RSI | MACD Hist | SMA 20 | SMA 50 | Status |
+|--------|-------|-----|-----------|--------|--------|--------|
+| SPY | $733.80 | 62.3 | -0.8453 | $726.73 ✓ | $692.43 ✓ | 🟢 GREEN posture |
+| QQQ | $701.52 | 65.6 | -0.8588 | $686.13 ✓ | $635.42 ✓ | Clear of $700 watch |
+| MSFT | $417.52 | 54.2 | -0.5598 | $417.35 ✓ | $399.51 | HALF-TRIGGER 1/2 — MACD pace stalled |
+| NVDA | $220.65 | 60.0 | +0.645 | $212.35 ✓ | $194.72 | BINARY TONIGHT — earnings AMC 5/20. No entry. |
+| AAPL | $299.14 | 72.4 | +1.04 | $284.41 ✓ | $267.76 | OVERBOUGHT — wait for SMA 20 pullback |
+| TSLA | $404.17 | 50.3 | +0.13 | $403.05 ✓ | $387.14 | Day-trade only (SMA 200 > SMA 50) |
+| AMZN | $259.39 | 52.0 | -2.70 | $265.83 ✗ | $238.66 | ARCHIVED — below SMA 20, no re-proposal |
+| GOOGL | $387.75 | 62.2 | -1.4647 | $378.64 ✓ | $336.34 | WATCH — Stoch 0.06 extreme oversold; MACD neg |
+| AMD | $414.18 | 63.8 | -2.27 | $385.45 ✓ | $288.00 | OBSERVE-ONLY pre-NVDA earnings |
+| META | $602.70 | 41.5 | -2.41 | $628.41 ✗ | $620.31 ✗ | Short watch — RSI near 40 bounce risk |
+| LLY | $1,021.15 | 62.2 | +7.18 | $953.87 ✓ | $940.42 ✓ | EXTENDED (7% above SMA 20) — wait for pullback |
+| XOM | $162.61 | 64.9 | +1.53 | $152.17 ✓ | $155.38 ✓ | Above upper BB — overbought |
 
-## Key Levels (Updated May 19 Midday)
-- **SPY**: Trip-wire $736 — TRIGGERED (Day 2). SMA 20 $726.82. No-new-longs until reclaim of $736.
-- **QQQ**: Trip-wire $700 — clear ($703.15). SMA 20 $686.21.
-- **MSFT**: SMA 20 support $417.36 — price holding ($417.63). MACD histogram -0.5525 and approaching zero. Build Day 1 catalyst active.
-- **NVDA**: $223.25 (recovered from $220.40). Earnings 5/20 AMC — no entry. Post-earnings watch zone: $215–$220 with RSI < 65.
-- **GOOGL**: $387.56 after -3.2% today. Stoch RSI 0.06 — extreme. MACD hist -1.48. Watch for stabilization tomorrow.
+### Sector ETFs (5/20 pre-market)
+- **XLK (Tech)**: $173.24. MACD bearish cross. RSI 65.7. Stoch 8.1 (extreme low). SMA 20 ($167.46) clear ✓. Long-term bearish (SMA 50 < 200).
+- **XLE (Energy)**: $61.27. Above upper BB (bb_pct 1.03). Stoch 95.5 overbought. Extended — no long entries.
+- **XLV (Healthcare)**: $147.32. EMA 9/21 bullish crossover. MACD hist +0.39. Near upper BB. Stoch 82 overbought. LLY is the sector leader but extended.
+- **XLF (Financials)**: $51.12. Below SMA 20 ($51.59). MACD barely negative. Bearish posture.
+- **XLI (Industrials)**: $168.73. EMA 9/21 bearish cross. Below lower BB. Stoch 0 (extreme oversold). Below SMA 20. Bearish.
+- **SOXX/SMH (Semiconductors)**: Binary — NVDA earnings AMC 5/20. No new exposure until post-print.
+- **XLC (Communication Services)**: GOOGL Stoch 0.06 extreme oversold. META below SMAs. Sector weak.
+
+## Key Levels (Updated 5/20 pre-market)
+- **SPY**: Posture GREEN. SMA 20 $726.73 (support). SMA 50 $692.43 (deeper support). MACD neg — watch for cross.
+- **QQQ**: $701.52, above SMA 20 $686.13. No trip-wire. MACD bearish cross — watch.
+- **MSFT**: SMA 20 $417.35 — barely above ($417.52). MACD hist -0.5598 (stalled). Build Day 2 today (5/20). Stale-by: 5/22 EOD (2 sessions left).
+- **NVDA**: $220.65. **EARNINGS AMC TONIGHT.** Post-print watch zone: $215–$220 (RSI < 65). AMD and semi sector direction follows.
+- **GOOGL**: $387.75. Stoch 0.06 extreme oversold. MACD hist -1.4647 still negative. Watch for base-building.
+- **LLY**: $1,021.15. SMA 20 ~$953. Wait for pullback.
+- **META**: $602.70. Below SMA 20 ($628.41) and SMA 50 ($620.31). RSI 41.5. Short watch if RSI stays above 40 and bounces to SMA 20.
 
 ## Key Events — Week of May 18, 2026
-- **Mon 5/18**: SPY trip-wire triggered (midday). SPY trip-wire active at close.
-- **Tue 5/19**: Microsoft Build 2026 Day 1 (ongoing). AMZN-2026-05-15 archived (midday). SPY trip-wire still active.
-- **Wed 5/20 AMC**: **NVDA Q1 FY27 earnings** — binary event. No new semi exposure into print.
+- **Mon 5/18**: SPY old trip-wire triggered (midday). Closed below $736.
+- **Tue 5/19**: Microsoft Build 2026 Day 1. AMZN-2026-05-15 archived. Market Posture System added to strategy.
+- **Wed 5/20 (TODAY)**: Microsoft Build Day 2. **NVDA Q1 FY27 earnings AMC TONIGHT** — binary event. Posture: GREEN (first classification).
 - **Thu 5/21**: Post-NVDA tape read. Semiconductor sector direction set. Post-NVDA pullback watch NVDA $215–$220.
 - **Fri 5/22**: Microsoft Build closes. MSFT half-trigger stale-by deadline. MSFT "sell the news" watch. Weekly review 4:30 PM ET.
 
-## Sentiment (EOD 5/19)
-- Cautious. SPY trip-wire worsened into close ($733.85 < $736). No-new-longs rule active — Day 2.
-- NVDA $221.46 at close. Binary event: earnings 5/20 AMC **tonight**. No exposure — correct.
-- MSFT half-trigger 1/2: MACD histogram -0.5435 (barely moved from midday -0.5525). SMA 20 condition still MET. Cross pace has slowed. Stale-by 5/22 EOD — 2 sessions remaining.
-- AMZN-2026-05-15 archived midday 5/19 per ADR-0002.
-- GOOGL extreme oversold (Stoch RSI 0.06 midday). Monitor for stabilization tomorrow.
-- Confidence level: 4/10 — SPY trip-wire active and worsening + NVDA earnings tonight. Full cash. NVDA reaction is the week's defining catalyst.
+## Sentiment (5/20 pre-market)
+- **Posture upgraded: 🟢 GREEN** under new SMA-based posture system. Old $736 trip-wire retired. Technically full trading allowed.
+- NVDA binary event tonight (earnings AMC). No semi exposure — correct. Sector direction set after print.
+- MSFT half-trigger 1/2: MACD histogram -0.5598 (slightly worse than EOD -0.5435). Build Day 2 today — last real catalyst before stale-by 5/22 EOD. 
+- GOOGL Stoch RSI 0.06 — extreme oversold for 2 consecutive sessions. MACD still negative. Not ready to propose.
+- LLY showing sector strength (Healthcare/XLV) but extended from SMA 20.
+- Confidence level: 5/10 — GREEN posture is positive, but NVDA binary event creates uncertainty across Tech/Semi sector. Full cash is appropriate until post-NVDA tape read.
 - 0/3 trade slots used for Week 3. Deployed: 0%.
 
 ## Key Events — Remainder of Week

@@ -21,6 +21,16 @@ Memory files (`learnings.md`, `strategy.md`) drift over time. ADRs are immutable
 
 See `routines/5_weekly_review.md` step 4a for the canonical ADR template.
 
+## Index
+
+| ADR | Date | Status | Summary |
+|-----|------|--------|---------|
+| [0001](0001-rsi-70-no-new-longs.md) | 2026-05-08 | Accepted | No new longs when RSI > 70 on daily timeframe |
+| [0002](0002-approved-setup-2day-staleness.md) | 2026-05-15 | Accepted | Approved setups auto-stale after 2 trading days without a fill |
+| [0003](0003-approval-zone-immutability.md) | 2026-05-15 | Accepted | Agent cannot mutate entry zone, stop, target, or size intraday |
+| [0004](0004-half-trigger-ledger.md) | 2026-05-15 | Accepted | Partial re-arm conditions logged and inherited across routines |
+| [0005](0005-day-trading-session-approval.md) | 2026-05-20 | Accepted | Day trading uses session-level approval instead of per-trade gate |
+
 ## Reading order
 
 ADRs are listed numerically. To understand the *current* state of a rule, read the most recent ADR that touches it (find by grep). To understand *evolution*, read in order.
