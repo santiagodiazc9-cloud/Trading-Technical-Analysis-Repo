@@ -1,7 +1,17 @@
 # Open Positions
 
 ## Current Positions
-None — 100% cash. $100,000 paper portfolio.
+
+### GOOGL — LONG (filled 2026-05-20)
+- **Entry**: $387.07 | 51 shares | Cost basis: $19,740.57
+- **Stop**: 10% trailing GTC (order e0b8fbda) — initial hard floor ~$348.36
+- **Target**: $415.00 | R:R ~2.3:1
+- **Unrealized P&L**: +$12.75 (+0.07%) at fill
+- **Stop tighten rules**: at +15% ($445.13) → 7% trail; at +20% ($464.48) → 5% trail
+- **-7% cut trigger**: $359.98 (close immediately if hit)
+- **Catalyst**: Google I/O 2026 (Gemini, AI Mode in Search)
+- **Sector**: Communication Services
+- **Week trade count**: 1/3
 
 ## Pending Orders
 None.
@@ -15,7 +25,7 @@ None.
 - **AMD** (~$445, 5/14): Overbought, observe-only until post-NVDA earnings tape read.
 
 ## Pending Setups
-**GOOGL-2026-05-20** — Approved: YES (see setup block below)
+None. GOOGL-2026-05-20 filled — see Current Positions.
 
 ## MSFT Half-Trigger Status (ADR-0004)
 **Setup #2 — MSFT Mean-Reversion / Trend-Follow**
@@ -231,4 +241,14 @@ None.
 - Week 3 Day 3: 0/3 weekly trade slots used. 0 positions. $0 deployed. $0 P&L.
 - NVDA earnings AMC tonight: primary market catalyst. Determines semi/AI sector direction for 5/21.
 - Microsoft Build CORRECTED to June 2-3. MSFT catalyst window is later than previously noted.
-- 1 new setup proposed: GOOGL-2026-05-20 (awaiting Santiago approval).
+- 1 new setup proposed: GOOGL-2026-05-20 (approved via Discord 13:28Z = 9:28 AM ET).
+
+## EOD Review Log — 2026-05-20 (NOTE: Fired at ~9:45 AM ET — market open +15 min, same scheduling bug)
+- Account confirmed (Alpaca): $100,000 equity, $100,000 cash, 0 positions, 0 day-trades.
+- No day trades to close. No swing positions to manage.
+- Daily P&L: $0.00 (0.00%). Daily loss cap: NOT hit. Hard rule violations: NONE.
+- **GOOGL-2026-05-20 execution gap**: Setup approved at 9:28 AM ET (13:28Z) — 2 minutes before market open. Market-open execution routine had already fired at 5:53 AM ET (pre-market, before approval). No execution routine ran after approval. At EOD check (9:45 AM): GOOGL $388.77, within entry zone $387–$391, but intraday confirmation criteria NOT met (price below $390, Stoch K 0.857 still extreme oversold, MACD hist -2.2335 deepening vs -1.4647 at proposal). Setup remains valid. Stale-by 2026-05-22 EOD per ADR-0002. **Action needed**: properly-timed market-open or midday execution routine on 5/21 must check confirmation criteria.
+- **MSFT half-trigger**: MACD hist -0.5598 (per pre-market scan). SMA 20 condition still MET. 1 session left before stale-by 2026-05-22 EOD. Microsoft Build CORRECTED to June 2-3 — real catalyst is 2 weeks out.
+- **NVDA earnings AMC tonight**: Binary event. No semiconductor exposure. Correct.
+- Weekly trade count: 0/3. Week 3 Day 3 complete.
+- Scheduling note: All three routines today fired in the first 4 hours (market-open 5:53 AM, midday 6:32 AM, EOD 9:45 AM). Cloud scheduler infra still broken. CRITICAL: fix before Week 4 (2026-05-25).
