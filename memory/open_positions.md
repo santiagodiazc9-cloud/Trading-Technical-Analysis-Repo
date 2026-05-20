@@ -2,16 +2,17 @@
 
 ## Current Positions
 
-### GOOGL — LONG (filled 2026-05-20)
-- **Entry**: $387.07 | 51 shares | Cost basis: $19,740.57
-- **Stop**: 10% trailing GTC (order e0b8fbda) — initial hard floor ~$348.36
+### GOOGL — LONG (filled 2026-05-20) — SWING
+- **Entry**: $387.07 | 51 shares | Cost basis: $19,740.57 | Entry order: 83bf9678
+- **Stop**: 10% trailing GTC (order e0b8fbda, status active) — initial hard floor ~$348.36
 - **Target**: $415.00 | R:R ~2.3:1
-- **Unrealized P&L**: +$12.75 (+0.07%) at fill
-- **Stop tighten rules**: at +15% ($445.13) → 7% trail; at +20% ($464.48) → 5% trail
-- **-7% cut trigger**: $359.98 (close immediately if hit)
+- **Unrealized P&L (EOD 2026-05-20)**: +$74.97 (+0.38%) — current price $388.54
+- **Stop tighten rules**: at +15% ($445.13) → 7% trail; at +20% ($464.48) → 5% trail. NOT triggered — no change.
+- **-7% cut trigger**: $359.98 (close immediately if hit). NOT approached.
 - **Catalyst**: Google I/O 2026 (Gemini, AI Mode in Search)
 - **Sector**: Communication Services
 - **Week trade count**: 1/3
+- **EOD 2026-05-20 review**: Position healthy and held overnight (swing, not a day trade — no close). Trailing stop active. Technicals: RSI 62.4, MACD hist -2.27 (deepened from -1.46 at proposal — the one indicator running against the thesis, watch 5/21), Stoch K 0.45 (still extreme oversold — the bounce thesis has NOT fired yet), price below VWAP $392.37 but above SMA 20 $381.08 inside full bull stack. No stop adjustment due. Watch closely 5/21.
 
 ## Pending Orders
 None.
@@ -25,7 +26,8 @@ None.
 - **AMD** (~$445, 5/14): Overbought, observe-only until post-NVDA earnings tape read.
 
 ## Pending Setups
-None. GOOGL-2026-05-20 filled — see Current Positions.
+None.
+GOOGL-2026-05-20 filled 2026-05-20 09:51 ET — now a managed position, see Current Positions at top of file.
 
 ## MSFT Half-Trigger Status (ADR-0004)
 **Setup #2 — MSFT Mean-Reversion / Trend-Follow**
@@ -169,9 +171,11 @@ None. GOOGL-2026-05-20 filled — see Current Positions.
 
 ---
 
-## Pending Setups
+## Recently Filled Setups
 
-### GOOGL-2026-05-20 — SWING LONG
+### GOOGL-2026-05-20 — SWING LONG — ✅ FILLED 2026-05-20
+
+> **STATUS: FILLED** 2026-05-20 09:51 ET @ $387.07 (51 shares, entry order 83bf9678). Setup lifecycle complete — proposed → approved → filled → now a managed position. See "Current Positions" at the top of this file. **Market-open routine: do NOT re-execute this setup.**
 
 - **Direction**: LONG
 - **Entry Zone**: $387.00–$391.00
@@ -186,8 +190,8 @@ None. GOOGL-2026-05-20 filled — see Current Positions.
 - **Execution note**: Do NOT fill at open. Wait for intraday confirmation — price holding above $390 with Stoch turning up. This is a swing entry, not a market-open chase.
 - **Sector**: XLC neutral (not confirming weakness). GOOGL-specific catalyst (I/O) is independent of sector rotation.
 - **Earnings**: GOOGL next report ~late July 2026. Earnings window CLEAR.
-- Approved: YES  <!-- via Discord 2026-05-20 13:28Z — manually corrected from bot misfire -->
-- Stale-by: 2026-05-22 EOD (ADR-0002, 2 trading days from proposal)
+- Approval: was `Approved: YES` (via Discord 2026-05-20 13:28Z). **Consumed by fill — no longer an open approval.**
+- Stale-by: N/A — filled before the 2026-05-22 EOD stale-by date.
 
 <!-- setup-data:json
 {
@@ -205,16 +209,16 @@ None. GOOGL-2026-05-20 filled — see Current Positions.
 
 ---
 
-## MSFT Half-Trigger Status (ADR-0004) — Updated Pre-Market 2026-05-20
+## MSFT Half-Trigger Status (ADR-0004) — Updated EOD 2026-05-20
 
 **Setup #2 — MSFT Mean-Reversion / Trend-Follow**
 - **Re-arm gate** (both required, same routine to propose):
-  - Condition 1 — SMA 20 reclaim: **MET** (price $417.52 vs SMA 20 $417.35 — barely above by $0.17)
-  - Condition 2 — MACD positive cross (histogram > 0): **NOT YET** (histogram -0.5598 — stalled/reversed from -0.5435 yesterday. Progress: -1.31 → -0.97 → -0.5525 → -0.5435 → -0.5598. Cross NOT fired.)
-- **SPY posture**: 🟢 GREEN — blocker CLEARED. If both conditions fire, a setup CAN be proposed.
-- **Catalyst window CORRECTED**: Microsoft Build 2026 is **June 2-3** (not May 19-22 as previously noted). The real catalyst window starts June 2. Setup may be re-proposed with a fresh Build catalyst if it stales now and re-forms by June 2.
-- **Half-trigger stale-by**: **2026-05-22 EOD** — 1 session remaining (5/21). If MACD cross doesn't fire by EOD 5/21, this half-trigger stales. A fresh setup could re-arm June 2 for the Build catalyst.
-- **Status**: Half-trigger — 1 of 2 conditions met. MACD cross stalled. **1 session left before stale-by.** Likely stales — but MSFT remains on the watchlist for a fresh June 2 re-arm.
+  - Condition 1 — SMA 20 reclaim: **MET** (EOD $420.99 vs SMA 20 $416.76 — comfortably above by $4.23; margin much improved from the morning's razor-thin $0.17)
+  - Condition 2 — MACD positive cross (histogram > 0): **NOT YET** (histogram -0.3212 EOD — improved from -0.5435 on 5/19. Progress: -1.31 → -0.97 → -0.5525 → -0.5435 → -0.5598 → **-0.3212**. The cross is approaching again after a 2-session stall. Still negative — cross NOT fired.)
+- **SPY posture**: 🟢 GREEN (strengthened — SPY $741.10 EOD) — blocker CLEARED. If both conditions fire in one routine, a setup CAN be proposed.
+- **Catalyst window**: Microsoft Build 2026 is **June 2-3** (San Francisco). The real catalyst window starts June 2. If this half-trigger stales now, a fresh setup may re-form for the Build catalyst.
+- **Half-trigger stale-by**: **2026-05-22 EOD** — 1 session remaining (5/21). If the MACD cross doesn't fire by EOD 5/21, this half-trigger stales.
+- **Status**: Half-trigger — 1 of 2 conditions met. MACD histogram resumed its approach to zero (-0.32, best reading yet). SMA 20 reclaim is now solid. **1 session left before stale-by** — the 5/21 routine is the live re-arm check. If MACD crosses positive on 5/21 with SMA 20 still held, a setup can be proposed.
 
 ---
 
@@ -252,3 +256,17 @@ None. GOOGL-2026-05-20 filled — see Current Positions.
 - **NVDA earnings AMC tonight**: Binary event. No semiconductor exposure. Correct.
 - Weekly trade count: 0/3. Week 3 Day 3 complete.
 - Scheduling note: All three routines today fired in the first 4 hours (market-open 5:53 AM, midday 6:32 AM, EOD 9:45 AM). Cloud scheduler infra still broken. CRITICAL: fix before Week 4 (2026-05-25).
+
+## EOD Review Log — 2026-05-20 (3:45 PM ET — correctly timed, supersedes the 9:45 AM misfire above)
+- Account confirmed (Alpaca, ~3:46 PM ET): equity $100,073.95, cash $80,259.43, buying power $180,333.38, deployed 19.8%, daytrade_count 1, PDT false.
+- **First fill of the program**: GOOGL filled AFTER the 9:45 AM misfire — buy order 83bf9678 filled 09:51 ET @ $387.07 (51 sh, $19,740.57). Trailing stop e0b8fbda (10% GTC) placed 09:51:39 ET — 15s after fill. The 9:45 AM EOD log above was written pre-fill and is superseded by this entry.
+- **Day trades to close**: NONE. GOOGL is a swing position, held overnight. No close required.
+- **Swing position review**: GOOGL +$74.97 (+0.38%), $388.54. Trailing stop active. No stop tighten due (+15% trigger $445.13 far off). -7% cut ($359.98) not approached. MACD hist -2.27 is the one indicator against the thesis — watch 5/21. Stoch K still 0.45 (oversold bounce not yet fired).
+- **Daily P&L**: +$73.95 (+0.07%). Daily loss cap: NOT hit. Hard rule violations: NONE. Pre-Trade Buy Gate at entry: 8/8 passed.
+- **daytrade_count = 1**: from the same-day GOOGL buy + GTC trailing-stop pair (Alpaca counting quirk). No round-trip occurred; GOOGL held overnight. Equity > $25k so PDT does not bind. Benign.
+- **MSFT half-trigger**: 1/2. MACD hist improved to -0.3212 EOD (from -0.5435 on 5/19). SMA 20 reclaim solid ($420.99 > $416.76). Stale-by 5/22 EOD — 1 session left (5/21 is the live re-arm check).
+- **NVDA earnings AMC tonight**: binary event. No semiconductor exposure. Correct.
+- **Market**: SPY rallied to $741.10 — 🟢 GREEN posture strengthened (1.77% above SMA 20).
+- Weekly trade count: 1/3. Week 3 Day 3 complete. 1 position, 19.8% deployed.
+- **Watch 5/21 pre-market**: (1) GOOGL — confirm Stoch bounce firing / MACD not deteriorating further; (2) NVDA post-earnings tape read — sets semi sector direction (ARM/AMD/AVGO/TSM); (3) MSFT MACD cross — last session before half-trigger stale-by.
+- Scheduling note: this EOD routine fired correctly at ~3:46 PM ET — first on-time routine in days. Market-open/midday still misfired pre-market. Cloud scheduler audit still required before Week 4.

@@ -1,7 +1,14 @@
 # Market Context
 
 ## Last Updated
-2026-05-20 (Pre-Market Research, ~9:20 AM ET — delayed run, manual execution)
+2026-05-20 (End-of-Day Review, ~3:46 PM ET)
+
+## EOD State — 2026-05-20 (~3:46 PM ET)
+- **Posture: 🟢 GREEN — strengthened.** SPY rallied to **$741.10** (from $733.80 pre-market, +~1% on the day). Now 1.77% above SMA 20 ($728.23) — margin widened from the thin 0.97% of the morning. SMA 20 > SMA 50 ($693.71) > SMA 200 ($677.69). RSI 66.5, MACD histogram -0.98 (still negative). Stoch K 9.4 (oversold, turning up). Above VWAP — bullish intraday.
+- **First position opened**: GOOGL 51 sh long @ $387.07 (swing, Google I/O catalyst). EOD $388.54, +0.38%. Account equity $100,073.95, deployed 19.8%, 1/3 weekly trade slots used.
+- **MSFT** $420.99 EOD — SMA 20 reclaim solid ($416.76, +$4.23 margin). MACD histogram improved to **-0.3212** (from -0.5435 on 5/19) — cross approaching again after a 2-session stall. Half-trigger 1/2. Stale-by 5/22 EOD, 1 session left (5/21).
+- **NVDA Q1 FY27 earnings AMC tonight** — binary event, no semiconductor exposure held. The print sets AI/semi sector direction for 5/21 and is the gating catalyst for ARM, AMD, AVGO, TSM watchlist names.
+- The GREEN posture and broad-market strength are real, but tonight's NVDA print can reset the tape — treat 5/21 pre-market as a fresh read.
 
 ## Market Summary — Week of May 18, 2026 (Week 3)
 

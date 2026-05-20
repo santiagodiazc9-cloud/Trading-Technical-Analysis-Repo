@@ -6,6 +6,34 @@ The legacy filename was `pending_clickup_updates.md` — kept the renamed file a
 
 ---
 
+## 2026-05-20 19:52 UTC — End-of-Day Review (cloud routine)
+
+`notify.py brief` and `notify.py dashboard` failed: `memory/discord_config.json` is missing on this routine host (only `discord_config.example.json` present) and `DISCORD_BOT_TOKEN` is unset in `.env`. Routine completed all on-disk steps (trade logged, journal written, learnings/strategy/market_context/open_positions updated, snapshot appended, `Dashboard.md` regenerated). Flush the items below once Discord credentials are provisioned.
+
+### #daily-brief (silent summary)
+**Title**: End-of-Day Review — 2026-05-20
+**Body**: First fill of the program — GOOGL 51 sh @ $387.07 (swing long, confidence 6/10, Google I/O catalyst). EOD unrealized +$74.97 (+0.38%). Daily P&L +$73.95 (+0.07%), equity $100,073.95, deployed 19.8%, 1/3 weekly trades used. 0 closes, 0 day trades — GOOGL held overnight with a 10% GTC trailing stop active (post-entry rule satisfied, stop placed 15s after fill). Pre-Trade Buy Gate 8/8 at entry. No hard rule violations, daily loss cap not approached. MSFT half-trigger 1/2 — MACD histogram improved to -0.32 (from -0.54), SMA 20 reclaim solid; 1 session left before 5/22 stale-by. NVDA Q1 FY27 earnings AMC tonight — no semiconductor exposure (correct). SPY rallied to $741.10 — 🟢 GREEN posture strengthened. Top observation: the position is green on broad-market drift, not on the GOOGL Stoch-bounce signal, which has not fired yet (Stoch K still 0.45) — watch 5/21.
+
+### #chat (reflective question)
+**Title**: Reflection — 2026-05-20
+**Body**: GOOGL is trade #1 of the whole program — entered at confidence 6/10, the lowest proposable bucket, after two full weeks of disciplined patience. Looking at it: was a 6/10 setup the right conviction level to break the seal on, or should the first live trade have had to clear a higher bar (7+)? Your answer shapes whether we treat 5-6 as a genuine "go" zone or a "watch only" zone going forward.
+
+### Dashboard mirror (silent)
+`Dashboard.md` regenerated successfully — live=true, equity $100,073.95, positions=1 (GOOGL), pending_setups=0. Pinned-message mirror in `#daily-brief` NOT updated — `DISCORD_BOT_TOKEN` missing.
+
+### Bug logged — dashboard.py "Recent Trades" rendering
+- **File**: `scripts/dashboard.py` lines 234-237 (`## Recent Trades` block).
+- **Symptom**: With the first non-empty `trades` array in `trade_log.json`, the dashboard renders each trade as a raw Python dict via `push(f"- {t}")` — one ~900-char unreadable line on the canonical state view.
+- **Fix**: format the dict — e.g. for an open trade `f"- {sym} {direction} {qty} @ {entry} — OPEN (since {entry_date})"`; for a closed trade include exit price / outcome / P&L. Guard with `isinstance(t, dict)`.
+- Not fixed in this routine (EOD routine commit scope is `memory/ journal/ docs/adr/` per the trigger; `scripts/` is out of scope). Logged here for a follow-up infra pass.
+
+### Infra fix still needed (carried forward)
+1. Provision `memory/discord_config.json` (copy `discord_config.example.json`, fill real webhook URLs) on the cloud routine host.
+2. Set `DISCORD_BOT_TOKEN` in the cloud routine host's `.env`.
+3. Cloud scheduler audit — on 2026-05-20 the market-open and midday routines fired pre-market (5:53 AM, 6:32 AM); only the EOD routine fired on time (~3:46 PM ET). Fix before Week 4.
+
+---
+
 ## 2026-05-18 22:21 UTC — End-of-Day Review (local session)
 
 `notify.py brief` and `notify.py dashboard` both failed: `httpx` module not installed. Routine completed all on-disk steps (journal EOD section written, trade_log.json snapshot appended, learnings.md pattern note added, market_context.md updated to EOD, open_positions.md EOD log written, Dashboard.md regenerated). Flush once `pip install httpx` is run.

@@ -127,9 +127,11 @@ When a multi-condition re-arm gate (set as part of a setup PASS or close-out) ha
 - Memory architecture validated: all read/write routines working as intended.
 - Approval gate held under live intraday pressure (AMZN-2026-05-15): technicals improved through the day, agent did not mutate parameters or self-approve.
 - Staleness rule (informal in Week 2, now ADR-0002) caught the NVDA-2026-05-08 silent-drift case cleanly.
+- First live entry (GOOGL 2026-05-20) executed the full chain correctly: approval gate → Pre-Trade Buy Gate (8/8) → market fill → 10% GTC trailing stop attached within 15 seconds → trade logged. The post-entry protection rule (CLAUDE.md rule 6) held under real conditions.
 
 ## What's Not Working
-- No live trade data yet to evaluate setup quality (still 0 trades through Week 2).
+- Still no *closed*-trade data to evaluate setup quality or calibration. First fill landed 2026-05-20 (GOOGL, confidence 6) — one open position, outcome pending. Confidence calibration buckets remain empty until trades close.
+- Cloud routine scheduler still misfiring: on 2026-05-20 the market-open and midday routines fired pre-market (5:53 AM, 6:32 AM) and only the EOD routine ran on time (~3:46 PM ET). The 9:28 AM GOOGL approval landed in the gap — no execution routine ran between approval and the manual/properly-timed fill. Infra audit still needed (launchd / cron / GHA workflow) before Week 4.
 - Cloud routine scheduler unreliable: 4 trading days of Week 2 (5/11–5/14) ran with degraded or missing routines. Only the 5/15 schedule fired fully. Infra audit needed (launchd / cron / GHA workflow).
 - Discord webhooks (`memory/discord_config.json`) and bot token still unprovisioned in cloud host — every brief, fill, alert this week logged to `memory/pending_discord_updates.md` instead.
 - RuFlo MCP unavailable in cloud env all week — vector recall and pattern storage not running. File-only memory only.
@@ -137,6 +139,7 @@ When a multi-condition re-arm gate (set as part of a setup PASS or close-out) ha
 ## Adjustments Log
 - 2026-05-16: Upgraded strategy framework. Added: ADX (14) > 25 trend strength gate on all entries (day + swing), Fibonacci 38.2%/61.8% as preferred pullback entry zones, RSI divergence as caution signal, economic calendar hard rules (no new entries within 30min of high-impact news, no holding swings through macro events), explicit confluence checklist (all 6 required to propose). Forex-specific concepts (session hours, spreads, SMC order blocks) not applied — equities only. Core risk rules in CLAUDE.md unchanged.
 - 2026-05-08: Initial strategy framework established
+- 2026-05-20 (EOD): **No rule changes.** First fill of the program executed (GOOGL swing long, confidence 6/10) — entry, Pre-Trade Buy Gate (8/8 passed), post-entry 10% trailing stop, and trade logging all ran end-to-end as written. The rule set behaved as designed on its first live entry; nothing to refine yet. Setup-quality and confidence-calibration assessment is deferred until the trade closes and produces an outcome. Any rule refinement is the Friday 2026-05-22 weekly review's job, not the EOD routine's.
 - 2026-05-08 (Weekly Review): Week 1 was system calibration — no trades taken. Core rules unchanged. Adding emphasis on patience: do NOT enter trades when RSI > 70 on the daily timeframe unless there is a confirmed momentum breakout with volume surge. This rule formalizes the observation that several watchlist names were extended this week. **Formalized as ADR-0001.**
 - 2026-05-13 (EOD): Proposed rule for Friday weekly review — **approved-setup staleness check**. Any setup carrying `Approved: YES` that does not fill within 2 trading days must be re-evaluated against fresh indicators in the next pre-market routine. Goal: prevent stale approvals from quietly drifting forward and producing late, low-quality fills.
 - 2026-05-14 (EOD): No strategy changes — strategy cannot be meaningfully refined while the data pipeline is down. No scan ran for the 4th straight day. The blocker is infrastructure, not strategy. Holding all rules unchanged until a pre-market routine successfully re-baselines indicators.
