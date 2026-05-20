@@ -14,9 +14,6 @@ None.
 - **TSLA** (~$445, 5/14): Day-trade only — SMA 50 < 200 (bearish daily). No overnight bias.
 - **AMD** (~$445, 5/14): Overbought, observe-only until post-NVDA earnings tape read.
 
-## Pending Setups
-**GOOGL-2026-05-20** — Approved: YES (see setup block below)
-
 ## MSFT Half-Trigger Status (ADR-0004)
 **Setup #2 — MSFT Mean-Reversion / Trend-Follow**
 - **Re-arm gate** (both required, same routine to propose):
@@ -232,3 +229,29 @@ None.
 - NVDA earnings AMC tonight: primary market catalyst. Determines semi/AI sector direction for 5/21.
 - Microsoft Build CORRECTED to June 2-3. MSFT catalyst window is later than previously noted.
 - 1 new setup proposed: GOOGL-2026-05-20 (awaiting Santiago approval).
+
+## Market Open Execution Log — 2026-05-20 (09:44 AM ET — on-schedule, market open)
+- Account (live Alpaca): $100,000 equity, $100,000 cash, 0 positions, 0 day-trades. daytrade_count 0, PDT false. Daily P&L $0.00. Deployed 0%.
+- Market: OPEN (clock 09:44 ET). `memory/pause_state.json` absent → treated ACTIVE (not paused/halted). No halt, no daily-loss-cap trigger.
+- Market Posture: 🟢 GREEN (SPY $733.80 > SMA 20 $726.73 > SMA 50 $692.43).
+- Base: ran against origin/main `1a406a5` (the manual approval-fix commit). The cloud clone started one commit stale at `aabc6b4`; rebased onto `1a406a5` before acting.
+
+### GOOGL-2026-05-20 — APPROVED, fill DEFERRED (no order placed)
+- Approval: `Approved: YES` confirmed in this file (Discord 13:28Z, manually corrected from the bot misfire by commit `1a406a5`). Approval age 0 trading days — fresh, not stale (ADR-0002 OK).
+- Stale-approval price check (`setup_validator check GOOGL-2026-05-20`): `valid: true` — price has not overshot the target or blown the stop.
+- Live data 09:44 ET: price **$388.58**, VWAP $392.68 (price BELOW VWAP — bearish intraday), Stoch K 0.71 (extreme oversold and FALLING — was 1.54 at 09:38, not "turning up"), MACD histogram −2.25 (negative, deepening), RSI 62.6. Intraday range so far: open $387.70 / high $393.58 / low $387.70.
+- **Decision: DEFER — no fill.** The setup's published execution note (immutable per ADR-0003) states: *"Do NOT fill at open. Wait for intraday confirmation — price holding above $390 with Stoch turning up. This is a swing entry, not a market-open chase."* Both trigger conditions FAIL right now: price $388.58 is below $390, and Stoch is falling (not turning up). Filling now would be a market-open chase into intraday weakness — exactly what the note forbids. Santiago approved the setup *as published*, execution note included.
+- **Handoff**: GOOGL-2026-05-20 stays approved and live. The next check (midday scan 12:30 PM ET, or the 9:50 AM GHA market-open routine) should execute it ONLY when intraday confirmation is met: price holding above $390 AND above VWAP AND Stoch K turning up. Setup auto-stales 2026-05-22 EOD (ADR-0002) if never filled.
+
+### ⚠️ Position-size discrepancy — resolve before any fill
+- Routine `2_market_open_execution.md` step 4 says "ATR-size, cap at $1,000 or 5% of portfolio" (5% of $100k = $5,000). The approved GOOGL setup specifies "Position Size: 51 shares (~$19,900)" — ~20% of equity, which matches CLAUDE.md hard rule 1 ($20k absolute cap) but is ~4× the routine's stated cap.
+- The routine's "$1,000 / 5%" cap reads as a stale artifact from the earlier $10k-account era. Santiago approved the setup AS PUBLISHED (51 shares). Whoever fills GOOGL must reconcile this — recommend honoring the approved 51-share size (within CLAUDE.md rule 1) and updating routine step 4's cap language. Flagged to Santiago; NOT resolved here since no fill occurred.
+
+### Data hygiene fix applied
+- Removed the duplicate `## Pending Setups` heading. The file had two — a stale placeholder near the top and the real section holding the GOOGL block. `setup_validator.parse_pending_setups` and the Discord bot read only the first, which is the root cause of (a) the 13:28Z approve-button misfire onto the expired NVDA setup and (b) `setup_validator` returning "no pending setup matched GOOGL-2026-05-20". With the duplicate removed, `setup_validator` now resolves the real GOOGL block (verified).
+- Code bugs NOT fixed here (`scripts/` is outside this routine's commit scope): `discord_bot.py:134` greedy DOTALL regex; `setup_validator.py parse_pending_setups` single-section read. Full diagnosis + recommended fixes in `memory/pending_discord_updates.md`.
+
+### Result
+- Trades executed: 0. Setups deferred: 1 (GOOGL-2026-05-20 — approved, awaiting intraday confirmation).
+- Risk: 0/5 positions, 0/3 weekly trades, daily loss cap NOT hit, PDT 0/3, no hard-rule violations.
+- Discord `notify.py` unavailable (`memory/discord_config.json` missing) — brief + alert logged to `memory/pending_discord_updates.md`.

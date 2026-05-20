@@ -314,3 +314,27 @@ No-op execution. Step 4 (Approval Check) had no candidates: `memory/open_positio
 ### Action items (delta vs prior cycles)
 - Same outstanding gaps: provision `memory/discord_config.json` and `DISCORD_BOT_TOKEN` in cloud `.env` so cloud routines can post to `#daily-brief` and update the pinned Dashboard. Without these, all brief/dashboard posts back up here and the on-call user has no real-time visibility into cloud-run cadence.
 - Cloud sandbox needed `setuptools`/`wheel` upgraded before `ta` would build from sdist. Consider pinning `setuptools>=80,<83` and `wheel>=0.45` at the top of `requirements.txt` or shipping a prebuilt wheel for `ta` so future routines aren't gated on a build-time dep upgrade.
+
+---
+
+## 2026-05-20 13:44 UTC — Market Open Execution
+
+`notify.py` unavailable — `memory/discord_config.json` missing. `brief`, `alert`, and `dashboard` posts deferred here.
+
+### #daily-brief (silent summary — deferred)
+**Title**: Market Open Execution — 2026-05-20 09:44 ET
+**Body**: 0 trades placed. GOOGL-2026-05-20 is APPROVED but fill DEFERRED — its execution note says "do NOT fill at open; wait for price > $390 with Stoch turning up", and at 09:44 GOOGL was $388.58 (below $390, below VWAP $392.68, Stoch falling, MACD hist −2.25). Handed off to midday scan / the 9:50 GHA routine to fill on intraday confirmation. 0 open positions, $100k cash, 0/3 weekly slots, 0/3 day-trades. Posture 🟢 GREEN. No hard-rule violations.
+
+### #risk-alerts (MEDIUM — Discord approval bot bug)
+**Symbol**: GOOGL
+**Message**: The Discord approve button mis-fired at 13:28Z — bot commit `aabc6b4` placed `Approved: YES` on the EXPIRED NVDA setup instead of GOOGL-2026-05-20. A follow-up session corrected it manually via commit `1a406a5`, so GOOGL is now properly approved. Root cause is a code bug: `discord_bot.py:134` `update_open_positions` uses a greedy `re.DOTALL` regex `(### .*SYMBOL.*?)(\n##|\Z)` that matches from the first `### ` heading in the file and replaces the first `- Approved:` line found — the wrong block. Compounding: `setup_validator.py parse_pending_setups` reads only the first of two `## Pending Setups` headings. This routine removed the duplicate heading (data fix — validator now resolves GOOGL: `approved: true, valid: true`). **Until `discord_bot.py:134` is fixed, approve setups by direct file edit, not the Discord button.**
+
+### Routine result
+Ran against origin/main `1a406a5` (cloud clone started one commit stale at `aabc6b4`; rebased before acting). Market open confirmed 09:44 ET. Pause file absent → ACTIVE. GOOGL approval verified (`Approved: YES`, age 0 days — ADR-0002 OK), stale-price check `valid: true`. Fill deferred per the setup's immutable execution note (ADR-0003). Risk check passed (0/5 positions, 0/3 weekly, daily loss cap not hit, PDT 0/3). Dashboard refreshed locally.
+
+### Action items (delta vs prior cycles)
+- **HIGH**: Fix `scripts/discord_bot.py:134` `update_open_positions` — anchor the match on the exact `setup_id` (e.g. via the `setup-data:json` block) instead of a greedy `(### .*SYMBOL.*?)` DOTALL regex that grabs the wrong `### ` block.
+- **MEDIUM**: Fix `scripts/setup_validator.py parse_pending_setups` — use `re.finditer` to parse ALL `## Pending Setups` sections, not just the first. (Worked around for now by deduplicating the heading in `memory/open_positions.md`.)
+- **MEDIUM**: Reconcile the position-size cap. Routine `2_market_open_execution.md` step 4 says "cap at $1,000 or 5% of portfolio" but the approved GOOGL setup is 51 shares (~$19,900, ~20%, matching CLAUDE.md rule 1). The routine cap looks like a stale $10k-account artifact — update step 4 to reference CLAUDE.md rule 1 (20% / $20k) and honor the approved setup size.
+- Standing gaps: provision `memory/discord_config.json` + `DISCORD_BOT_TOKEN` in cloud `.env`.
+- `ta` build: fixed this run with `SETUPTOOLS_USE_DISTUTILS=stdlib pip install --user ta` (Debian setuptools `install_layout` AttributeError). Worth pinning a prebuilt `ta` wheel / `setuptools` version in `requirements.txt`.
