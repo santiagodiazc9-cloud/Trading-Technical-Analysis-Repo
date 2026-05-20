@@ -15,7 +15,7 @@ None.
 - **AMD** (~$445, 5/14): Overbought, observe-only until post-NVDA earnings tape read.
 
 ## Pending Setups
-None with `Approved: YES`.
+**GOOGL-2026-05-20** — Approved: YES (see setup block below)
 
 ## MSFT Half-Trigger Status (ADR-0004)
 **Setup #2 — MSFT Mean-Reversion / Trend-Follow**
@@ -39,7 +39,7 @@ None with `Approved: YES`.
 - R:R: ~2.2:1
 - Checklist Score: 5/6
 - Catalyst: AI cycle intact, analyst target $272, strong macro backdrop
-- Approved: YES  <!-- via Discord 2026-05-20 13:28Z -->
+- Approved: was YES (Discord 2026-05-11 11:26Z) — approval retired on expiration
 - **Status**: EXPIRED. NVDA ran to $225.91 by 2026-05-14 pre-market (above upper BB $224.53; RSI 72; bb_pct > 1.0) and continued to ~$235–236 by 2026-05-15/18. Entry zone $206–210 never filled; price now well above target. Monitor for post-5/20 earnings pullback to $215–$220 for a fresh setup.
 
 ### AMZN-2026-05-15 — ARCHIVED (ADR-0002, midday 5/19)
@@ -176,7 +176,7 @@ None with `Approved: YES`.
 - **Execution note**: Do NOT fill at open. Wait for intraday confirmation — price holding above $390 with Stoch turning up. This is a swing entry, not a market-open chase.
 - **Sector**: XLC neutral (not confirming weakness). GOOGL-specific catalyst (I/O) is independent of sector rotation.
 - **Earnings**: GOOGL next report ~late July 2026. Earnings window CLEAR.
-- Approved: NO (pending Santiago approval)
+- Approved: YES  <!-- via Discord 2026-05-20 13:28Z — manually corrected from bot misfire -->
 - Stale-by: 2026-05-22 EOD (ADR-0002, 2 trading days from proposal)
 
 <!-- setup-data:json
