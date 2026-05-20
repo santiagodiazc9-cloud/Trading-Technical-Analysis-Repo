@@ -1,15 +1,17 @@
 # Market Context
 
 ## Last Updated
-2026-05-20 (Midday Scan, ~6:32 AM ET — pre-market; routine fired early)
+2026-05-20 (Pre-Market Research, ~9:20 AM ET — delayed run, manual execution)
 
 ## Market Summary — Week of May 18, 2026 (Week 3)
 
-### Market Posture (NEW — first classification 5/20 pre-market)
+### Market Posture (Updated pre-market 5/20 ~9:20 AM ET)
 - **🟢 GREEN** — SPY $733.80 > SMA 20 $726.73 > SMA 50 $692.43.
 - Full trading allowed: new longs AND shorts.
 - Margin is thin (SPY only 0.97% above SMA 20). Monitor closely — any pullback through SMA 20 would shift to CAUTION.
 - Old $736 price-level trip-wire is RETIRED per strategy update 2026-05-19.
+- **NVDA earnings AMC tonight** — defining binary event for AI/semi sector direction 5/21.
+- **Calendar correction**: Microsoft Build 2026 is June 2-3 (San Francisco), NOT May 19-22 as previously noted.
 
 ### Broad Market (5/20 pre-market scan, daily bars — prior close data)
 - **SPY**: $733.80 | RSI 62.3 | MACD hist -0.8453 | Stoch K 3.8 (extreme low) | Above SMA 20 ($726.73) ✓ | Above SMA 50 ($692.43) ✓ | **POSTURE: 🟢 GREEN**
