@@ -25,7 +25,8 @@ None.
 - **AMD** (~$445, 5/14): Overbought, observe-only until post-NVDA earnings tape read.
 
 ## Pending Setups
-None. GOOGL-2026-05-20 filled — see Current Positions.
+None.
+GOOGL-2026-05-20 filled 2026-05-20 — now tracked under "Current Positions" above.
 
 ## MSFT Half-Trigger Status (ADR-0004)
 **Setup #2 — MSFT Mean-Reversion / Trend-Follow**
@@ -169,10 +170,11 @@ None. GOOGL-2026-05-20 filled — see Current Positions.
 
 ---
 
-## Pending Setups
+## Recently Filled Setups
 
-### GOOGL-2026-05-20 — SWING LONG
+### GOOGL-2026-05-20 — SWING LONG — ✅ FILLED 2026-05-20
 
+- **Status**: FILLED 2026-05-20 ~09:51 ET — 51 sh @ $387.07. Tracked under "Current Positions" (top of file). Trailing stop e0b8fbda active. Recorded in `trade_log.json` on 2026-05-21 (backfill — executing routine had not written it).
 - **Direction**: LONG
 - **Entry Zone**: $387.00–$391.00
 - **Stop-Loss**: $376.00 (below SMA 20 $378.64, ~2.5% risk)
@@ -252,3 +254,15 @@ None. GOOGL-2026-05-20 filled — see Current Positions.
 - **NVDA earnings AMC tonight**: Binary event. No semiconductor exposure. Correct.
 - Weekly trade count: 0/3. Week 3 Day 3 complete.
 - Scheduling note: All three routines today fired in the first 4 hours (market-open 5:53 AM, midday 6:32 AM, EOD 9:45 AM). Cloud scheduler infra still broken. CRITICAL: fix before Week 4 (2026-05-25).
+
+## Market Open Execution Log — 2026-05-21
+- Routine fired at 9:36 AM ET (13:36 UTC) — **correctly timed for the first time this week** (6 min after open).
+- Account (Alpaca live): $99,913.82 equity, $80,259.43 cash, 1 position, daytrade_count 0, deployed 19.67%.
+- Daily P&L: -$180.02 (-0.18%). Daily loss cap (-2%) NOT hit. Hard rule violations: NONE.
+- Market: OPEN. Clock confirmed.
+- **Position held**: GOOGL — 51 sh @ $387.07, current ~$385.59, unrealized -$75.62 (-0.38%). Trailing-stop e0b8fbda (10% GTC, qty 51) confirmed ACTIVE via `orders`. -7% cut trigger $359.98 — far away. No stop tightening (position not at +15%/+20%).
+- **Setups to execute**: NONE. The only setup in the file (GOOGL-2026-05-20, Approved: YES) already FILLED on 2026-05-20 — position is live. No fresh 2026-05-21 pre-market proposals in queue (pre-market routine has not logged a 5/21 run). MSFT half-trigger remains 1 of 2 (no proposal; pre-market's job). 0 trades placed, 0 setups skipped.
+- **Data reconciliation**: `trade_log.json` had an empty `trades` array despite the live GOOGL position. Backfilled the GOOGL-2026-05-20 trade record and set `weekly_trade_count[week_starting_2026-05-18]=1`. The 2026-05-20 executing routine committed the fill to git (d875313) and to open_positions.md but never wrote trade_log.json.
+- **Infra gaps**: `memory/pause_state.json` missing — treated as `active` (not paused); no setups to gate anyway. `memory/discord_config.json` missing — `notify.py` outputs logged to `memory/pending_discord_updates.md`. `ta` package still fails wheel build — `research.py` unavailable, but no pending setups needed analysis this run.
+- Risk check: 1/5 positions. GOOGL cost basis $19,740.57 = 19.76% of equity (within 20% cap). Weekly trade count 1/3. PDT 0/3. All clear.
+- Weekly trade count: 1/3. Week 3 Day 4.

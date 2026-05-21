@@ -7,11 +7,34 @@
     "platform": "Alpaca Paper Trading",
     "note": "Day 0 baseline — bot becomes active Monday 2026-05-11."
   },
-  "trades": [],
+  "trades": [
+    {
+      "trade_id": "GOOGL-2026-05-20",
+      "symbol": "GOOGL",
+      "side": "long",
+      "qty": 51,
+      "entry_price": 387.07,
+      "entry_date": "2026-05-20",
+      "cost_basis": 19740.57,
+      "stop_type": "10% trailing GTC",
+      "stop_order_id": "e0b8fbda-b5e5-44d4-86d2-14523e6b4b7c",
+      "target": 415.00,
+      "rr": "2.3:1",
+      "sector": "Communication Services",
+      "confidence": 6,
+      "catalyst": "Google I/O 2026 — Gemini models, AI Mode in Search, agentic AI",
+      "status": "open",
+      "exit_price": null,
+      "exit_date": null,
+      "realized_pnl": null,
+      "reasoning": "Swing long. Extreme oversold (Stoch K 0.06) within full SMA bull stack, plus Google I/O catalyst. Setup GOOGL-2026-05-20, approved via Discord 2026-05-20.",
+      "_backfill_note": "Recorded by 2026-05-21 market-open routine. GOOGL filled 2026-05-20 ~09:51 ET; the executing routine committed open_positions.md (git d875313) but did not write this trade to trade_log.json. Backfilled here for record integrity."
+    }
+  ],
   "weekly_trade_count": {
     "_comment": "Resets every Monday 00:00 ET. Used to enforce max-3-trades-per-week rule.",
     "week_starting_2026-05-11": 0,
-    "week_starting_2026-05-18": 0
+    "week_starting_2026-05-18": 1
   },
   "daily_snapshots": [
     {
@@ -166,7 +189,7 @@
     }
   ],
   "summary": {
-    "total_trades": 0,
+    "total_trades": 1,
     "wins": 0,
     "losses": 0,
     "win_rate": null,

@@ -314,3 +314,28 @@ No-op execution. Step 4 (Approval Check) had no candidates: `memory/open_positio
 ### Action items (delta vs prior cycles)
 - Same outstanding gaps: provision `memory/discord_config.json` and `DISCORD_BOT_TOKEN` in cloud `.env` so cloud routines can post to `#daily-brief` and update the pinned Dashboard. Without these, all brief/dashboard posts back up here and the on-call user has no real-time visibility into cloud-run cadence.
 - Cloud sandbox needed `setuptools`/`wheel` upgraded before `ta` would build from sdist. Consider pinning `setuptools>=80,<83` and `wheel>=0.45` at the top of `requirements.txt` or shipping a prebuilt wheel for `ta` so future routines aren't gated on a build-time dep upgrade.
+
+---
+
+## 2026-05-21 13:36 UTC — Market Open Execution
+
+`notify.py brief` and `notify.py dashboard` both failed:
+- `notify.py brief`: `memory/discord_config.json` missing.
+- `notify.py dashboard`: same — config missing (chain aborted at brief).
+
+### #daily-brief (silent summary — deferred)
+**Title**: Market Open Execution — 2026-05-21 09:36 ET
+**Body**: 0 trades placed — no approved setups awaiting execution (GOOGL-2026-05-20 already filled 5/20). 0 setups skipped. 1 open position: GOOGL 51 sh @ $387.07, -0.38%, trailing stop e0b8fbda active. Account $99,913.82 equity, deployed 19.7%, daily P&L -$180.02 (-0.18%). Weekly trades 1/3. No hard-rule violations.
+
+### Routine result
+No-op execution (no new orders). Routine fired at 9:36 AM ET — correctly timed for the first time this week. Step 3/3a (setup validation + stale-approval gate) skipped — the only setup on file already filled. Risk check passed: 1/5 positions, GOOGL cost basis 19.8% of equity (within 20% cap), daily loss cap not hit, PDT 0/3, -7% cut not triggered. Dashboard refreshed locally (`Dashboard.md`).
+
+### Data reconciliation performed
+- `trade_log.json` had an empty `trades` array despite the live GOOGL position. Backfilled the GOOGL-2026-05-20 trade record; set `weekly_trade_count[week_starting_2026-05-18]=1` and `summary.total_trades=1`. The 5/20 executing routine committed the fill to git (d875313) + `open_positions.md` but never wrote `trade_log.json`.
+- `open_positions.md` carried a stale duplicate GOOGL-2026-05-20 block under a second "Pending Setups" heading — renamed to "Recently Filled Setups", marked FILLED. Dashboard no longer mislabels the filled position as a pending setup.
+
+### Action items (delta vs prior cycles)
+- Same outstanding gaps: provision `memory/discord_config.json` + `DISCORD_BOT_TOKEN` in cloud `.env` so cloud routines can post `#daily-brief` and the pinned dashboard.
+- `memory/pause_state.json` is MISSING in the cloud clone — routines that gate on it (market-open, midday) currently fall back to "active". Restore the file so the `/pause` `/halt` toggles are honoured cloud-side.
+- For executing routines: write `trade_log.json` BEFORE committing a fill. The 5/20 gap (fill in git but not in trade_log) silently broke the weekly-count and calibration math until this routine caught it.
+- Routine-file `2_market_open_execution.md` step 4 caps size at "$1,000 or 5% of portfolio"; CLAUDE.md hard rule 1 and the live GOOGL fill use 20%. Reconcile in Friday weekly review.
