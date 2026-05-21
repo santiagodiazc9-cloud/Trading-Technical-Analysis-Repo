@@ -82,7 +82,7 @@ jobs:
       - name: Install Claude Code CLI
         if: vars.TRADING_GHA_ENABLED == 'true'
         run: |
-          npm install -g @anthropic-ai/claude-code
+          npm install -g @anthropic-ai/claude-code@2.1.146
           claude --version
 
       - name: Recreate .env from secrets

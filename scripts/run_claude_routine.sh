@@ -72,7 +72,14 @@ if [[ -z "$CLAUDE_BIN" ]] || [[ ! -x "$CLAUDE_BIN" ]]; then
   exit 1
 fi
 
-"$CLAUDE_BIN" -p "$PROMPT"
+# In CI (GitHub Actions), skip permission prompts — no human available to approve.
+CLAUDE_FLAGS="-p"
+if [[ "${CI:-}" == "true" ]]; then
+  CLAUDE_FLAGS="--dangerously-skip-permissions -p"
+fi
+
+# shellcheck disable=SC2086
+"$CLAUDE_BIN" $CLAUDE_FLAGS "$PROMPT" 2>&1
 ROUTINE_EXIT=$?
 
 if [[ "$ROUTINE_EXIT" -eq 0 ]]; then
