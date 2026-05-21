@@ -314,3 +314,25 @@ No-op execution. Step 4 (Approval Check) had no candidates: `memory/open_positio
 ### Action items (delta vs prior cycles)
 - Same outstanding gaps: provision `memory/discord_config.json` and `DISCORD_BOT_TOKEN` in cloud `.env` so cloud routines can post to `#daily-brief` and update the pinned Dashboard. Without these, all brief/dashboard posts back up here and the on-call user has no real-time visibility into cloud-run cadence.
 - Cloud sandbox needed `setuptools`/`wheel` upgraded before `ta` would build from sdist. Consider pinning `setuptools>=80,<83` and `wheel>=0.45` at the top of `requirements.txt` or shipping a prebuilt wheel for `ta` so future routines aren't gated on a build-time dep upgrade.
+
+---
+
+## 2026-05-21 16:44 UTC — Midday Scan
+
+`notify.py brief` and `notify.py dashboard` both failed (cloud host, expected):
+- `notify.py brief`: `memory/discord_config.json` missing.
+- `notify.py dashboard`: `DISCORD_BOT_TOKEN` missing from `.env`.
+
+Routine completed all on-disk steps: open_positions.md updated (GOOGL position P&L, MSFT half-trigger, midday log), trade_log.json corrected (GOOGL recorded), journal/2026-05-21.md written, market_context.md updated, learnings.md infra note added, Dashboard.md regenerated.
+
+### #daily-brief (silent summary — deferred)
+**Title**: Midday Scan — 2026-05-21
+**Body**: 🟢 GREEN posture (SPY $738.71 > SMA 20 $729.75 > SMA 50). GOOGL +0.24% (+$48.45) — HOLD, trailing stop e0b8fbda confirmed active, no threshold hit (not at -7% cut $359.98, not at +15% tighten $445.13). Account: equity $100,046.92, 1/5 positions, 1/3 weekly trades, 19.8% deployed, P&L today -0.05% (loss cap not hit). 0 new setups proposed — post-NVDA watchlist split between overbought names (AAPL/PANW/ARM/LLY) and negative-MACD names (AMD/AVGO/TSM); nothing cleared the 6-point confluence checklist. MSFT half-trigger 1/2 (MACD hist -0.43, narrowing; stale-by 5/22 EOD). Fixed a data-integrity gap: the 5/20 GOOGL fill was never written to trade_log.json — corrected this routine.
+
+### Routine result
+Midday scan complete. 1 position held (GOOGL), 0 trades placed, 0 closes, 0 stop adjustments, 0 new setups. Hard rule violations: NONE.
+
+### Action items (carry-forward)
+- Provision `memory/discord_config.json` + `DISCORD_BOT_TOKEN` in the cloud host so briefs/dashboard post directly instead of backing up here.
+- Scheduler still mistiming routines — no pre-market or market-open routine ran on 5/21 (this midday scan was the first 5/21 routine, and it fired on time). Infra fix flagged for Week 4.
+- The 5/20 execution wrote open_positions.md but not trade_log.json — add a hard post-fill checklist to `routines/2_market_open_execution.md`.

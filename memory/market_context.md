@@ -1,17 +1,28 @@
 # Market Context
 
 ## Last Updated
-2026-05-20 (Pre-Market Research, ~9:20 AM ET — delayed run, manual execution)
+2026-05-21 (Midday Scan, ~12:39 PM ET — no pre-market routine ran today; posture classified at midday)
 
 ## Market Summary — Week of May 18, 2026 (Week 3)
 
-### Market Posture (Updated pre-market 5/20 ~9:20 AM ET)
-- **🟢 GREEN** — SPY $733.80 > SMA 20 $726.73 > SMA 50 $692.43.
+### Market Posture (Updated midday 5/21 ~12:39 PM ET — Midday Scan; pre-market did not run)
+- **🟢 GREEN** — SPY $738.71 > SMA 20 $729.75 > SMA 50 $694.96.
 - Full trading allowed: new longs AND shorts.
-- Margin is thin (SPY only 0.97% above SMA 20). Monitor closely — any pullback through SMA 20 would shift to CAUTION.
-- Old $736 price-level trip-wire is RETIRED per strategy update 2026-05-19.
-- **NVDA earnings AMC tonight** — defining binary event for AI/semi sector direction 5/21.
-- **Calendar correction**: Microsoft Build 2026 is June 2-3 (San Francisco), NOT May 19-22 as previously noted.
+- SPY rallied +$4.91 vs 5/20 close ($733.80) — broad market firmer after NVDA earnings. Margin to SMA 20 now 1.2% (was 0.97% on 5/20).
+- SPY MACD hist -1.28 — still negative; the rally is not yet momentum-confirmed.
+- **NVDA Q1 FY27 earnings (5/20 AMC) are behind us** — broad tape took the print constructively (QQQ $701.52 → $709.76). NVDA stock itself $219.45 with a MACD bearish crossover — the print was not a blowout for the name.
+- Microsoft Build 2026 is June 2-3 (San Francisco) — ~2 weeks out.
+
+### Midday 5/21 Scan Update (fresh data — 29-symbol scan)
+- **SPY** $738.71 | RSI 63.9 | MACD hist -1.28 | above SMA 20/50/200 — GREEN.
+- **QQQ** $709.76 | RSI 67.3 | MACD hist -1.58 | above all SMAs — tech firm.
+- **GOOGL** (held) $388.02 | RSI 62.0 | MACD hist -2.81 | Stoch 0.87 — full bull stack; bounce thesis not yet played out.
+- **MSFT** $417.20 | MACD hist -0.43 (narrowing) | SMA 20 $416.84 — half-trigger 1/2, cross still pending.
+- **NVDA** $219.45 | RSI 57.7 | MACD bearish crossover — in post-earnings $215–220 watch zone but momentum negative.
+- **Overbought, no entry**: AAPL (RSI 75.2), PANW (RSI 81.4), ARM (RSI 73.9, above upper BB — +29% post-NVDA), LLY (Stoch 90), XLV (Stoch 98).
+- **Negative MACD momentum, no entry**: AMD -2.72, AVGO -4.17, TSM -2.35, AMZN -2.44, META -2.08, CEG -2.91.
+- **GS** $973.05 — full bull stack, MACD +1.25, RSI 60.8: technically clean but no documented catalyst and XLF sector weak. Watch only.
+- **META** $600.71 — short watch; below all 3 SMAs, RSI 41.0; entry needs a failed bounce to $620–628 (price far below). No short.
 
 ### Broad Market (5/20 pre-market scan, daily bars — prior close data)
 - **SPY**: $733.80 | RSI 62.3 | MACD hist -0.8453 | Stoch K 3.8 (extreme low) | Above SMA 20 ($726.73) ✓ | Above SMA 50 ($692.43) ✓ | **POSTURE: 🟢 GREEN**

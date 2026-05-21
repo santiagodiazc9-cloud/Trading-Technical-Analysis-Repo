@@ -109,6 +109,22 @@ def tail_learnings(learnings_md: str, n: int = 3) -> list[str]:
     return out
 
 
+def format_trade(t) -> str:
+    """One-line summary of a trade record. Falls back to str() for non-dict entries."""
+    if not isinstance(t, dict):
+        return str(t)
+    sym = t.get("symbol", "?")
+    direction = (t.get("direction") or "").upper()
+    qty = t.get("qty", "?")
+    entry = t.get("entry_price", "?")
+    if t.get("status") == "open":
+        return f"**{sym}** {direction} {qty} @ ${entry} — OPEN (entered {t.get('entry_date', '?')}, {t.get('strategy', '')})"
+    outcome = t.get("outcome") or "closed"
+    pnl = t.get("realized_pnl")
+    pnl_str = f" ({format_money(pnl)})" if pnl is not None else ""
+    return f"**{sym}** {direction} {qty} @ ${entry} → ${t.get('exit_price', '?')} — {outcome}{pnl_str}"
+
+
 def format_money(x) -> str:
     if x is None:
         return "—"
@@ -234,7 +250,7 @@ def render(state: dict) -> str:
     push("## Recent Trades (last 5)")
     if state["recent_trades"]:
         for t in state["recent_trades"]:
-            push(f"- {t}")
+            push(f"- {format_trade(t)}")
     else:
         push("_No trades logged yet._")
     push("")
