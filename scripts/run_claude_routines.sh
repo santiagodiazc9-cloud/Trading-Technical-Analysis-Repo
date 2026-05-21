@@ -7,6 +7,7 @@
 # fire jobs late after sleep/wake or load spikes. Exact matching was the root
 # cause of "No scheduled routine" failures during Week 2 (2026-05-11..14).
 set -euo pipefail
+export TZ=America/New_York  # plist env var doesn't propagate to shell on macOS; force date to return ET
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
