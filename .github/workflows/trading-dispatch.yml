@@ -125,6 +125,11 @@ jobs:
           ROUTINE_OVERRIDE: ${{ inputs.routine }}
         run: |
           set -e
+          # Debug: show claude version and test that the binary works
+          which claude && claude --version
+          echo "ANTHROPIC_API_KEY set: ${ANTHROPIC_API_KEY:+yes (${#ANTHROPIC_API_KEY} chars)}"
+          # Quick smoke test before running full routine
+          claude --dangerously-skip-permissions -p "respond with just the word ok" 2>&1 && echo "claude smoke test passed" || { echo "claude smoke test FAILED with exit $?"; exit 1; }
           if [ -n "${ROUTINE_OVERRIDE:-}" ]; then
             echo "Manual override: ${ROUTINE_OVERRIDE}"
             bash scripts/run_claude_routine.sh "${ROUTINE_OVERRIDE}"
