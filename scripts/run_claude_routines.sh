@@ -36,14 +36,20 @@ fi
 
 cd "$PROJECT_ROOT"
 
-# Write lockfile so GHA can see that local ran (GHA is failsafe-only).
-# Push just this one file so GHA's checkout picks it up; failures are non-fatal.
 LOCKFILE="$PROJECT_ROOT/memory/last_routine_run.json"
-python3 -c "import json,time; json.dump({'routine':'$ROUTINE','fired_by':'local','fired_at_epoch':int(time.time())},open('$LOCKFILE','w'))"
-git pull --ff-only --quiet 2>/dev/null || true
-git add "$LOCKFILE" 2>/dev/null || true
-git diff --cached --quiet 2>/dev/null || git commit -m "routine-lock(local): $ROUTINE" --no-verify -q 2>/dev/null || true
-git push origin HEAD --quiet 2>/dev/null || true
 
 echo "$(date '+%F %T') — dispatching $ROUTINE (DOW=$DOW HHMM=$HHMM)"
 "$RUNNER" "$ROUTINE"
+ROUTINE_EXIT=$?
+
+# Write lockfile ONLY on success so GHA failsafe can retry if local failed
+# (e.g. session limit hit — GHA fires 15 min later when limit may have reset).
+if [[ "$ROUTINE_EXIT" -eq 0 ]]; then
+  python3 -c "import json,time; json.dump({'routine':'$ROUTINE','fired_by':'local','fired_at_epoch':int(time.time())},open('$LOCKFILE','w'))"
+  git pull --ff-only --quiet 2>/dev/null || true
+  git add "$LOCKFILE" 2>/dev/null || true
+  git diff --cached --quiet 2>/dev/null || git commit -m "routine-lock(local): $ROUTINE" --no-verify -q 2>/dev/null || true
+  git push origin HEAD --quiet 2>/dev/null || true
+fi
+
+exit $ROUTINE_EXIT
