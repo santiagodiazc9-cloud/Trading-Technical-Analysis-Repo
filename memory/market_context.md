@@ -1,7 +1,33 @@
 # Market Context
 
 ## Last Updated
-2026-05-20 (Pre-Market Research, ~9:20 AM ET — delayed run, manual execution)
+2026-05-21 (End-of-Day Review, ~3:46 PM ET — fired on time)
+
+## End-of-Day Update — 2026-05-21
+
+### Market Posture: 🟢 GREEN (strengthened)
+- SPY $742.68 > SMA 20 $729.95 > SMA 50 $695.04 > SMA 200 $678.27. Full trading allowed.
+- SPY rallied ~+1.2% on the day (from $733.80 at 5/20 pre-market). Now **1.74% above SMA 20** — a healthier GREEN margin than 5/20's thin 0.97%.
+- SPY above VWAP ($735.49). RSI 67.4. MACD histogram -1.03 (still mildly negative — momentum lagging price, but trend intact). Stoch K 19.1.
+- QQQ $713.97 — strong, RSI 70.2 (just into overbought). Above all SMAs. MACD hist -1.31.
+
+### EOD Readings (5/21, daily bars)
+| Symbol | Price | RSI | MACD Hist | SMA 20 | Note |
+|--------|-------|-----|-----------|--------|------|
+| SPY | $742.68 | 67.4 | -1.03 | $729.95 ✓ | GREEN, strengthened |
+| QQQ | $713.97 | 70.2 | -1.31 | $692.16 ✓ | RSI overbought |
+| GOOGL | $388.29 | 62.2 | -2.80 | $383.58 ✓ | OPEN POSITION — MACD deepening, lagging tape |
+| MSFT | $419.01 | 54.8 | -0.3172 | $416.93 ✓ | Half-trigger 1/2 — MACD cross approaching, not fired |
+| NVDA | $220.00 | 58.2 | -0.175 | $214.42 ✓ | Post-earnings flat — muted reaction, no sector shock |
+
+### NVDA Earnings Resolved
+NVDA Q1 FY27 (5/20 AMC) reaction was **muted** — $220.00 EOD, essentially flat vs the $221.46 pre-print level. No semiconductor-sector shock in either direction. The week's defining binary event resolved without drama; MACD bearish crossover on NVDA is a minor caution but the daily trend holds. AI/semi sector overhang cleared.
+
+### EOD Sentiment
+- 🟢 GREEN posture, strengthened — broad rally day, NVDA overhang cleared. Full trading allowed for 5/22.
+- GOOGL (our one position) **did not participate** in the rally (+0.32% vs SPY +1.2%) — Communication Services / XLC is the laggard. Watch SMA 20 $383.58 and the deepening MACD as the 5/22 invalidation checkpoints.
+- MSFT half-trigger 1/2: MACD histogram improved to -0.3172 (from -0.5598 on 5/20) — cross approaching again. 5/22 is the last session before stale-by.
+- Week 3: 1/3 trade slots used, 1 open position, 19.79% deployed.
 
 ## Market Summary — Week of May 18, 2026 (Week 3)
 

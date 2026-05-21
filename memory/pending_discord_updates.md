@@ -314,3 +314,29 @@ No-op execution. Step 4 (Approval Check) had no candidates: `memory/open_positio
 ### Action items (delta vs prior cycles)
 - Same outstanding gaps: provision `memory/discord_config.json` and `DISCORD_BOT_TOKEN` in cloud `.env` so cloud routines can post to `#daily-brief` and update the pinned Dashboard. Without these, all brief/dashboard posts back up here and the on-call user has no real-time visibility into cloud-run cadence.
 - Cloud sandbox needed `setuptools`/`wheel` upgraded before `ta` would build from sdist. Consider pinning `setuptools>=80,<83` and `wheel>=0.45` at the top of `requirements.txt` or shipping a prebuilt wheel for `ta` so future routines aren't gated on a build-time dep upgrade.
+
+---
+
+## 2026-05-21 19:53 UTC — End-of-Day Review
+
+`notify.py brief`, `notify.py send chat`, and `notify.py dashboard` all failed:
+- `notify.py brief`: `memory/discord_config.json` missing.
+- `notify.py send chat`: `memory/discord_config.json` missing.
+- `notify.py dashboard`: `DISCORD_BOT_TOKEN` missing from `.env`.
+
+### #daily-brief (silent summary — deferred)
+**Title**: End-of-Day Review — 2026-05-21
+**Body**: Daily P&L -$32.13 (-0.03%), loss cap NOT hit. 0 closes, 0 wins / 0 losses. 1 swing position held overnight: GOOGL +0.32% (lagged a +1.2% SPY day). 🟢 GREEN posture strengthened; NVDA earnings (5/20 AMC) muted — no sector shock. Reconciled GOOGL-2026-05-20 entry into trade_log.json (was missing). Weekly trades 1/3.
+
+### #chat (reflective question — deferred)
+**Title**: Reflection — 2026-05-21
+**Body**: GOOGL-2026-05-20 was proposed at confidence 6/10 — the minimum proposable threshold — yet sized at 51 shares (~$19.7k), right at the 20% max-position cap. Should minimum-conviction setups carry maximum size, or should we scale position size by confidence bucket? Worth a look at Friday's weekly review.
+
+### Routine result
+EOD review completed cleanly. 1 open swing position (GOOGL) reviewed — trailing stop e0b8fbda confirmed active on Alpaca, no tighten/cut triggered. No day trades to close. No hard rule violations; daily loss cap not hit. trade_log.json reconciled (GOOGL entry + weekly count + summary + 5/21 snapshot). Dashboard.md regenerated. Memory files (open_positions.md, learnings.md, market_context.md, journal/2026-05-21.md) updated.
+
+### Action items (delta vs prior cycles)
+- Same outstanding gap: provision `memory/discord_config.json` and `DISCORD_BOT_TOKEN` in cloud `.env` so cloud routines can post `#daily-brief`, `#chat`, and the pinned Dashboard. Every brief/alert/reflection still backs up here.
+- **NEW — memory-file desync caught**: GOOGL-2026-05-20 entry was in `open_positions.md` (commit d875313) but never written to `trade_log.json`. The execution routine must write both files (trade record + weekly_trade_count) atomically. The 2026-05-20 EOD `daily_snapshot` is also missing — the 5/20 EOD routine fired pre-fill at ~9:45 AM ET.
+- `ta` install: `pip install --use-pep517 ta` builds the wheel cleanly in one command (alternative to the setuptools-upgrade workaround). Still recommend pinning a buildable `ta` or shipping a prebuilt wheel.
+- Scheduler: EOD routine fired ON TIME today (~3:46 PM ET) — first on-time fire since the 5/20 morning mis-fires. Watch whether it holds.

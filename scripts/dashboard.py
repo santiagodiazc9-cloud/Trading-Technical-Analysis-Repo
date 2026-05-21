@@ -234,7 +234,25 @@ def render(state: dict) -> str:
     push("## Recent Trades (last 5)")
     if state["recent_trades"]:
         for t in state["recent_trades"]:
-            push(f"- {t}")
+            if not isinstance(t, dict):
+                push(f"- {t}")
+                continue
+            sym = t.get("symbol", "?")
+            direction = t.get("direction") or t.get("side") or ""
+            strat = t.get("strategy", "")
+            qty = t.get("qty", "?")
+            entry = t.get("entry_price", "?")
+            tid = t.get("trade_id") or t.get("setup_id") or sym
+            status = (t.get("status") or "").upper()
+            if status == "OPEN" or t.get("exit_price") is None:
+                push(f"- {tid} — {sym} {direction} {strat} {qty} @ ${entry} — OPEN")
+            else:
+                pnl = t.get("pnl")
+                pnl_pct = t.get("pnl_pct")
+                pnl_str = f" {pnl:+.2f}" if isinstance(pnl, (int, float)) else ""
+                pct_str = f" ({pnl_pct:+.2f}%)" if isinstance(pnl_pct, (int, float)) else ""
+                push(f"- {tid} — {sym} {direction} {strat} {qty} @ ${entry} "
+                     f"→ ${t.get('exit_price')} — {status or 'CLOSED'}{pnl_str}{pct_str}")
     else:
         push("_No trades logged yet._")
     push("")

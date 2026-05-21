@@ -7,11 +7,37 @@
     "platform": "Alpaca Paper Trading",
     "note": "Day 0 baseline — bot becomes active Monday 2026-05-11."
   },
-  "trades": [],
+  "trades": [
+    {
+      "trade_id": "GOOGL-2026-05-20",
+      "setup_id": "GOOGL-2026-05-20",
+      "symbol": "GOOGL",
+      "sector": "Communication Services",
+      "side": "buy",
+      "direction": "long",
+      "strategy": "swing",
+      "qty": 51,
+      "entry_price": 387.07,
+      "entry_time": "2026-05-20T13:51:00Z",
+      "cost_basis": 19740.57,
+      "stop_type": "trailing_stop_10pct_gtc",
+      "stop_order_id": "e0b8fbda-b5e5-44d4-86d2-14523e6b4b7c",
+      "target": 415.00,
+      "rr_ratio": 2.3,
+      "confidence": 6,
+      "catalyst": "Google I/O 2026 (Gemini models, AI Mode in Search, agentic AI); Stoch RSI extreme-oversold mean-reversion within full SMA bull stack",
+      "status": "open",
+      "exit_price": null,
+      "exit_time": null,
+      "pnl": null,
+      "pnl_pct": null,
+      "reconciliation_note": "Entry executed 2026-05-20 (commit d875313, recorded in open_positions.md) but never written to trade_log.json at the time. Reconciled into trades[] during the 2026-05-21 EOD review. entry_time approximated from the trailing-stop submit timestamp (2026-05-20T13:51:39Z)."
+    }
+  ],
   "weekly_trade_count": {
     "_comment": "Resets every Monday 00:00 ET. Used to enforce max-3-trades-per-week rule.",
     "week_starting_2026-05-11": 0,
-    "week_starting_2026-05-18": 0
+    "week_starting_2026-05-18": 1
   },
   "daily_snapshots": [
     {
@@ -163,18 +189,51 @@
       "daily_loss_cap_hit": false,
       "hard_rule_violations": [],
       "notes": "Week 3 Day 2. 0 trades, 0 positions, P&L $0.00 (0.00%). SPY trip-wire active and WORSENED into close ($735.51 midday → $733.85 EOD; $736 threshold not reclaimed). NVDA $221.46 EOD heading into Q1 FY27 earnings AMC tonight — confirmed no semiconductor exposure entering print. MSFT half-trigger 1/2: MACD histogram barely moved (-0.5525 midday → -0.5435 EOD); pace of approach to zero has slowed significantly vs prior sessions. SMA 20 condition still MET ($417.77 > $417.37). AMZN-2026-05-15 archived midday per ADR-0002. GOOGL extreme oversold (Stoch RSI 0.06 midday). No setups proposed. Stale-state sweep: both learnings.md and strategy.md modified today — no stale-file flags needed. NVDA earnings reaction (5/20 AMC → 5/21 pre-market tape read) is the week's defining catalyst for semiconductor sector direction and potential SPY trip-wire resolution."
+    },
+    {
+      "date": "2026-05-21",
+      "routine": "end_of_day_review",
+      "equity": 100061.71,
+      "cash": 80259.43,
+      "buying_power": 180321.14,
+      "deployed_pct": 19.79,
+      "pnl_today_dollars": -32.13,
+      "pnl_today_pct": -0.03,
+      "open_positions": 1,
+      "trades_closed_today": 0,
+      "wins_today": 0,
+      "losses_today": 0,
+      "trades_opened_today": 0,
+      "weekly_trade_count": 1,
+      "daytrade_count": 0,
+      "pattern_day_trader": false,
+      "running_win_rate": null,
+      "running_pnl_dollars": 61.71,
+      "running_pnl_pct": 0.06,
+      "confidence_calibration": {
+        "_comment": "predicted-confidence-bucket -> {sample_size, wins, losses}. Counts CLOSED trades only. 1 trade open at conf 6 (bucket_5_6) — pending close; buckets stay empty until it resolves.",
+        "bucket_9_10": {"n": 0, "wins": 0, "losses": 0},
+        "bucket_7_8":  {"n": 0, "wins": 0, "losses": 0},
+        "bucket_5_6":  {"n": 0, "wins": 0, "losses": 0},
+        "open_trades_pending": {"bucket_5_6": 1}
+      },
+      "daily_loss_cap_hit": false,
+      "hard_rule_violations": [],
+      "notes": "Week 3 Day 4. 0 trades closed, 1 open position (GOOGL, swing, +0.32% unrealized). Daily P&L -$32.13 (-0.03%) — daily loss cap NOT hit. GOOGL underperformed a +1.2% SPY day (account ticked down because GOOGL slipped ~$0.63/sh off its 5/20 close). Trailing stop e0b8fbda CONFIRMED ACTIVE on Alpaca; no tighten (+0.32% << +15%), no -7% cut. Deployed 19.79% (1 of 5 slots) — under the 75-85% band, expected with one position, not a violation. Market posture 🟢 GREEN strengthened (SPY 1.74% above SMA 20). NVDA earnings (5/20 AMC) muted — $220 EOD, no sector shock. MSFT half-trigger still 1/2 (MACD hist -0.3172, improving; stale-by 5/22 EOD). RECONCILIATION: GOOGL-2026-05-20 entry was missing from trades[] and weekly_trade_count — added tonight; summary total_trades 0->1. The 2026-05-20 EOD daily_snapshot is MISSING (5/20 EOD routine fired pre-fill at ~9:45 AM ET) — documented gap, not reconstructed; running_pnl_dollars here is derived from live Alpaca equity ($100,061.71) vs day_0_baseline ($100,000), so it does not depend on the missing 5/20 snapshot. Infra: ta installed via --use-pep517; Discord unprovisioned (brief logged to pending_discord_updates.md); RuFlo file-only. EOD routine fired on time (~3:46 PM ET)."
     }
   ],
   "summary": {
-    "total_trades": 0,
+    "_comment": "total_trades counts all entries incl. open positions. wins/losses/win_rate/total_pnl/best_trade/worst_trade reflect CLOSED trades only — still 0 closed as of 2026-05-21. phase_pnl is live equity minus day_0_baseline (includes unrealized).",
+    "total_trades": 1,
+    "open_trades": 1,
     "wins": 0,
     "losses": 0,
     "win_rate": null,
     "total_pnl": 0,
     "best_trade": null,
     "worst_trade": null,
-    "current_equity": 100000.00,
-    "phase_pnl": 0,
-    "phase_pnl_pct": 0
+    "current_equity": 100061.71,
+    "phase_pnl": 61.71,
+    "phase_pnl_pct": 0.06
   }
 }
