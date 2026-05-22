@@ -314,3 +314,22 @@ No-op execution. Step 4 (Approval Check) had no candidates: `memory/open_positio
 ### Action items (delta vs prior cycles)
 - Same outstanding gaps: provision `memory/discord_config.json` and `DISCORD_BOT_TOKEN` in cloud `.env` so cloud routines can post to `#daily-brief` and update the pinned Dashboard. Without these, all brief/dashboard posts back up here and the on-call user has no real-time visibility into cloud-run cadence.
 - Cloud sandbox needed `setuptools`/`wheel` upgraded before `ta` would build from sdist. Consider pinning `setuptools>=80,<83` and `wheel>=0.45` at the top of `requirements.txt` or shipping a prebuilt wheel for `ta` so future routines aren't gated on a build-time dep upgrade.
+
+---
+
+## 2026-05-22 19:50 UTC — End-of-Day Review
+
+`notify.py brief` and `notify.py dashboard` both failed — `memory/discord_config.json` still missing in the cloud routine host (unchanged gap since 2026-05-15).
+
+### #daily-brief (silent summary — deferred)
+**Title**: End-of-Day Review — 2026-05-22
+**Body**: Daily P&L -$288.14 (-0.29%) — loss cap not hit. 0 closes, 0W/0L. 1 swing held overnight: GOOGL 51sh -1.31% (10% trailing stop e0b8fbda active, -7% cut clear). GOOGL diverged DOWN from a strong post-NVDA tech rally (SPY $745.28, 🟢 GREEN posture, QQQ RSI 71.3 overbought). MSFT half-trigger STALED — MACD cross never fired. Reconciled a process gap: the GOOGL entry was missing from trade_log.json. Weekly review next at 4:30 PM ET.
+
+### Routine result
+EOD review completed. 0 day trades to close. GOOGL swing held overnight (no exit trigger hit; trailing stop verified live). trade_log.json reconciled (GOOGL entry added, weekly_trade_count corrected 0→1, 2026-05-22 daily snapshot appended). market_context.md, learnings.md, open_positions.md, journal/2026-05-22.md all updated. Dashboard.md regenerated locally.
+
+### Action items (delta vs prior cycles)
+- Same outstanding gap: provision `memory/discord_config.json` (+ `DISCORD_BOT_TOKEN`) in the cloud `.env` so cloud routines can post `#daily-brief` and refresh the pinned Dashboard. Every brief since 2026-05-15 has backed up here.
+- NEW (process): the GOOGL entry (5/20) was never written to `trade_log.json` by the market-open execution routine — `trades[]` was empty and `weekly_trade_count` read 0, silently corrupting the max-3-trades-per-week guardrail. The buy order and the trade-log write must be atomic in the execution routine. Flag for the 2026-05-22 weekly review.
+- NEW (infra): no routines and no journal ran on 2026-05-21 while a live GOOGL position was open — a full session of an unmonitored position. The cloud scheduler reliability problem is now risk-relevant, not just a convenience issue.
+- ROUTING NOTE: this EOD routine's dispatch instructions said "ClickUp MCP IS available — use for posting EOD brief / Performance Dashboard / trade-log tasks / reflective question." That contradicts CLAUDE.md, which retired ClickUp in Discord-migration Phases 2–4 (final artifacts deleted 2026-05-16, commit a201388). Routine `4_end_of_day_review.md` uses Discord only. Followed CLAUDE.md + the routine file (Discord, file-based memory) and did NOT write to ClickUp. The dispatch template's ClickUp lines are stale and should be removed.

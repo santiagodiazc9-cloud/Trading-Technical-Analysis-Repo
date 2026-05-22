@@ -3,15 +3,16 @@
 ## Current Positions
 
 ### GOOGL — LONG (filled 2026-05-20)
-- **Entry**: $387.07 | 51 shares | Cost basis: $19,740.57
-- **Stop**: 10% trailing GTC (order e0b8fbda) — initial hard floor ~$348.36
+- **Entry**: $387.07 | 51 shares | Cost basis: $19,740.57 | Entry order `83bf9678` (market, filled 09:51 ET)
+- **Stop**: 10% trailing GTC (order e0b8fbda) — active & verified live 2026-05-22 EOD. Initial hard floor ~$348.36
 - **Target**: $415.00 | R:R ~2.3:1
-- **Unrealized P&L**: +$12.75 (+0.07%) at fill
-- **Stop tighten rules**: at +15% ($445.13) → 7% trail; at +20% ($464.48) → 5% trail
-- **-7% cut trigger**: $359.98 (close immediately if hit)
+- **Unrealized P&L (2026-05-22 EOD)**: -$258.06 (-1.31%) | Current price $382.01
+- **Stop tighten rules**: at +15% ($445.13) → 7% trail; at +20% ($464.48) → 5% trail (position negative — no tightening)
+- **-7% cut trigger**: $359.98 (close immediately if hit — NOT hit, $382.01 > $359.98)
 - **Catalyst**: Google I/O 2026 (Gemini, AI Mode in Search)
 - **Sector**: Communication Services
-- **Week trade count**: 1/3
+- **Week trade count**: 1/3 (week starting 2026-05-18)
+- **EOD 2026-05-22 status**: Day 2 of 2–10 swing window. Below SMA 20 ($385.43) — short-term downtrend; long-term bull stack (SMA 50/200) intact. RSI 56.8, MACD hist -3.60 (negative), Stoch K 0.87 (extreme oversold). Diverged DOWN from a rallying broad tape — post-I/O "sell the news" continuing. HOLD overnight; no exit trigger hit. **Watch closely Monday 5/25** — if it loses momentum further or approaches the -7% cut, exit per rules.
 
 ## Pending Orders
 None.
@@ -25,7 +26,8 @@ None.
 - **AMD** (~$445, 5/14): Overbought, observe-only until post-NVDA earnings tape read.
 
 ## Pending Setups
-None. GOOGL-2026-05-20 filled — see Current Positions.
+None.
+<!-- GOOGL-2026-05-20 filled 2026-05-20 → now an open position (see Current Positions). Setup detail archived under "Filled Setups — Recently Executed" below. -->
 
 ## MSFT Half-Trigger Status (ADR-0004)
 **Setup #2 — MSFT Mean-Reversion / Trend-Follow**
@@ -169,9 +171,10 @@ None. GOOGL-2026-05-20 filled — see Current Positions.
 
 ---
 
-## Pending Setups
+## Filled Setups — Recently Executed
 
-### GOOGL-2026-05-20 — SWING LONG
+### GOOGL-2026-05-20 — SWING LONG — FILLED 2026-05-20
+**Status**: FILLED — 51 sh @ $387.07 (market order `83bf9678`, 09:51 ET 2026-05-20). Now an open position — see "Current Positions" at top of file for live management state. Original setup parameters preserved below for audit.
 
 - **Direction**: LONG
 - **Entry Zone**: $387.00–$391.00
@@ -213,8 +216,8 @@ None. GOOGL-2026-05-20 filled — see Current Positions.
   - Condition 2 — MACD positive cross (histogram > 0): **NOT YET** (histogram -0.5598 — stalled/reversed from -0.5435 yesterday. Progress: -1.31 → -0.97 → -0.5525 → -0.5435 → -0.5598. Cross NOT fired.)
 - **SPY posture**: 🟢 GREEN — blocker CLEARED. If both conditions fire, a setup CAN be proposed.
 - **Catalyst window CORRECTED**: Microsoft Build 2026 is **June 2-3** (not May 19-22 as previously noted). The real catalyst window starts June 2. Setup may be re-proposed with a fresh Build catalyst if it stales now and re-forms by June 2.
-- **Half-trigger stale-by**: **2026-05-22 EOD** — 1 session remaining (5/21). If MACD cross doesn't fire by EOD 5/21, this half-trigger stales. A fresh setup could re-arm June 2 for the Build catalyst.
-- **Status**: Half-trigger — 1 of 2 conditions met. MACD cross stalled. **1 session left before stale-by.** Likely stales — but MSFT remains on the watchlist for a fresh June 2 re-arm.
+- **Half-trigger stale-by**: **2026-05-22 EOD** — reached.
+- **Status (RESOLVED 2026-05-22 EOD): STALED.** Stale-by date reached; the MACD positive cross never fired (histogram -0.56 on 5/20 → -0.36 on 5/22 — improved but stayed negative). Condition 2 never met. Half-trigger cleared per ADR-0004 with NO proposal. MSFT ($418.71, above SMA 20 $416.64) remains on the watchlist and can re-arm as a fresh setup for the **June 2–3 Microsoft Build** catalyst.
 
 ---
 
@@ -252,3 +255,15 @@ None. GOOGL-2026-05-20 filled — see Current Positions.
 - **NVDA earnings AMC tonight**: Binary event. No semiconductor exposure. Correct.
 - Weekly trade count: 0/3. Week 3 Day 3 complete.
 - Scheduling note: All three routines today fired in the first 4 hours (market-open 5:53 AM, midday 6:32 AM, EOD 9:45 AM). Cloud scheduler infra still broken. CRITICAL: fix before Week 4 (2026-05-25).
+
+## EOD Review Log — 2026-05-22 (ran ~3:48 PM ET — correctly timed)
+- **Account (Alpaca EOD)**: equity $99,741.95 | cash $80,259.43 | buying power $180,001.38 | deployed 19.53% | daytrade_count 0 | PDT false.
+- **Daily P&L**: -$288.14 (-0.29%). Daily loss cap (-2%) NOT hit. Hard rule violations: NONE.
+- **Day trades**: none to close (GOOGL is a swing position).
+- **GOOGL position**: 51 sh @ $387.07, now $382.01, unrealized -$258.06 (-1.31%). 10% trailing-stop GTC (e0b8fbda) verified ACTIVE. -7% cut ($359.98) NOT hit. No stop tightening (position negative). HELD overnight — see Current Positions for full EOD status. Diverged down from a strong post-NVDA tech rally; watch closely Monday.
+- **MSFT half-trigger**: STALED at this EOD (stale-by 5/22, ADR-0004). MACD cross never fired. Cleared, no proposal. Can re-arm fresh for June 2–3 Build.
+- **Market posture**: 🟢 GREEN — SPY $745.28 > SMA 20 $731.52 > SMA 50 $696.62. Healthy margin (~1.9%). QQQ RSI 71.3 (overbought) — no-chase discipline applies to any Monday long.
+- **Process gap reconciled**: GOOGL entry (5/20) was never written to `trade_log.json` by the execution routine — `trades[]` was empty, `weekly_trade_count` read 0. Both corrected this routine; logged to learnings.md 2026-05-22.
+- **Continuity gap**: no routines / no journal ran on 2026-05-21 — cloud scheduler still unreliable. GOOGL went unmonitored for a full session.
+- **Weekly trade count**: 1/3 (week starting 2026-05-18 — GOOGL). 2 slots remain.
+- **For Monday 5/25 pre-market**: (1) Re-check GOOGL — Day 3 of swing window; confirm trailing stop still live; if MACD stays deeply negative and price keeps diverging from the tape, consider whether the I/O thesis is broken. (2) Broad tape is extended (QQQ overbought) — no chasing. (3) MSFT off the half-trigger ledger — treat as a plain watchlist name until a fresh June-Build setup forms. (4) Weekly review runs today 4:30 PM ET — flag the trade-log atomic-write gap and the scheduler reliability issue for rule/process hardening.

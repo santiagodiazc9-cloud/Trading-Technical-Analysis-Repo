@@ -1,9 +1,37 @@
 # Market Context
 
 ## Last Updated
-2026-05-20 (Pre-Market Research, ~9:20 AM ET — delayed run, manual execution)
+2026-05-22 (End-of-Day Review, ~3:48 PM ET)
 
-## Market Summary — Week of May 18, 2026 (Week 3)
+## End-of-Day Update — 2026-05-22 (Friday, Week 3 close)
+
+### Market Posture: 🟢 GREEN (healthy margin)
+- SPY $745.28 > SMA 20 $731.52 > SMA 50 $696.62 > SMA 200 $678.83 — full bull stack.
+- Margin to SMA 20 is now ~1.9% (up from a thin 0.97% on 5/20) — GREEN is no longer fragile.
+- SPY RSI 68.8 (approaching overbought). MACD histogram -0.97 — still slightly negative but price action decisively higher. Stoch K 32.
+- Full trading allowed (new longs AND shorts).
+
+### What happened this week
+- **NVDA Q1 FY27 earnings (5/20 AMC) drove a strong post-print rally.** SPY $733.80 (5/20 pre-mkt) → $745.28. QQQ ~$701 → $717.31, RSI now 71.3 (outright overbought). Post-NVDA semiconductor strength carried the index into the Friday close.
+- Broad tape is now extended — QQQ overbought, SPY RSI near 70. No-chase discipline (ADR-0001) applies to any new long proposed Monday.
+
+### EOD readings (5/22 ~3:48 PM ET, intraday)
+| Symbol | Price | RSI | MACD Hist | SMA 20 | Notes |
+|--------|-------|-----|-----------|--------|-------|
+| SPY | $745.28 | 68.8 | -0.97 | $731.52 ✓ | 🟢 GREEN posture, healthy margin |
+| QQQ | $717.31 | 71.3 | -1.36 | $694.85 ✓ | OVERBOUGHT — no-chase applies |
+| GOOGL | $382.01 | 56.8 | -3.60 | $385.43 ✗ | HELD — below SMA 20, Stoch K 0.87 extreme oversold |
+| MSFT | $418.71 | 54.5 | -0.36 | $416.64 ✓ | Half-trigger STALED (MACD cross never fired) |
+
+### Position note
+- **GOOGL** (51 sh @ $387.07, swing long): closing the week at $382.01, unrealized -1.31%. Diverged DOWN from the rallying tape — post-I/O "sell the news" continued. Below SMA 20, MACD negative, but Stoch K 0.87 (extreme oversold) and full long-term bull stack intact. Not at any exit trigger. Watch closely Monday.
+
+### MSFT half-trigger — RESOLVED
+- Stale-by was 5/22 EOD (ADR-0004). MACD positive cross never fired (histogram -0.56 → -0.36, stayed negative). **Half-trigger cleared with no proposal.** MSFT remains on the watchlist; it can re-arm fresh for the **June 2–3 Microsoft Build** catalyst.
+
+---
+
+## Market Summary — Week of May 18, 2026 (Week 3) — (sections below are the 5/20 pre-market snapshot, kept for reference)
 
 ### Market Posture (Updated pre-market 5/20 ~9:20 AM ET)
 - **🟢 GREEN** — SPY $733.80 > SMA 20 $726.73 > SMA 50 $692.43.
