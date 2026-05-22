@@ -314,3 +314,24 @@ No-op execution. Step 4 (Approval Check) had no candidates: `memory/open_positio
 ### Action items (delta vs prior cycles)
 - Same outstanding gaps: provision `memory/discord_config.json` and `DISCORD_BOT_TOKEN` in cloud `.env` so cloud routines can post to `#daily-brief` and update the pinned Dashboard. Without these, all brief/dashboard posts back up here and the on-call user has no real-time visibility into cloud-run cadence.
 - Cloud sandbox needed `setuptools`/`wheel` upgraded before `ta` would build from sdist. Consider pinning `setuptools>=80,<83` and `wheel>=0.45` at the top of `requirements.txt` or shipping a prebuilt wheel for `ta` so future routines aren't gated on a build-time dep upgrade.
+
+---
+
+## 2026-05-22 12:00 UTC — Pre-Market Research
+
+`notify.py brief` and `notify.py dashboard` failed — `memory/discord_config.json` missing (and `DISCORD_BOT_TOKEN` absent from `.env`).
+
+### #daily-brief (silent summary — deferred)
+**Title**: Pre-Market Brief — 2026-05-22
+**Body**: Posture 🟢 GREEN (SPY $742.71 > SMA 20/50/200). Post-NVDA-earnings tape bifurcated: strong names extended/overbought, weak names broken momentum — no clean entries. Deep-dived NVDA, XLV, XLE — all NO SETUP. NVDA had a blockbuster beat-and-raise but the tape sold it 4 straight days (MACD bearish cross) → moved to WATCH. META → SHORT WATCH (awaiting bounce-rejection at $620-628). MSFT half-trigger 1/2, stale-by today. 0 new setups proposed. Holding GOOGL (+0.4%). Weekly trades 1/3, deployed 19.8%.
+
+### #approvals (setup cards — deferred)
+None — 0 setups proposed this routine.
+
+### Routine result
+Pre-market research completed in file-only mode. 0 new setups. 1 position held (GOOGL). Posture GREEN, daily loss cap not hit, hard-rule violations none. Memory files (market_context.md, open_positions.md, learnings.md, journal/2026-05-22.md) updated. Dashboard refreshed locally.
+
+### Action items (recurring — unchanged)
+- Provision `memory/discord_config.json` and `DISCORD_BOT_TOKEN` in the cloud `.env` so cloud routines can post briefs and update the pinned Dashboard.
+- RuFlo MCP still unavailable in cloud — vector recall and pattern indexing skipped. File-only memory used.
+- **DATA-INTEGRITY (for weekly review 5/22)**: `memory/trade_log.json` has `trades: []` — the GOOGL entry (51 sh @ $387.07, filled 2026-05-20) was never logged because the 5/20 EOD routine fired before the fill. Position is correct on Alpaca + `open_positions.md`. Weekly review must reconstruct the trade-log entry and fix `weekly_trade_count`.
