@@ -30,6 +30,8 @@ See `routines/5_weekly_review.md` step 4a for the canonical ADR template.
 | [0003](0003-approval-zone-immutability.md) | 2026-05-15 | Accepted | Agent cannot mutate entry zone, stop, target, or size intraday |
 | [0004](0004-half-trigger-ledger.md) | 2026-05-15 | Accepted | Partial re-arm conditions logged and inherited across routines |
 | [0005](0005-day-trading-session-approval.md) | 2026-05-20 | Accepted | Day trading uses session-level approval instead of per-trade gate |
+| [0006](0006-market-posture-system.md) | 2026-05-22 | Accepted | SMA-based Market Posture System replaces the fixed price-level trip-wire |
+| [0007](0007-short-selling-rules.md) | 2026-05-22 | Accepted | Short selling rules added — agent may now scan and propose short setups |
 
 ## Reading order
 

@@ -7,7 +7,7 @@
 - Multi-condition re-arm gates accumulate state. Logging partial triggers at the routine where they first fire is cheap; reconstructing later is expensive. **(Formalized as ADR-0004 on 2026-05-15.)**
 
 ## Common Mistakes
-- [Will be tracked here as live trades produce outcomes — empty through Week 2, still 0 trades closed.]
+- [Trading mistakes tracked here as closed trades produce outcomes — still 0 trades CLOSED through Week 3. One open position (GOOGL). Process/infrastructure mistakes are logged under Infrastructure Notes.]
 
 ## Pattern Notes
 - 2026-05-18: SPY trip-wire (<$736) triggered for first time this cycle — NVDA pre-earnings (-6.5%) led the broad pullback. Zero setups proposed; patience intact. Trip-wire rule worked as designed: unconditional rules hold best under intraday pressure when judgment-based rules would be tempted to override.
@@ -21,6 +21,7 @@
 - 2026-05-13 (EOD): Candidate rule for Friday weekly review — `Approved: YES` setups should auto-stale after 2 trading days without a fill, requiring re-evaluation against fresh indicators before re-arming. NVDA swing approval from 2026-05-08 silently drifted into staleness because no rule forced a re-check. **→ Adopted as ADR-0002 on 2026-05-15.**
 - 2026-05-14 (EOD): Distinguish "patience" from "inability to evaluate." Staying in cash is a valid outcome ONLY when it's a decision made against fresh data. Four straight trading days (5/11–5/14) with no scan and no fresh setup is an infrastructure failure masquerading as discipline. Do not let a clean-looking flat P&L hide a broken pipeline.
 - 2026-05-15 (Weekly Review): Three new lifecycle rules formalized — ADR-0002 (2-day staleness), ADR-0003 (approval-zone immutability), ADR-0004 (half-trigger ledger). No changes to entry criteria, position sizing, stop-loss methodology, or sector discipline. The intent is to harden the boundary between "the agent observes" and "the agent acts" — observation is unconstrained, action requires Santiago.
+- 2026-05-22 (Weekly Review): ADR-0006 (Market Posture System) and ADR-0007 (Short Selling Rules) formalized. Both rules were written into `strategy.md` on 2026-05-19 but went three days without an ADR or an Adjustments Log entry. **LESSON:** a mid-week strategy change must get its ADR + Adjustments Log entry *at the time of the change*, not deferred to the Friday review. A deferred ADR is an audit-trail gap, and the change could be silently lost entirely if a weekly review is skipped or the routine misfires. The weekly review should be the *backstop* that catches missed ADRs, not the default place they get written.
 
 ## Infrastructure Notes
 - 2026-05-08: Cowork scheduler sandbox blocks outbound Alpaca API connections (403 proxy error). Live order placement and real-time data require Santiago to run scripts manually from VS Code terminal. Automated routines best used for journaling, memory updates, and ClickUp notifications.
@@ -32,6 +33,8 @@
 - 2026-05-15 (Weekly Review): The `ta` fix held for one day. Today's weekly review routine confirmed the bootstrap-setuptools-first sequence works deterministically. Still TODO Santiago side: bake into a `requirements-bootstrap.txt` and patch the routine runners so this isn't a "remember to do it" step.
 - 2026-05-15 (Weekly Review): Scheduler health update — 2026-05-15 was the first day all five routines (pre-market, market-open, midday, EOD, weekly review) fired on schedule. Whether that holds next week is unknown; the 5/11–5/14 gap pattern is still unexplained.
 - 2026-05-15 (Weekly Review): Discord credentials (`memory/discord_config.json` + `DISCORD_BOT_TOKEN`) remain unprovisioned in the cloud routine host. Every brief / alert / setup card produced this week was logged to `memory/pending_discord_updates.md` instead. RuFlo MCP unavailable in cloud env all week — file-only mode used for everything.
+- 2026-05-22 (Weekly Review): **Trade-logging gap — a trade was executed but never logged.** The GOOGL entry (filled 2026-05-20) was committed to `open_positions.md` and git but never written into `memory/trade_log.json` — the `trades` array stayed empty and `weekly_trade_count` stayed 0. Cause: the EOD routine that normally logs trades misfired on 5/20 (ran 9:45 AM ET) and did not run at all on 5/21 or 5/22. Reconciled manually in this weekly review. **ACTION (process fix to propose):** trade logging must not depend solely on the EOD routine — the market-open / execution step that places an order should write the `trade_log.json` entry at fill time. A trade that is filled and committed but unlogged corrupts every downstream metric (weekly count, calibration, day-over-day P&L).
+- 2026-05-22 (Weekly Review): **Routine scheduler still broken into Week 3.** No pre-market / midday / EOD routine fired on 5/21 or 5/22 — there are no journal entries for those days and no EOD snapshots for 5/20 or 5/21. The post-NVDA-earnings reaction (the week's defining catalyst) was never captured. The `ta` package build still fails on a plain `pip install -r requirements.txt`; the documented fix (upgrade setuptools+wheel first, via `requirements-bootstrap.txt`) works but is still a manual "remember to do it" step. Scheduler reliability is now the single largest operational risk and must be fixed before Week 4.
 
 ## Synthesis Lessons
 - 2026-05-15: **Stoch oversold + RSI neutral is not enough** when long-term SMA structure is broken. MSFT today (Stoch K 5.6, RSI 50, but SMA50 < SMA200 and below SMA20) looks textbook for mean-reversion but is fighting both its own trend AND an overbought broad tape. Rule of thumb: require at least one of {SMA 20 reclaim, MACD bullish cross, sector ETF green vs SPY} before acting on a mean-reversion signal against a long-term-bearish structure.
@@ -41,6 +44,8 @@
 - 2026-05-15 (EOD): **Half-trigger logging at midday pays compound interest at EOD.** MSFT held the SMA-20 reclaim through the full session (1 of 2 re-arm conditions confirmed). Because midday already logged the partial state into `open_positions.md` + `learnings.md`, tonight's snapshot ships clean to Monday's pre-market routine without re-deriving — the routine just reads "1/2 conditions held, watch for MACD cross" and proceeds. Cheap to write at midday, expensive to reconstruct from scratch later. **Rule of thumb:** when a setup hits a fraction of its re-arm gate, log the partial state immediately — even if no proposal results today. **→ Adopted as ADR-0004.**
 - 2026-05-15 (EOD): **Audit "patience" honestly at weekly review.** Five trading days into Phase 2 (5/11–5/15) and the trade ledger reads zero. That number conflates four causes — infrastructure outage (5/11–5/14), patient pass on extended/structurally-broken setups (5/13–5/14 NVDA/MSFT), approval-blocked setup (5/15 AMZN), and clean patient pass (5/15 broad watchlist). Friday's weekly review must score these separately or the system will mistake blindness for discipline. **Rule of thumb:** weekly review categorizes each flat day into {patient | infra-blocked | approval-blocked | mixed} before computing a "discipline" stat. **→ Executed in this 2026-05-15 weekly review; see Pattern Notes for the Week 2 categorization.**
 - 2026-05-15 (Weekly Review): **The hard ratio of Week 2 was 4 days infra-blocked vs 1 day clean.** Out of five trading days: 5/11 Mon (infra-blocked — no routines fired), 5/12 Tue (infra-blocked — no routines fired), 5/13 Wed (infra-blocked — only EOD fired, no scan), 5/14 Thu (infra-blocked — only EOD fired, no scan), 5/15 Fri (clean — all routines fired with fresh data; 1 setup proposed, 0 fills, mix of patient passes and one approval-blocked setup). The "0 trades for Week 2" headline obscures that 80% of the week was unable to evaluate. Real discipline data: **1 of 1 evaluable days had a discipline outcome consistent with rules** (AMZN proposed at conf 6, gate held, no fill). Tiny n. Cannot generalize anything about "Week 2 discipline" until the infra holds for a full clean week.
+- 2026-05-22 (Weekly Review): **An extreme-oversold reading is necessary but not sufficient — and it can stay extreme for days.** The first live trade, GOOGL, was entered 5/20 at $387.07 on Stoch K 0.06 (extreme oversold) plus a real catalyst (Google I/O). By 5/22 close ($383.03) the stock had slipped *below* its SMA 20 and the MACD histogram deepened to -3.53 — the expected bounce never came and "sell the I/O news" simply continued. Stoch K was *still* 0.9 at week's end: an oversold oscillator can stay pinned near zero across multiple sessions while price keeps drifting down. This is not a rule violation (confidence was 6/10, the trailing stop and -7% cut protect it) and n=1 so it is an observation, not a rule. But the read: a confidence-6 oversold-bounce setup deserves its minimum sizing and tight management precisely because the bounce timing is the weakest link. Revisit this lesson when GOOGL closes.
+- 2026-05-22 (Weekly Review): **A catalyst confirms direction, not timing.** GOOGL's I/O catalyst was real and the long-term SMA stack is intact — the *thesis* may still be right. What the catalyst did not do was make the bounce happen on our schedule. Pairing a catalyst with an oversold technical raises confidence in the eventual direction; it does not compress the time-to-bounce. Patience after entry is as important as patience before it.
 
 ## Pattern Notes
 - 2026-05-18 (EOD): Market taking a measured pause after last week's overbought extension. SPY MACD bearish cross (histogram -0.04) is the first momentum stall signal since the May rally. Not a reversal — uptrend intact — but caution appropriate. NVDA earnings binary tomorrow, no exposure (correct). MSFT half-trigger 1/2 held for 3rd session. 0 trades, full cash, patience working as designed.
@@ -101,3 +106,40 @@
 - **Wednesday–Friday**: read the post-earnings tape on NVDA. If digital-AI semis hold, watchlist remains tech-heavy. If sector breaks, re-rotate watchlist toward defensive ETFs or value names.
 - **Capacity budget**: 0/3 weekly trade slots used this week → 3 fresh slots Monday morning. Stay disciplined: no force-fills to "use the slots."
 - **Confidence in current approach**: 7/10. Up from 6/10 (Week 1 close) because the rule set survived its first live pressure test (AMZN gate) and three lifecycle gaps were formally closed. Down from a hypothetical 8/10 because infra reliability is still the limiting factor and we have no live-trade outcome data yet to validate the entry criteria.
+
+## Weekly Review — Week Ending 2026-05-22
+
+### Week 3 Summary
+- **First live trade of the operating phase.** GOOGL long entered 2026-05-20 — the 0-trade streak (Weeks 1–2 and the first two days of Week 3) is broken.
+- **Trades entered**: 1 (GOOGL-2026-05-20 swing long, 51 sh @ $387.07, confidence 6/10). **Trades closed**: 0.
+- **P&L**: Equity $100,000.00 → $99,804.12 = **-$195.88 (-0.20%)**, entirely the GOOGL unrealized mark (-0.99% / -1.0%). No realized P&L.
+- **Win rate**: N/A — no closed trades. Calibration buckets unchanged (GOOGL still open).
+- **Posture**: GREEN at week's end (SPY $745.67, 1.93% above SMA 20). Market rallied ~1.6% on the week; NVDA earnings (5/20 AMC) digested constructively.
+- **ADRs written**: 2 — ADR-0006 (Market Posture System) and ADR-0007 (Short Selling Rules), both backfilled for rule changes made 2026-05-19.
+- **Rule violations**: NONE. GOOGL respects every risk rule — 19.58% deployed (< 20% cap), real 10% GTC trailing stop placed at fill, well above the -7% cut.
+
+### Patterns This Week
+- The Market Posture System (ADR-0006) was used for real for the first time and worked: it cleared the stale $736 trip-wire that had been blocking longs inside a healthy uptrend, and classified GREEN correctly.
+- GOOGL is a clean test of the "extreme oversold + catalyst" thesis — and so far the bounce has not come. See the Synthesis Lessons above: oversold is necessary, not sufficient; a catalyst confirms direction, not timing.
+- Post-NVDA-earnings, the semis split sharply: high-beta names (AMD, ARM) ripped to overbought; the heavier names (AVGO, TSM) lagged and AVGO is now oversold within its uptrend. NVDA itself sits at $215.34, inside the pre-flagged $215–$220 watch zone.
+
+### Mistakes / Gaps This Week
+- **Trade-logging gap** (see Infrastructure Notes 2026-05-22): GOOGL filled but never written to `trade_log.json` until this review caught it. The fix is to log trades at fill time, not at EOD.
+- **Deferred ADRs** (see Strategy Refinements 2026-05-22): the 5/19 posture/short rules went three days without an ADR. Mid-week changes should be ADR'd at the time of change.
+- **Scheduler still broken**: no routine fired 5/21 or 5/22; the post-earnings tape was never journaled. This is the top operational risk.
+
+### Rules Changed
+- ADR-0006 — SMA-based Market Posture System replaces the fixed price-level trip-wire.
+- ADR-0007 — Short selling rules added; the agent may now scan and propose shorts.
+- No changes to position sizing, stop methodology, sector discipline, or the confluence checklist. CLAUDE.md hard rules 1–15 unchanged. With only one open and zero closed trades, there is no outcome data to justify tuning entry criteria.
+
+### Plan for Week 4 (May 26–29, 2026 — Mon 5/26 is Memorial Day, market closed)
+- **Manage GOOGL first.** It is below SMA 20 with a deteriorating MACD. No action unless a hard rule triggers (-7% cut $359.98, or trailing stop). Watch for either an SMA 20 reclaim (thesis confirms) or a break toward $376 (stop comes into play).
+- **NVDA** is the best fresh-setup candidate — re-baseline it fully at the 5/26 pre-market (post-earnings reaction was never journaled). Long setup only if it holds SMA 20 and MACD turns up.
+- **AVGO** — oversold-within-uptrend watch; needs MACD confirmation.
+- **META** — short watch under ADR-0007; entry only on a failed bounce to the $617–$619 SMA confluence.
+- Do not chase the overbought index-linked names (AAPL, AMD, ARM, QQQ all RSI > 72).
+- **Fix the scheduler** before relying on automated routines for execution/logging.
+
+### Confidence in Current Approach
+**6/10** (down from 7/10 at the Week 2 close). Up-votes: a rule set that is being exercised for real, a posture system that worked on first use, and a first trade that respects every risk rule. Down-votes: the trade-logging gap and the persistent scheduler failure mean the automation cannot yet be trusted to execute-and-record without manual reconciliation; the first live trade is underwater; and we still have zero closed trades, so entry/exit logic remains unvalidated end-to-end. The strategy is sound; the infrastructure is the problem.

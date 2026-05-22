@@ -234,7 +234,20 @@ def render(state: dict) -> str:
     push("## Recent Trades (last 5)")
     if state["recent_trades"]:
         for t in state["recent_trades"]:
-            push(f"- {t}")
+            if isinstance(t, dict):
+                entry = t.get("entry", {}) or {}
+                sym = t.get("symbol", "?")
+                direction = t.get("direction", "")
+                status = t.get("status", "")
+                qty = entry.get("qty", "")
+                price = entry.get("price")
+                date = entry.get("date", "")
+                price_str = format_money(price) if price is not None else "—"
+                pnl = t.get("realized_pnl")
+                pnl_str = f" · realized {format_money(pnl)}" if pnl is not None else ""
+                push(f"- {sym} {direction} {qty} @ {price_str} ({status}, {date}){pnl_str}")
+            else:
+                push(f"- {t}")
     else:
         push("_No trades logged yet._")
     push("")

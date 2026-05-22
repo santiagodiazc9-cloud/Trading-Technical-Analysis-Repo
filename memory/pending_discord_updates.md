@@ -314,3 +314,27 @@ No-op execution. Step 4 (Approval Check) had no candidates: `memory/open_positio
 ### Action items (delta vs prior cycles)
 - Same outstanding gaps: provision `memory/discord_config.json` and `DISCORD_BOT_TOKEN` in cloud `.env` so cloud routines can post to `#daily-brief` and update the pinned Dashboard. Without these, all brief/dashboard posts back up here and the on-call user has no real-time visibility into cloud-run cadence.
 - Cloud sandbox needed `setuptools`/`wheel` upgraded before `ta` would build from sdist. Consider pinning `setuptools>=80,<83` and `wheel>=0.45` at the top of `requirements.txt` or shipping a prebuilt wheel for `ta` so future routines aren't gated on a build-time dep upgrade.
+
+---
+
+## 2026-05-22 20:35 UTC — Friday Weekly Review (Week 3 close)
+
+`notify.py brief` and `notify.py dashboard` both failed (unchanged root cause):
+- `notify.py brief`: `memory/discord_config.json` missing.
+- `notify.py dashboard`: `DISCORD_BOT_TOKEN` missing from `.env`.
+
+### #daily-brief (silent summary — deferred)
+**Title**: Weekly Review — Week ending 2026-05-22
+**Body**: Week 3 close. P&L -$195.88 (-0.20%), unrealized — 1 open position (GOOGL long, -1.0%). Trades entered 1, closed 0, win rate N/A. First live trade of the operating phase: GOOGL-2026-05-20 (Google I/O catalyst + extreme-oversold; bounce not yet confirmed). 2 ADRs written — ADR-0006 Market Posture System, ADR-0007 Short Selling Rules (both backfilled from rule changes made 2026-05-19). Posture GREEN (SPY $745.67). Confidence 6/10 (down from 7). Week 4 plan: manage GOOGL, watch NVDA in its $215–$220 post-earnings zone, fix the routine scheduler.
+
+### #chat (reflective question — deferred)
+"Our first live trade, GOOGL, was an 'extreme oversold + catalyst' setup — and the catalyst fired but the bounce hasn't. If it stops out, was the lesson 'don't trust oversold bounces' or 'don't enter before momentum confirms (MACD turning / SMA 20 reclaimed)'? One outcome won't answer it — but which way does your intuition lean?"
+
+### Routine result
+Friday Weekly Review completed all on-disk steps: trade_log.json reconciled (GOOGL trade logged, weekly count fixed, 5/22 snapshot added), strategy.md Adjustments Log updated, ADR-0006 + ADR-0007 written and indexed, watchlist + market_context + learnings + weekly journal updated, open_positions.md cleaned up, Dashboard.md regenerated. RuFlo MCP unavailable — file-only mode (ADRs to docs/adr/ as normal, parallel RuFlo memory_store skipped). ClickUp not written to — it is a read-only archive per CLAUDE.md (Discord migration Phase 2–3) and routine 5 step 9.
+
+### Action items (delta vs prior cycles)
+- Still outstanding: provision `memory/discord_config.json` and `DISCORD_BOT_TOKEN` in cloud `.env`.
+- NEW — trade-logging gap: the GOOGL fill (5/20) reached `open_positions.md` and git but never reached `trade_log.json`, because the EOD routine that logs trades misfired 5/20–5/22. Fix: log trades at fill time in the execution step, not deferred to EOD.
+- NEW — scheduler: no routine fired 5/21 or 5/22; 5/20's fired hours early. Top operational risk — audit launchd/cron/GHA before Week 4.
+- Carry-forward: bake the `setuptools`/`wheel` bootstrap (`requirements-bootstrap.txt`) into the routine runners so `ta` builds without a manual step.

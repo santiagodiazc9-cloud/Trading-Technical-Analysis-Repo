@@ -7,11 +7,44 @@
     "platform": "Alpaca Paper Trading",
     "note": "Day 0 baseline — bot becomes active Monday 2026-05-11."
   },
-  "trades": [],
+  "trades": [
+    {
+      "trade_id": "GOOGL-2026-05-20",
+      "symbol": "GOOGL",
+      "sector": "Communication Services",
+      "direction": "LONG",
+      "strategy": "swing",
+      "status": "open",
+      "entry": {
+        "date": "2026-05-20",
+        "filled_at": "2026-05-20T13:51Z approx",
+        "price": 387.07,
+        "qty": 51,
+        "cost_basis": 19740.57
+      },
+      "stop": {
+        "type": "trailing_stop",
+        "trail_pct": 10,
+        "order_id": "e0b8fbda-b5e5-44d4-86d2-14523e6b4b7c",
+        "initial_floor": 348.36,
+        "placed_at": "2026-05-20T13:51:39Z",
+        "status": "new (GTC, untriggered)"
+      },
+      "target": 415.00,
+      "rr": 2.3,
+      "confidence": 6,
+      "catalyst": "Google I/O 2026 — Gemini models, AI Mode in Search, agentic AI",
+      "exit": null,
+      "realized_pnl": null,
+      "unrealized_pnl_at_2026-05-22_weekly_review": -195.88,
+      "unrealized_pnl_pct_at_2026-05-22_weekly_review": -0.99,
+      "notes": "First live trade of the operating phase. Approved via Discord 2026-05-20 13:28Z. Entry filled ~09:51 ET 2026-05-20; 10% GTC trailing stop placed immediately per Post-Entry Order hard rule. Logged retroactively in the 2026-05-22 weekly review — the EOD routine that normally logs trades misfired 5/20-5/22."
+    }
+  ],
   "weekly_trade_count": {
     "_comment": "Resets every Monday 00:00 ET. Used to enforce max-3-trades-per-week rule.",
     "week_starting_2026-05-11": 0,
-    "week_starting_2026-05-18": 0
+    "week_starting_2026-05-18": 1
   },
   "daily_snapshots": [
     {
@@ -163,18 +196,52 @@
       "daily_loss_cap_hit": false,
       "hard_rule_violations": [],
       "notes": "Week 3 Day 2. 0 trades, 0 positions, P&L $0.00 (0.00%). SPY trip-wire active and WORSENED into close ($735.51 midday → $733.85 EOD; $736 threshold not reclaimed). NVDA $221.46 EOD heading into Q1 FY27 earnings AMC tonight — confirmed no semiconductor exposure entering print. MSFT half-trigger 1/2: MACD histogram barely moved (-0.5525 midday → -0.5435 EOD); pace of approach to zero has slowed significantly vs prior sessions. SMA 20 condition still MET ($417.77 > $417.37). AMZN-2026-05-15 archived midday per ADR-0002. GOOGL extreme oversold (Stoch RSI 0.06 midday). No setups proposed. Stale-state sweep: both learnings.md and strategy.md modified today — no stale-file flags needed. NVDA earnings reaction (5/20 AMC → 5/21 pre-market tape read) is the week's defining catalyst for semiconductor sector direction and potential SPY trip-wire resolution."
+    },
+    {
+      "date": "2026-05-22",
+      "routine": "friday_weekly_review",
+      "_snapshot_note": "EOD-equivalent snapshot captured by the weekly review. The dedicated EOD routine did not fire on 5/20 (ran early at 9:45 AM ET), 5/21 (no run), or 5/22 (no run). No EOD snapshots exist for 5/20 or 5/21 — daily-snapshot continuity gap. Values below are live Alpaca state at 2026-05-22 ~16:35 ET, after market close.",
+      "equity": 99804.12,
+      "cash": 80259.43,
+      "buying_power": 180063.55,
+      "deployed_pct": 19.58,
+      "pnl_today_dollars": -225.97,
+      "pnl_today_pct": -0.23,
+      "open_positions": 1,
+      "trades_closed_today": 0,
+      "wins_today": 0,
+      "losses_today": 0,
+      "trades_opened_today": 0,
+      "weekly_trade_count": 1,
+      "daytrade_count": 0,
+      "pattern_day_trader": false,
+      "running_win_rate": null,
+      "running_pnl_dollars": -195.88,
+      "running_pnl_pct": -0.20,
+      "confidence_calibration": {
+        "_comment": "predicted-confidence-bucket -> {sample_size, wins, losses}. Counts CLOSED trades only. GOOGL (confidence 6) is still open — not yet counted.",
+        "bucket_9_10": {"n": 0, "wins": 0, "losses": 0},
+        "bucket_7_8":  {"n": 0, "wins": 0, "losses": 0},
+        "bucket_5_6":  {"n": 0, "wins": 0, "losses": 0}
+      },
+      "daily_loss_cap_hit": false,
+      "hard_rule_violations": [],
+      "notes": "Week 3 close. 1 open position (GOOGL long, entered 5/20). Equity $99,804.12, down -$195.88 (-0.20%) from the $100,000 baseline — entirely the GOOGL unrealized mark (-0.99%). 0 trades closed this week. GOOGL position within risk rules: 19.58% deployed (< 20% cap), real 10% GTC trailing stop active (order e0b8fbda), well above the -7% cut line. Daily loss cap NOT hit (-0.23% today). Hard rule violations: NONE. Scheduler infra still broken — no EOD routine fired 5/20-5/22; this snapshot is the weekly review's reconciliation."
     }
   ],
   "summary": {
-    "total_trades": 0,
+    "total_trades": 1,
+    "open_trades": 1,
+    "closed_trades": 0,
     "wins": 0,
     "losses": 0,
     "win_rate": null,
-    "total_pnl": 0,
+    "total_realized_pnl": 0,
     "best_trade": null,
     "worst_trade": null,
-    "current_equity": 100000.00,
-    "phase_pnl": 0,
-    "phase_pnl_pct": 0
+    "current_equity": 99804.12,
+    "phase_pnl": -195.88,
+    "phase_pnl_pct": -0.20,
+    "_phase_pnl_note": "phase_pnl is the mark-to-market equity change from the $100,000 day-0 baseline. It is unrealized — the single open position (GOOGL) accounts for all of it. No trades have closed yet."
   }
 }

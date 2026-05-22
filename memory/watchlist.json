@@ -3,20 +3,20 @@
     {
       "symbol": "AAPL",
       "sector": "Tech",
-      "notes": "Mega-cap tech, strong trend follower. 2026-05-14: ~$298.95 RSI ~76, Stoch ~98 — overbought. 2026-05-18: no fresh data; prior overbought condition likely persists. Wait for daily pullback toward SMA 20 (~$288 area). No setup.",
+      "notes": "Mega-cap tech, strong trend follower. 2026-05-22 close $308.81: RSI 78.5 (overbought), Stoch K 96.9, MACD hist +0.98, well above SMA 20 ($289.33). Extended — no entry. Wait for a daily pullback toward SMA 20 (~$289). No setup.",
       "strategy": "swing"
     },
     {
       "symbol": "MSFT",
       "sector": "Tech",
-      "notes": "Cloud/AI leader. 2026-05-18: $422.00, SMA 20 ($417.40) reclaimed ✓, SMA 200 ($463.13) overhead — long-term bearish. MACD histogram -1.31 (cross pending). Re-arm gate: SMA 20 reclaim CONFIRMED; MACD positive cross PENDING (ADR-0004 half-trigger). Entry zone $410–$413 overrun — no chase. Catalyst: Microsoft Build 2026 (5/19–22). Watch for post-Build pullback to $412–$415 + MACD cross in same routine. MACD stale-by 2026-05-22 EOD if no progress.",
+      "notes": "Cloud/AI leader. HALF-TRIGGER STALED 2026-05-22 EOD per ADR-0004 — the MACD positive-cross condition never fired across the full 5-day window (histogram -1.31 → -0.97 → -0.55 → -0.54 → -0.56 → -0.37; approached zero but never crossed). SMA 20 reclaim held throughout. 2026-05-22 close $418.50: above SMA 20 ($416.63), MACD hist -0.37, RSI 54.4, Stoch 68.4, SMA 200 ($460.40) still overhead. Setup #2 cleared without re-proposal. Real catalyst — Microsoft Build 2026 — is June 2-3 (San Francisco), not last week. MSFT stays on watch for a fresh setup forming into the Build window.",
       "strategy": "swing",
       "priority": "high"
     },
     {
       "symbol": "NVDA",
       "sector": "Tech",
-      "notes": "AI chip leader. 2026-05-18: ~$235–236. EARNINGS WEDNESDAY 5/20 AMC — binary event. NO NEW ENTRY until post-earnings pullback to $215–$220 with RSI < 65. Prior $206–210 setup EXPIRED 2026-05-16. Post-earnings read: if strong print + guide, watch for consolidation near $220–$225; if miss, may pull all the way back to SMA 50 (~$191). Do not pre-position.",
+      "notes": "AI chip leader. Q1 FY27 earnings reported 2026-05-20 AMC. 2026-05-22 close $215.34: RSI 53.7, MACD hist -0.87, SMA 20 ($214.75) just reclaimed, SMA 50 $196.80, Stoch 26.8. Price has settled into the $215–$220 post-earnings watch zone with RSI well under 65 — the exact re-arm condition flagged pre-earnings. NOTE: routines did not fire 5/21, so the post-earnings reaction was never captured in a journal — re-baseline NVDA fully at the 2026-05-26 pre-market before proposing. Potential swing-long candidate if MACD turns up and it holds SMA 20.",
       "strategy": "both",
       "priority": "high"
     },
@@ -30,26 +30,26 @@
     {
       "symbol": "AMZN",
       "sector": "Consumer Discretionary",
-      "notes": "E-commerce + cloud. 2026-05-18: $264.22, inside entry zone $264–$265.50 from setup AMZN-2026-05-15. BUT MACD histogram -2.02 (deepening negative) + XLY sector ($116.52, below SMA 20, MACD negative) = PASS. Setup AMZN-2026-05-15 stales at EOD 5/19 pre-market per ADR-0002. After archive: re-evaluate on next pullback to SMA 20 with MACD confirmation and XLY recovery.",
+      "notes": "E-commerce + cloud. AMZN-2026-05-15 setup was archived 5/19 per ADR-0002. 2026-05-22 close $266.27: recovered off the $256 low but MACD hist still -2.10 (negative), price just below SMA 20 ($267.09), RSI 58.0, Stoch 23.7. SMA 50 $241.93 — long-term bullish. No setup — wait for SMA 20 reclaim with MACD turning positive.",
       "strategy": "swing",
       "priority": "normal"
     },
     {
       "symbol": "META",
       "sector": "Communication Services",
-      "notes": "Social/AI play. 2026-05-14: $616.61 RSI 46.4 — neutral/weak. Below SMA 20, MACD histogram deeply negative. No setup. Watch for SMA 20 reclaim.",
+      "notes": "Social/AI play. SHORT WATCH (per ADR-0007 short rules). 2026-05-22 close $610.42: below SMA 20 ($619.10), SMA 50 ($617.83) AND SMA 200 ($669.42) — full bearish stack. RSI 45.4 (within 40–65 short range), MACD hist -1.01. Do NOT short here — $9 below SMA 20 is chasing a falling knife. Short entry trigger: a rally/bounce to the $617–$619 SMA 20/50 confluence that FAILS (rejection candle) with RSI staying above 40. Re-evaluate next pre-market.",
       "strategy": "swing"
     },
     {
       "symbol": "GOOGL",
       "sector": "Communication Services",
-      "notes": "Search + cloud. 2026-05-14: $402.63 RSI 75.6 — overbought. Long-term bullish. No entry; wait for clean daily pullback to SMA 20.",
+      "notes": "Search + cloud. **HELD POSITION** — GOOGL-2026-05-20 long, 51 sh @ $387.07 (filled 2026-05-20), 10% GTC trailing stop order e0b8fbda. 2026-05-22 close $383.03: BELOW SMA 20 ($385.48), MACD hist -3.53 (deteriorating), Stoch K 0.9 (extreme oversold), RSI 57.6. Unrealized ~-1.0%. Google I/O 'sell the news' continued past our entry; the oversold-bounce thesis is not yet confirmed. Watch for SMA 20 reclaim + MACD turn. -7% cut line $359.98; trailing-stop floor ~$348. Target $415.",
       "strategy": "swing"
     },
     {
       "symbol": "AMD",
       "sector": "Tech",
-      "notes": "Chip sector. 2026-05-14: $445.40 RSI 76.1 — overbought. Long-term bullish. Observe-only until post-NVDA earnings (5/20 AMC) — NVDA print sets semiconductor sector direction for the week. Re-evaluate 5/21 pre-market.",
+      "notes": "Chip sector. Ripped post-NVDA earnings. 2026-05-22 close $467.64: RSI 72.6 (overbought), MACD hist -1.50, well above SMA 20 ($405.86). Extended — no chase. Wait for a pullback toward SMA 20. NVDA print clearly lifted the high-beta semis (AMD, ARM); the laggards were AVGO and TSM.",
       "strategy": "both"
     },
     {
@@ -141,21 +141,21 @@
     {
       "symbol": "AVGO",
       "sector": "Tech",
-      "notes": "Broadcom — custom AI accelerators (Google TPU, Meta MTIA), networking silicon (switching/routing), VMware cloud infrastructure. Strong cash flow, dividend grower. High institutional ownership. No indicator data yet — pre-market routine will initialize. Watch earnings (~Aug 2026). Post-NVDA earnings (5/20 AMC) may set semiconductor sector direction — re-evaluate 5/21.",
+      "notes": "Broadcom — custom AI accelerators (Google TPU, Meta MTIA), networking silicon, VMware cloud infrastructure. Strong cash flow, dividend grower. 2026-05-22 close $414.01: RSI 53.1, MACD hist -4.18 (deep negative), Stoch K 8.5 (extreme oversold), just below SMA 20 ($419.01) — long-term bull stack intact (SMA 50 $377, SMA 200 $350). Did NOT rip post-NVDA like AMD/ARM. Oversold-within-uptrend WATCH candidate — needs MACD to turn before a setup forms. Earnings ~Aug 2026.",
       "strategy": "swing",
       "priority": "high"
     },
     {
       "symbol": "TSM",
       "sector": "Tech",
-      "notes": "TSMC — world's largest semiconductor foundry, manufactures chips for NVDA, AAPL, AMD, ARM. Critical AI supply chain chokepoint. NYSE ADR (not Taiwan exchange). Watch for geopolitical risk premium (Taiwan Strait). NVDA earnings 5/20 AMC will move TSM sympathetically. No indicator data yet — pre-market routine will initialize.",
+      "notes": "TSMC — world's largest semiconductor foundry; manufactures chips for NVDA, AAPL, AMD, ARM. Critical AI supply-chain chokepoint. NYSE ADR. Watch geopolitical risk premium (Taiwan Strait). 2026-05-22 close $404.33: RSI 55.3, MACD hist -1.99, just above SMA 20 ($402.57) — long-term bull stack intact. Lagged the post-NVDA semi rally (like AVGO). No setup yet — needs MACD confirmation.",
       "strategy": "swing",
       "priority": "high"
     },
     {
       "symbol": "ARM",
       "sector": "Tech",
-      "notes": "Arm Holdings — CPU architecture licensor. Every smartphone runs ARM; growing AI edge and data center deployment. High P/E, momentum-driven. Watch for licensing renewal catalysts (NVDA, AAPL, Qualcomm). High ATR relative to price — size accordingly. No indicator data yet — pre-market routine will initialize.",
+      "notes": "Arm Holdings — CPU architecture licensor. Every smartphone runs ARM; growing AI edge and data-center deployment. High P/E, momentum-driven. 2026-05-22 close $306.42: RSI 76.6 (overbought), MACD hist +6.94 (strong momentum), Stoch 93.3 — ripped hard post-NVDA earnings. Extended — no chase. Wait for a pullback. High ATR relative to price — size accordingly.",
       "strategy": "swing",
       "priority": "normal"
     },
@@ -188,6 +188,6 @@
       "priority": "normal"
     }
   ],
-  "last_updated": "2026-05-20",
-  "update_reason": "Added 7 symbols across two themes: (1) AI infrastructure semiconductor supply chain — AVGO (Broadcom), TSM (TSMC), ARM (Arm Holdings); (2) Nuclear energy / AI power thesis — CEG (Constellation, large-cap operator), VST (Vistra, large-cap operator), NNE (Nano Nuclear, speculative), SMR (NuScale, speculative). Goal: capture the full AI infrastructure stack from chip manufacturing through to power generation."
+  "last_updated": "2026-05-22",
+  "update_reason": "Friday Weekly Review (Week 3, ending 2026-05-22). Refreshed notes for all actively-tracked names against fresh 2026-05-22 close data from research.py scan. Key changes: GOOGL flipped to HELD POSITION (entered 5/20); MSFT half-trigger STALED per ADR-0004 (MACD cross never fired); NVDA settled into the $215–$220 post-earnings watch zone; META reframed as a SHORT WATCH under the new ADR-0007 short rules. No symbols removed — none have been stale 2+ weeks (the list was last expanded 5/20). No symbols added — 29 names already span the AI chip + power thesis and the watchlist is at a workable size."
 }

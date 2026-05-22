@@ -36,7 +36,7 @@ Starting with a **conservative, paper-trading** approach. Focus on high-probabil
 - Max 3 swing positions at a time
 - **RSI divergence**: if price makes a new high but RSI does not, treat as a caution signal — tighten target or skip
 
-## Market Posture System (added 2026-05-19, replaces price-level trip-wire)
+## Market Posture System (added 2026-05-19, replaces price-level trip-wire) — ADR-0006
 
 Every pre-market routine classifies the current market posture based on SPY's position relative to its moving averages. This replaces the old hard price-level trip-wire ($736), which became stale and context-free.
 
@@ -60,7 +60,7 @@ Every pre-market routine classifies the current market posture based on SPY's po
 
 **Why this replaces the old trip-wire:** A fixed price level ($736) has no relationship to market health after the market moves significantly. A $734 SPY in an uptrend is a buying opportunity; a $737 SPY after a -15% crash is a dead-cat bounce. The SMA relationship captures this correctly in both cases.
 
-## Short Selling Rules (added 2026-05-19)
+## Short Selling Rules (added 2026-05-19) — ADR-0007
 
 Short setups are allowed and actively scanned in every pre-market routine. The mirror of the long rules applies. Shorts unlock opportunity in sideways and bearish markets.
 
@@ -127,12 +127,15 @@ When a multi-condition re-arm gate (set as part of a setup PASS or close-out) ha
 - Memory architecture validated: all read/write routines working as intended.
 - Approval gate held under live intraday pressure (AMZN-2026-05-15): technicals improved through the day, agent did not mutate parameters or self-approve.
 - Staleness rule (informal in Week 2, now ADR-0002) caught the NVDA-2026-05-08 silent-drift case cleanly.
+- First live trade executed (Week 3): GOOGL long filled 2026-05-20 with a real 10% GTC trailing stop placed immediately — Post-Entry Order hard rule satisfied end-to-end for the first time.
+- Market Posture System (ADR-0006) classified 🟢 GREEN cleanly on its first live use (2026-05-20), correctly clearing the stale $736 trip-wire that had blocked longs inside a healthy uptrend.
 
 ## What's Not Working
-- No live trade data yet to evaluate setup quality (still 0 trades through Week 2).
-- Cloud routine scheduler unreliable: 4 trading days of Week 2 (5/11–5/14) ran with degraded or missing routines. Only the 5/15 schedule fired fully. Infra audit needed (launchd / cron / GHA workflow).
-- Discord webhooks (`memory/discord_config.json`) and bot token still unprovisioned in cloud host — every brief, fill, alert this week logged to `memory/pending_discord_updates.md` instead.
-- RuFlo MCP unavailable in cloud env all week — vector recall and pattern storage not running. File-only memory only.
+- Still no *closed*-trade data to evaluate setup quality. Week 3 opened the first position (GOOGL) but it is unrealized — entry criteria, stop methodology, and exit logic remain untested end-to-end.
+- Cloud routine scheduler still unreliable into Week 3: on 2026-05-20 all three of market-open, midday, and EOD fired in the first 4 hours of the day (5:53 AM, 6:32 AM, 9:45 AM ET) instead of on schedule. No journal entry exists for 5/21 or 5/22 — EOD routines did not fire those days. Infra audit (launchd / cron / GHA workflow) still outstanding and now the top operational risk.
+- Trade-logging gap: the GOOGL fill (2026-05-20) was committed to `open_positions.md` but never written into `memory/trade_log.json` (`trades` stayed empty, `weekly_trade_count` stayed 0) because the EOD routine that normally logs trades misfired all three remaining days of the week. Reconciled manually in the 2026-05-22 weekly review.
+- Discord webhooks (`memory/discord_config.json`) and bot token still unprovisioned in cloud host — every brief, fill, alert logged to `memory/pending_discord_updates.md` instead.
+- RuFlo MCP unavailable in cloud env — vector recall and pattern storage not running. File-only memory only.
 
 ## Adjustments Log
 - 2026-05-16: Upgraded strategy framework. Added: ADX (14) > 25 trend strength gate on all entries (day + swing), Fibonacci 38.2%/61.8% as preferred pullback entry zones, RSI divergence as caution signal, economic calendar hard rules (no new entries within 30min of high-impact news, no holding swings through macro events), explicit confluence checklist (all 6 required to propose). Forex-specific concepts (session hours, spreads, SMC order blocks) not applied — equities only. Core risk rules in CLAUDE.md unchanged.
@@ -147,3 +150,9 @@ When a multi-condition re-arm gate (set as part of a setup PASS or close-out) ha
   - **ADR-0004**: Half-trigger ledger. Partial re-arm conditions are logged in `open_positions.md` and `learnings.md` at the routine where they first fire; subsequent routines inherit the partial state. (Validation case: MSFT SMA 20 reclaim fired and stuck across midday + EOD on 2026-05-15.)
 
   No changes to the core risk rules (CLAUDE.md hard rules 1–15) or to the strategy framework (day-trade / swing-trade entry signals). All three new rules govern *setup lifecycle*, not entry criteria.
+- 2026-05-19 (mid-week, formalized in 2026-05-22 weekly review): **Two strategy changes added mid-week — now formalized via ADR.**
+  - **Market Posture System** replaced the fixed SPY $736 / QQQ $700 price-level trip-wire with a four-state SMA-based posture classification (GREEN/CAUTION/RED/BEAR) plus a VIX override and CAUTION exceptions. The fixed level had gone stale and context-free — blocking longs at a price that sat comfortably inside an uptrend. **Formalized as ADR-0006.**
+  - **Short Selling Rules** added a full short-selling ruleset (6-point swing entry, short-specific hard rules, short day-trade criteria). The agent now actively scans for short setups every pre-market routine, making RED/BEAR posture actionable instead of cash-only. **Formalized as ADR-0007.**
+  These two changes were written into this file on 2026-05-19 but never carried an ADR or an Adjustments Log entry — this is the backfill. Core risk rules (CLAUDE.md hard rules 1–15) unchanged; the −7% cut applies symmetrically to shorts.
+- 2026-05-20 (EOD): **Day-trade approval model** — the intraday day-trading engine uses a session-level approval (`memory/daytrader_session.json`) instead of a per-trade gate, since a 5-minute polling cadence cannot wait on per-trade Discord approval. Adds to (does not replace) CLAUDE.md Rule 15. **Formalized as ADR-0005.**
+- 2026-05-22 (Friday Weekly Review): No new entry, risk, or sizing rules changed this week. The week's rule activity was the backfill of ADR-0006 and ADR-0007 for the 2026-05-19 changes. First live trade of the operating phase (GOOGL long, 2026-05-20) is still open — there is no closed-trade outcome data yet to justify tuning entry criteria, position sizing, or stop methodology. Holding the framework unchanged until closed trades produce signal.
