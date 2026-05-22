@@ -314,3 +314,24 @@ No-op execution. Step 4 (Approval Check) had no candidates: `memory/open_positio
 ### Action items (delta vs prior cycles)
 - Same outstanding gaps: provision `memory/discord_config.json` and `DISCORD_BOT_TOKEN` in cloud `.env` so cloud routines can post to `#daily-brief` and update the pinned Dashboard. Without these, all brief/dashboard posts back up here and the on-call user has no real-time visibility into cloud-run cadence.
 - Cloud sandbox needed `setuptools`/`wheel` upgraded before `ta` would build from sdist. Consider pinning `setuptools>=80,<83` and `wheel>=0.45` at the top of `requirements.txt` or shipping a prebuilt wheel for `ta` so future routines aren't gated on a build-time dep upgrade.
+
+---
+
+## 2026-05-22 16:45 UTC — Midday Scan
+
+`notify.py brief` and `notify.py dashboard` both failed (cloud host — Discord still unprovisioned):
+- `notify.py brief`: `memory/discord_config.json` missing.
+- `notify.py dashboard`: `DISCORD_BOT_TOKEN` missing from `.env`.
+
+Routine completed all on-disk steps (open_positions.md midday log + GOOGL P&L + MSFT half-trigger update, trade_log.json GOOGL entry recorded + weekly count corrected, journal/2026-05-22.md created, market_context.md midday update, Dashboard.md regenerated).
+
+### #daily-brief (silent summary — deferred)
+**Title**: Midday Scan — 2026-05-22
+**Body**: GOOGL -0.40% (-$79.82) — thesis intact-but-soft, HOLD; trailing stop e0b8fbda live. Account -$112 today (-0.11%), daily loss cap not hit. Posture 🟢 GREEN (SPY $747, post-NVDA relief rally) but tape broadly overbought — 0 new setups (no chasing). NVDA in pullback zone but MACD not confirming; META short not deepening. MSFT half-trigger 1/2 — stales EOD today. Weekly trades 1/3.
+
+### Routine result
+1 position managed (GOOGL — HOLD, no action; not near stop/target/-7%-cut/tighten). 0 new setups proposed. 0 trades executed. No AUTO closes triggered. Hard rule violations: NONE. First correctly-timed routine in over a week (fired 12:39 PM ET); 5/21 had a full-day routine gap.
+
+### Action items
+- Same outstanding gap: provision `memory/discord_config.json` and `DISCORD_BOT_TOKEN` in cloud `.env` so cloud routines can post `#daily-brief` and mirror the pinned Dashboard.
+- Routine hand-off gap found: the 5/20 GOOGL fill was written to open_positions.md but never to trade_log.json, and weekly_trade_count stayed 0 — both corrected this routine. Flag for Friday weekly review: add a post-fill cross-check (position must land in BOTH files).

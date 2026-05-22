@@ -1,7 +1,16 @@
 # Market Context
 
 ## Last Updated
-2026-05-20 (Pre-Market Research, ~9:20 AM ET — delayed run, manual execution)
+2026-05-22 (Midday Scan, 12:39 PM ET — correctly-timed run)
+
+## Midday Update — 2026-05-22 (12:39 PM ET)
+
+- **Posture: 🟢 GREEN (reconfirmed, stronger).** SPY $747.01 > SMA 20 $731.60 > SMA 50 $696.66 > SMA 200 $678.84. SPY rallied ~$13 since the 5/20 pre-market read ($733.80) — a post-NVDA-earnings relief rally. Full SMA bull stack. RSI 69.6 (approaching overbought); MACD line 12.47 above signal 13.34 region but histogram -0.86 (slightly negative). bb_pct 0.83.
+- **Tape is broadly overbought** — chasing risk is high. RSI readings: AAPL 78.8, PANW 83.5, ARM 76.9, QQQ 72.0, XLK 73.3, AMD 72.5, LLY 68.1 (and +9% extended from SMA 20). The NVDA earnings beat lifted the whole AI/semi complex; entering extended names here would violate CLAUDE.md rule 12 (no chasing).
+- **NVDA**: $216.59 post-earnings, inside the $215–220 pullback watch zone, RSI 54.9 (< 65 ✓), above SMA 20 $214.82. But MACD histogram -0.79 (negative, no bullish cross) and price below VWAP $218.17 — momentum confluence not yet met. WATCH, not a setup.
+- **META**: $608.58, below SMA 20/50/200, RSI 44.5. MACD histogram -1.13 — LESS negative than -2.41 on 5/20 (momentum NOT deepening). Price below the $620–628 short-entry bounce zone. No clean short — falling-knife risk.
+- **5/21 routine gap**: No routines ran 5/21 (no journal, no logs). Today's 12:39 PM midday scan is the first correctly-timed routine in over a week.
+- 1/3 weekly trade slots used (GOOGL). 1 open position. Deployed 19.67%.
 
 ## Market Summary — Week of May 18, 2026 (Week 3)
 

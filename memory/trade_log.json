@@ -7,11 +7,35 @@
     "platform": "Alpaca Paper Trading",
     "note": "Day 0 baseline — bot becomes active Monday 2026-05-11."
   },
-  "trades": [],
+  "trades": [
+    {
+      "trade_id": "GOOGL-2026-05-20",
+      "symbol": "GOOGL",
+      "direction": "LONG",
+      "type": "swing",
+      "sector": "Communication Services",
+      "status": "open",
+      "entry_date": "2026-05-20",
+      "entry_price": 387.07,
+      "qty": 51,
+      "cost_basis": 19740.57,
+      "stop": {"type": "trailing_stop_gtc", "trail_pct": 10, "order_id": "e0b8fbda-b5e5-44d4-86d2-14523e6b4b7c"},
+      "target": 415.00,
+      "rr": 2.3,
+      "confidence": 6,
+      "catalyst": "Google I/O 2026 — Gemini models, AI Mode in Search",
+      "exit_date": null,
+      "exit_price": null,
+      "pnl_dollars": null,
+      "pnl_pct": null,
+      "outcome": null,
+      "notes": "Entry recorded retroactively at 2026-05-22 midday scan. The 5/20 market-open and EOD routines committed this position to open_positions.md (commit d875313) but never wrote it to trade_log.json; weekly_trade_count was also left at 0. Both corrected this routine. Midday 5/22 mark: $385.51, unrealized -0.40%."
+    }
+  ],
   "weekly_trade_count": {
-    "_comment": "Resets every Monday 00:00 ET. Used to enforce max-3-trades-per-week rule.",
+    "_comment": "Resets every Monday 00:00 ET. Used to enforce max-3-trades-per-week rule. Counts entries only.",
     "week_starting_2026-05-11": 0,
-    "week_starting_2026-05-18": 0
+    "week_starting_2026-05-18": 1
   },
   "daily_snapshots": [
     {
