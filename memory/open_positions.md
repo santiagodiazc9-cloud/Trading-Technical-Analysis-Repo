@@ -6,7 +6,7 @@
 - **Entry**: $387.07 | 51 shares | Cost basis: $19,740.57
 - **Stop**: 10% trailing GTC (order e0b8fbda) — initial hard floor ~$348.36
 - **Target**: $415.00 | R:R ~2.3:1
-- **Unrealized P&L**: +$12.75 (+0.07%) at fill
+- **Unrealized P&L**: -$13.26 (-0.07%) — as of market-open 2026-05-22 09:36 ET (last $386.81)
 - **Stop tighten rules**: at +15% ($445.13) → 7% trail; at +20% ($464.48) → 5% trail
 - **-7% cut trigger**: $359.98 (close immediately if hit)
 - **Catalyst**: Google I/O 2026 (Gemini, AI Mode in Search)
@@ -25,7 +25,7 @@ None.
 - **AMD** (~$445, 5/14): Overbought, observe-only until post-NVDA earnings tape read.
 
 ## Pending Setups
-None. GOOGL-2026-05-20 filled — see Current Positions.
+None.
 
 ## MSFT Half-Trigger Status (ADR-0004)
 **Setup #2 — MSFT Mean-Reversion / Trend-Follow**
@@ -169,9 +169,10 @@ None. GOOGL-2026-05-20 filled — see Current Positions.
 
 ---
 
-## Pending Setups
+## Executed Setups — Filled (historical record)
 
-### GOOGL-2026-05-20 — SWING LONG
+### GOOGL-2026-05-20 — SWING LONG — ✅ FILLED 2026-05-20
+**STATUS: FILLED 2026-05-20 — 51 sh @ $387.07. Now tracked under "Current Positions" at the top of this file. This is NOT a pending setup; do not execute.**
 
 - **Direction**: LONG
 - **Entry Zone**: $387.00–$391.00
@@ -186,8 +187,8 @@ None. GOOGL-2026-05-20 filled — see Current Positions.
 - **Execution note**: Do NOT fill at open. Wait for intraday confirmation — price holding above $390 with Stoch turning up. This is a swing entry, not a market-open chase.
 - **Sector**: XLC neutral (not confirming weakness). GOOGL-specific catalyst (I/O) is independent of sector rotation.
 - **Earnings**: GOOGL next report ~late July 2026. Earnings window CLEAR.
-- Approved: YES  <!-- via Discord 2026-05-20 13:28Z — manually corrected from bot misfire -->
-- Stale-by: 2026-05-22 EOD (ADR-0002, 2 trading days from proposal)
+- Approved: YES (Discord 2026-05-20 13:28Z) — FILLED 2026-05-20, see Current Positions.
+- Stale-by: N/A — setup FILLED 2026-05-20, well before the stale-by deadline.
 
 <!-- setup-data:json
 {
@@ -252,3 +253,17 @@ None. GOOGL-2026-05-20 filled — see Current Positions.
 - **NVDA earnings AMC tonight**: Binary event. No semiconductor exposure. Correct.
 - Weekly trade count: 0/3. Week 3 Day 3 complete.
 - Scheduling note: All three routines today fired in the first 4 hours (market-open 5:53 AM, midday 6:32 AM, EOD 9:45 AM). Cloud scheduler infra still broken. CRITICAL: fix before Week 4 (2026-05-25).
+
+## Market Open Execution Log — 2026-05-22
+- Routine ran 09:36 AM ET (13:36 UTC) — properly timed (market opened 09:30, routine scheduled 09:35). Market confirmed OPEN.
+- Account (Alpaca live): $99,989.04 equity, $80,259.43 cash, buying power $180,248.47, 1 position, 0 day-trades, not PDT-flagged. Daily P&L -$41.05 (-0.04%). Deployed 19.73%.
+- Pause state: `memory/pause_state.json` was MISSING — created with the documented default `active`. No halt, no pause. Trading allowed.
+- Pending setups awaiting execution: **NONE**. GOOGL-2026-05-20 (the only `Approved: YES` setup) was already FILLED 2026-05-20 — confirmed against live Alpaca position data (51 sh @ $387.07). No double-buy. Stale-approval gate (step 3a) skipped — nothing unfilled to validate.
+- **Trades executed: 0. Setups skipped: 0** (none pending). Hard rule violations: NONE.
+- **Memory reconciliation**: `trade_log.json` `trades` array was empty despite the live GOOGL position — the 2026-05-20 market-open routine placed the order but never recorded it. Backfilled the GOOGL-2026-05-20 trade record and corrected `weekly_trade_count.week_starting_2026-05-18` (0 → 1). Relabeled the stale lower "Pending Setups" block to "Executed Setups — Filled" so no future routine re-executes it.
+- **GOOGL position management**: last $386.81 (-0.07%, -$13.26 unrealized). research.py: RSI 60.9, full SMA bull stack (px > SMA20 $385.67 > SMA50 $341.22 > SMA200 $296.22), MACD hist -3.29, Stoch K 0.87 (extreme oversold), below VWAP $393.70. Thesis intact. -7% cut trigger $359.98 — far away. +15% stop-tighten trigger $445.13 — far away. Trailing stop e0b8fbda (10% GTC) live, status `new`. No action required.
+- Risk check: 1/5 positions, GOOGL 19.73% of equity (≤20% ✓), weekly trades 1/3, daily loss cap (-2%) NOT hit, PDT 0/3. All within limits.
+- MSFT half-trigger (ADR-0004): stale-by is TODAY 2026-05-22 EOD; still 1/2 conditions (MACD positive cross never fired). Not re-evaluated here — outside market-open routine scope. Flagged for the EOD / Friday weekly-review routine to perform the staleness sweep.
+- Market posture (courtesy check, research.py): SPY $747.80 > SMA20 $731.64 > SMA50 $696.67 → 🟢 GREEN. RSI 70.0 (overbought) — extended after the post-NVDA rally. Pre-market 5/22 did not run; pre-market routine should re-baseline.
+- Infra: `ta` wheel build failed until `setuptools`/`wheel` were upgraded (known recurring issue). RuFlo MCP unavailable — file-only mode. Discord webhooks unprovisioned — brief/dashboard posts deferred to `memory/pending_discord_updates.md`.
+- Scheduling gap: no routine ran 2026-05-21 (no journal/log/market_context entry); pre-market 5/22 also did not run (`market_context.md` still dated 5/20). Cloud scheduler still unreliable.

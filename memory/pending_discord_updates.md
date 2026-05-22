@@ -314,3 +314,28 @@ No-op execution. Step 4 (Approval Check) had no candidates: `memory/open_positio
 ### Action items (delta vs prior cycles)
 - Same outstanding gaps: provision `memory/discord_config.json` and `DISCORD_BOT_TOKEN` in cloud `.env` so cloud routines can post to `#daily-brief` and update the pinned Dashboard. Without these, all brief/dashboard posts back up here and the on-call user has no real-time visibility into cloud-run cadence.
 - Cloud sandbox needed `setuptools`/`wheel` upgraded before `ta` would build from sdist. Consider pinning `setuptools>=80,<83` and `wheel>=0.45` at the top of `requirements.txt` or shipping a prebuilt wheel for `ta` so future routines aren't gated on a build-time dep upgrade.
+
+---
+
+## 2026-05-22 13:36 UTC — Market Open Execution
+
+`notify.py brief` and `notify.py dashboard` both failed (unchanged from prior cycles):
+- `notify.py brief`: `memory/discord_config.json` missing.
+- `notify.py dashboard`: `DISCORD_BOT_TOKEN` missing from `.env`.
+
+### #daily-brief (silent summary — deferred)
+**Title**: Market Open Execution — 2026-05-22 09:36 ET
+**Body**: 0 trades placed (no pending setups awaiting execution). GOOGL-2026-05-20 — the only `Approved: YES` setup — confirmed already FILLED 2026-05-20 (51 sh @ $387.07). 1 open position (GOOGL, -0.07%, -$13.26 unrealized). Account $99,989.04 equity, $80,259.43 cash, deployed 19.73%, daily P&L -$41.05 (-0.04%). 1/3 weekly trade slots, 0/3 day-trades. Posture 🟢 GREEN (SPY $747.80 > all SMAs, RSI 70 overbought). No hard-rule violations.
+
+### Routine result
+No-op execution (no setups to trade). Key actions this run:
+- **Memory reconciliation**: `trade_log.json` `trades` array was empty despite the live GOOGL position. Backfilled the GOOGL-2026-05-20 trade record; corrected `weekly_trade_count.week_starting_2026-05-18` 0 → 1. The 2026-05-20 market-open routine placed the order but never recorded it.
+- Relabeled the stale lower "Pending Setups" block in `open_positions.md` to "Executed Setups — Filled" — it still listed GOOGL-2026-05-20 with `Approved: YES` after the fill, a double-buy hazard.
+- Created `memory/pause_state.json` (was missing) with the default `active` state.
+- GOOGL position management: trailing stop e0b8fbda (10% GTC) live; -7%/-tighten triggers far away; no action needed.
+- Risk check passed: 1/5 positions, GOOGL 19.73% of equity, daily loss cap not hit, PDT 0/3.
+
+### Action items (delta vs prior cycles)
+- Same outstanding gaps: provision `memory/discord_config.json` and `DISCORD_BOT_TOKEN` in cloud `.env`.
+- **NEW**: Add a post-entry assertion to the market-open routine — after any fill, verify the trade was written to all three of (`open_positions.md` Current Positions, `trade_log.json` trades, `weekly_trade_count`). The 5/20 routine updated only the first, silently corrupting the weekly-trade-limit count (a hard risk rule).
+- Cloud scheduler still unreliable: no routine ran 2026-05-21; pre-market 5/22 did not run (`market_context.md` still dated 5/20).

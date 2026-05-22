@@ -7,11 +7,43 @@
     "platform": "Alpaca Paper Trading",
     "note": "Day 0 baseline — bot becomes active Monday 2026-05-11."
   },
-  "trades": [],
+  "trades": [
+    {
+      "trade_id": "GOOGL-2026-05-20",
+      "setup_id": "GOOGL-2026-05-20",
+      "symbol": "GOOGL",
+      "side": "long",
+      "direction": "LONG",
+      "strategy": "swing",
+      "sector": "Communication Services",
+      "qty": 51,
+      "entry_price": 387.07,
+      "entry_date": "2026-05-20",
+      "cost_basis": 19740.57,
+      "stop": {
+        "type": "trailing_stop",
+        "trail_pct": 10,
+        "time_in_force": "GTC",
+        "order_id": "e0b8fbda-b5e5-44d4-86d2-14523e6b4b7c",
+        "initial_floor_estimate": 348.36
+      },
+      "target": 415.00,
+      "rr_ratio": 2.3,
+      "confidence": 6,
+      "catalyst": "Google I/O 2026 — Gemini models, AI Mode in Search, agentic AI",
+      "status": "open",
+      "exit_price": null,
+      "exit_date": null,
+      "realized_pnl": null,
+      "week": "week_starting_2026-05-18",
+      "reasoning": "Swing long. Full SMA bull stack with Stoch K extreme oversold (mean-reversion within an uptrend) plus the Google I/O 2026 catalyst. Approved via Discord 2026-05-20 13:28Z; filled 2026-05-20 ~09:51 ET by the market-open routine.",
+      "backfill_note": "Backfilled into trade_log.json by the 2026-05-22 market-open routine. The 2026-05-20 market-open routine placed the buy + trailing stop and updated open_positions.md Current Positions, but did not append this trade record or increment weekly_trade_count. Reconciled here against live Alpaca position data."
+    }
+  ],
   "weekly_trade_count": {
     "_comment": "Resets every Monday 00:00 ET. Used to enforce max-3-trades-per-week rule.",
     "week_starting_2026-05-11": 0,
-    "week_starting_2026-05-18": 0
+    "week_starting_2026-05-18": 1
   },
   "daily_snapshots": [
     {
@@ -173,7 +205,7 @@
     "total_pnl": 0,
     "best_trade": null,
     "worst_trade": null,
-    "current_equity": 100000.00,
+    "current_equity": 99989.04,
     "phase_pnl": 0,
     "phase_pnl_pct": 0
   }
