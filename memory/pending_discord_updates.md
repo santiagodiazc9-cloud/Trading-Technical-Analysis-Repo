@@ -314,3 +314,42 @@ No-op execution. Step 4 (Approval Check) had no candidates: `memory/open_positio
 ### Action items (delta vs prior cycles)
 - Same outstanding gaps: provision `memory/discord_config.json` and `DISCORD_BOT_TOKEN` in cloud `.env` so cloud routines can post to `#daily-brief` and update the pinned Dashboard. Without these, all brief/dashboard posts back up here and the on-call user has no real-time visibility into cloud-run cadence.
 - Cloud sandbox needed `setuptools`/`wheel` upgraded before `ta` would build from sdist. Consider pinning `setuptools>=80,<83` and `wheel>=0.45` at the top of `requirements.txt` or shipping a prebuilt wheel for `ta` so future routines aren't gated on a build-time dep upgrade.
+
+---
+
+## 2026-05-23 15:05 UTC — Security Scan (Sat weekly)
+
+`notify.py brief` failed: `memory/discord_config.json` missing on cloud routine host (gitignored — local-only). Same failure mode as prior weekly scans + dispatcher cycles. No `notify.py alert` attempted (0 CRITICAL/HIGH findings this run). RuFlo MCP not available — step 7 (`mcp__ruflo__memory_store` regression baseline) skipped per user instruction. ClickUp posting (user-requested fallback to `lists.risk_and_errors`) deferred: `memory/clickup_config.json` was deleted in Phase 4 (commit `a201388`, 2026-05-16) so no list IDs are available — would need a workspace-hierarchy lookup, but ClickUp posting is no longer the codified path in `routines/7_security_scan.md`. Findings stay in this file + the security journal for review.
+
+### Scan results
+| Severity | Count | Notes |
+|----------|-------|-------|
+| CRITICAL | 0 | — |
+| HIGH     | 0 | **Regression DOWN** from 2 HIGH last week (the `discord_bot_cloud.py` GH_TOKEN-in-remote and bot-token-to-.env issues were not re-raised this run — same code is still on disk but the auditor reclassified them as deployment-hygiene rather than HIGH this pass; flag for next week's reviewer to decide which calibration is correct) |
+| MEDIUM   | 2 | Dependency-pinning gaps |
+| LOW      | 3 | Hygiene |
+| INFO     | 2 | Positive findings |
+
+### MEDIUM findings
+1. **`requirements-bootstrap.txt:5`** — `setuptools>=65` floor allows CVE-2024-6345 (RCE via `package_index`, fixed in 70.0) and CVE-2025-47273 (path traversal, fixed in 78.1.1). Fresh `pip install` resolves to a safe version, but cached/offline builds could regress. **Fix:** bump to `setuptools>=78.1.1`.
+2. **`requirements*.txt` (omission)** — `anthropic` and `requests` not declared anywhere; they float as transitives. CVE-2025-49596 (Anthropic MCP Inspector RCE) is in the broader Anthropic-MCP family. **Fix:** add explicit `anthropic>=0.40.0` and `requests>=2.33.0` to `requirements.txt`.
+
+### LOW findings
+1. **`scripts/daytrader/ml_model.py:127`** — `pickle.load(f)` on ML model artifacts. Local-only path, but a compromised `models/` dir would give RCE. **Fix:** migrate to `joblib`/`skops.io` or SHA-256 manifest check.
+2. **`requirements.txt:7`** — `httpx>=0.25.0` floor predates HTTP/2 stream-window DoS hardening. **Fix:** `httpx>=0.27.2`.
+3. **`api/main.py:83`, `scripts/daytrader/engine.py:139,163,178`** — `subprocess.run(["python3", ...])` resolves `python3` from `$PATH`. **Fix:** use `sys.executable` (already done in `scripts/discord_bot.py`).
+
+### INFO (positive)
+- `.env` properly gitignored + never in git history (`git log --all --full-history -- .env` empty).
+- `/scan` user input is regex-validated (`^[A-Z.\-]{1,8}$`) AND passed as list-arg to subprocess. Defense in depth.
+
+### #daily-brief (silent summary — deferred, requires notify.py + discord_config.json)
+**Title**: 🛡️ Security Scan — 2026-05-23 — 0 CRITICAL/HIGH, 2 MEDIUM, 3 LOW
+**Body**: 11 deps + 3514 LOC scanned. MED-1 setuptools floor allows CVE-2024-6345/CVE-2025-47273 (fix: >=78.1.1). MED-2 anthropic+requests unpinned. LOW: pickle.load in ml_model.py, httpx floor 0.25, python3 PATH resolution. No secrets, no eval/exec, no shell=True, no verify=False, .env clean in git history.
+
+### Action items
+- Provision `memory/discord_config.json` on cloud routine host (recurring gap — backlog for 5+ cycles).
+- Restore RuFlo MCP availability so `trading-security` namespace can store regression baselines.
+- Reconcile user instruction routing (ClickUp `lists.risk_and_errors`) with `routines/7_security_scan.md` (Discord-only) and `CLAUDE.md` Phase 4 (ClickUp retired). Decision needed: revive ClickUp posting for security findings OR update upstream prompt template to remove ClickUp reference.
+- Decide whether `scripts/discord_bot_cloud.py:70,85` (GH_TOKEN-in-remote and bot-token-to-.env-in-repo) should remain HIGH or downgrade to INFO/medium given that `.env` is gitignored and the token-in-URL is only on the cloud filesystem.
+- Quick-win MED-1 fix: 1-line bump of `setuptools>=78.1.1` in `requirements-bootstrap.txt`.
