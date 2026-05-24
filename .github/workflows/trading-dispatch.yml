@@ -125,23 +125,8 @@ jobs:
           ROUTINE_OVERRIDE: ${{ inputs.routine }}
         run: |
           set -e
-          # Debug: capture claude startup output to a committed file so we can read it
           which claude && claude --version
           echo "ANTHROPIC_API_KEY set: ${ANTHROPIC_API_KEY:+yes (${#ANTHROPIC_API_KEY} chars)}"
-          set +e
-          claude --dangerously-skip-permissions -p "respond with just the word ok" > /tmp/claude_test.txt 2>&1
-          CLAUDE_TEST_EXIT=$?
-          set -e
-          echo "claude exit code: $CLAUDE_TEST_EXIT"
-          cat /tmp/claude_test.txt
-          cp /tmp/claude_test.txt memory/gha_claude_test.txt
-          git add memory/gha_claude_test.txt
-          git diff --cached --quiet || git commit -m "debug: claude smoke test output" --no-verify
-          git push origin HEAD || true
-          if [ "$CLAUDE_TEST_EXIT" -ne 0 ]; then
-            echo "claude smoke test FAILED — see memory/gha_claude_test.txt"
-            exit 1
-          fi
           if [ -n "${ROUTINE_OVERRIDE:-}" ]; then
             echo "Manual override: ${ROUTINE_OVERRIDE}"
             bash scripts/run_claude_routine.sh "${ROUTINE_OVERRIDE}"

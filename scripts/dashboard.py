@@ -155,7 +155,8 @@ def collect_state() -> dict:
 
     state["watchlist"] = read_json(WATCHLIST, {}).get("watchlist", [])
     state["pause"] = read_json(PAUSE_STATE, {"state": "active"})
-    state["run_queue"] = read_json(RUN_QUEUE, {"queue": []}).get("queue", [])
+    _rq = read_json(RUN_QUEUE, {"queue": []})
+    state["run_queue"] = _rq if isinstance(_rq, list) else _rq.get("queue", [])
 
     return state
 
