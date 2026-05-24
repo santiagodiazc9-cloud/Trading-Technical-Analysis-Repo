@@ -4,3 +4,4 @@
 # On Linux/GHA runners this is usually a no-op but harmless.
 setuptools>=65
 wheel
+yfinance>=0.2.0
