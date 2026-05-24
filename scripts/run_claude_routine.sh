@@ -78,9 +78,31 @@ if [[ "${CI:-}" == "true" ]]; then
   CLAUDE_FLAGS="--dangerously-skip-permissions -p"
 fi
 
-# shellcheck disable=SC2086
-"$CLAUDE_BIN" $CLAUDE_FLAGS "$PROMPT" 2>&1
-ROUTINE_EXIT=$?
+# Retry once on transient socket/network errors (60s gives the connection time to recover).
+# Routines are safe to retry — they read current state before acting.
+MAX_ATTEMPTS=2
+ATTEMPT=0
+ROUTINE_EXIT=1
+while (( ATTEMPT < MAX_ATTEMPTS )); do
+  ATTEMPT=$(( ATTEMPT + 1 ))
+  if (( ATTEMPT > 1 )); then
+    echo "$(date '+%F %T') — socket/network error on attempt 1; retrying in 60s..."
+    sleep 60
+  fi
+  # caffeinate -i holds an assertion against system sleep for the life of the process.
+  # Without it, macOS can sleep mid-routine and drop the socket connection.
+  # On Linux (GHA) caffeinate is absent; the `command -v` check skips it cleanly.
+  if command -v caffeinate &>/dev/null; then
+    # shellcheck disable=SC2086
+    caffeinate -i "$CLAUDE_BIN" $CLAUDE_FLAGS "$PROMPT" 2>&1
+  else
+    # shellcheck disable=SC2086
+    "$CLAUDE_BIN" $CLAUDE_FLAGS "$PROMPT" 2>&1
+  fi
+  ROUTINE_EXIT=$?
+  [[ "$ROUTINE_EXIT" -eq 0 ]] && break
+  echo "$(date '+%F %T') — claude exited $ROUTINE_EXIT on attempt $ATTEMPT"
+done
 
 if [[ "$ROUTINE_EXIT" -eq 0 ]]; then
   _discord_ping "✅ Routine done: ${ROUTINE_NAME}" "Completed successfully · $(TZ=America/New_York date '+%H:%M ET')"

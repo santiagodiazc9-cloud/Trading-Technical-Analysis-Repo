@@ -42,13 +42,11 @@ elif (( DOW >= 1 && DOW <= 5 )) && (( HHMM >= 1600 && HHMM <= 1614 )); then
 elif (( DOW == 5 ))              && (( HHMM >= 1645 && HHMM <= 1659 )); then
   ROUTINE="routines/5_weekly_review.md";         IS_MAIN_ROUTINE=1
 else
-  # Non-routine slot: run Discord dispatcher during active window.
-  if (( DOW <= 5 )) && (( HHMM >= 800 )) && (( HHMM <= 1630 )); then
-    ROUTINE="routines/6_discord_dispatcher.md"
-  else
-    echo "$(date '+%F %T %Z') — no routine for DOW=$DOW HHMM=$HHMM (idle)"
-    exit 0
-  fi
+  # GHA is failsafe-only for the 5 main routines. The discord dispatcher runs
+  # locally via run_claude_polling.sh and doesn't need a cloud backup — running
+  # it here would burn API credits every 15 min unnecessarily.
+  echo "$(date '+%F %T %Z') — no routine for DOW=$DOW HHMM=$HHMM (idle)"
+  exit 0
 fi
 
 cd "$PROJECT_ROOT"
