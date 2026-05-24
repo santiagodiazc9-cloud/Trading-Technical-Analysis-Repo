@@ -363,13 +363,86 @@ def get_news_for_symbols(symbols: list, limit: int = 3) -> dict:
     return result
 
 
+_BULLISH_WORDS = {
+    "beat", "beats", "upgrade", "raises", "raised", "record", "growth", "strong",
+    "outperform", "buy", "bullish", "surge", "rally", "breakout", "accelerate",
+    "expansion", "wins", "awarded", "partnership", "breakthrough", "approves",
+    "approved", "exceeds", "positive", "profit", "revenue", "gain", "top",
+}
+_BEARISH_WORDS = {
+    "miss", "misses", "downgrade", "cuts", "cut", "weak", "loss", "losses",
+    "decline", "sell", "bearish", "drop", "warning", "concern", "risk",
+    "struggles", "disappoints", "recall", "investigation", "lawsuit", "lowers",
+    "below", "missed", "shortfall", "negative", "charge", "writedown", "layoffs",
+}
+
+
+def compute_sentiment_score(headlines: list) -> float:
+    """Score headlines -5 to +5 using financial keyword lists."""
+    if not headlines:
+        return 0.0
+    text = " ".join(headlines).lower()
+    words = text.split()
+    bullish = sum(1 for w in words if w.strip(".,!?;:\"'") in _BULLISH_WORDS)
+    bearish = sum(1 for w in words if w.strip(".,!?;:\"'") in _BEARISH_WORDS)
+    total = max(len(words), 1)
+    raw = (bullish - bearish) / total * 50
+    return round(max(-5.0, min(5.0, raw)), 2)
+
+
+def get_short_data(symbols: list) -> dict:
+    """
+    Fetch short interest data for symbols via yfinance.
+    Returns {symbol: {"short_pct": float, "short_ratio_days": float}}.
+    Parallelised; missing/errored symbols return empty dict.
+    """
+    try:
+        import yfinance as yf
+    except ImportError:
+        return {}
+
+    result = {}
+
+    def _fetch(sym):
+        try:
+            info = yf.Ticker(sym).info
+            return sym, {
+                "short_pct": info.get("shortPercentOfFloat") or 0.0,
+                "short_ratio_days": info.get("shortRatio") or 0.0,
+            }
+        except Exception:
+            return sym, {}
+
+    with ThreadPoolExecutor(max_workers=10) as ex:
+        for sym, data in ex.map(_fetch, symbols):
+            result[sym] = data
+    return result
+
+
+def compute_squeeze_score(gap_pct, volume, news_headlines, short_pct, short_ratio_days) -> int:
+    """Score a candidate's short-squeeze potential 0–10."""
+    score = 0
+    if short_pct and short_pct > 0.15:
+        score += 3
+    if short_pct and short_pct > 0.25:
+        score += 2
+    if gap_pct and abs(gap_pct) > 1.0:
+        score += 2
+    if volume and volume >= 1_000_000:
+        score += 2
+    if news_headlines:
+        score += 1
+    return score
+
+
 def cmd_market_scan(top_n: int = 25):
     """
-    Catalyst-driven three-layer scan:
-      1. Gap movers — snapshot screen across full universe (~650 symbols)
-      2. Earnings runners — upcoming earnings in next 7 days merged into list
-      3. News — recent headlines per candidate
-      4. Full TA — existing indicator suite on each candidate
+    Catalyst-driven scan across ~650 symbols with enriched signals:
+      1. Gap movers — snapshot screen across full universe
+      2. Earnings runners — upcoming earnings in next 7 days
+      3. News + sentiment divergence — headlines + contrarian score
+      4. Short squeeze score — high short interest + catalyst = explosive potential
+      5. Full TA — existing indicator suite on each candidate
     """
     print(f"[market-scan] Pass 1: screening universe for top {top_n} gap movers...", file=sys.stderr)
     candidates = fast_premarket_screen(top_n)
@@ -402,8 +475,13 @@ def cmd_market_scan(top_n: int = 25):
     candidates = candidates[:top_n]
     candidate_syms = [c["symbol"] for c in candidates]
 
-    print(f"[market-scan] Pass 3: fetching news for {len(candidate_syms)} candidates...", file=sys.stderr)
-    news_map = get_news_for_symbols(candidate_syms, limit=3)
+    print(f"[market-scan] Pass 3: fetching news + short data for {len(candidate_syms)} candidates...", file=sys.stderr)
+    # Run news and short-data fetches concurrently
+    with ThreadPoolExecutor(max_workers=2) as ex:
+        news_future = ex.submit(get_news_for_symbols, candidate_syms, 3)
+        short_future = ex.submit(get_short_data, candidate_syms)
+    news_map = news_future.result()
+    short_map = short_future.result()
 
     # Load watchlist for context enrichment
     watchlist_map = {}
@@ -417,22 +495,50 @@ def cmd_market_scan(top_n: int = 25):
     for i, c in enumerate(candidates):
         sym = c["symbol"]
         print(f"[market-scan] Pass 4 [{i+1}/{len(candidates)}]: TA for {sym}...", file=sys.stderr)
+        headlines = news_map.get(sym, [])
+        short = short_map.get(sym, {})
+        short_pct = short.get("short_pct", 0.0)
+        short_ratio = short.get("short_ratio_days", 0.0)
+        gap_pct = c.get("gap_pct")
+        volume = c.get("volume")
+
+        sentiment = compute_sentiment_score(headlines)
+        if gap_pct is not None and gap_pct > 0 and sentiment < -1:
+            divergence = "BULLISH_DIVERGENCE"
+        elif gap_pct is not None and gap_pct < 0 and sentiment > 1:
+            divergence = "BEARISH_DIVERGENCE"
+        else:
+            divergence = "ALIGNED"
+
+        squeeze = compute_squeeze_score(gap_pct, volume, headlines, short_pct, short_ratio)
+
         try:
             df = get_bars(sym, "1Day", 365)
             df = compute_indicators(df)
             signals = get_signals(df)
             signals["symbol"] = sym
-            signals["snapshot_gap_pct"] = c.get("gap_pct")
-            signals["snapshot_volume"] = c.get("volume")
+            signals["snapshot_gap_pct"] = gap_pct
+            signals["snapshot_volume"] = volume
             signals["momentum_score"] = c.get("momentum_score")
             signals["earnings_date"] = earnings_map.get(sym)
-            signals["news_headlines"] = news_map.get(sym, [])
+            signals["news_headlines"] = headlines
+            signals["sentiment_score"] = sentiment
+            signals["sentiment_divergence"] = divergence
+            signals["short_interest_pct"] = round(short_pct * 100, 1) if short_pct else None
+            signals["short_ratio_days"] = short_ratio or None
+            signals["squeeze_score"] = squeeze
+            signals["squeeze_flag"] = "SQUEEZE_CANDIDATE" if squeeze >= 6 else None
             signals["watchlist_notes"] = watchlist_map.get(sym, "")
             results[sym] = signals
         except Exception as e:
             results[sym] = {"symbol": sym, "error": str(e),
                             "earnings_date": earnings_map.get(sym),
-                            "news_headlines": news_map.get(sym, [])}
+                            "news_headlines": headlines,
+                            "sentiment_score": sentiment,
+                            "sentiment_divergence": divergence,
+                            "short_interest_pct": round(short_pct * 100, 1) if short_pct else None,
+                            "squeeze_score": squeeze,
+                            "squeeze_flag": "SQUEEZE_CANDIDATE" if squeeze >= 6 else None}
     print(json.dumps(results, indent=2))
 
 

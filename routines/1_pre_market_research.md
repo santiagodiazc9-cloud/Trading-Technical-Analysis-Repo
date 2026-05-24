@@ -121,17 +121,78 @@ For each short candidate that passes the screen, apply the same 6-point checklis
 
 If fewer than 5 of 6 pass → PASS. Note in journal as "short candidate, partial confluence."
 
-### 4. Parallel Deep-Dive (RuFlo swarm)
-For the top 3 candidates from the scan, spawn FOUR sub-agents IN PARALLEL using the Agent tool — send all four Agent tool calls in a single message (independent, no shared state):
+### 4. Adversarial Bull/Bear/Judge Debate
 
-1. **Fundamentals agent** (`subagent_type: researcher`) — earnings, analyst PTs, revenue growth, sector positioning. Read recent SEC filings if relevant.
-2. **Technicals agent** (`subagent_type: researcher`) — run `python3 scripts/research.py analyze <SYMBOL>` for each candidate. Walk through the 6-point checklist from CLAUDE.md. Identify clean entry/stop/target levels.
-3. **News agent** (`subagent_type: researcher`) — last 24h news for each candidate via WebSearch. Specifically: catalysts, downgrades, analyst actions, sector news, competitor moves.
-4. **Sector momentum agent** (`subagent_type: researcher`) — sector ETF state (XLK, XLF, XLE, etc.) for the candidate's sector. Is the sector leading or rolling over? Check `memory/sector_blocklist.md` first.
+Select up to **3 candidates** for full debate using this priority order:
+1. `squeeze_flag == "SQUEEZE_CANDIDATE"` (short squeeze potential — explosive upside)
+2. `sentiment_divergence == "BULLISH_DIVERGENCE"` or `"BEARISH_DIVERGENCE"` (contrarian signal)
+3. Strongest TA signals (MACD crossover + RSI 40–65 + ADX > 25 + ADR compliant)
 
-Each sub-agent prompt MUST be self-contained (the agent has no conversation context). Include ticker(s), the 6-point checklist text, and ask for a structured report under 250 words.
+For each selected candidate, run a **2-round debate**:
 
-After all four return, synthesize into one decision per candidate. If sub-agents disagree, default to the most cautious read.
+---
+
+**Round 1 — spawn Bull agent + Bear agent IN PARALLEL** (one message, two Agent tool calls):
+
+**Bull agent prompt** (`subagent_type: researcher`):
+> You are a bull-case analyst. You have been given market data for [SYMBOL]. Your job is to build the STRONGEST POSSIBLE bullish case — assume the best-case scenario. Do not hedge. Ignore the bear risks for now.
+> 
+> Data: [paste full market-scan JSON for this symbol]
+>
+> Output exactly this structure (no other text):
+> BULL_THESIS: [2 sentences]
+> KEY_DRIVERS:
+> - [driver 1]
+> - [driver 2]  
+> - [driver 3]
+> PRICE_TARGET: $[X] in [N] days
+> BULL_CONFIDENCE: [N]/10
+
+**Bear agent prompt** (`subagent_type: researcher`):
+> You are a bear-case analyst. You have been given market data for [SYMBOL]. Your job is to build the STRONGEST POSSIBLE bearish case — assume the worst-case scenario. Do not hedge. Ignore the bull thesis for now.
+>
+> Data: [paste full market-scan JSON for this symbol]
+>
+> Output exactly this structure (no other text):
+> BEAR_THESIS: [2 sentences]
+> KEY_RISKS:
+> - [risk 1]
+> - [risk 2]
+> - [risk 3]
+> DOWNSIDE_SCENARIO: $[X] in [N] days
+> BEAR_CONFIDENCE: [N]/10
+
+---
+
+**Round 2 — spawn Judge agent** (after both Round 1 agents return):
+
+**Judge agent prompt** (`subagent_type: researcher`):
+> You are a senior portfolio manager at a hedge fund. You have received a bull report and a bear report for [SYMBOL]. Your job is to make the final call. Be direct. Do not be diplomatic.
+>
+> RAW DATA:
+> [paste full market-scan JSON]
+>
+> BULL REPORT:
+> [paste verbatim bull agent output]
+>
+> BEAR REPORT:
+> [paste verbatim bear agent output]
+>
+> Output exactly this structure (no other text):
+> VERDICT: BUY / SHORT / PASS
+> CONFIDENCE: [N]/10
+> POSITION_MODIFIER: FULL / HALF / QUARTER
+> DECIDING_FACTOR: [one sentence — what tipped the decision]
+> ENTRY_ZONE: $[X]–$[Y]
+> STOP: $[Z]
+> TARGET: $[W]
+> RR: [N]:1
+
+---
+
+**Gate**: Only proceed to step 5 (write setup + Discord) if `CONFIDENCE ≥ 7`. If PASS or confidence < 7, write one line to `journal/YYYY-MM-DD.md`: `- [SYMBOL] debate rejected: [DECIDING_FACTOR]` and move to the next candidate.
+
+**All agent prompts MUST be self-contained** — sub-agents have no conversation context. Include the full data block in every prompt.
 
 ### 4a. Vector recall — similar past setups
 Before finalizing each setup, retrieve similar historical setups from RuFlo memory:
