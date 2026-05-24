@@ -6,6 +6,7 @@ Called by Claude Code routines to fetch market data and compute indicators.
 Usage:
     python scripts/research.py analyze <symbol>       — Full TA for one symbol
     python scripts/research.py scan                   — Scan all watchlist symbols
+    python scripts/research.py market-scan [N]        — Catalyst scan: S&P500 + Nasdaq100 + emerging tech → top N movers with news + earnings
     python scripts/research.py bars <symbol> <tf> <days> — Raw bar data as JSON
     python scripts/research.py indicators <symbol>    — Just the indicator values
 """
@@ -26,8 +27,9 @@ from ta.momentum import RSIIndicator, StochRSIIndicator
 from ta.trend import MACD, SMAIndicator, EMAIndicator
 from ta.volatility import BollingerBands, AverageTrueRange
 from ta.volume import VolumeWeightedAveragePrice
-from alpaca.data.historical import StockHistoricalDataClient
-from alpaca.data.requests import StockBarsRequest
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from alpaca.data.historical import StockHistoricalDataClient, NewsClient
+from alpaca.data.requests import StockBarsRequest, StockSnapshotRequest, NewsRequest
 from alpaca.data.timeframe import TimeFrame, TimeFrameUnit
 from alpaca.data.enums import DataFeed
 
@@ -40,6 +42,7 @@ if not API_KEY or not SECRET_KEY:
     sys.exit(1)
 
 data_client = StockHistoricalDataClient(API_KEY, SECRET_KEY)
+news_client = NewsClient(API_KEY, SECRET_KEY)
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -232,6 +235,207 @@ def load_watchlist() -> list[str]:
         return ["AAPL", "MSFT", "NVDA", "TSLA", "AMZN", "META", "GOOGL", "AMD", "SPY", "QQQ"]
 
 
+def load_universe() -> list:
+    """Merge S&P 500 + Nasdaq 100 + emerging tech symbol lists, deduplicated."""
+    seen = set()
+    result = []
+    for fname in ("sp500_symbols.json", "nasdaq100_symbols.json", "emerging_tech_symbols.json"):
+        path = os.path.join(PROJECT_ROOT, "data", fname)
+        try:
+            syms = json.load(open(path))
+            for s in syms:
+                s = s.strip().upper()
+                if s and s not in seen:
+                    seen.add(s)
+                    result.append(s)
+        except FileNotFoundError:
+            pass
+    return result
+
+
+def fast_premarket_screen(top_n: int = 25) -> list:
+    """
+    Fetch snapshots for the full universe in batches, filter by volume/price/gap,
+    return top_n candidates sorted by volume × |gap%| (momentum score).
+    """
+    symbols = load_universe()
+    candidates = []
+    batch_size = 300
+    for i in range(0, len(symbols), batch_size):
+        batch = symbols[i:i + batch_size]
+        try:
+            req = StockSnapshotRequest(symbol_or_symbols=batch, feed=DataFeed.IEX)
+            snapshots = data_client.get_stock_snapshot(req)
+        except Exception as e:
+            print(f"  snapshot batch {i//batch_size + 1} error: {e}", file=sys.stderr)
+            continue
+        for sym, snap in snapshots.items():
+            try:
+                price = float(snap.latest_trade.price) if snap.latest_trade else None
+                prev_close = float(snap.prev_daily_bar.close) if snap.prev_daily_bar else None
+                volume = int(snap.daily_bar.volume) if snap.daily_bar else 0
+                if price is None or prev_close is None or prev_close == 0:
+                    continue
+                gap_pct = (price - prev_close) / prev_close * 100
+                if volume >= 500_000 and price >= 3.0 and abs(gap_pct) >= 1.0:
+                    candidates.append({
+                        "symbol": sym,
+                        "price": round(price, 2),
+                        "volume": volume,
+                        "gap_pct": round(gap_pct, 2),
+                        "momentum_score": volume * abs(gap_pct),
+                    })
+            except Exception:
+                continue
+    candidates.sort(key=lambda x: x["momentum_score"], reverse=True)
+    return candidates[:top_n]
+
+
+def get_earnings_soon(symbols: list, days_ahead: int = 7) -> dict:
+    """
+    Check symbols for upcoming earnings within days_ahead days using yfinance.
+    Returns {symbol: earnings_date_str}. Parallelised for speed.
+    """
+    try:
+        import yfinance as yf
+    except ImportError:
+        return {}
+
+    today = datetime.now().date()
+    cutoff = today + timedelta(days=days_ahead)
+    result = {}
+
+    def _check(sym):
+        try:
+            cal = yf.Ticker(sym).calendar
+            if cal is None:
+                return None
+            dates = cal.get("Earnings Date", [])
+            if not dates:
+                return None
+            d = dates[0]
+            if hasattr(d, "date"):
+                d = d.date()
+            elif isinstance(d, str):
+                d = datetime.strptime(d[:10], "%Y-%m-%d").date()
+            if today <= d <= cutoff:
+                return (sym, str(d))
+        except Exception:
+            pass
+        return None
+
+    with ThreadPoolExecutor(max_workers=10) as ex:
+        futures = {ex.submit(_check, s): s for s in symbols}
+        for f in as_completed(futures):
+            r = f.result()
+            if r:
+                result[r[0]] = r[1]
+    return result
+
+
+def get_news_for_symbols(symbols: list, limit: int = 3) -> dict:
+    """
+    Fetch recent news headlines for a list of symbols via Alpaca News API.
+    Returns {symbol: [headline, ...]}.
+    """
+    if not symbols:
+        return {}
+    result = {s: [] for s in symbols}
+    try:
+        req = NewsRequest(symbols=",".join(symbols),
+                          limit=min(limit * len(symbols), 50),
+                          sort="desc", include_content=False)
+        resp = news_client.get_news(req)
+        # NewsSet iterates as ('data', {'news': [...]}) tuples; items are dicts
+        raw_items = []
+        for key, val in resp:
+            if key == "data" and isinstance(val, dict):
+                raw_items = val.get("news", [])
+                break
+        for item in raw_items:
+            syms = item.symbols if hasattr(item, "symbols") else (item.get("symbols") or [])
+            headline = item.headline if hasattr(item, "headline") else item.get("headline", "")
+            for sym in (syms or []):
+                if sym in result and len(result[sym]) < limit:
+                    result[sym].append(headline)
+    except Exception as e:
+        print(f"  news fetch error: {e}", file=sys.stderr)
+    return result
+
+
+def cmd_market_scan(top_n: int = 25):
+    """
+    Catalyst-driven three-layer scan:
+      1. Gap movers — snapshot screen across full universe (~650 symbols)
+      2. Earnings runners — upcoming earnings in next 7 days merged into list
+      3. News — recent headlines per candidate
+      4. Full TA — existing indicator suite on each candidate
+    """
+    print(f"[market-scan] Pass 1: screening universe for top {top_n} gap movers...", file=sys.stderr)
+    candidates = fast_premarket_screen(top_n)
+    print(f"[market-scan] Pass 1 complete: {len(candidates)} gap candidates", file=sys.stderr)
+
+    candidate_syms = [c["symbol"] for c in candidates]
+
+    # Earnings: check all candidates + top 50 S&P 500 large-caps for run-up plays
+    sp500_large = []
+    try:
+        sp500_large = json.load(open(os.path.join(PROJECT_ROOT, "data", "sp500_symbols.json")))[:50]
+    except Exception:
+        pass
+    earnings_check = list(set(candidate_syms + sp500_large))
+    print(f"[market-scan] Pass 2: checking earnings calendar for {len(earnings_check)} symbols...", file=sys.stderr)
+    earnings_map = get_earnings_soon(earnings_check, days_ahead=7)
+
+    # Merge in earnings runners not already in gap candidates
+    for sym, edate in earnings_map.items():
+        if sym not in candidate_syms and len(candidates) < top_n:
+            candidates.append({
+                "symbol": sym,
+                "price": None,
+                "volume": None,
+                "gap_pct": None,
+                "momentum_score": 0,
+                "earnings_runner": True,
+            })
+            candidate_syms.append(sym)
+    candidates = candidates[:top_n]
+    candidate_syms = [c["symbol"] for c in candidates]
+
+    print(f"[market-scan] Pass 3: fetching news for {len(candidate_syms)} candidates...", file=sys.stderr)
+    news_map = get_news_for_symbols(candidate_syms, limit=3)
+
+    # Load watchlist for context enrichment
+    watchlist_map = {}
+    try:
+        wl = json.load(open(os.path.join(PROJECT_ROOT, "memory", "watchlist.json")))
+        watchlist_map = {item["symbol"]: item.get("notes", "") for item in wl.get("watchlist", [])}
+    except Exception:
+        pass
+
+    results = {}
+    for i, c in enumerate(candidates):
+        sym = c["symbol"]
+        print(f"[market-scan] Pass 4 [{i+1}/{len(candidates)}]: TA for {sym}...", file=sys.stderr)
+        try:
+            df = get_bars(sym, "1Day", 365)
+            df = compute_indicators(df)
+            signals = get_signals(df)
+            signals["symbol"] = sym
+            signals["snapshot_gap_pct"] = c.get("gap_pct")
+            signals["snapshot_volume"] = c.get("volume")
+            signals["momentum_score"] = c.get("momentum_score")
+            signals["earnings_date"] = earnings_map.get(sym)
+            signals["news_headlines"] = news_map.get(sym, [])
+            signals["watchlist_notes"] = watchlist_map.get(sym, "")
+            results[sym] = signals
+        except Exception as e:
+            results[sym] = {"symbol": sym, "error": str(e),
+                            "earnings_date": earnings_map.get(sym),
+                            "news_headlines": news_map.get(sym, [])}
+    print(json.dumps(results, indent=2))
+
+
 def cmd_analyze(symbol: str):
     print(f"Analyzing {symbol}...")
     df = get_bars(symbol, "1Day", 365)
@@ -311,6 +515,9 @@ def main():
             cmd_analyze(sys.argv[2].upper())
         elif cmd == "scan":
             cmd_scan()
+        elif cmd == "market-scan":
+            top_n = int(sys.argv[2]) if len(sys.argv) > 2 else 25
+            cmd_market_scan(top_n)
         elif cmd == "bars":
             symbol = sys.argv[2].upper()
             tf = sys.argv[3] if len(sys.argv) > 3 else "1Day"

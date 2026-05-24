@@ -74,15 +74,26 @@ Write the classified posture to `memory/market_context.md` under a "## Market Po
 
 Subsequent routines (midday, EOD) read this line to inherit posture without re-running the analysis.
 
-### 3. Scan Watchlist
-Run: `python3 scripts/research.py scan`
-- Review all indicator readings for every watchlist symbol
-- Identify which symbols have active signals (crossovers, oversold/overbought, etc.)
+### 3. Market-Wide Catalyst Scan
+Run: `python3 scripts/research.py market-scan`
+
+This scans ~650 symbols (S&P 500 + Nasdaq 100 + emerging tech/RnD/AI/biotech/quantum/space/nuclear) and returns the top ~25 movers enriched with:
+- `snapshot_gap_pct` — pre-market % move vs yesterday's close
+- `earnings_date` — if the company reports within 7 days (run-up play or avoid)
+- `news_headlines` — last 3 headlines from Alpaca news feed
+- `watchlist_notes` — any notes from `memory/watchlist.json` if the symbol is already tracked
+- Full TA indicator suite (RSI, MACD, SMA, BB, ATR, etc.)
+
+Interpret each candidate:
+- High gap% + strong news catalyst = potential momentum setup
+- Earnings in 2–5 days + bullish TA = run-up candidate (size at 50% normal)
+- Earnings in 0–2 days = avoid new entries (binary event risk)
+- Watchlist notes present = use the stored context; prior analysis still valid
 
 ### 3a. Short Candidate Screen
-After the long scan, run a dedicated short screen. Short setups are first-class — a flat or declining market is not "no opportunity", it is a SHORT market.
+After the scan, identify short setups from the results. Short setups are first-class — a flat or declining market is not "no opportunity", it is a SHORT market.
 
-Screen for these bearish signals across the full watchlist (including all sector ETFs):
+Screen for these bearish signals across the scan results (including sector ETFs if present):
 - Price **below SMA 20** AND SMA 20 slope is negative (declining, not flat)
 - MACD histogram **negative and deepening** (more negative than 2 sessions ago)
 - RSI **between 35–65 and declining** — confirms momentum rollover without extreme oversold (RSI < 35 = bounce risk, skip)
