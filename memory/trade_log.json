@@ -221,6 +221,38 @@
       "daily_loss_cap_hit": false,
       "hard_rule_violations": [],
       "notes": "Week 3 Day 3. 0 trades, 0 positions, P&L $0.00 (0.00%). Market posture: GREEN (first full day under new SMA-based system). GOOGL-2026-05-20 approved at 9:28 AM ET (Approved: YES) — not executed due to scheduling gap: market-open routine fired at 5:53 AM (pre-approval), no execution path for remainder of day. At EOD check (9:45 AM): GOOGL $388.77 within entry zone but below $390 intraday confirmation level. MACD hist -2.2335 (deteriorated from -1.4647 at proposal). Stoch K 0.857 (still extreme oversold). Setup stale-by 2026-05-22 EOD — valid for tomorrow. NVDA earnings AMC tonight — no semiconductor exposure. MSFT half-trigger 1/2: MACD stalled (-0.5598), 1 session remaining before stale-by. Daily loss cap: NOT hit. Hard rule violations: NONE. Scheduling gap is week's dominant infra failure: all 3 routines fired in first 4 hours instead of scheduled times."
+    },
+    {
+      "date": "2026-05-21",
+      "routine": "end_of_day_review",
+      "equity": 100064.26,
+      "cash": 80259.43,
+      "buying_power": 180323.69,
+      "deployed_pct": 19.79,
+      "pnl_today_dollars": -29.58,
+      "pnl_today_pct": -0.03,
+      "open_positions": 1,
+      "trades_closed_today": 0,
+      "wins_today": 0,
+      "losses_today": 0,
+      "trades_opened_today": 0,
+      "weekly_trade_count": 1,
+      "daytrade_count": 0,
+      "pattern_day_trader": false,
+      "running_win_rate": null,
+      "running_pnl_dollars": 0.00,
+      "running_pnl_pct": 0.0,
+      "unrealized_pnl_dollars": 64.26,
+      "unrealized_pnl_pct": 0.33,
+      "confidence_calibration": {
+        "_comment": "predicted-confidence-bucket -> {sample_size, wins, losses}. Empty until we have closed trades.",
+        "bucket_9_10": {"n": 0, "wins": 0, "losses": 0},
+        "bucket_7_8":  {"n": 0, "wins": 0, "losses": 0},
+        "bucket_5_6":  {"n": 0, "wins": 0, "losses": 0}
+      },
+      "daily_loss_cap_hit": false,
+      "hard_rule_violations": [],
+      "notes": "Week 3 Day 4. First day with open position. 1 open trade (GOOGL long 51 shares @ $387.07, unrealized +$64.26 +0.33%). 0 trades closed. Daily P&L -$29.58 (-0.03%) — well within daily loss cap. Post-NVDA AI cycle beat: SPY strengthened to 1.81% above SMA 20 (posture GREEN STRENGTHENED). GOOGL Stoch K rebounded from 0.06 (extreme oversold at entry) to 0.87 — inflection captured. MACD hist still negative (-2.8451) — known weakness at confidence 6/10. Trailing stop e0b8fbda CONFIRMED ACTIVE. No management actions triggered. MSFT MACD hist improved to -0.3178 (from -0.5598 yesterday) — largest single-day improvement in half-trigger window. Cross still not fired; 5/22 is stale-by and last chance. Daily loss cap: NOT hit. Hard rule violations: NONE."
     }
   ],
   "summary": {
@@ -232,8 +264,8 @@
     "total_pnl": 0,
     "best_trade": null,
     "worst_trade": null,
-    "current_equity": 100083.64,
-    "phase_pnl": 83.64,
-    "phase_pnl_pct": 0.08
+    "current_equity": 100064.26,
+    "phase_pnl": 64.26,
+    "phase_pnl_pct": 0.06
   }
 }

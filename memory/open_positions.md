@@ -6,7 +6,7 @@
 - **Entry**: $387.07 | 51 shares | Cost basis: $19,740.57
 - **Stop**: 10% trailing GTC (order e0b8fbda) — initial hard floor ~$348.36
 - **Target**: $415.00 | R:R ~2.3:1
-- **Unrealized P&L**: +$12.75 (+0.07%) at fill
+- **Unrealized P&L**: +$64.26 (+0.33%) as of 2026-05-21 EOD
 - **Stop tighten rules**: at +15% ($445.13) → 7% trail; at +20% ($464.48) → 5% trail
 - **-7% cut trigger**: $359.98 (close immediately if hit)
 - **Catalyst**: Google I/O 2026 (Gemini, AI Mode in Search)
@@ -110,6 +110,25 @@ None. GOOGL-2026-05-20 filled — see Current Positions.
 - MSFT EOD: $417.77, MACD histogram -0.5435 (barely moved from midday -0.5525). SMA 20 $417.37 — still MET. Half-trigger 1/2. No cross today.
 - NVDA $221.46 into earnings (5/20 AMC). No exposure. Binary event confirmed.
 - Weekly trade count: 0/3. Week 3 Day 2 complete.
+
+## EOD Review Log — 2026-05-21
+- Market closed 4:00 PM ET. Routine fired 4:52 PM ET (on schedule).
+- Account: $100,064.26 equity | $80,259.43 cash | 19.79% deployed | 0 day-trades.
+- **Daily P&L: -$29.58 (-0.03%)**. Daily loss cap: NOT hit. Hard rule violations: NONE.
+- **GOOGL position (EOD)**: 51 shares @ $387.07 | EOD ~$388.33 | Unrealized +$64.26 (+0.33%)
+  - Trailing stop e0b8fbda: CONFIRMED ACTIVE (status: new).
+  - -7% cut trigger ($359.98): price well above — NO ACTION.
+  - Stop tighten +15% ($445.13): not reached — NO ACTION.
+  - Technicals: RSI 61.55 (healthy), MACD hist -2.8451 (negative, expected at entry), Stoch K 0.87 (rebounded from 0.06 oversold — inflection captured). Full SMA bull stack intact.
+  - Position status: HOLD. No management needed overnight.
+- **MSFT half-trigger final check (stale-by 5/22 EOD)**:
+  - Price $419.00 | SMA 20 $416.93 → Condition 1 (SMA 20 reclaim) **STILL MET** ✓
+  - MACD histogram -0.3178 — **BEST reading in this window** (was -0.5598 yesterday, improved +0.2420 today)
+  - MACD positive cross **NOT YET** fired. Cross has NOT triggered as of market close.
+  - Tomorrow (5/22) is the final session before stale-by EOD.
+  - **Pre-market 5/22 MUST check MSFT first** — if cross fires, propose setup with Build June 2-3 catalyst.
+- NVDA post-earnings: price ~$223.48 (market-open log). Pullback zone $215–$220 not yet reached. No entry.
+- Weekly trade count: 1/3. Week 3 Day 4 complete.
 
 ## MSFT Half-Trigger Status (ADR-0004) — Updated Midday 2026-05-20
 **Setup #2 — MSFT Mean-Reversion / Trend-Follow**

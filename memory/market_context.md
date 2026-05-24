@@ -1,17 +1,16 @@
 # Market Context
 
 ## Last Updated
-2026-05-20 (Pre-Market Research, ~9:20 AM ET — delayed run, manual execution)
+2026-05-21 (EOD Review, 4:52 PM ET — on schedule)
 
 ## Market Summary — Week of May 18, 2026 (Week 3)
 
-### Market Posture (Updated pre-market 5/20 ~9:20 AM ET)
-- **🟢 GREEN** — SPY $733.80 > SMA 20 $726.73 > SMA 50 $692.43.
-- Full trading allowed: new longs AND shorts.
-- Margin is thin (SPY only 0.97% above SMA 20). Monitor closely — any pullback through SMA 20 would shift to CAUTION.
+### Market Posture (Updated EOD 5/21)
+- **🟢 GREEN STRENGTHENED** — SPY held post-NVDA gains. SPY ~$741+ closing, ~1.81% above SMA 20 ($728.24).
+- NVDA Q1 FY27 beat confirmed AI cycle intact. Full trading allowed: new longs AND shorts.
+- Margin has widened vs yesterday (0.97% → 1.81% above SMA 20). Posture robust.
 - Old $736 price-level trip-wire is RETIRED per strategy update 2026-05-19.
-- **NVDA earnings AMC tonight** — defining binary event for AI/semi sector direction 5/21.
-- **Calendar correction**: Microsoft Build 2026 is June 2-3 (San Francisco), NOT May 19-22 as previously noted.
+- Microsoft Build 2026 is June 2-3 (San Francisco) — catalyst window is next week.
 
 ### Broad Market (5/20 pre-market scan, daily bars — prior close data)
 - **SPY**: $733.80 | RSI 62.3 | MACD hist -0.8453 | Stoch K 3.8 (extreme low) | Above SMA 20 ($726.73) ✓ | Above SMA 50 ($692.43) ✓ | **POSTURE: 🟢 GREEN**
@@ -72,10 +71,9 @@
 
 ## Key Events — Remainder of Week
 - **5/19 EOD**: ✓ DONE. SPY trip-wire still active ($733.85). MSFT MACD cross did NOT fire. NVDA $221.46 into earnings.
-- **5/20 EOD (9:45 AM check — early routine)**: GOOGL-2026-05-20 Approved: YES but NOT executed (scheduling gap — market-open routine fired at 5:53 AM, before approval 9:28 AM). GOOGL at $388.77 in entry zone but below $390 confirmation level. MACD hist -2.2335 (deteriorated). NVDA earnings AMC tonight — no exposure. 0 trades, $100k cash. Posture: 🟢 GREEN.
-- **5/20 AMC**: **NVDA Q1 FY27 earnings — TONIGHT.** Stay out of all semis. Market direction catalyst.
-- **5/21 pre-market**: Post-NVDA tape read. AMD and SOXX direction. NVDA post-earnings pullback zone $215–$220 (RSI < 65). **Re-check GOOGL-2026-05-20**: is $388.77 close still in entry zone? Is MACD histogram improving? Stoch turning up? Confirmation criteria check required before any fill.
-- **5/22**: MSFT half-trigger stale-by. Weekly review 4:30 PM ET.
+- **5/20 EOD (9:45 AM check — early routine)**: GOOGL-2026-05-20 Approved: YES but NOT executed (scheduling gap). NVDA earnings AMC tonight — no exposure.
+- **5/21 EOD**: ✓ DONE. GOOGL held: 51 shares, EOD ~$388.33, unrealized +$64.26 (+0.33%). Trailing stop confirmed. Daily P&L -$29.58 (-0.03%). Post-NVDA AI cycle beat → SPY strengthened to 1.81% above SMA 20. 🟢 GREEN STRENGTHENED. MSFT MACD hist improved to -0.3178 (best in window) — cross still not fired. **5/22 is MSFT stale-by — pre-market check mandatory.**
+- **5/22 (TOMORROW)**: MSFT half-trigger stale-by. **Pre-market MUST check MSFT MACD cross.** Weekly review 4:30 PM ET.
 
 ## Prior Context (May 14 summary — for reference)
 - Broad market overbought extension. SPY RSI 76.5, QQQ RSI 79.4.
