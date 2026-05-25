@@ -253,6 +253,39 @@
       "daily_loss_cap_hit": false,
       "hard_rule_violations": [],
       "notes": "Week 3 Day 4. First day with open position. 1 open trade (GOOGL long 51 shares @ $387.07, unrealized +$64.26 +0.33%). 0 trades closed. Daily P&L -$29.58 (-0.03%) — well within daily loss cap. Post-NVDA AI cycle beat: SPY strengthened to 1.81% above SMA 20 (posture GREEN STRENGTHENED). GOOGL Stoch K rebounded from 0.06 (extreme oversold at entry) to 0.87 — inflection captured. MACD hist still negative (-2.8451) — known weakness at confidence 6/10. Trailing stop e0b8fbda CONFIRMED ACTIVE. No management actions triggered. MSFT MACD hist improved to -0.3178 (from -0.5598 yesterday) — largest single-day improvement in half-trigger window. Cross still not fired; 5/22 is stale-by and last chance. Daily loss cap: NOT hit. Hard rule violations: NONE."
+    },
+    {
+      "date": "2026-05-25",
+      "routine": "end_of_day_review",
+      "note": "Memorial Day — US equity markets CLOSED. Mark-to-market unchanged from Fri 5/22 close. No execution, no day-trade closes, no new bars.",
+      "equity": 99790.90,
+      "cash": 80259.43,
+      "buying_power": 180050.33,
+      "deployed_pct": 19.57,
+      "pnl_today_dollars": 0.00,
+      "pnl_today_pct": 0.0,
+      "open_positions": 1,
+      "trades_closed_today": 0,
+      "wins_today": 0,
+      "losses_today": 0,
+      "trades_opened_today": 0,
+      "weekly_trade_count": 0,
+      "daytrade_count": 0,
+      "pattern_day_trader": false,
+      "running_win_rate": null,
+      "running_pnl_dollars": 0.00,
+      "running_pnl_pct": 0.0,
+      "unrealized_pnl_dollars": -209.10,
+      "unrealized_pnl_pct": -1.06,
+      "confidence_calibration": {
+        "_comment": "predicted-confidence-bucket -> {sample_size, wins, losses}. Empty until we have closed trades.",
+        "bucket_9_10": {"n": 0, "wins": 0, "losses": 0},
+        "bucket_7_8":  {"n": 0, "wins": 0, "losses": 0},
+        "bucket_5_6":  {"n": 0, "wins": 0, "losses": 0}
+      },
+      "daily_loss_cap_hit": false,
+      "hard_rule_violations": [],
+      "notes": "Week 4 Day 1 (holiday, no trading). Markets closed for Memorial Day; mark-to-market frozen at Fri 5/22 close prices. Account: $99,790.90 equity / $80,259.43 cash / 19.57% deployed / 0 day-trades. GOOGL 51 sh @ $387.07 marked at $382.97 → unrealized -$209.10 (-1.06%). Trailing stop e0b8fbda confirmed ACTIVE (status: new). -7% cut $359.98 ~6% below current — healthy buffer. No management actions. Pre-market routine ran 08:13 ET on schedule. MSFT half-trigger STALED (5/22 EOD passed; MACD never crossed). Tomorrow's pre-market priorities: NVDA MACD direction (in watch zone $215-220), GOOGL position health, AVGO base-building. Hard rule violations: NONE. Daily loss cap: NOT hit. Weekly trade count: 0/3 (Week 4 reset Mon 00:00 ET; first executable session is Tue 5/26)."
     }
   ],
   "summary": {
@@ -264,8 +297,8 @@
     "total_pnl": 0,
     "best_trade": null,
     "worst_trade": null,
-    "current_equity": 100064.26,
-    "phase_pnl": 64.26,
-    "phase_pnl_pct": 0.06
+    "current_equity": 99790.90,
+    "phase_pnl": -209.10,
+    "phase_pnl_pct": -0.21
   }
 }
