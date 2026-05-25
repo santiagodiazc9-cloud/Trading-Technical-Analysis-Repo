@@ -42,7 +42,7 @@ for ch in ("general", "daily_brief"):
     payload = json.dumps({
         "embeds": [{"title": title, "description": body, "color": 10070709}]
     }).encode()
-    req = urllib.request.Request(url, data=payload, headers={"Content-Type": "application/json"})
+    req = urllib.request.Request(url, data=payload, headers={"Content-Type": "application/json", "User-Agent": "DiscordBot (trading-agent, 1.0)"})
     try:
         urllib.request.urlopen(req, timeout=10)
     except Exception:

@@ -77,7 +77,10 @@ def post(channel, payload):
             r.raise_for_status()
         else:
             data = json.dumps(payload).encode()
-            req = _urllib_req.Request(url, data=data, headers={"Content-Type": "application/json"})
+            req = _urllib_req.Request(url, data=data, headers={
+                "Content-Type": "application/json",
+                "User-Agent": "DiscordBot (trading-agent, 1.0)",
+            })
             _urllib_req.urlopen(req, timeout=10)
     except Exception as e:
         die(f"Discord webhook failed: {e}", code=2)
@@ -99,7 +102,10 @@ def try_post(channel, payload):
             _httpx.post(url, json=payload, timeout=10.0).raise_for_status()
         else:
             data = json.dumps(payload).encode()
-            req = _urllib_req.Request(url, data=data, headers={"Content-Type": "application/json"})
+            req = _urllib_req.Request(url, data=data, headers={
+                "Content-Type": "application/json",
+                "User-Agent": "DiscordBot (trading-agent, 1.0)",
+            })
             _urllib_req.urlopen(req, timeout=10)
     except Exception:
         pass

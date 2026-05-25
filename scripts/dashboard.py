@@ -72,6 +72,8 @@ def parse_pending_setups(positions_md: str):
     if not m:
         return []
     section = m.group(1)
+    if not section.strip() or "_None._" in section:
+        return []
     setups = []
     for block in re.split(r"\n### ", section):
         block = block.strip()
