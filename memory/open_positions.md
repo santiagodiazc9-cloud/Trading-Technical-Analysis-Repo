@@ -288,6 +288,23 @@ Per ADR-0004 stale-by mechanism: half-trigger entered 5/15, allotted 5 trading d
 
 ---
 
+## EOD Review Log — 2026-05-25 (19:45 UTC / 15:45 ET, on schedule)
+- 🇺🇸 Memorial Day — US equity markets CLOSED. No live tape, no execution. Routine completes journaling, snapshot, dashboard refresh.
+- Account (Alpaca EOD): **$99,790.90 equity | $80,259.43 cash | 19.57% deployed | 0 day-trades | PDT false**.
+- **Daily P&L: $0.00 (0.00%)** (mark-to-market unchanged from Fri 5/22 close; no bars today).
+- Daily loss cap: NOT hit. Hard rule violations: NONE.
+- **GOOGL position**: 51 sh @ $387.07 | Current $382.97 | Unrealized **-$209.10 (-1.06%)**.
+  - Trailing stop e0b8fbda CONFIRMED ACTIVE (status: new). Floor ~$348.36.
+  - -7% cut $359.98 — price 6.0% above. NO ACTION.
+  - +15% tighten $445.13 — not reached. NO ACTION.
+  - Indicators inherited from pre-market (Fri close data; markets closed today): RSI 57.6, MACD hist -3.53, Stoch K 0.87, price below SMA 20 ($385.48). Status HOLD.
+- No day trades to close. No swing positions to manage (single GOOGL position carries cleanly).
+- MSFT half-trigger: STALED 5/22 EOD (archived; no re-proposal). Fresh setup window opens for June 2-3 Build catalyst if MSFT pulls back to SMA 20 with MACD positive cross.
+- NVDA: $215.34 inside watch zone $215–$220, but MACD hist -0.87 not yet confirming. Tomorrow's pre-market priority #1.
+- Stale-state sweep: learnings.md (mtime 5/25 pre-market) fresh ✓. strategy.md (mtime 5/23) 2 days back, well under 10-day threshold ✓. No flags appended.
+- Weekly trade count: 0/3 (Week 4 — first executable session is Tue 5/26).
+- Reflective question: skipped (markets closed, nothing notable).
+
 ## EOD Review Log — 2026-05-20 (NOTE: Fired at ~9:45 AM ET — market open +15 min, same scheduling bug)
 - Account confirmed (Alpaca): $100,000 equity, $100,000 cash, 0 positions, 0 day-trades.
 - No day trades to close. No swing positions to manage.
