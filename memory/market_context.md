@@ -1,27 +1,27 @@
 # Market Context
 
 ## Last Updated
-2026-05-25 (Pre-Market Research, 08:13 ET — Memorial Day, US markets CLOSED today; next open 2026-05-26)
+2026-05-26 (Pre-Market Research, 08:00 ET — first executable session of Week 4 post-Memorial Day)
 
 ## Market Posture
 🟢 GREEN STRENGTHENED — SPY $745.67 | SMA 20 $731.54 | SMA 50 $696.63 | SMA 200 $678.83
 
 ## Market Summary — Week of May 25, 2026 (Week 4)
 
-### Market Posture (Updated Pre-Market 5/25)
-- **🟢 GREEN STRENGTHENED** — SPY 1.93% above SMA 20 (margin widened from 5/21 EOD's 1.81%).
+### Market Posture (Updated Pre-Market 5/26)
+- **🟢 GREEN STRENGTHENED** — SPY 1.93% above SMA 20. Indicators unchanged from Fri 5/22 close (Memorial Day Monday — no fresh bars).
 - Full SMA bull stack: SPY > SMA 20 > SMA 50 > SMA 200. Long-term uptrend intact.
-- BUT underlying momentum is divergent: SPY MACD hist -0.95 (negative, weakening under rising price). RSI 68.97 approaching overbought.
-- QQQ RSI 71.4 already overbought. XLK RSI 72.8 overbought. Tech leadership extended.
-- **Trading stance**: GREEN allows new longs and shorts. But "tired uptrend" signal supports caution on new longs at extension — prefer pullback entries to SMA 20 retests.
-- Microsoft Build 2026 (June 2-3) is next week's catalyst.
+- Underlying momentum still divergent: SPY MACD hist -0.948 (negative under rising price). RSI 68.97 approaching overbought.
+- QQQ RSI 71.4 OVERBOUGHT, MACD hist -1.35. Tech leadership extended.
+- **Trading stance**: GREEN allows new longs and shorts. But "tired uptrend" signal continues to support caution on new longs at extension — prefer pullback / oversold-inflection entries.
+- Microsoft Build 2026 (June 2-3) is next week's catalyst window.
 
-### Broad Market (5/25 pre-market scan, prior close data)
+### Broad Market (5/26 pre-market scan, Fri 5/22 close data — Memorial Day Mon = no new bars)
 - **SPY**: $745.67 | RSI 68.97 | MACD hist -0.948 | Stoch K 32.6 | Above SMA 20 ($731.54) ✓ by 1.93% | Above SMA 50 ($696.63) ✓ | **POSTURE: 🟢 GREEN**
 - **QQQ**: $717.49 | RSI 71.37 OVERBOUGHT | MACD hist -1.35 (bearish cross) | Stoch K 27.7 | Above SMA 20 ($694.86) ✓ by 3.26%
-- **Regime**: GREEN posture with bearish momentum divergence. Uptrend mature; new long entries require confirmation, not chase.
+- **Regime**: GREEN posture with bearish momentum divergence still in place. Uptrend mature; new long entries require confirmation, not chase.
 
-### Individual Names (5/25 pre-market scan — prior close data; markets closed Memorial Day)
+### Individual Names (5/26 pre-market scan — Fri 5/22 close, no Memorial Day bars)
 
 | Symbol | Price | RSI | MACD Hist | SMA 20 | Stoch K | Status |
 |--------|-------|-----|-----------|--------|---------|--------|
@@ -57,7 +57,15 @@
 - **XLF (Financials)**: $51.93. RSI 55.7. MACD hist -0.001 (flat). Marginal.
 - **XLI (Industrials)**: $171.73. RSI 50.2. MACD hist -0.51 (negative cross). Below SMA 20 ($172.49). Weak.
 
-## Key Levels (Updated 5/25 pre-market)
+### Market-Wide Catalyst Scan (5/26 pre-market)
+- **Pass 1 (gap movers)**: 0 candidates — pre-market early, no significant gaps yet.
+- **Pass 2 (earnings calendar)**: 3 candidates returned, ALL within 2-day earnings window — SKIP per binary-event hard rule:
+  - **A (Agilent)** $114.91 — earnings 5/27 AMC. MACD bullish cross firing (+0.12) but inside binary window.
+  - **AZO (AutoZone)** $3400.87 — earnings 5/27 BMO. RSI 44.9, MACD hist -6.42 deeply negative.
+  - **ADSK (Autodesk)** $241.00 — earnings 5/28 AMC. MACD just barely positive (+0.20), below SMA 200.
+- **No tradeable candidates from market scan.** Earnings filter caught all 3.
+
+## Key Levels (Updated 5/26 pre-market)
 - **SPY**: Posture GREEN. SMA 20 $731.54 (support). SMA 50 $696.63 (deeper support). MACD weakening — watch for cross-down or recovery.
 - **QQQ**: $717.49. SMA 20 $694.86. Above all SMAs but RSI 71 overbought.
 - **NVDA**: $215.34 — **inside post-earnings watch zone** $215–$220. SMA 20 $214.75 (right at). MACD hist -0.87. Watch for MACD positive cross at tomorrow's pre-market to validate setup.
@@ -68,20 +76,21 @@
 
 ## Key Events — Week of May 25, 2026 (Week 4)
 - **Mon 5/25**: 🇺🇸 **MEMORIAL DAY — US MARKETS CLOSED**. Pre-market research ran but no execution possible.
-- **Tue 5/26**: Regular trading resumes. Pre-market should check NVDA MACD direction, GOOGL position health, AVGO base-building. AZO earnings AMC.
-- **Wed 5/27**: A (Agilent) earnings AMC.
+- **Tue 5/26**: Regular trading resumes. Pre-market: NVDA MACD STILL NOT CROSSED (-0.87); no setups proposed.
+- **Wed 5/27**: A (Agilent) earnings AMC; AZO (AutoZone) earnings BMO.
 - **Thu 5/28**: ADSK (Autodesk) earnings AMC.
 - **Fri 5/29**: Weekly review 4:30 PM ET. End of Week 4.
+- **Mon-Tue 6/2-6/3**: Microsoft Build 2026 — MSFT fresh setup may re-arm.
 
-## Sentiment (5/25 pre-market)
+## Sentiment (5/26 pre-market)
 - **🟢 GREEN STRENGTHENED** posture, but underlying breadth weakening:
   - SPY/QQQ MACD bearish cross (price up, momentum down — classic late-uptrend signal)
-  - Top names (AAPL, AMD, ARM, PANW) all RSI > 70 — leadership extended
+  - Top names (AAPL, AMD, ARM, PANW, LLY) all RSI > 70 — leadership extended
   - Sectors mixed: XLV overbought, XLI rolling over, XLF flat, XLE modestly positive
-- **Tradeable opportunities are thin today** — Memorial Day closure plus extended-tape conditions = no setups proposed.
-- **Tomorrow's focus**: NVDA in watch zone needs MACD confirmation. AVGO base-building if it holds $410. GOOGL position needs to reclaim SMA 20 or risk continued drift toward -7% cut.
-- Confidence level: 4/10 for new entries. Posture allows trading, but tape conditions argue for patience and oversold-pullback setups (NVDA-style) rather than momentum chases.
-- 0/3 trade slots used for Week 4 (resets Mon 00:00 ET — but no trade possible Mon anyway). GOOGL position carried in from Week 3.
+- **Setups proposed today: 0.** Patient pass. NVDA in watch zone but MACD positive cross has not fired; VST/CRM have MACD cross but broken long-term structure; market-scan returned only earnings names (skip per 0-2 day binary rule).
+- **Tomorrow's focus**: NVDA MACD direction (still the #1 priority — if cross fires, propose). AVGO base-building if MACD turns less negative than -2. GOOGL position health (SMA 20 reclaim or further decline toward $375 manual trigger).
+- Confidence level: 4/10 for new entries. Posture allows trading, but tape conditions argue for patience.
+- 0/3 trade slots used for Week 4. GOOGL position carried from Week 3.
 
 ## Prior Context (Week 3 close — 2026-05-22)
 - MSFT half-trigger: MACD never crossed positive. Stale-by 5/22 EOD passed silently — gate retired per ADR-0004.
