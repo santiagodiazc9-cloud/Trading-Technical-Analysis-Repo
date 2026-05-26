@@ -6,13 +6,13 @@
 - **Entry**: $387.07 | 51 shares | Cost basis: $19,740.57
 - **Stop**: 10% trailing GTC (order e0b8fbda) — initial hard floor ~$348.36
 - **Target**: $415.00 | R:R ~2.3:1
-- **Unrealized P&L**: -$209.10 (-1.06%) as of 2026-05-25 pre-market (Fri 5/22 close data)
+- **Unrealized P&L**: -$187.17 (-0.95%) as of 2026-05-26 pre-market (Alpaca live $383.40)
 - **Stop tighten rules**: at +15% ($445.13) → 7% trail; at +20% ($464.48) → 5% trail
-- **-7% cut trigger**: $359.98 (close immediately if hit) — current $383.03, ~6% buffer
+- **-7% cut trigger**: $359.98 (close immediately if hit) — current $383.40, ~6.5% buffer
 - **Catalyst**: Google I/O 2026 (Gemini, AI Mode in Search)
 - **Sector**: Communication Services
 - **Week trade count**: 0/3 (Week 4 reset Mon 00:00 ET; GOOGL counted in Week 3)
-- **Technical update 5/25 pre-market**: MACD hist -3.53 (deteriorated from -2.85 5/21), price BELOW SMA 20 ($385.48), Stoch K 0.87 (still extreme oversold from entry — has NOT produced sustained bounce). Trailing stop still active. Manual watch trigger: if price loses $375, re-evaluate manually before next routine.
+- **Technical update 5/26 pre-market**: indicators unchanged from Fri close (Memorial Day = no new bars). MACD hist -3.53, price BELOW SMA 20 ($385.48), Stoch K 0.87 (still extreme oversold from entry — has NOT produced sustained bounce). Trailing stop still active. Manual watch trigger: if price loses $375 today, re-evaluate before next routine.
 
 ## Pending Orders
 None.
@@ -285,6 +285,45 @@ Per ADR-0004 stale-by mechanism: half-trigger entered 5/15, allotted 5 trading d
 **Setups proposed: 0**. Markets closed today; tape conditions argue for patience even tomorrow.
 **Confidence level for new entries**: 4/10. GREEN posture but tired uptrend + extended leaders + GOOGL position concern = stand down on new longs unless NVDA-style oversold-pullback setup confirms.
 **Weekly trade count**: 0/3. Week 4 begins (Memorial Day shortened week).
+
+---
+
+## Pre-Market Research Log — 2026-05-26 (12:00 UTC / 08:00 ET, on schedule — first session of Week 4)
+
+**Ruflo**: MCP unavailable in cloud — file-only mode (steps 4a vector recall + 8 indexing skipped).  
+**Stale-setup sweep**: 0 archived.  
+**Account**: $99,812.83 equity | $80,259.43 cash | 19.59% deployed | 0 day-trades | Daily P&L +$21.93 (overnight mark).  
+**Open positions**: GOOGL 51 sh @ $387.07, current $383.40, unrealized **-$187.17 (-0.95%)** (improving slightly from Fri's -1.06%).  
+**Market Posture**: 🟢 GREEN STRENGTHENED — SPY $745.67 > SMA 20 $731.54 (margin 1.93%) > SMA 50 $696.63 > SMA 200 $678.83. Indicators unchanged from Fri close (Memorial Day = no new bars).
+
+**Market-Wide Scan:**
+- Pass 1 (gap movers): 0 candidates — pre-market early.
+- Pass 2 (earnings calendar): 3 names returned, ALL in 2-day earnings window — **all SKIP** per binary-event rule:
+  - **A (Agilent)** $114.91 — earnings 5/27 AMC. MACD bullish cross (+0.12) but binary window.
+  - **AZO (AutoZone)** $3400.87 — earnings 5/27 BMO. RSI 44.9, MACD hist -6.42.
+  - **ADSK (Autodesk)** $241.00 — earnings 5/28 AMC. MACD +0.20, below SMA 200.
+
+**Watchlist Top Observations:**
+- **NVDA $215.34** — inside watch zone $215–$220. RSI 53.7 (< 65 ✓), SMA bull stack intact (price > SMA 20 $214.75 by $0.59), Stoch K 26.8 (room to run). **MACD hist STILL -0.87 (negative — positive cross NOT fired).** Checklist 5/6 — Momentum gate fails. **No setup. Re-check tomorrow.**
+- **VST $156.28** — MACD bullish cross fired (+0.36). BUT Stoch K 80.1 (extended), SMA 200 $174.10 overhead (long-term broken). Checklist 3/6. PASS.
+- **CRM $180.10** — fresh MACD cross (+0.51). BUT SMA 50 $181.93 and SMA 200 $222.37 overhead. Checklist 2/6. PASS.
+- **AVGO $414.01** — Stoch K 8.5 extreme oversold, but MACD hist -4.18 (deeply negative — not basing). Watch only.
+- **META $610.42** — short watch, below SMA 20+50+200, RSI 45.4 (above floor). MACD hist -1.01 only mildly deepening, Stoch K 60.5 (no rejection signal yet). Continue to watch for bounce-rejection to $619–$628.
+- **MSFT $418.50** — half-trigger STALED 5/22 EOD per ADR-0004. Fresh setup may re-form for June 2-3 Build catalyst.
+- **AMZN $266.27** — archived setup remains dead. Below SMA 20, MACD -2.10 deepening. No re-proposal.
+- Leaders **AAPL, AMD, ARM, PANW, LLY** all RSI > 70 — no chases.
+
+**Setups proposed: 0.** Patient pass.
+
+**Confidence level for new entries**: 4/10. GREEN posture but tired uptrend + extended leaders + no momentum-confirmed pullback setup = stand down on new longs unless NVDA's MACD cross fires tomorrow.
+
+**Weekly trade count**: 0/3 (Week 4 day 1).
+
+**Next routine priorities** (5/27 pre-market):
+1. NVDA — MACD direction (cross + price > $214 SMA 20 = propose 6-7/10 setup).
+2. GOOGL position — SMA 20 reclaim attempt? MACD hist less negative? Manual trigger $375.
+3. AVGO — MACD hist trajectory; if less negative than -2 and Stoch K turning, base-building begins.
+4. META — bounce-rejection to $619-628 watch.
 
 ---
 
