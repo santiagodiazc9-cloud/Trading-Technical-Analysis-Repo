@@ -4,6 +4,15 @@ This file is a fallback log. When a routine's `notify.py` call fails (Discord we
 
 ---
 
+### 2026-05-26 13:37 UTC — Market Open Execution Brief (Discord config missing in cloud env)
+- **Channel**: #daily-brief
+- **Title**: Market Open Execution — 2026-05-26
+- **Body**: 0 trades placed (no pending setups in queue). 1 open position (GOOGL -1.08%, trailing stop active, well above -7% cut at $359.98). Account $99,789.37 equity | $80,259.43 cash | 19.57% deployed | 0 day-trades | daily P&L -$1.53. Pause: ACTIVE. Hard rules: clean. Weekly trades 0/3.
+- **Reason**: `memory/discord_config.json` missing in cloud routine host (recurring known gap).
+- **Dashboard mirror**: failed (`DISCORD_BOT_TOKEN` missing in .env — bot edit/pin requires token).
+- **Setups to push as cards**: 0.
+- **Alerts**: 0.
+
 ### 2026-05-25 12:13 UTC — Pre-Market Brief (Discord config missing in cloud env)
 - **Channel**: #daily-brief
 - **Title**: Pre-Market Brief — 2026-05-25 (Memorial Day)
@@ -19,12 +28,3 @@ This file is a fallback log. When a routine's `notify.py` call fails (Discord we
 - **Reason**: `memory/discord_config.json` missing in cloud routine host (recurring known gap).
 - **Dashboard mirror**: failed (`DISCORD_BOT_TOKEN` missing in .env — bot edit/pin requires token).
 - **Alerts**: 0 (no high-severity events).
-
-### 2026-05-26 12:00 UTC — Pre-Market Brief (Discord config missing in cloud env)
-- **Channel**: #daily-brief
-- **Title**: Pre-Market Brief — 2026-05-26
-- **Body**: Week 4 day 1 post-Memorial Day. 🟢 GREEN STRENGTHENED (SPY $745.67, SMA 20 $731.54, margin 1.93%). Equity $99,812.83 | cash $80,259.43 | deployed 19.59% | day-trades 0. 0 setups proposed — patient pass. NVDA still in watch zone ($215.34, RSI 53.7, SMA 20 reclaim $214.75 ✓) but MACD positive cross has NOT fired (-0.87). VST/CRM MACD crosses fired but broken long-term structure. Market-scan returned only earnings names (A/AZO 5/27, ADSK 5/28 — all 0-2 day binary, skip). Tape: tired-uptrend leaders RSI > 70 (AAPL/AMD/ARM/PANW/LLY). GOOGL position -0.95% (improving from -1.06%), manual trigger $375. Trade count 0/3. Confidence on new entries: 4/10.
-- **Reason**: `memory/discord_config.json` missing in cloud routine host (recurring known gap).
-- **Setups to push as cards**: 0 (no setups proposed today).
-- **Dashboard mirror**: failed (`DISCORD_BOT_TOKEN` missing in .env — bot edit/pin requires token). `Dashboard.md` regenerated locally; live equity $99,818.44 / +$27.54 daily.
-- **Alerts**: 0 (no high-severity events — Ruflo MCP unavailable is the standing cloud-env state, no repeat-alert needed).
