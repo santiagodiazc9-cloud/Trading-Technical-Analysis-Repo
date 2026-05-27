@@ -1,10 +1,25 @@
 # Market Context
 
 ## Last Updated
-2026-05-26 (Pre-Market Research, 08:00 ET — first executable session of Week 4 post-Memorial Day)
+2026-05-27 (End-of-Day Review, 15:45 ET — Week 4 Day 2 complete)
 
 ## Market Posture
-🟢 GREEN STRENGTHENED — SPY $745.67 | SMA 20 $731.54 | SMA 50 $696.63 | SMA 200 $678.83
+🟢 GREEN STRENGTHENED holds — SPY $750.58 | SMA 20 $735.25 | SMA 50 $700.03 | SMA 200 $679.99 | RSI 71.5 OVERBOUGHT | MACD hist -0.56 (improving from -0.95)
+
+QQQ $729.72 | RSI 74.96 EXTREME OVERBOUGHT | MACD hist -0.49
+
+**Trading stance**: GREEN allows new longs and shorts. But broad indexes now at RSI 71-75 (textbook overbought) — a 3-5% mean-reversion pullback is the base-case expectation. **Materially raise the bar for new long entries**: any candidate must also be sector-strong, because a broad pullback would drag everything. Prefer shorts on bounce-rejection or wait for index reset before new longs.
+
+## EOD Summary — 2026-05-27 (Tue, Week 4 Day 2)
+
+- **Account**: $100,153.51 equity | $80,259.43 cash | 19.86% deployed | 0 day-trades.
+- **Daily P&L**: +$61.20 (+0.06%) — GOOGL bounce drove the gain. Daily loss cap NOT hit. Hard rule violations: NONE.
+- **GOOGL** (sole position): +0.77% unrealized first time green since entry. SMA 20 RECLAIMED. Stoch K bouncing (9.83 from 0.87 Fri). MACD hist deterioration arrested (-3.46 vs Fri -3.53). Trailing stop active; -7% cut 7.7% away.
+- **NVDA WATCH ZONE BROKE**: $215.34 (5/22 close) → $213.16 (5/27 intraday). Below SMA 20 ($214.67). MACD hist deepened to -1.75 from -0.87. Revised watch zone to $208-215 with SMA 50 ($198) as deeper support. Entry trigger now requires both MACD-cross trajectory AND SMA 20 reclaim.
+- **Index extension**: SPY RSI 71.5 OVERBOUGHT, QQQ RSI 75 EXTREME OVERBOUGHT. Tired-uptrend signal now at high-conviction levels.
+- **Weekly trade count**: 0/3 (Week 4 Day 2). No entries this week.
+
+## Market Summary — Week of May 25, 2026 (Week 4)
 
 ## Market Summary — Week of May 25, 2026 (Week 4)
 

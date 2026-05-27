@@ -4,6 +4,15 @@ This file is a fallback log. When a routine's `notify.py` call fails (Discord we
 
 ---
 
+### 2026-05-27 19:45 UTC — End-of-Day Review Brief (Discord config missing in cloud env)
+- **Channel**: #daily-brief
+- **Title**: End-of-Day Review — 2026-05-27
+- **Body**: Daily P&L +$61.20 (+0.06%). 0 closes, 0 wins / 0 losses. 1 swing held overnight (GOOGL +0.77% — first green since 5/20 entry; SMA 20 reclaimed at $390.12 vs $389.43, Stoch K bouncing 9.83 from 0.87 Fri, MACD hist deterioration arrested at -3.46 vs -3.53). Account $100,153.51 equity | $80,259.43 cash | 19.86% deployed | 0 day-trades. Daily loss cap: NOT hit. Hard rule violations: NONE. NVDA watch zone broke ($215.34→$213.16; below SMA 20 $214.67; MACD hist deepened to -1.75 from -0.87) — zone revised to $208-215 with SMA 50 ($198) as deeper support. SPY $750.58 RSI 71.5 OVERBOUGHT (still 🟢 GREEN), QQQ $729.72 RSI 74.96 EXTREME OVERBOUGHT — broad pullback risk rising. Weekly trade count: 0/3 (Week 4 Day 2). Tomorrow priorities: GOOGL MACD positive cross watch, NVDA $208-215 revised zone, AVGO MACD trajectory, ADSK earnings AMC + AZO BMO.
+- **Reason**: `memory/discord_config.json` missing in cloud routine host (recurring known gap).
+- **Dashboard mirror**: failed (`memory/discord_config.json` missing — `notify.py dashboard` requires webhook config).
+- **Setups to push as cards**: 0 (EOD routine doesn't propose setups).
+- **Alerts**: 0 (no high-severity events).
+
 ### 2026-05-26 13:37 UTC — Market Open Execution Brief (Discord config missing in cloud env)
 - **Channel**: #daily-brief
 - **Title**: Market Open Execution — 2026-05-26
