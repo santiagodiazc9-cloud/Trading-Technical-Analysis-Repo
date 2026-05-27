@@ -4,6 +4,15 @@ This file is a fallback log. When a routine's `notify.py` call fails (Discord we
 
 ---
 
+### 2026-05-27 12:09 UTC — Pre-Market Brief (Discord config missing in cloud env)
+- **Channel**: #daily-brief
+- **Title**: Pre-Market Brief — 2026-05-27
+- **Body**: 🟢 GREEN STRENGTHENED (SPY +2.34% vs SMA 20). 0 setups proposed — broad tape BROAD OVERBOUGHT (SPY RSI 71.4 AND QQQ RSI 75.3, first dual-overbought this cycle). NVDA momentum gate failed HARDER (MACD hist -0.87→-1.35; moving AWAY from positive cross inside the watch zone). MSFT lost SMA 20 + MACD worsened (-0.37→-0.58) simultaneously. AVGO reclaimed SMA 20 (Stoch K 12.77 oversold) but MACD still -3.62 — not yet basing. META short watch needs bounce-rejection (Stoch K 76 = bouncing, not rejecting). GOOGL position +0.44% (~+$87 unrealized) — Stoch K inflection beginning (0.06→0.87→4.47). Earnings binary names skipped (A 5/27 AMC, ADSK 5/28 AMC). Confidence 3/10 for new entries (downgraded from 4/10). Patient pass. Week 4 day 2: 0/3 trades used.
+- **Reason**: `memory/discord_config.json` missing in cloud routine host (recurring known gap).
+- **Dashboard mirror**: failed (`DISCORD_BOT_TOKEN` missing in .env — bot edit/pin requires token).
+- **Setups to push as cards**: 0.
+- **Alerts**: 0.
+
 ### 2026-05-26 13:37 UTC — Market Open Execution Brief (Discord config missing in cloud env)
 - **Channel**: #daily-brief
 - **Title**: Market Open Execution — 2026-05-26

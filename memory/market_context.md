@@ -1,54 +1,49 @@
 # Market Context
 
 ## Last Updated
-2026-05-26 (Pre-Market Research, 08:00 ET — first executable session of Week 4 post-Memorial Day)
+2026-05-27 (Pre-Market Research, 08:00 ET — Week 4 day 2)
 
 ## Market Posture
-🟢 GREEN STRENGTHENED — SPY $745.67 | SMA 20 $731.54 | SMA 50 $696.63 | SMA 200 $678.83
+🟢 GREEN STRENGTHENED — SPY $750.46 | SMA 20 $733.30 | SMA 50 $698.39 | SMA 200 $679.42
 
 ## Market Summary — Week of May 25, 2026 (Week 4)
 
-### Market Posture (Updated Pre-Market 5/26)
-- **🟢 GREEN STRENGTHENED** — SPY 1.93% above SMA 20. Indicators unchanged from Fri 5/22 close (Memorial Day Monday — no fresh bars).
+### Market Posture (Updated Pre-Market 5/27)
+- **🟢 GREEN STRENGTHENED** — SPY 2.34% above SMA 20 (margin widened from 1.93% on 5/26). Indices gapped up overnight.
 - Full SMA bull stack: SPY > SMA 20 > SMA 50 > SMA 200. Long-term uptrend intact.
-- Underlying momentum still divergent: SPY MACD hist -0.948 (negative under rising price). RSI 68.97 approaching overbought.
-- QQQ RSI 71.4 OVERBOUGHT, MACD hist -1.35. Tech leadership extended.
-- **Trading stance**: GREEN allows new longs and shorts. But "tired uptrend" signal continues to support caution on new longs at extension — prefer pullback / oversold-inflection entries.
+- **Both indices now OVERBOUGHT**: SPY RSI 71.40 (crossed > 70), QQQ RSI 75.31. Stoch K still mid-range — pullback risk rising.
+- SPY/QQQ MACD histograms still negative (-0.66 / -0.71) under rising price — classic late-trend negative divergence persists.
+- **Trading stance**: GREEN allows new longs and shorts, but extension + RSI overbought + MACD divergence argues HEAVILY for patience on new longs. Prefer oversold-inflection pullback setups, not chases. Short watch unlocks on bounce-rejection.
 - Microsoft Build 2026 (June 2-3) is next week's catalyst window.
 
-### Broad Market (5/26 pre-market scan, Fri 5/22 close data — Memorial Day Mon = no new bars)
-- **SPY**: $745.67 | RSI 68.97 | MACD hist -0.948 | Stoch K 32.6 | Above SMA 20 ($731.54) ✓ by 1.93% | Above SMA 50 ($696.63) ✓ | **POSTURE: 🟢 GREEN**
-- **QQQ**: $717.49 | RSI 71.37 OVERBOUGHT | MACD hist -1.35 (bearish cross) | Stoch K 27.7 | Above SMA 20 ($694.86) ✓ by 3.26%
-- **Regime**: GREEN posture with bearish momentum divergence still in place. Uptrend mature; new long entries require confirmation, not chase.
+### Broad Market (5/27 pre-market scan, live indicators)
+- **SPY**: $750.46 | RSI **71.40 OVERBOUGHT** | MACD hist -0.66 (improving from -0.95) | Stoch K 42.3 | Above SMA 20 ($733.30) ✓ by 2.34% | **POSTURE: 🟢 GREEN STRENGTHENED**
+- **QQQ**: $730.11 | RSI **75.31 OVERBOUGHT** | MACD hist -0.71 (improving from -1.35) | Stoch K 38.0 | Above SMA 20 ($698.15) ✓ by 4.58%
+- **Regime**: GREEN posture, but broad-tape RSI > 70 on both indices simultaneously. MACD divergence persists. Uptrend mature; new long entries require oversold-pullback confirmation, not chase.
 
-### Individual Names (5/26 pre-market scan — Fri 5/22 close, no Memorial Day bars)
+### Individual Names (5/27 pre-market scan — live indicators)
 
 | Symbol | Price | RSI | MACD Hist | SMA 20 | Stoch K | Status |
 |--------|-------|-----|-----------|--------|---------|--------|
-| SPY | $745.67 | 69.0 | -0.95 | $731.54 ✓ | 32.6 | 🟢 GREEN posture |
-| QQQ | $717.49 | 71.4 | -1.35 | $694.86 ✓ | 27.7 | RSI overbought, MACD bearish cross |
-| MSFT | $418.50 | 54.4 | -0.37 | $416.63 ✓ | 68.4 | Half-trigger STALED 5/22 EOD (MACD never crossed) |
-| NVDA | $215.34 | 53.7 | -0.87 | $214.75 ✓ | 26.8 | **IN POST-EARNINGS WATCH ZONE** — RSI <65 ✓, MACD not yet confirming |
-| AAPL | $308.81 | 78.5 | +0.98 | $289.33 ✓ | 96.9 | Extreme overbought (RSI+Stoch) |
-| TSLA | $425.95 | 58.3 | -0.65 | $409.24 ✓ | 25.0 | SMA 50 < 200 still — day-trade only |
-| AMZN | $266.27 | 58.0 | -2.10 | $267.09 ✗ | 23.7 | Below SMA 20, MACD deepening — no re-proposal |
-| GOOGL | $383.03 | 57.6 | -3.53 | $385.48 ✗ | 0.87 | **OWN POSITION** — lost SMA 20, MACD deteriorated, Stoch persists oversold |
-| AMD | $467.64 | 72.6 | -1.50 | $405.86 ✓ | 39.4 | Overbought — no new entries |
-| META | $610.42 | 45.4 | -1.01 | $619.10 ✗ | 60.5 | Short watch — but MACD only mildly deepening |
-| LLY | $1065.60 | 68.4 | +8.72 | $974.03 ✓ | 94.0 | Strong MACD but Stoch extreme — wait for pullback |
-| ARM | $306.42 | 76.6 | +6.94 | $224.65 ✓ | 93.3 | Extreme overbought, ABOVE upper BB |
-| PANW | $260.67 | 83.6 | +4.32 | $212.43 ✓ | 80.6 | Extreme RSI 83 — no chase |
-| AVGO | $414.01 | 53.1 | -4.18 | $419.01 ✗ | 8.5 | Lost SMA 20, deeply negative MACD, Stoch extreme oversold — watch base |
-| TSM | $404.33 | 55.3 | -1.99 | $402.57 ✓ | 27.4 | Marginal hold of SMA 20 |
-| VST | $156.28 | 55.0 | +0.36 | $151.00 ✓ | 80.1 | MACD bullish cross — but Stoch warming |
-| CEG | $294.00 | 51.7 | -1.21 | $295.58 ✗ | 55.2 | Below SMA 20 — no setup |
-| JPM | $306.34 | 52.6 | -0.37 | $305.47 ✓ | 49.4 | Neutral |
-| GS | $996.73 | 66.3 | +3.50 | $942.32 ✓ | 92.3 | ABOVE upper BB — overbought |
-| CRM | $180.10 | 50.9 | +0.51 | $178.79 ✓ | 74.1 | Neutral, MACD turning positive |
-| XOM | $154.83 | 51.6 | +0.70 | $153.04 ✓ | 56.0 | Above SMA 20, neutral RSI |
-| PLTR | $136.84 | 47.4 | +0.36 | $137.43 ✗ | 75.5 | Below SMA 20, MACD turning positive |
-| NNE | $26.78 | 55.0 | -0.16 | $25.28 ✓ | 41.4 | Speculative — no setup |
-| SMR | $11.39 | 48.4 | -0.16 | $11.86 ✗ | 33.5 | Below SMA 20 — no setup |
+| SPY | $750.46 | 71.4 | -0.66 | $733.30 ✓ | 42.3 | 🟢 GREEN posture, RSI overbought |
+| QQQ | $730.11 | 75.3 | -0.71 | $698.15 ✓ | 38.0 | RSI deeply overbought, MACD divergence |
+| MSFT | ~$415.75 | 52.4 | -0.58 | $416.18 ✗ | 56.9 | **Lost SMA 20**, MACD worsened (-0.37 → -0.58). Half-trigger STALED 5/22. |
+| NVDA | ~$214.66 | 53.2 | -1.35 | $214.67 ≈ | 12.6 | At SMA 20 / lower watch zone edge. MACD **WORSENED** (-0.87 → -1.35). Stoch K extreme oversold. NO cross. |
+| AAPL | ~$300+ | 78.4 | +0.88 | $291.37 ✓ | 96.5 | Extreme RSI 78 + Stoch 96 — no chase |
+| TSLA | ~$423 | 60.8 | -0.10 | $411.99 ✓ | 33.0 | SMA 50 < 200 — day-trade only |
+| AMZN | ~$262 | 56.6 | -2.05 | $267.31 ✗ | 22.3 | Below SMA 20, MACD deepening. Archived setup stays dead. |
+| GOOGL | ~$388.78 | 61.1 | -3.56 | $387.41 ≈ | 4.47 | **OWN POSITION** — Stoch K finally turning up (0.06→0.87→4.47), reclaiming SMA 20. Improving. |
+| AMD | ~$447 | (>70) | +0.99 | $414.33 ✓ | 53.8 | MACD bullish cross fired BUT RSI overbought — no entry |
+| META | ~$609 | 46.5 | -0.38 | $615.79 ✗ | 76.4 | Short watch — but Stoch K 76 = recovery; needs SMA 20 bounce-rejection. MACD barely deepening. |
+| LLY | ~$1010 | 68.6 | +9.03 | $983.95 ✓ | 100.0 | MACD super strong but Stoch K 100 extreme — wait for pullback |
+| AVGO | ~$422 | 56.6 | -3.62 | $419.21 ✓ | 12.8 | **Reclaimed SMA 20**, Stoch K extreme oversold — but MACD still -3.62 deeply negative. Watch base. |
+| TSM | ~$405.50 | 58.8 | -1.38 | $402.94 ✓ | 35.0 | Above SMA 20, RSI neutral. Marginal — no setup. |
+| ARM | (extended) | — | — | — | — | Already RSI 76+ — no chase |
+| PANW | (extended) | — | — | — | — | Already RSI 83+ — no chase |
+| VST | ~$152 | 61.0 | +1.57 | $150.90 ✓ | 94.2 | MACD bullish cross strengthened BUT Stoch 94 extreme, SMA 50 < 200 still |
+| CEG | ~$294 | 55.0 | +0.39 | $294.90 ≈ | 66.8 | MACD bullish cross fired ✓ BUT SMA 50 < 200 — checklist 3/6, pass |
+| CRM | ~$179 | 49.9 | +0.59 | $178.74 ✓ | 74.2 | MACD turning positive BUT SMA 50 < 200, SMA 200 $222 overhead. Pass |
+| PLTR | ~$136 | 47.0 | +0.40 | $137.10 ✗ | 82.8 | Below SMA 20, MACD turning. SMA 50 < 200. Pass |
 
 ### Sector ETFs (5/25 pre-market — prior close)
 - **XLK (Tech)**: $180.36. RSI 72.8 OVERBOUGHT. MACD hist -0.19. Above SMA 20 ($170.55) ✓.
@@ -57,40 +52,41 @@
 - **XLF (Financials)**: $51.93. RSI 55.7. MACD hist -0.001 (flat). Marginal.
 - **XLI (Industrials)**: $171.73. RSI 50.2. MACD hist -0.51 (negative cross). Below SMA 20 ($172.49). Weak.
 
-### Market-Wide Catalyst Scan (5/26 pre-market)
+### Market-Wide Catalyst Scan (5/27 pre-market)
 - **Pass 1 (gap movers)**: 0 candidates — pre-market early, no significant gaps yet.
-- **Pass 2 (earnings calendar)**: 3 candidates returned, ALL within 2-day earnings window — SKIP per binary-event hard rule:
-  - **A (Agilent)** $114.91 — earnings 5/27 AMC. MACD bullish cross firing (+0.12) but inside binary window.
-  - **AZO (AutoZone)** $3400.87 — earnings 5/27 BMO. RSI 44.9, MACD hist -6.42 deeply negative.
-  - **ADSK (Autodesk)** $241.00 — earnings 5/28 AMC. MACD just barely positive (+0.20), below SMA 200.
-- **No tradeable candidates from market scan.** Earnings filter caught all 3.
+- **Pass 2 (earnings calendar)**: 2 candidates returned, BOTH within 2-day earnings window — SKIP per binary-event hard rule:
+  - **A (Agilent)** $115.07 — earnings 5/27 AMC (TODAY). RSI 50.96, MACD hist +0.23 (cross firing). Binary window.
+  - **ADSK (Autodesk)** $238.30 — earnings 5/28 AMC (TOMORROW). RSI 48.1, MACD barely positive (+0.002), below SMA 200.
+- **No tradeable candidates from market scan.** Earnings filter caught both.
 
-## Key Levels (Updated 5/26 pre-market)
-- **SPY**: Posture GREEN. SMA 20 $731.54 (support). SMA 50 $696.63 (deeper support). MACD weakening — watch for cross-down or recovery.
-- **QQQ**: $717.49. SMA 20 $694.86. Above all SMAs but RSI 71 overbought.
-- **NVDA**: $215.34 — **inside post-earnings watch zone** $215–$220. SMA 20 $214.75 (right at). MACD hist -0.87. Watch for MACD positive cross at tomorrow's pre-market to validate setup.
-- **GOOGL** (position): SMA 20 $385.48 (price below by $2.45). Stop floor ~$348.36. -7% cut $359.98.
-- **AVGO**: $414.01, lost SMA 20 ($419.01). Deeply negative MACD. Watch for base-building.
-- **MSFT**: SMA 20 $416.63 still above ($418.50). MACD hist -0.37 — improved but never crossed. **Half-trigger STALED 5/22 EOD.** Fresh setup needed for June 2-3 Build catalyst.
-- **META**: $610.42, below SMA 20 ($619.10) and SMA 50 ($617.83) and SMA 200 ($669.42). RSI 45.4 (above 35 floor). Short watch on bounce-rejection to $619-628.
+## Key Levels (Updated 5/27 pre-market)
+- **SPY**: Posture GREEN STRENGTHENED, RSI 71.4 OVERBOUGHT. SMA 20 $733.30 (first support). SMA 50 $698.39 (deeper support). MACD divergence persists.
+- **QQQ**: $730.11. RSI 75.3 deeply overbought. SMA 20 $698.15.
+- **NVDA**: ~$214.66 — at edge of post-earnings watch zone $215–$220. SMA 20 $214.67 (right at). MACD hist **-1.35 (worsened from -0.87 → -1.35)**. Momentum gate STILL not firing — actually moving away from cross. Stoch K 12.6 oversold but momentum confirmation absent.
+- **GOOGL** (position): SMA 20 $387.41 reclaimed (~$388.78). MACD hist -3.56 (deteriorated). Stoch K 4.47 — finally turning up from 0.06 oversold. Stop floor ~$348.36. -7% cut $359.98 (~10.4% buffer).
+- **AVGO**: ~$422, reclaimed SMA 20 ($419.21). Stoch K 12.77 extreme oversold. MACD -3.62 still deeply negative. Watch for MACD reversal.
+- **MSFT**: ~$415.75 — **lost SMA 20** ($416.18). MACD hist -0.58 (worsened from -0.37). Half-trigger STALED 5/22 EOD. Fresh setup window for June 2-3 Build catalyst.
+- **META**: ~$609, below SMA 20 ($615.79) and SMA 50 ($617.81) and SMA 200 ($668.68). RSI 46.5 (above 35 floor). MACD hist -0.38 barely deepening. Stoch K 76.4 = recovering. Short watch needs deeper MACD + clean bounce-rejection.
 
 ## Key Events — Week of May 25, 2026 (Week 4)
 - **Mon 5/25**: 🇺🇸 **MEMORIAL DAY — US MARKETS CLOSED**. Pre-market research ran but no execution possible.
-- **Tue 5/26**: Regular trading resumes. Pre-market: NVDA MACD STILL NOT CROSSED (-0.87); no setups proposed.
-- **Wed 5/27**: A (Agilent) earnings AMC; AZO (AutoZone) earnings BMO.
+- **Tue 5/26**: Regular trading resumed. Pre-market: 0 setups. Account +$22 overnight mark.
+- **Wed 5/27 (TODAY)**: A (Agilent) earnings AMC; AZO (AutoZone) earnings BMO. Pre-market: 0 setups (NVDA momentum gate fails; broad tape overbought).
 - **Thu 5/28**: ADSK (Autodesk) earnings AMC.
 - **Fri 5/29**: Weekly review 4:30 PM ET. End of Week 4.
-- **Mon-Tue 6/2-6/3**: Microsoft Build 2026 — MSFT fresh setup may re-arm.
+- **Mon-Tue 6/2-6/3**: Microsoft Build 2026 — MSFT fresh setup may re-arm if MACD positive cross fires AND SMA 20 reclaim returns.
 
-## Sentiment (5/26 pre-market)
-- **🟢 GREEN STRENGTHENED** posture, but underlying breadth weakening:
-  - SPY/QQQ MACD bearish cross (price up, momentum down — classic late-uptrend signal)
+## Sentiment (5/27 pre-market)
+- **🟢 GREEN STRENGTHENED** posture, but tape now showing BROAD overbought:
+  - Both SPY and QQQ RSI > 70 (first time this cycle on both simultaneously)
+  - SPY/QQQ MACD histograms still negative under rising price — divergence persists 4th day
   - Top names (AAPL, AMD, ARM, PANW, LLY) all RSI > 70 — leadership extended
-  - Sectors mixed: XLV overbought, XLI rolling over, XLF flat, XLE modestly positive
-- **Setups proposed today: 0.** Patient pass. NVDA in watch zone but MACD positive cross has not fired; VST/CRM have MACD cross but broken long-term structure; market-scan returned only earnings names (skip per 0-2 day binary rule).
-- **Tomorrow's focus**: NVDA MACD direction (still the #1 priority — if cross fires, propose). AVGO base-building if MACD turns less negative than -2. GOOGL position health (SMA 20 reclaim or further decline toward $375 manual trigger).
-- Confidence level: 4/10 for new entries. Posture allows trading, but tape conditions argue for patience.
-- 0/3 trade slots used for Week 4. GOOGL position carried from Week 3.
+  - NVDA failed to fire MACD positive cross — momentum DETERIORATED (-0.87 → -1.35) inside the watch zone
+  - MSFT lost SMA 20 reclaim — fresh setup window won't open without both gate conditions firing again
+- **Setups proposed today: 0.** Patient pass — broad-tape overbought + NVDA momentum deterioration + MSFT structure loss = no high-conviction longs. No clean short setups (META Stoch K 76 = recovering, not rejecting).
+- **Tomorrow's focus**: NVDA MACD direction (still #1 — if cross fires AT $214–$218, propose). GOOGL position health (Stoch K turning up — possible bounce begins). AVGO base-building (MACD trajectory — needs less negative than -2). META bounce-rejection watch ($615–$628).
+- Confidence level: **3/10** for new entries (downgraded from 4/10 yesterday due to RSI > 70 on both indices + NVDA momentum deterioration).
+- 0/3 trade slots used for Week 4 day 2. GOOGL position carried from Week 3.
 
 ## Prior Context (Week 3 close — 2026-05-22)
 - MSFT half-trigger: MACD never crossed positive. Stale-by 5/22 EOD passed silently — gate retired per ADR-0004.
