@@ -2,10 +2,10 @@
   "_comment": "All trades + EOD snapshots. The day_0_baseline is the starting reference for cumulative P&L math. Each EOD snapshot under daily_snapshots is required for next-day day-over-day calculations.",
   "day_0_baseline": {
     "date": "2026-05-08",
-    "starting_equity": 100000.00,
-    "starting_cash": 100000.00,
+    "starting_equity": 100000.0,
+    "starting_cash": 100000.0,
     "platform": "Alpaca Paper Trading",
-    "note": "Day 0 baseline — bot becomes active Monday 2026-05-11."
+    "note": "Day 0 baseline \u2014 bot becomes active Monday 2026-05-11."
   },
   "trades": [
     {
@@ -17,13 +17,13 @@
       "entry_date": "2026-05-20",
       "entry_time_et": "approx 13:51 ET (order submitted 13:51:39Z)",
       "cost_basis": 19740.57,
-      "stop_loss": 376.00,
+      "stop_loss": 376.0,
       "stop_type": "trailing_stop_10pct_gtc",
       "stop_order_id": "e0b8fbda-b5e5-44d4-86d2-14523e6b4b7c",
       "stop_floor": 348.36,
-      "target": 415.00,
+      "target": 415.0,
       "rr_ratio": 2.3,
-      "catalyst": "Google I/O 2026 (May 19-20) — Gemini models, AI Mode in Search, agentic AI. Stoch K 0.06 extreme oversold within full SMA bull stack.",
+      "catalyst": "Google I/O 2026 (May 19-20) \u2014 Gemini models, AI Mode in Search, agentic AI. Stoch K 0.06 extreme oversold within full SMA bull stack.",
       "sector": "Communication Services",
       "confidence": 6,
       "setup_id": "GOOGL-2026-05-20",
@@ -44,11 +44,11 @@
     {
       "date": "2026-05-13",
       "routine": "end_of_day_review",
-      "equity": 100000.00,
-      "cash": 100000.00,
-      "buying_power": 200000.00,
+      "equity": 100000.0,
+      "cash": 100000.0,
+      "buying_power": 200000.0,
       "deployed_pct": 0.0,
-      "pnl_today_dollars": 0.00,
+      "pnl_today_dollars": 0.0,
       "pnl_today_pct": 0.0,
       "open_positions": 0,
       "trades_closed_today": 0,
@@ -59,26 +59,38 @@
       "daytrade_count": 0,
       "pattern_day_trader": false,
       "running_win_rate": null,
-      "running_pnl_dollars": 0.00,
+      "running_pnl_dollars": 0.0,
       "running_pnl_pct": 0.0,
       "confidence_calibration": {
         "_comment": "predicted-confidence-bucket -> {sample_size, wins, losses}. Empty until we have closed trades.",
-        "bucket_9_10": {"n": 0, "wins": 0, "losses": 0},
-        "bucket_7_8":  {"n": 0, "wins": 0, "losses": 0},
-        "bucket_5_6":  {"n": 0, "wins": 0, "losses": 0}
+        "bucket_9_10": {
+          "n": 0,
+          "wins": 0,
+          "losses": 0
+        },
+        "bucket_7_8": {
+          "n": 0,
+          "wins": 0,
+          "losses": 0
+        },
+        "bucket_5_6": {
+          "n": 0,
+          "wins": 0,
+          "losses": 0
+        }
       },
       "daily_loss_cap_hit": false,
       "hard_rule_violations": [],
-      "notes": "No positions, no trades. Day-trade close step had nothing to close. NVDA swing approval flipped to STALE (price outran entry zone, no fresh scan since 2026-05-09). MSFT mean-reversion idea carried forward to 2026-05-14 pre-market. Infra: ta package failed to install in routine sandbox; research.py scan unavailable this run. Journal continuity gap — no entries for 2026-05-11 or 2026-05-12."
+      "notes": "No positions, no trades. Day-trade close step had nothing to close. NVDA swing approval flipped to STALE (price outran entry zone, no fresh scan since 2026-05-09). MSFT mean-reversion idea carried forward to 2026-05-14 pre-market. Infra: ta package failed to install in routine sandbox; research.py scan unavailable this run. Journal continuity gap \u2014 no entries for 2026-05-11 or 2026-05-12."
     },
     {
       "date": "2026-05-14",
       "routine": "end_of_day_review",
-      "equity": 100000.00,
-      "cash": 100000.00,
-      "buying_power": 200000.00,
+      "equity": 100000.0,
+      "cash": 100000.0,
+      "buying_power": 200000.0,
       "deployed_pct": 0.0,
-      "pnl_today_dollars": 0.00,
+      "pnl_today_dollars": 0.0,
       "pnl_today_pct": 0.0,
       "open_positions": 0,
       "trades_closed_today": 0,
@@ -89,26 +101,38 @@
       "daytrade_count": 0,
       "pattern_day_trader": false,
       "running_win_rate": null,
-      "running_pnl_dollars": 0.00,
+      "running_pnl_dollars": 0.0,
       "running_pnl_pct": 0.0,
       "confidence_calibration": {
         "_comment": "predicted-confidence-bucket -> {sample_size, wins, losses}. Empty until we have closed trades.",
-        "bucket_9_10": {"n": 0, "wins": 0, "losses": 0},
-        "bucket_7_8":  {"n": 0, "wins": 0, "losses": 0},
-        "bucket_5_6":  {"n": 0, "wins": 0, "losses": 0}
+        "bucket_9_10": {
+          "n": 0,
+          "wins": 0,
+          "losses": 0
+        },
+        "bucket_7_8": {
+          "n": 0,
+          "wins": 0,
+          "losses": 0
+        },
+        "bucket_5_6": {
+          "n": 0,
+          "wins": 0,
+          "losses": 0
+        }
       },
       "daily_loss_cap_hit": false,
       "hard_rule_violations": [],
-      "notes": "No positions, no trades. Day-trade close step had nothing to close. Scheduler gap confirmed as a pattern: only the EOD routine fired on 5/13 and 5/14 — pre-market, market-open, midday, and the dispatcher did not run on 5/14 (last_poll.json last_poll_at still null; open_positions.md still carried the unprocessed 2026-05-14 pre-market block). NVDA setup never re-evaluated, still STALE. MSFT formal proposal now 3 trading days overdue. Infra: ta package still fails wheel build, aborting the whole pip batch install; worked around by installing other deps individually. research.py scan unavailable for the 4th consecutive day."
+      "notes": "No positions, no trades. Day-trade close step had nothing to close. Scheduler gap confirmed as a pattern: only the EOD routine fired on 5/13 and 5/14 \u2014 pre-market, market-open, midday, and the dispatcher did not run on 5/14 (last_poll.json last_poll_at still null; open_positions.md still carried the unprocessed 2026-05-14 pre-market block). NVDA setup never re-evaluated, still STALE. MSFT formal proposal now 3 trading days overdue. Infra: ta package still fails wheel build, aborting the whole pip batch install; worked around by installing other deps individually. research.py scan unavailable for the 4th consecutive day."
     },
     {
       "date": "2026-05-15",
       "routine": "end_of_day_review",
-      "equity": 100000.00,
-      "cash": 100000.00,
-      "buying_power": 200000.00,
+      "equity": 100000.0,
+      "cash": 100000.0,
+      "buying_power": 200000.0,
       "deployed_pct": 0.0,
-      "pnl_today_dollars": 0.00,
+      "pnl_today_dollars": 0.0,
       "pnl_today_pct": 0.0,
       "open_positions": 0,
       "trades_closed_today": 0,
@@ -119,26 +143,38 @@
       "daytrade_count": 0,
       "pattern_day_trader": false,
       "running_win_rate": null,
-      "running_pnl_dollars": 0.00,
+      "running_pnl_dollars": 0.0,
       "running_pnl_pct": 0.0,
       "confidence_calibration": {
         "_comment": "predicted-confidence-bucket -> {sample_size, wins, losses}. Empty until we have closed trades.",
-        "bucket_9_10": {"n": 0, "wins": 0, "losses": 0},
-        "bucket_7_8":  {"n": 0, "wins": 0, "losses": 0},
-        "bucket_5_6":  {"n": 0, "wins": 0, "losses": 0}
+        "bucket_9_10": {
+          "n": 0,
+          "wins": 0,
+          "losses": 0
+        },
+        "bucket_7_8": {
+          "n": 0,
+          "wins": 0,
+          "losses": 0
+        },
+        "bucket_5_6": {
+          "n": 0,
+          "wins": 0,
+          "losses": 0
+        }
       },
       "daily_loss_cap_hit": false,
       "hard_rule_violations": [],
-      "notes": "Full schedule fired today (pre-market, market-open, midday, EOD all ran). 0 trades, 0 positions, P&L $0.00 (0.00%). Day-trade close step had nothing to close. AMZN-2026-05-15 setup proposed pre-market (confidence 6/10, swing long $264-$265.50, R:R 3.0:1) — Approved: NO held into the close; price drifted $267.21 (pre-mkt) → $261.30 (open) → $263.13 (midday) → $263.56 (EOD), never reached entry zone after open and never approved. NVDA Setup #1 STALE confirmed (price $228.29 EOD, prior zone $206-210 fully outrun; 5/20 earnings binary risk). MSFT Setup #2 PASS held; SMA 20 reclaim ($423.39 vs $417.47) sustained through close = 1 of 2 re-arm conditions met for Monday's pre-market re-evaluation, MACD cross still pending. Infra: ta package install fix held (setuptools+wheel upgrade before pip install -r requirements.txt) — no degraded steps today. RuFlo MCP unavailable (file-only mode) — no vector recall / pattern storage. Discord webhooks still unprovisioned in cloud host — brief logged to memory/pending_discord_updates.md."
+      "notes": "Full schedule fired today (pre-market, market-open, midday, EOD all ran). 0 trades, 0 positions, P&L $0.00 (0.00%). Day-trade close step had nothing to close. AMZN-2026-05-15 setup proposed pre-market (confidence 6/10, swing long $264-$265.50, R:R 3.0:1) \u2014 Approved: NO held into the close; price drifted $267.21 (pre-mkt) \u2192 $261.30 (open) \u2192 $263.13 (midday) \u2192 $263.56 (EOD), never reached entry zone after open and never approved. NVDA Setup #1 STALE confirmed (price $228.29 EOD, prior zone $206-210 fully outrun; 5/20 earnings binary risk). MSFT Setup #2 PASS held; SMA 20 reclaim ($423.39 vs $417.47) sustained through close = 1 of 2 re-arm conditions met for Monday's pre-market re-evaluation, MACD cross still pending. Infra: ta package install fix held (setuptools+wheel upgrade before pip install -r requirements.txt) \u2014 no degraded steps today. RuFlo MCP unavailable (file-only mode) \u2014 no vector recall / pattern storage. Discord webhooks still unprovisioned in cloud host \u2014 brief logged to memory/pending_discord_updates.md."
     },
     {
       "date": "2026-05-18",
       "routine": "end_of_day_review",
-      "equity": 100000.00,
-      "cash": 100000.00,
-      "buying_power": 200000.00,
+      "equity": 100000.0,
+      "cash": 100000.0,
+      "buying_power": 200000.0,
       "deployed_pct": 0.0,
-      "pnl_today_dollars": 0.00,
+      "pnl_today_dollars": 0.0,
       "pnl_today_pct": 0.0,
       "open_positions": 0,
       "trades_closed_today": 0,
@@ -149,26 +185,38 @@
       "daytrade_count": 0,
       "pattern_day_trader": false,
       "running_win_rate": null,
-      "running_pnl_dollars": 0.00,
+      "running_pnl_dollars": 0.0,
       "running_pnl_pct": 0.0,
       "confidence_calibration": {
         "_comment": "predicted-confidence-bucket -> {sample_size, wins, losses}. Empty until we have closed trades.",
-        "bucket_9_10": {"n": 0, "wins": 0, "losses": 0},
-        "bucket_7_8":  {"n": 0, "wins": 0, "losses": 0},
-        "bucket_5_6":  {"n": 0, "wins": 0, "losses": 0}
+        "bucket_9_10": {
+          "n": 0,
+          "wins": 0,
+          "losses": 0
+        },
+        "bucket_7_8": {
+          "n": 0,
+          "wins": 0,
+          "losses": 0
+        },
+        "bucket_5_6": {
+          "n": 0,
+          "wins": 0,
+          "losses": 0
+        }
       },
       "daily_loss_cap_hit": false,
       "hard_rule_violations": [],
-      "notes": "Week 3 Day 1. 0 trades, 0 positions, P&L $0.00 (0.00%). SPY trip-wire triggered midday ($734.81 < $736) — no-new-longs rule activated and held through close. NVDA -6.5% to $220.40 intraday (pre-earnings IV repricing; binary event 5/20 AMC). MSFT tested SMA 20 ($417.93 vs $417.39) intraday — half-trigger 1/2 conditions still pending (MACD histogram -0.97 at midday). AMZN-2026-05-15 stales at 5/19 EOD per ADR-0002. No setups proposed. Note: 2026-05-16 EOD snapshot missing (sessions ran 5/16 but snapshot not captured in that routine). httpx unavailable in main session — Discord brief logged to pending_discord_updates.md."
+      "notes": "Week 3 Day 1. 0 trades, 0 positions, P&L $0.00 (0.00%). SPY trip-wire triggered midday ($734.81 < $736) \u2014 no-new-longs rule activated and held through close. NVDA -6.5% to $220.40 intraday (pre-earnings IV repricing; binary event 5/20 AMC). MSFT tested SMA 20 ($417.93 vs $417.39) intraday \u2014 half-trigger 1/2 conditions still pending (MACD histogram -0.97 at midday). AMZN-2026-05-15 stales at 5/19 EOD per ADR-0002. No setups proposed. Note: 2026-05-16 EOD snapshot missing (sessions ran 5/16 but snapshot not captured in that routine). httpx unavailable in main session \u2014 Discord brief logged to pending_discord_updates.md."
     },
     {
       "date": "2026-05-19",
       "routine": "end_of_day_review",
-      "equity": 100000.00,
-      "cash": 100000.00,
-      "buying_power": 200000.00,
+      "equity": 100000.0,
+      "cash": 100000.0,
+      "buying_power": 200000.0,
       "deployed_pct": 0.0,
-      "pnl_today_dollars": 0.00,
+      "pnl_today_dollars": 0.0,
       "pnl_today_pct": 0.0,
       "open_positions": 0,
       "trades_closed_today": 0,
@@ -179,27 +227,39 @@
       "daytrade_count": 0,
       "pattern_day_trader": false,
       "running_win_rate": null,
-      "running_pnl_dollars": 0.00,
+      "running_pnl_dollars": 0.0,
       "running_pnl_pct": 0.0,
       "confidence_calibration": {
         "_comment": "predicted-confidence-bucket -> {sample_size, wins, losses}. Empty until we have closed trades.",
-        "bucket_9_10": {"n": 0, "wins": 0, "losses": 0},
-        "bucket_7_8":  {"n": 0, "wins": 0, "losses": 0},
-        "bucket_5_6":  {"n": 0, "wins": 0, "losses": 0}
+        "bucket_9_10": {
+          "n": 0,
+          "wins": 0,
+          "losses": 0
+        },
+        "bucket_7_8": {
+          "n": 0,
+          "wins": 0,
+          "losses": 0
+        },
+        "bucket_5_6": {
+          "n": 0,
+          "wins": 0,
+          "losses": 0
+        }
       },
       "daily_loss_cap_hit": false,
       "hard_rule_violations": [],
-      "notes": "Week 3 Day 2. 0 trades, 0 positions, P&L $0.00 (0.00%). SPY trip-wire active and WORSENED into close ($735.51 midday → $733.85 EOD; $736 threshold not reclaimed). NVDA $221.46 EOD heading into Q1 FY27 earnings AMC tonight — confirmed no semiconductor exposure entering print. MSFT half-trigger 1/2: MACD histogram barely moved (-0.5525 midday → -0.5435 EOD); pace of approach to zero has slowed significantly vs prior sessions. SMA 20 condition still MET ($417.77 > $417.37). AMZN-2026-05-15 archived midday per ADR-0002. GOOGL extreme oversold (Stoch RSI 0.06 midday). No setups proposed. Stale-state sweep: both learnings.md and strategy.md modified today — no stale-file flags needed. NVDA earnings reaction (5/20 AMC → 5/21 pre-market tape read) is the week's defining catalyst for semiconductor sector direction and potential SPY trip-wire resolution."
+      "notes": "Week 3 Day 2. 0 trades, 0 positions, P&L $0.00 (0.00%). SPY trip-wire active and WORSENED into close ($735.51 midday \u2192 $733.85 EOD; $736 threshold not reclaimed). NVDA $221.46 EOD heading into Q1 FY27 earnings AMC tonight \u2014 confirmed no semiconductor exposure entering print. MSFT half-trigger 1/2: MACD histogram barely moved (-0.5525 midday \u2192 -0.5435 EOD); pace of approach to zero has slowed significantly vs prior sessions. SMA 20 condition still MET ($417.77 > $417.37). AMZN-2026-05-15 archived midday per ADR-0002. GOOGL extreme oversold (Stoch RSI 0.06 midday). No setups proposed. Stale-state sweep: both learnings.md and strategy.md modified today \u2014 no stale-file flags needed. NVDA earnings reaction (5/20 AMC \u2192 5/21 pre-market tape read) is the week's defining catalyst for semiconductor sector direction and potential SPY trip-wire resolution."
     },
     {
       "date": "2026-05-20",
       "routine": "end_of_day_review",
-      "note": "EOD routine fired at ~9:45 AM ET (early — same scheduling bug as market-open 5:53 AM and midday 6:32 AM). Market still open at time of snapshot.",
-      "equity": 100000.00,
-      "cash": 100000.00,
-      "buying_power": 200000.00,
+      "note": "EOD routine fired at ~9:45 AM ET (early \u2014 same scheduling bug as market-open 5:53 AM and midday 6:32 AM). Market still open at time of snapshot.",
+      "equity": 100000.0,
+      "cash": 100000.0,
+      "buying_power": 200000.0,
       "deployed_pct": 0.0,
-      "pnl_today_dollars": 0.00,
+      "pnl_today_dollars": 0.0,
       "pnl_today_pct": 0.0,
       "open_positions": 0,
       "trades_closed_today": 0,
@@ -210,17 +270,29 @@
       "daytrade_count": 0,
       "pattern_day_trader": false,
       "running_win_rate": null,
-      "running_pnl_dollars": 0.00,
+      "running_pnl_dollars": 0.0,
       "running_pnl_pct": 0.0,
       "confidence_calibration": {
         "_comment": "predicted-confidence-bucket -> {sample_size, wins, losses}. Empty until we have closed trades.",
-        "bucket_9_10": {"n": 0, "wins": 0, "losses": 0},
-        "bucket_7_8":  {"n": 0, "wins": 0, "losses": 0},
-        "bucket_5_6":  {"n": 0, "wins": 0, "losses": 0}
+        "bucket_9_10": {
+          "n": 0,
+          "wins": 0,
+          "losses": 0
+        },
+        "bucket_7_8": {
+          "n": 0,
+          "wins": 0,
+          "losses": 0
+        },
+        "bucket_5_6": {
+          "n": 0,
+          "wins": 0,
+          "losses": 0
+        }
       },
       "daily_loss_cap_hit": false,
       "hard_rule_violations": [],
-      "notes": "Week 3 Day 3. 0 trades, 0 positions, P&L $0.00 (0.00%). Market posture: GREEN (first full day under new SMA-based system). GOOGL-2026-05-20 approved at 9:28 AM ET (Approved: YES) — not executed due to scheduling gap: market-open routine fired at 5:53 AM (pre-approval), no execution path for remainder of day. At EOD check (9:45 AM): GOOGL $388.77 within entry zone but below $390 intraday confirmation level. MACD hist -2.2335 (deteriorated from -1.4647 at proposal). Stoch K 0.857 (still extreme oversold). Setup stale-by 2026-05-22 EOD — valid for tomorrow. NVDA earnings AMC tonight — no semiconductor exposure. MSFT half-trigger 1/2: MACD stalled (-0.5598), 1 session remaining before stale-by. Daily loss cap: NOT hit. Hard rule violations: NONE. Scheduling gap is week's dominant infra failure: all 3 routines fired in first 4 hours instead of scheduled times."
+      "notes": "Week 3 Day 3. 0 trades, 0 positions, P&L $0.00 (0.00%). Market posture: GREEN (first full day under new SMA-based system). GOOGL-2026-05-20 approved at 9:28 AM ET (Approved: YES) \u2014 not executed due to scheduling gap: market-open routine fired at 5:53 AM (pre-approval), no execution path for remainder of day. At EOD check (9:45 AM): GOOGL $388.77 within entry zone but below $390 intraday confirmation level. MACD hist -2.2335 (deteriorated from -1.4647 at proposal). Stoch K 0.857 (still extreme oversold). Setup stale-by 2026-05-22 EOD \u2014 valid for tomorrow. NVDA earnings AMC tonight \u2014 no semiconductor exposure. MSFT half-trigger 1/2: MACD stalled (-0.5598), 1 session remaining before stale-by. Daily loss cap: NOT hit. Hard rule violations: NONE. Scheduling gap is week's dominant infra failure: all 3 routines fired in first 4 hours instead of scheduled times."
     },
     {
       "date": "2026-05-21",
@@ -240,29 +312,41 @@
       "daytrade_count": 0,
       "pattern_day_trader": false,
       "running_win_rate": null,
-      "running_pnl_dollars": 0.00,
+      "running_pnl_dollars": 0.0,
       "running_pnl_pct": 0.0,
       "unrealized_pnl_dollars": 64.26,
       "unrealized_pnl_pct": 0.33,
       "confidence_calibration": {
         "_comment": "predicted-confidence-bucket -> {sample_size, wins, losses}. Empty until we have closed trades.",
-        "bucket_9_10": {"n": 0, "wins": 0, "losses": 0},
-        "bucket_7_8":  {"n": 0, "wins": 0, "losses": 0},
-        "bucket_5_6":  {"n": 0, "wins": 0, "losses": 0}
+        "bucket_9_10": {
+          "n": 0,
+          "wins": 0,
+          "losses": 0
+        },
+        "bucket_7_8": {
+          "n": 0,
+          "wins": 0,
+          "losses": 0
+        },
+        "bucket_5_6": {
+          "n": 0,
+          "wins": 0,
+          "losses": 0
+        }
       },
       "daily_loss_cap_hit": false,
       "hard_rule_violations": [],
-      "notes": "Week 3 Day 4. First day with open position. 1 open trade (GOOGL long 51 shares @ $387.07, unrealized +$64.26 +0.33%). 0 trades closed. Daily P&L -$29.58 (-0.03%) — well within daily loss cap. Post-NVDA AI cycle beat: SPY strengthened to 1.81% above SMA 20 (posture GREEN STRENGTHENED). GOOGL Stoch K rebounded from 0.06 (extreme oversold at entry) to 0.87 — inflection captured. MACD hist still negative (-2.8451) — known weakness at confidence 6/10. Trailing stop e0b8fbda CONFIRMED ACTIVE. No management actions triggered. MSFT MACD hist improved to -0.3178 (from -0.5598 yesterday) — largest single-day improvement in half-trigger window. Cross still not fired; 5/22 is stale-by and last chance. Daily loss cap: NOT hit. Hard rule violations: NONE."
+      "notes": "Week 3 Day 4. First day with open position. 1 open trade (GOOGL long 51 shares @ $387.07, unrealized +$64.26 +0.33%). 0 trades closed. Daily P&L -$29.58 (-0.03%) \u2014 well within daily loss cap. Post-NVDA AI cycle beat: SPY strengthened to 1.81% above SMA 20 (posture GREEN STRENGTHENED). GOOGL Stoch K rebounded from 0.06 (extreme oversold at entry) to 0.87 \u2014 inflection captured. MACD hist still negative (-2.8451) \u2014 known weakness at confidence 6/10. Trailing stop e0b8fbda CONFIRMED ACTIVE. No management actions triggered. MSFT MACD hist improved to -0.3178 (from -0.5598 yesterday) \u2014 largest single-day improvement in half-trigger window. Cross still not fired; 5/22 is stale-by and last chance. Daily loss cap: NOT hit. Hard rule violations: NONE."
     },
     {
       "date": "2026-05-25",
       "routine": "end_of_day_review",
-      "note": "Memorial Day — US equity markets CLOSED. Mark-to-market unchanged from Fri 5/22 close. No execution, no day-trade closes, no new bars.",
-      "equity": 99790.90,
+      "note": "Memorial Day \u2014 US equity markets CLOSED. Mark-to-market unchanged from Fri 5/22 close. No execution, no day-trade closes, no new bars.",
+      "equity": 99790.9,
       "cash": 80259.43,
       "buying_power": 180050.33,
       "deployed_pct": 19.57,
-      "pnl_today_dollars": 0.00,
+      "pnl_today_dollars": 0.0,
       "pnl_today_pct": 0.0,
       "open_positions": 1,
       "trades_closed_today": 0,
@@ -273,19 +357,76 @@
       "daytrade_count": 0,
       "pattern_day_trader": false,
       "running_win_rate": null,
-      "running_pnl_dollars": 0.00,
+      "running_pnl_dollars": 0.0,
       "running_pnl_pct": 0.0,
-      "unrealized_pnl_dollars": -209.10,
+      "unrealized_pnl_dollars": -209.1,
       "unrealized_pnl_pct": -1.06,
       "confidence_calibration": {
         "_comment": "predicted-confidence-bucket -> {sample_size, wins, losses}. Empty until we have closed trades.",
-        "bucket_9_10": {"n": 0, "wins": 0, "losses": 0},
-        "bucket_7_8":  {"n": 0, "wins": 0, "losses": 0},
-        "bucket_5_6":  {"n": 0, "wins": 0, "losses": 0}
+        "bucket_9_10": {
+          "n": 0,
+          "wins": 0,
+          "losses": 0
+        },
+        "bucket_7_8": {
+          "n": 0,
+          "wins": 0,
+          "losses": 0
+        },
+        "bucket_5_6": {
+          "n": 0,
+          "wins": 0,
+          "losses": 0
+        }
       },
       "daily_loss_cap_hit": false,
       "hard_rule_violations": [],
-      "notes": "Week 4 Day 1 (holiday, no trading). Markets closed for Memorial Day; mark-to-market frozen at Fri 5/22 close prices. Account: $99,790.90 equity / $80,259.43 cash / 19.57% deployed / 0 day-trades. GOOGL 51 sh @ $387.07 marked at $382.97 → unrealized -$209.10 (-1.06%). Trailing stop e0b8fbda confirmed ACTIVE (status: new). -7% cut $359.98 ~6% below current — healthy buffer. No management actions. Pre-market routine ran 08:13 ET on schedule. MSFT half-trigger STALED (5/22 EOD passed; MACD never crossed). Tomorrow's pre-market priorities: NVDA MACD direction (in watch zone $215-220), GOOGL position health, AVGO base-building. Hard rule violations: NONE. Daily loss cap: NOT hit. Weekly trade count: 0/3 (Week 4 reset Mon 00:00 ET; first executable session is Tue 5/26)."
+      "notes": "Week 4 Day 1 (holiday, no trading). Markets closed for Memorial Day; mark-to-market frozen at Fri 5/22 close prices. Account: $99,790.90 equity / $80,259.43 cash / 19.57% deployed / 0 day-trades. GOOGL 51 sh @ $387.07 marked at $382.97 \u2192 unrealized -$209.10 (-1.06%). Trailing stop e0b8fbda confirmed ACTIVE (status: new). -7% cut $359.98 ~6% below current \u2014 healthy buffer. No management actions. Pre-market routine ran 08:13 ET on schedule. MSFT half-trigger STALED (5/22 EOD passed; MACD never crossed). Tomorrow's pre-market priorities: NVDA MACD direction (in watch zone $215-220), GOOGL position health, AVGO base-building. Hard rule violations: NONE. Daily loss cap: NOT hit. Weekly trade count: 0/3 (Week 4 reset Mon 00:00 ET; first executable session is Tue 5/26)."
+    },
+    {
+      "date": "2026-05-27",
+      "routine": "end_of_day_review",
+      "note": "Week 4 Day 2. GOOGL bounced to +0.77% on SMA 20 reclaim. NVDA broke down out of watch zone ($215.34 \u2192 $213.16). No new entries. Hard rule violations: NONE.",
+      "equity": 100153.51,
+      "cash": 80259.43,
+      "buying_power": 180412.94,
+      "deployed_pct": 19.86,
+      "pnl_today_dollars": 61.2,
+      "pnl_today_pct": 0.06,
+      "open_positions": 1,
+      "trades_closed_today": 0,
+      "wins_today": 0,
+      "losses_today": 0,
+      "trades_opened_today": 0,
+      "weekly_trade_count": 0,
+      "daytrade_count": 0,
+      "pattern_day_trader": false,
+      "running_win_rate": null,
+      "running_pnl_dollars": 0.0,
+      "running_pnl_pct": 0.0,
+      "unrealized_pnl_dollars": 152.49,
+      "unrealized_pnl_pct": 0.77,
+      "confidence_calibration": {
+        "_comment": "predicted-confidence-bucket -> {sample_size, wins, losses}. Empty until we have closed trades.",
+        "bucket_9_10": {
+          "n": 0,
+          "wins": 0,
+          "losses": 0
+        },
+        "bucket_7_8": {
+          "n": 0,
+          "wins": 0,
+          "losses": 0
+        },
+        "bucket_5_6": {
+          "n": 0,
+          "wins": 0,
+          "losses": 0
+        }
+      },
+      "daily_loss_cap_hit": false,
+      "hard_rule_violations": [],
+      "notes": "Account: $100,153.51 equity / $80,259.43 cash / 19.86% deployed / 0 day-trades. GOOGL 51 sh @ $387.07 marked at $390.06 \u2192 unrealized +$152.49 (+0.77%) \u2014 first time green since entry. SMA 20 reclaimed ($390.12 vs $389.43), Stoch K bouncing (9.83 from 0.87 Fri), MACD hist -3.46 (~flat vs Fri -3.53 \u2014 arrested). Trailing stop e0b8fbda ACTIVE; -7% cut $359.98 7.7% below. SPY $750.58 GREEN STRENGTHENED (RSI 71.5 OVERBOUGHT, MACD -0.56 improving). QQQ $729.72 RSI 75 EXTREME OVERBOUGHT. NVDA $213.16 \u2014 BROKE DOWN out of $215-220 watch zone; MACD hist deepened to -1.75 from -0.87. Watch zone revised to $208-215 with SMA 50 ($198) as deeper support. No day-trades to close. Stale-state sweep clean. Routine on schedule (15:45 ET, market closes 16:00). Discord webhook still unprovisioned in cloud \u2192 logged to pending_discord_updates.md. Weekly trade count: 0/3 (Week 4 Day 2)."
     }
   ],
   "summary": {
@@ -297,8 +438,8 @@
     "total_pnl": 0,
     "best_trade": null,
     "worst_trade": null,
-    "current_equity": 99790.90,
-    "phase_pnl": -209.10,
-    "phase_pnl_pct": -0.21
+    "current_equity": 100153.51,
+    "phase_pnl": 153.51,
+    "phase_pnl_pct": 0.15
   }
 }

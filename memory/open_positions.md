@@ -6,13 +6,13 @@
 - **Entry**: $387.07 | 51 shares | Cost basis: $19,740.57
 - **Stop**: 10% trailing GTC (order e0b8fbda) — initial hard floor ~$348.36
 - **Target**: $415.00 | R:R ~2.3:1
-- **Unrealized P&L**: -$187.17 (-0.95%) as of 2026-05-26 pre-market (Alpaca live $383.40)
+- **Unrealized P&L**: +$152.49 (+0.77%) as of 2026-05-27 EOD review (Alpaca live $390.06)
 - **Stop tighten rules**: at +15% ($445.13) → 7% trail; at +20% ($464.48) → 5% trail
-- **-7% cut trigger**: $359.98 (close immediately if hit) — current $383.40, ~6.5% buffer
+- **-7% cut trigger**: $359.98 (close immediately if hit) — current $390.06, ~7.7% buffer
 - **Catalyst**: Google I/O 2026 (Gemini, AI Mode in Search)
 - **Sector**: Communication Services
 - **Week trade count**: 0/3 (Week 4 reset Mon 00:00 ET; GOOGL counted in Week 3)
-- **Technical update 5/26 pre-market**: indicators unchanged from Fri close (Memorial Day = no new bars). MACD hist -3.53, price BELOW SMA 20 ($385.48), Stoch K 0.87 (still extreme oversold from entry — has NOT produced sustained bounce). Trailing stop still active. Manual watch trigger: if price loses $375 today, re-evaluate before next routine.
+- **Technical update 5/27 EOD**: SMA 20 RECLAIMED ($390.12 vs $389.43). RSI 61.8 (healthy). MACD hist -3.46 (still negative but ~flat vs Fri -3.53 — no further deterioration). Stoch K 9.83 (BOUNCING from 0.87 — oversold inflection thesis now showing up in price). Full SMA bull stack (SMA 50 > 200) intact. Price below VWAP $392.61 (intraday weakness late in session) but net +0.77% from entry. Trailing stop active. Manual watch trigger $375 unchanged.
 
 ## Pending Orders
 None.
@@ -234,14 +234,15 @@ NVDA post-earnings pullback watch is live ($215–$220 zone, RSI < 65 ✓, MACD 
 - **Hard gate**: RSI must stay above 40 at time of fill. MACD hist must deepen (more negative than -1.0).
 - **Re-evaluate**: 5/26 pre-market.
 
-### NVDA — Long watch, post-earnings pullback zone
-- Current: $215.34 (5/22 close), **INSIDE watch zone $215–$220**.
-- RSI 53.7 (< 65 ✓). Full SMA bull stack (price > SMA 20 $214.75 > SMA 50 $196.80 > SMA 200 $187.03).
-- MACD hist -0.87 (negative — NEEDS POSITIVE CROSS for setup confirmation). Stoch K 26.8 (room to run).
-- **Entry trigger**: MACD positive cross + price holding above $215 at pre-market check.
-- Tentative setup parameters if trigger fires (5/26 pre-market): entry $215–$218, stop $208 (below SMA 50 $196.80 buffer; ~3.5% risk), target $230 (R:R ~2.4:1), confidence 6-7/10 depending on catalyst.
+### NVDA — Long watch, post-earnings pullback zone (REVISED 2026-05-27 EOD)
+- Current: $213.16 (5/27 EOD, intraday), **BELOW prior watch zone $215–$220** — broke through SMA 20.
+- RSI 51.57 (< 65 ✓). Long-term bull stack still intact (SMA 50 $198 > SMA 200 $187) but **short-term broken** (price below SMA 20 $214.67, below EMA 9 $217.59, below EMA 21 $214.09).
+- MACD hist **-1.75** (deepened from -0.87 Fri — momentum getting WORSE, not better). Stoch K 3.72 extreme oversold but failing to bounce.
+- **Watch zone revised**: $208–$215 with SMA 50 ($198) as deeper structural support. Original $215–$220 entry zone no longer relevant.
+- **Entry trigger (REVISED)**: MACD hist turns less negative (above -1.0 trajectory) AND price RECLAIMS SMA 20 ($214.67) AND holds for one full session. Without both, this is a falling knife.
+- Tentative setup parameters if trigger fires: entry $214–$217 (post-reclaim), stop $206 (~$2 below SMA 50 buffer; ~3.7% risk), target $230 (R:R ~2.3:1), confidence 5–6/10.
 - Sector check needed at proposal time: AVGO/TSM/SMH MACD direction (must align bullish).
-- **Re-evaluate**: 5/26 pre-market — FIRST item to check.
+- **Re-evaluate**: 5/28 pre-market.
 
 ### AVGO — Long watch, oversold base-building
 - Current: $414.01 (5/22 close), below SMA 20 ($419.01) and lost trend.
@@ -361,6 +362,30 @@ Per ADR-0004 stale-by mechanism: half-trigger entered 5/15, allotted 5 trading d
 - **PDT**: count 0/3 in the 5-rolling-day window — clean.
 - **Discord brief**: webhook config missing in cloud env — logged to `memory/pending_discord_updates.md` for dispatcher flush.
 - **Next watch points**: (1) GOOGL behavior at $375 manual trigger / SMA 20 reclaim attempt $387.13; (2) midday scan to revisit NVDA MACD direction if intraday bars produce a fresh cross.
+
+## EOD Review Log — 2026-05-27 (19:45 UTC / 15:45 ET, on schedule)
+- Routine fired 15:45 ET — market close in 15 minutes (closes 16:00 ET). Within the intended window. ✓
+- **Account live (Alpaca)**: $100,153.51 equity | $80,259.43 cash | 19.86% deployed | 0 day-trades | PDT false.
+- **Daily P&L: +$61.20 (+0.06%)** (mark-to-market — GOOGL bounce from -1.08% AM open → +0.77% EOD).
+- Daily loss cap: NOT hit. Hard rule violations: NONE.
+- **No day-trade positions** to close. Only swing carry (GOOGL).
+- **GOOGL position (EOD-15min)**: 51 sh @ $387.07 | current $390.06 | unrealized **+$152.49 (+0.77%)**.
+  - Trailing stop e0b8fbda CONFIRMED ACTIVE (type: trailing_stop, status: new, qty 51).
+  - -7% cut $359.98 — price 7.7% above. NO ACTION.
+  - +15% tighten $445.13 — not reached. NO ACTION.
+  - Fresh EOD indicators: RSI 61.82, MACD hist **-3.46 (≈ flat vs Fri -3.53 — deterioration arrested)**, Stoch K 9.83 (BOUNCING from 0.87 Fri — the inflection thesis is finally showing in price), price **RECLAIMED SMA 20** ($390.12 vs $389.43), price below VWAP $392.61 (intraday late-session weakness), SMA 50 > 200 long-term bullish stack intact.
+  - Status: **HOLD overnight**. SMA 20 reclaim + Stoch bounce are constructive; MACD still has work to do. Manual watch trigger $375 unchanged.
+- **Market posture (EOD)**: 🟢 GREEN STRENGTHENED holds. SPY $750.58 (RSI 71.5 OVERBOUGHT, MACD hist -0.56 improving from -0.95). SPY > SMA 20 $735.25 > SMA 50 $700.03 > SMA 200 $679.99 — full bull stack. QQQ $729.72 RSI 75 EXTREME OVERBOUGHT. Posture allows trading but extension on indexes argues continued patience on new longs.
+- **Watch zone updates (key tomorrow priorities)**:
+  - **NVDA $213.16** — **LOST WATCH ZONE.** Was $215.34 Fri (inside $215–$220), now $213.16 below SMA 20 ($214.67). MACD hist DEEPENED to -1.75 (from -0.87 Fri — worse, not better). Stoch K 3.72 extreme oversold but momentum still failing. RSI 51.6. **Watch-zone thesis weakened**: zone was meant to capture a pullback that holds support; price has now broken through SMA 20 instead of bouncing off it. Revise watch zone to $208–$215 with SMA 50 ($198) as deeper support. No new setup until MACD positive cross AND price reclaims SMA 20.
+  - **AVGO** (no fresh scan today) — re-check 5/28 pre-market for MACD trajectory.
+  - **META** — short watch unchanged, await bounce-rejection.
+  - **GOOGL** — position constructive, SMA 20 reclaimed, Stoch bouncing. Monitor for MACD cross at next pre-market.
+- **Weekly trade count**: 0/3 (Week 4 Day 2 complete; no new entries this week).
+- **PDT**: count 0/3 in 5-rolling-day window — clean.
+- **Discord brief**: webhook config missing in cloud env — logged to `memory/pending_discord_updates.md` for dispatcher flush.
+- **Stale-state sweep**: learnings.md last touched 2026-05-25 EOD (2 trading days back) — fresh ✓. strategy.md last touched 2026-05-23 (4 days back) — well under 10-day threshold ✓. No flags appended.
+- **Reflective question**: skipping — nothing notably anomalous today (GOOGL bounce is constructive, NVDA breakdown is a known watch-zone risk, no decisions were made that warrant reflection).
 
 ## EOD Review Log — 2026-05-20 (NOTE: Fired at ~9:45 AM ET — market open +15 min, same scheduling bug)
 - Account confirmed (Alpaca): $100,000 equity, $100,000 cash, 0 positions, 0 day-trades.
