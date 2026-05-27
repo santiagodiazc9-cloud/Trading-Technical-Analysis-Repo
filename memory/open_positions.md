@@ -6,13 +6,13 @@
 - **Entry**: $387.07 | 51 shares | Cost basis: $19,740.57
 - **Stop**: 10% trailing GTC (order e0b8fbda) — initial hard floor ~$348.36
 - **Target**: $415.00 | R:R ~2.3:1
-- **Unrealized P&L**: -$187.17 (-0.95%) as of 2026-05-26 pre-market (Alpaca live $383.40)
+- **Unrealized P&L**: ~+$87 (+0.44%) as of 2026-05-27 pre-market (Alpaca live ~$388.78)
 - **Stop tighten rules**: at +15% ($445.13) → 7% trail; at +20% ($464.48) → 5% trail
-- **-7% cut trigger**: $359.98 (close immediately if hit) — current $383.40, ~6.5% buffer
+- **-7% cut trigger**: $359.98 (close immediately if hit) — current ~$388.78, ~7.5% buffer
 - **Catalyst**: Google I/O 2026 (Gemini, AI Mode in Search)
 - **Sector**: Communication Services
 - **Week trade count**: 0/3 (Week 4 reset Mon 00:00 ET; GOOGL counted in Week 3)
-- **Technical update 5/26 pre-market**: indicators unchanged from Fri close (Memorial Day = no new bars). MACD hist -3.53, price BELOW SMA 20 ($385.48), Stoch K 0.87 (still extreme oversold from entry — has NOT produced sustained bounce). Trailing stop still active. Manual watch trigger: if price loses $375 today, re-evaluate before next routine.
+- **Technical update 5/27 pre-market**: RSI 61.12 (healthy), MACD hist -3.56 (deepening — known weakness from entry), Stoch K **4.47 finally turning up** (from 0.06 → 0.87 → 4.47 — inflection beginning). Price reclaiming SMA 20 ($387.41). Full SMA bull stack intact (SMA 50 $342.88 > SMA 200 $297.16). Trailing stop ACTIVE. Position turning constructive — let it work. Manual watch trigger $375 still in effect.
 
 ## Pending Orders
 None.
@@ -285,6 +285,46 @@ Per ADR-0004 stale-by mechanism: half-trigger entered 5/15, allotted 5 trading d
 **Setups proposed: 0**. Markets closed today; tape conditions argue for patience even tomorrow.
 **Confidence level for new entries**: 4/10. GREEN posture but tired uptrend + extended leaders + GOOGL position concern = stand down on new longs unless NVDA-style oversold-pullback setup confirms.
 **Weekly trade count**: 0/3. Week 4 begins (Memorial Day shortened week).
+
+---
+
+## Pre-Market Research Log — 2026-05-27 (12:09 UTC / 08:09 ET, on schedule — Week 4 day 2)
+
+**Ruflo**: MCP unavailable in cloud — file-only mode (steps 4a vector recall + 8 indexing skipped).  
+**Stale-setup sweep**: 0 archived.  
+**Account**: $99,970.93 equity | $80,259.43 cash | 19.72% deployed | 0 day-trades | Daily P&L -$121.38 (-0.12%).  
+**Open positions**: GOOGL 51 sh @ $387.07, current ~$388.78, unrealized ~**+$87 (+0.44%)** — flipped to green from -$209 on Friday.  
+**Market Posture**: 🟢 **GREEN STRENGTHENED** — SPY $750.46 > SMA 20 $733.30 (margin **2.34%**, widened from 1.93%) > SMA 50 $698.39 > SMA 200 $679.42. Both SPY (RSI 71.4) and QQQ (RSI 75.3) now OVERBOUGHT.
+
+**Market-Wide Scan:**
+- Pass 1 (gap movers): 0 candidates — pre-market early.
+- Pass 2 (earnings calendar): 2 names returned, both in 2-day earnings window — **all SKIP** per binary-event rule:
+  - **A (Agilent)** $115.07 — earnings 5/27 AMC TODAY. MACD cross firing (+0.23). Binary window.
+  - **ADSK (Autodesk)** $238.30 — earnings 5/28 AMC. RSI 48, below SMA 200.
+
+**Watchlist Top Observations:**
+- **NVDA ~$214.66** — at SMA 20 ($214.67), bottom edge of watch zone $215–$220. RSI 53.2 ✓, Stoch K 12.6 extreme oversold. **MACD hist DETERIORATED**: -0.87 (Fri) → -1.35 (today). Positive cross moved FURTHER away, not closer. **Momentum gate fails harder.** No setup — re-check tomorrow but trajectory is wrong direction.
+- **MSFT ~$415.75** — **lost SMA 20** ($416.18; was holding +$0.27 Fri, now below). MACD hist -0.58 (worsened from -0.37). Both half-trigger conditions broken simultaneously. Setup definitively archived; fresh proposal must independently fire BOTH conditions for June 2-3 Build catalyst.
+- **AVGO ~$422** — **reclaimed SMA 20** ($419.21) ✓. Stoch K 12.77 extreme oversold. RSI 56.6 healthy. BUT MACD hist still -3.62 (deeply negative; barely improved from -4.18). Not yet basing — wait for MACD trajectory turn (less negative than -2 + Stoch confirms turn). Watch.
+- **META ~$609** — below SMA 20 ($615.79), SMA 50 ($617.81), SMA 200 ($668.68). Short watch. BUT Stoch K 76.4 (rising; from 60.5 Fri) = bouncing, not rejecting yet. MACD hist -0.38 (only mild deepening). Need bounce-rejection candle at $615–$628 zone with MACD deepening past -1. Watch.
+- **GOOGL (position)** — Stoch K **inflection beginning** (0.06 → 0.87 → 4.47 over 3 sessions). RSI 61.1 healthy. Price reclaiming SMA 20 ($387.41 vs ~$388.78). MACD still -3.56 (lagging confirmation). Hold.
+- **AMD ~$447, AAPL ~$300+, ARM, PANW, LLY** — All RSI 70-78+ OR Stoch 96-100. Extreme leadership extension. No chases.
+- **TSLA, AMZN, PLTR, CRM, VST, CEG** — Each fails ≥3 of 6 checklist items (SMA 50<200, MACD bearish, Stoch extremes, below SMA 20). Pass.
+
+**Adversarial Bull/Bear/Judge debate**: SKIPPED. No candidate has squeeze_flag, sentiment_divergence, or 5+ confluence on the priority criteria. Earnings-windowed scan names (A, ADSK) auto-skip; NVDA momentum gate fails harder than yesterday; AVGO base not yet confirmed; META short setup lacks bounce-rejection trigger.
+
+**Setups proposed: 0.** Patient pass — broad-tape RSI > 70 on both indices + NVDA momentum deteriorating + MSFT structure broken = stand down on new longs. No clean short setups today.
+
+**Confidence level for new entries**: **3/10** (downgraded from 4/10 yesterday). GREEN posture but multiple warning signs: broad RSI overbought, NVDA momentum wrong direction, MSFT lost SMA 20, MACD divergence persists.
+
+**Weekly trade count**: 0/3 (Week 4 day 2).
+
+**Next routine priorities** (5/27 midday + 5/28 pre-market):
+1. **NVDA** — MACD direction. If cross fires (hist > 0) AND price holds > $214, propose 6/10 setup. If MACD continues deepening, retire post-earnings watch and wait for fresh setup.
+2. **GOOGL position** — Stoch K inflection continuation. SMA 20 hold confirms turn.
+3. **AVGO** — MACD trajectory: needs less negative than -2 AND Stoch turning up from < 20.
+4. **META** — bounce to $615–$628 with rejection candle? If yes + MACD deepening, propose short.
+5. Broad tape — first sign of pullback (SPY MACD crosses positive OR SPY loses SMA 20 short-term) changes the calculus.
 
 ---
 
