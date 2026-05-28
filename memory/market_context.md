@@ -1,7 +1,7 @@
 # Market Context
 
 ## Last Updated
-2026-05-28 (Midday Scan, 12:35 ET / 16:35 UTC — Week 4 Day 3, Thursday)
+2026-05-28 (End-of-Day Review, 15:46 ET / 19:46 UTC — Week 4 Day 3, Thursday)
 
 ## Market Posture
 🟢 GREEN STRENGTHENED — SPY $750.59 | SMA 20 $735.25 | SMA 50 $700.03 | SMA 200 $679.99
@@ -74,3 +74,14 @@
 - **TSM $426.85** — MACD bullish cross fired (+0.50). Above upper BB.
 - **GOOGL $389.02 (position)** — Stoch K 13.58 (bounce continuing). +0.50% unrealized. Trail active.
 - **No setups proposed at midday.** Same posture/conclusion as pre-mkt: patient pass.
+
+## End-of-Day Update (5/28 19:46 UTC — ~14 min to close)
+- **SPY ~$755.3** (extended above $754.23 midday, +0.63% on day). RSI **73.6** (deeper OB; pre-mkt 71.5 → midday 73.3 → EOD 73.6). MACD hist **-0.31 (continued improvement: -0.56 → -0.36 → -0.31)**. Stoch K 60.1 (up from 59.4). Posture: 🟢 **GREEN STRENGTHENED HELD** through close. SMA 20 $737.41 — 2.4% above.
+- **QQQ ~$735.5** (basically flat from midday $735.33). RSI **76.7**. MACD hist **-0.14 (improved from -0.18 / -0.51 pre-mkt)** — approaching zero but not crossed. Tech still leading, OB but cooling momentum gap.
+- **XLK ~$187.7** (slight extension from $187.30). RSI **76.9**. MACD hist **+0.27** (slight pullback from midday +0.29 but still positive). Sector confirmation held.
+- **AVGO $426.95** — MACD hist **-2.57 (improved from -2.67 midday but slope DECELERATED)**, Stoch K **34.87** (continued up from 33.28), price > SMA 20 ($421.38). Half-trigger remains **2 of 3** — MACD cross still pending. 4 sessions left on stale-by 2026-06-04.
+- **AMZN $273.99** — strong intraday move (+1.6% from $269.58 midday). RSI 64.5. MACD hist **-1.09 (improved from -1.38; closest to zero of the watch list)** but no fresh catalyst → observed, not proposed.
+- **NVDA $214.49** — modest recovery off lows ($212.60 midday → $214.49 EOD). MACD hist -1.91 (improved from -2.03 midday but worse than -1.79 pre-mkt). Stoch K **2.32 (extreme oversold)** — could produce sharp reversal in 5/29 session. Still below SMA 20 $214.89 ($0.40 gap).
+- **GOOGL $391.32 (position)** — Stoch K **15.17 (bounce extended)**. **+1.10% unrealized — best mark of position lifetime.** Price reclaimed SMA 20 at the close ($391.32 vs $391.42). Trail active. MACD hist -3.33 (continued improvement).
+- **Setups proposed at EOD**: 0. Patient pass holds for the third straight session.
+- **Posture conclusion**: 🟢 GREEN STRENGTHENED through the close. Tape "tired uptrend" persists (deeper RSI overbought) but MACD trajectories improved across SPY/QQQ/XLK and AVGO/AMZN/NVDA all moved their MACD hist toward zero. 5/29 pre-market will inherit a stronger setup landscape than today's open.

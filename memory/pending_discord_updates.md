@@ -46,3 +46,17 @@ This file is a fallback log. When a routine's `notify.py` call fails (Discord we
 
 ### 2026-05-25 19:45 UTC — End-of-Day Review Brief (Memorial Day)
 - **Body**: Markets closed. GOOGL -1.06%. No trades.
+
+## 2026-05-28 19:46 UTC — End-of-Day Review brief (notify.py failed: discord_config.json missing)
+
+**Channel**: #daily-brief (silent)
+**Title**: End-of-Day Review — 2026-05-28
+**Body**: Daily P&L +$127.76 (+0.13%) | Equity $100,217.52 | 0 closes / 0 wins / 0 losses | 1 swing held overnight: GOOGL +$217.52 (+1.10%) — best mark of position lifetime, Stoch K bounce 0.22→15.17 across 4 routines, SMA 20 reclaim at close. AVGO half-trigger remains 2/3 (MACD hist -2.57, cross pending). 0 setups proposed (3rd straight no-setup day). Weekly trade count 0/3 with 1 session left. Posture 🟢 GREEN STRENGTHENED held. No hard-rule violations.
+
+**Channel**: #daily-brief (dashboard pin mirror)
+**Action**: notify.py dashboard — same failure mode. Dashboard.md was regenerated successfully at /home/user/Trading-Technical-Analysis-Repo/Dashboard.md (path returned ok from scripts/dashboard.py).
+
+**Channel**: #chat (reflective question)
+**Title**: Reflection — 2026-05-28
+**Body**: GOOGL was entered at confidence 6/10 on 2026-05-20 — under the usual 7-gate but justified by Stoch K extreme oversold (0.06) inside a full bull SMA stack with the Google I/O catalyst. Six sessions in, the position is at +1.10% with five sequential Stoch K readings monotonically up (0.22 → 15.17) and SMA 20 reclaimed at the close. Was the "lower the confidence gate when oversold + catalyst + bull stack align" framework right to lower the gate here? Or are we one good entry away from getting comfortable taking confidence-6 trades that won't recover as cleanly?
+

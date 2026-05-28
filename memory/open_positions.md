@@ -14,6 +14,7 @@
 - **Week trade count**: 0/3 (Week 4; GOOGL counted in Week 3)
 - **Technical update 5/28 market-open (13:36 UTC)**: RSI 60.15 (slightly off from 61.1 pre-market). MACD hist -3.55 (essentially flat). Stoch K **12.10 (continued bounce from 8.86 pre-mkt → 12.10 now — recovery extending)**. Price $387.93 still testing SMA 20 ($391.25) from below. BB %B 0.36 mid-range. ATR 8.94. Long-term bullish stack intact. Trailing stop e0b8fbda CONFIRMED ACTIVE. Manual watch trigger $375 well clear.
 - **Technical update 5/28 midday (16:35 UTC)**: RSI 61.31. MACD hist **-3.46 (slight improvement)**. Stoch K **13.58 (bounce continuing: 0.22 Mon → 8.86 pre-mkt → 12.10 open → 13.58 midday)**. Price $389.25 narrowing gap to SMA 20 ($391.32) — now within $2.07. BB %B 0.42. ATR 9.19. VWAP $392.08 still overhead. Trailing stop e0b8fbda CONFIRMED ACTIVE. No stop tighten (only +0.50%, threshold +15%). Position trending in our favor through midday.
+- **EOD update 5/28 (19:46 UTC / 15:46 ET, 14 min to close)**: RSI 62.57. MACD hist **-3.33 (continued improvement: -3.54 pre-mkt → -3.46 midday → -3.33 EOD)**. Stoch K **15.17 (bounce extended: 0.22 → 8.86 → 12.10 → 13.58 → 15.17)**. Price $391.32 essentially **AT SMA 20 ($391.42 — gap closed to $0.10)**. BB %B 0.50. ATR 9.21. VWAP $392.02 still marginally overhead. Trailing stop e0b8fbda CONFIRMED ACTIVE. **Unrealized P&L: +$217.52 (+1.10%)** — best mark of position lifetime, up from +0.50% midday and +0.19% open. No stop tighten (well below +15% threshold). SMA 20 reclaim functionally complete at the close.
 
 ## Pending Orders
 None.
@@ -95,9 +96,9 @@ The full archive of expired/archived setups and prior routine logs (5/18–5/26)
 - **Entry trigger**: MACD hist > -2 AND Stoch K continuation up AND price holds > SMA 20.
 - **Tentative setup params** (if confluence completes 5/29 pre-market): entry $414–$418, stop $402, target $448, R:R 2.4:1, confidence 7/10.
 - **Re-evaluate**: 5/29 pre-market — priority #1.
-- **Half-Trigger — 2 of 3 conditions met (logged 5/28 midday 16:35 UTC per ADR-0004)**:
-  - [✓] MET — Stoch K continuation up (20.94 pre-mkt → 33.28 midday)
-  - [✓] MET — Price holds > SMA 20 ($425.40 > $421.30)
-  - [✗] NOT YET — MACD hist > -2 (currently -2.67, improved from -3.22 pre-mkt but still below trigger)
-  - Trajectory: MACD moving the right direction; AMZN's MACD hist (-1.38) is actually closer to zero, but AMZN lacks the catalyst/base structure. AVGO closer to a full 3-of-3 if MACD continues improving through close.
-  - **Half-trigger stale-by**: EOD 2026-06-04 (5 trading days per ADR-0004).
+- **Half-Trigger — 2 of 3 conditions met (logged 5/28 midday 16:35 UTC per ADR-0004; EOD update below)**:
+  - [✓] MET — Stoch K continuation up (20.94 pre-mkt → 33.28 midday → **34.87 EOD**)
+  - [✓] MET — Price holds > SMA 20 ($425.40 midday → **$426.95 EOD** vs SMA 20 $421.38 — gap widened)
+  - [✗] NOT YET — MACD hist > -2 (-3.22 pre-mkt → -2.67 midday → **-2.57 EOD** — slope of improvement DECELERATED into close: midday-to-EOD gain only +0.10 vs pre-mkt-to-midday +0.55. Cross still pending; not firing today.)
+  - **EOD 5/28 status**: still 2/3. Trajectory holds the right direction but lost momentum in the final session. AMZN MACD hist closed at -1.09 (closer to zero than AVGO's -2.57) but lacks AVGO's catalyst/base structure — observed, not proposed.
+  - **Half-trigger stale-by**: EOD 2026-06-04 (5 trading days per ADR-0004). 4 sessions remain.
