@@ -1,99 +1,65 @@
 # Market Context
 
 ## Last Updated
-2026-05-26 (Pre-Market Research, 08:00 ET — first executable session of Week 4 post-Memorial Day)
+2026-05-28 (Pre-Market Research, 08:07 ET / 12:07 UTC — Week 4 Day 3, Thursday)
 
 ## Market Posture
-🟢 GREEN STRENGTHENED — SPY $745.67 | SMA 20 $731.54 | SMA 50 $696.63 | SMA 200 $678.83
+🟢 GREEN STRENGTHENED — SPY $750.59 | SMA 20 $735.25 | SMA 50 $700.03 | SMA 200 $679.99
 
 ## Market Summary — Week of May 25, 2026 (Week 4)
 
-### Market Posture (Updated Pre-Market 5/26)
-- **🟢 GREEN STRENGTHENED** — SPY 1.93% above SMA 20. Indicators unchanged from Fri 5/22 close (Memorial Day Monday — no fresh bars).
+### Market Posture (Updated Pre-Market 5/28)
+- **🟢 GREEN STRENGTHENED** — SPY 2.09% above SMA 20 (margin widened vs Tue's 1.93%).
 - Full SMA bull stack: SPY > SMA 20 > SMA 50 > SMA 200. Long-term uptrend intact.
-- Underlying momentum still divergent: SPY MACD hist -0.948 (negative under rising price). RSI 68.97 approaching overbought.
-- QQQ RSI 71.4 OVERBOUGHT, MACD hist -1.35. Tech leadership extended.
-- **Trading stance**: GREEN allows new longs and shorts. But "tired uptrend" signal continues to support caution on new longs at extension — prefer pullback / oversold-inflection entries.
-- Microsoft Build 2026 (June 2-3) is next week's catalyst window.
+- Underlying momentum still mixed: SPY MACD hist -0.56 (improved from -0.95 Tue); RSI 71.5 OVERBOUGHT (deeper).
+- QQQ RSI 74.8 OVERBOUGHT, MACD hist -0.51 (slight improvement vs -1.35).
+- XLK MACD hist just turned positive (+0.15) — possible early sector confirmation, but RSI 74.9 overbought.
+- **Trading stance**: GREEN allows new longs and shorts, but tape is "tired uptrend" — prefer pullback / oversold-inflection setups; avoid chasing extended leaders.
 
-### Broad Market (5/26 pre-market scan, Fri 5/22 close data — Memorial Day Mon = no new bars)
-- **SPY**: $745.67 | RSI 68.97 | MACD hist -0.948 | Stoch K 32.6 | Above SMA 20 ($731.54) ✓ by 1.93% | Above SMA 50 ($696.63) ✓ | **POSTURE: 🟢 GREEN**
-- **QQQ**: $717.49 | RSI 71.37 OVERBOUGHT | MACD hist -1.35 (bearish cross) | Stoch K 27.7 | Above SMA 20 ($694.86) ✓ by 3.26%
-- **Regime**: GREEN posture with bearish momentum divergence still in place. Uptrend mature; new long entries require confirmation, not chase.
+### Broad Market (5/28 pre-market scan, fresh data)
+- **SPY**: $750.59 | RSI 71.5 | MACD hist -0.56 | Stoch K 50.6 | Above SMA 20 ($735.25) ✓ by 2.09% | **POSTURE: 🟢 GREEN STRENGTHENED**
+- **QQQ**: $729.48 | RSI 74.8 OVERBOUGHT | MACD hist -0.51 | Stoch K 46.4 | Above SMA 20 ($701.74) ✓ by 3.96%
+- **XLK**: $184.40 | RSI 74.9 OVERBOUGHT | MACD hist +0.15 (fresh positive) | Above SMA 20 ($173.10) ✓ by 6.5%
+- **Regime**: GREEN with bearish RSI overbought signals. Uptrend stretching — new long entries require setup confirmation, not chase.
 
-### Individual Names (5/26 pre-market scan — Fri 5/22 close, no Memorial Day bars)
+### Individual Names (5/28 pre-market — fresh data)
 
 | Symbol | Price | RSI | MACD Hist | SMA 20 | Stoch K | Status |
 |--------|-------|-----|-----------|--------|---------|--------|
-| SPY | $745.67 | 69.0 | -0.95 | $731.54 ✓ | 32.6 | 🟢 GREEN posture |
-| QQQ | $717.49 | 71.4 | -1.35 | $694.86 ✓ | 27.7 | RSI overbought, MACD bearish cross |
-| MSFT | $418.50 | 54.4 | -0.37 | $416.63 ✓ | 68.4 | Half-trigger STALED 5/22 EOD (MACD never crossed) |
-| NVDA | $215.34 | 53.7 | -0.87 | $214.75 ✓ | 26.8 | **IN POST-EARNINGS WATCH ZONE** — RSI <65 ✓, MACD not yet confirming |
-| AAPL | $308.81 | 78.5 | +0.98 | $289.33 ✓ | 96.9 | Extreme overbought (RSI+Stoch) |
-| TSLA | $425.95 | 58.3 | -0.65 | $409.24 ✓ | 25.0 | SMA 50 < 200 still — day-trade only |
-| AMZN | $266.27 | 58.0 | -2.10 | $267.09 ✗ | 23.7 | Below SMA 20, MACD deepening — no re-proposal |
-| GOOGL | $383.03 | 57.6 | -3.53 | $385.48 ✗ | 0.87 | **OWN POSITION** — lost SMA 20, MACD deteriorated, Stoch persists oversold |
-| AMD | $467.64 | 72.6 | -1.50 | $405.86 ✓ | 39.4 | Overbought — no new entries |
-| META | $610.42 | 45.4 | -1.01 | $619.10 ✗ | 60.5 | Short watch — but MACD only mildly deepening |
-| LLY | $1065.60 | 68.4 | +8.72 | $974.03 ✓ | 94.0 | Strong MACD but Stoch extreme — wait for pullback |
-| ARM | $306.42 | 76.6 | +6.94 | $224.65 ✓ | 93.3 | Extreme overbought, ABOVE upper BB |
-| PANW | $260.67 | 83.6 | +4.32 | $212.43 ✓ | 80.6 | Extreme RSI 83 — no chase |
-| AVGO | $414.01 | 53.1 | -4.18 | $419.01 ✗ | 8.5 | Lost SMA 20, deeply negative MACD, Stoch extreme oversold — watch base |
-| TSM | $404.33 | 55.3 | -1.99 | $402.57 ✓ | 27.4 | Marginal hold of SMA 20 |
-| VST | $156.28 | 55.0 | +0.36 | $151.00 ✓ | 80.1 | MACD bullish cross — but Stoch warming |
-| CEG | $294.00 | 51.7 | -1.21 | $295.58 ✗ | 55.2 | Below SMA 20 — no setup |
-| JPM | $306.34 | 52.6 | -0.37 | $305.47 ✓ | 49.4 | Neutral |
-| GS | $996.73 | 66.3 | +3.50 | $942.32 ✓ | 92.3 | ABOVE upper BB — overbought |
-| CRM | $180.10 | 50.9 | +0.51 | $178.79 ✓ | 74.1 | Neutral, MACD turning positive |
-| XOM | $154.83 | 51.6 | +0.70 | $153.04 ✓ | 56.0 | Above SMA 20, neutral RSI |
-| PLTR | $136.84 | 47.4 | +0.36 | $137.43 ✗ | 75.5 | Below SMA 20, MACD turning positive |
-| NNE | $26.78 | 55.0 | -0.16 | $25.28 ✓ | 41.4 | Speculative — no setup |
-| SMR | $11.39 | 48.4 | -0.16 | $11.86 ✗ | 33.5 | Below SMA 20 — no setup |
+| SPY | $750.59 | 71.5 | -0.56 | $735.25 ✓ | 50.6 | 🟢 GREEN STRENGTHENED |
+| QQQ | $729.48 | 74.8 | -0.51 | $701.74 ✓ | 46.4 | Overbought |
+| XLK | $184.40 | 74.9 | +0.15 | $173.10 ✓ | 47.9 | Overbought, MACD just + |
+| MSFT | $412.71 | 49.6 | -0.93 | $415.35 ✗ | 42.0 | Lost SMA 20 again |
+| NVDA | $212.58 | 51.0 | **-1.79** | $214.64 ✗ | 3.7 | **MACD DEEPENED, lost SMA 20, dropped below watch zone** |
+| AAPL | $310.93 | 79.0 | +0.85 | $293.38 ✓ | 96.5 | Extreme overbought (RSI 79) |
+| TSLA | $440.44 | 63.1 | +0.59 | $415.20 ✓ | 43.9 | MACD cross, SMA 50 < 200 — day-trade only |
+| AMZN | $271.85 | 62.7 | -1.56 | $267.91 ✓ | 27.66 | Reclaimed SMA 20, MACD improving |
+| GOOGL | $388.84 | 61.1 | -3.54 | $389.37 ✗ | 8.86 | **OWN POSITION — Stoch bounce 0.22→8.86, testing SMA 20 reclaim** |
+| AMD | $495.57 | 74.1 | +1.55 | $422.96 ✓ | 62.1 | Extreme — +17% above SMA 20 |
+| META | $635.31 | 56.9 | **+1.56** | $613.99 ✓ | 90.15 | **MACD cross FIRED but Stoch 90 + SMA 50 < 200, short thesis broken** |
+| LLY | $1084.23 | 70.9 | +9.67 | $994.47 ✓ | 100.0 | RSI 71 + Stoch 100 — extreme |
+| ARM | $302.42 | 70.6 | +8.42 | $235.11 ✓ | 88.9 | Extreme — +28% above SMA 20 |
+| PANW | $248.45 | 71.2 | +2.36 | $219.50 ✓ | 53.4 | Overbought |
+| AVGO | $421.81 | 56.4 | -3.22 | $420.30 ✓ | 20.94 | **Reclaimed SMA 20, base building (debate verdict PASS 6/10)** |
+| TSM | $422.70 | 62.7 | -0.35 | $404.46 ✓ | 50.6 | Above upper BB |
+| VST | $160.04 | 56.6 | +2.00 | $150.85 ✓ | 95.0 | Stoch 95, SMA 200 broken |
+| CEG | $288.66 | 48.8 | +0.60 | $294.05 ✗ | 73.0 | Below SMA 20 |
+| CRM | $177.62 | 48.3 | +0.52 | $178.55 ✗ | 78.3 | Long-term broken |
+| PLTR | $132.47 | 41.3 | +0.17 | $136.66 ✗ | 69.8 | Below SMA 20 |
 
-### Sector ETFs (5/25 pre-market — prior close)
-- **XLK (Tech)**: $180.36. RSI 72.8 OVERBOUGHT. MACD hist -0.19. Above SMA 20 ($170.55) ✓.
-- **XLE (Energy)**: $59.45. RSI 55.2. MACD hist +0.20 (modestly positive). Above SMA 20 ($58.48) ✓.
-- **XLV (Healthcare)**: $149.89. RSI 62.4. MACD hist +0.62. Stoch K 98.5 extreme overbought. ABOVE upper BB. Wait for pullback.
-- **XLF (Financials)**: $51.93. RSI 55.7. MACD hist -0.001 (flat). Marginal.
-- **XLI (Industrials)**: $171.73. RSI 50.2. MACD hist -0.51 (negative cross). Below SMA 20 ($172.49). Weak.
+### Sector ETFs (5/28 pre-market)
+- **XLK (Tech)**: $184.40. RSI 74.9 OVERBOUGHT. MACD hist +0.15 (just turned positive). Above SMA 20 ($173.10) ✓ +6.5%.
+- **XLE (Energy)**: $56.99. RSI 44.1. MACD hist -0.10 (just turned NEGATIVE — bearish cross). Below SMA 20 ($58.50). Weak.
 
-### Market-Wide Catalyst Scan (5/26 pre-market)
-- **Pass 1 (gap movers)**: 0 candidates — pre-market early, no significant gaps yet.
-- **Pass 2 (earnings calendar)**: 3 candidates returned, ALL within 2-day earnings window — SKIP per binary-event hard rule:
-  - **A (Agilent)** $114.91 — earnings 5/27 AMC. MACD bullish cross firing (+0.12) but inside binary window.
-  - **AZO (AutoZone)** $3400.87 — earnings 5/27 BMO. RSI 44.9, MACD hist -6.42 deeply negative.
-  - **ADSK (Autodesk)** $241.00 — earnings 5/28 AMC. MACD just barely positive (+0.20), below SMA 200.
-- **No tradeable candidates from market scan.** Earnings filter caught all 3.
+### Market-Wide Catalyst Scan (5/28 pre-market)
+- **Pass 1 (gap movers)**: 0 candidates.
+- **Pass 2 (earnings calendar)**: 1 candidate — **ADSK (Autodesk)** $236.98, earnings 5/28 AMC tonight. SKIP per binary event rule.
+- **No tradeable candidates from market scan.**
 
-## Key Levels (Updated 5/26 pre-market)
-- **SPY**: Posture GREEN. SMA 20 $731.54 (support). SMA 50 $696.63 (deeper support). MACD weakening — watch for cross-down or recovery.
-- **QQQ**: $717.49. SMA 20 $694.86. Above all SMAs but RSI 71 overbought.
-- **NVDA**: $215.34 — **inside post-earnings watch zone** $215–$220. SMA 20 $214.75 (right at). MACD hist -0.87. Watch for MACD positive cross at tomorrow's pre-market to validate setup.
-- **GOOGL** (position): SMA 20 $385.48 (price below by $2.45). Stop floor ~$348.36. -7% cut $359.98.
-- **AVGO**: $414.01, lost SMA 20 ($419.01). Deeply negative MACD. Watch for base-building.
-- **MSFT**: SMA 20 $416.63 still above ($418.50). MACD hist -0.37 — improved but never crossed. **Half-trigger STALED 5/22 EOD.** Fresh setup needed for June 2-3 Build catalyst.
-- **META**: $610.42, below SMA 20 ($619.10) and SMA 50 ($617.83) and SMA 200 ($669.42). RSI 45.4 (above 35 floor). Short watch on bounce-rejection to $619-628.
-
-## Key Events — Week of May 25, 2026 (Week 4)
-- **Mon 5/25**: 🇺🇸 **MEMORIAL DAY — US MARKETS CLOSED**. Pre-market research ran but no execution possible.
-- **Tue 5/26**: Regular trading resumes. Pre-market: NVDA MACD STILL NOT CROSSED (-0.87); no setups proposed.
-- **Wed 5/27**: A (Agilent) earnings AMC; AZO (AutoZone) earnings BMO.
-- **Thu 5/28**: ADSK (Autodesk) earnings AMC.
-- **Fri 5/29**: Weekly review 4:30 PM ET. End of Week 4.
-- **Mon-Tue 6/2-6/3**: Microsoft Build 2026 — MSFT fresh setup may re-arm.
-
-## Sentiment (5/26 pre-market)
-- **🟢 GREEN STRENGTHENED** posture, but underlying breadth weakening:
-  - SPY/QQQ MACD bearish cross (price up, momentum down — classic late-uptrend signal)
-  - Top names (AAPL, AMD, ARM, PANW, LLY) all RSI > 70 — leadership extended
-  - Sectors mixed: XLV overbought, XLI rolling over, XLF flat, XLE modestly positive
-- **Setups proposed today: 0.** Patient pass. NVDA in watch zone but MACD positive cross has not fired; VST/CRM have MACD cross but broken long-term structure; market-scan returned only earnings names (skip per 0-2 day binary rule).
-- **Tomorrow's focus**: NVDA MACD direction (still the #1 priority — if cross fires, propose). AVGO base-building if MACD turns less negative than -2. GOOGL position health (SMA 20 reclaim or further decline toward $375 manual trigger).
-- Confidence level: 4/10 for new entries. Posture allows trading, but tape conditions argue for patience.
-- 0/3 trade slots used for Week 4. GOOGL position carried from Week 3.
-
-## Prior Context (Week 3 close — 2026-05-22)
-- MSFT half-trigger: MACD never crossed positive. Stale-by 5/22 EOD passed silently — gate retired per ADR-0004.
-- GOOGL position established 5/20 at $387.07 (Stoch K 0.06 inflection + Google I/O catalyst).
-- Post-NVDA AI cycle confirmed (5/20 AMC beat).
-- Week 3 final: 1 trade entered (GOOGL), 0 trades closed.
+## Sentiment (5/28 pre-market)
+- **🟢 GREEN STRENGTHENED**, but underlying tape is stretched.
+- **Real base-building candidates**: AVGO (just reclaimed SMA 20, debate PASS 6/10), AMZN (reclaimed SMA 20, MACD improving but no cross yet).
+- **NVDA gate FAILING**: MACD -0.87 → -1.79 (worse), lost SMA 20, dropped below watch zone.
+- **GOOGL position recovered**: Stoch K bounced 0.22 → 8.86, position +0.11% (was -1.06% Mon).
+- **Setups proposed today: 0.** Patient pass. Confidence level: 5/10 for new entries.
+- **Weekly trade count**: 0/3 (Week 4 day 3, 2 days remain).
