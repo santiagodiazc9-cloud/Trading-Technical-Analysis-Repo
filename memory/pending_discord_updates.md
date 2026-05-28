@@ -12,6 +12,15 @@ This file is a fallback log. When a routine's `notify.py` call fails (Discord we
 - **Setups to push as cards**: 0.
 - **Alerts**: 0.
 
+### 2026-05-28 16:35 UTC — Midday Scan Brief (Discord config missing in cloud env)
+- **Channel**: #daily-brief
+- **Title**: Midday Scan — 2026-05-28
+- **Body**: GOOGL +0.50% (+$99.45) at $389.02 — Stoch bounce continuing (0.22 Mon → 8.86 pre-mkt → 12.10 open → 13.58 midday). MACD hist -3.46 (slight improvement). Trail e0b8fbda active. No -7% trigger; no stop tighten (only +0.50%, threshold +15%). 0 management actions taken. 0 new setups proposed. AVGO half-trigger logged 2 of 3 per ADR-0004 (Stoch K up ✓, price > SMA 20 ✓, MACD > -2 ✗ at -2.67 — trajectory improving). AMZN MACD hist -1.38 (closer to cross than AVGO but no catalyst). NVDA continues to deteriorate (MACD -2.03 worse than -1.79 pre-mkt; Stoch K 0.03 extreme oversold). Account equity $100,099.09, cash $80,259.43, deployed 19.82%, day-trades 0/3, PDT false. Daily P&L +$9.33 (+0.01%) — turned positive vs -$54.82 open. Week 4 trade count: 0/3.
+- **Reason**: `memory/discord_config.json` missing in cloud routine host (recurring known gap).
+- **Setups to push as cards**: 0.
+- **Alerts**: 0.
+- **Dashboard mirror**: `Dashboard.md` regenerated (live=true, positions=1, pending_setups=1). Pinned-message mirror NOT updated — DISCORD_BOT_TOKEN missing.
+
 ### 2026-05-28 12:07 UTC — Pre-Market Brief (Discord config missing in cloud env)
 - **Channel**: #daily-brief
 - **Title**: Pre-Market Brief — 2026-05-28

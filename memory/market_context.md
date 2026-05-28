@@ -1,7 +1,7 @@
 # Market Context
 
 ## Last Updated
-2026-05-28 (Pre-Market Research, 08:07 ET / 12:07 UTC — Week 4 Day 3, Thursday)
+2026-05-28 (Midday Scan, 12:35 ET / 16:35 UTC — Week 4 Day 3, Thursday)
 
 ## Market Posture
 🟢 GREEN STRENGTHENED — SPY $750.59 | SMA 20 $735.25 | SMA 50 $700.03 | SMA 200 $679.99
@@ -63,3 +63,14 @@
 - **GOOGL position recovered**: Stoch K bounced 0.22 → 8.86, position +0.11% (was -1.06% Mon).
 - **Setups proposed today: 0.** Patient pass. Confidence level: 5/10 for new entries.
 - **Weekly trade count**: 0/3 (Week 4 day 3, 2 days remain).
+
+## Midday Update (5/28 16:35 UTC)
+- **SPY $754.23** (up from $750.59 pre-mkt, +0.48%). RSI 73.3 (deeper overbought from 71.5). MACD hist -0.36 (improved from -0.56). Stoch K 59.4 (up from 50.6). Posture: 🟢 GREEN intact, slightly more stretched.
+- **QQQ $735.33** (up from $729.48). RSI 76.5 (deeper). MACD -0.18 (improved from -0.51). Tech still leading.
+- **XLK $187.30** (up from $184.40). RSI 77.1. MACD hist +0.29 (improved from +0.15). Sector confirmation holding.
+- **AVGO $425.40** — MACD hist -2.67 (improved from -3.22), Stoch K 33.28 (up from 20.94), price > SMA 20. **Half-trigger 2 of 3** logged. MACD hist > -2 still needed.
+- **AMZN $269.58** — slight pullback from $271.85. MACD hist -1.38 (improved from -1.56). Closer to MACD cross than AVGO but no fresh catalyst.
+- **NVDA $212.60** — continuing to deteriorate. MACD -2.03 (worse than -1.79 pre-mkt). Stoch K 0.03 (extreme oversold).
+- **TSM $426.85** — MACD bullish cross fired (+0.50). Above upper BB.
+- **GOOGL $389.02 (position)** — Stoch K 13.58 (bounce continuing). +0.50% unrealized. Trail active.
+- **No setups proposed at midday.** Same posture/conclusion as pre-mkt: patient pass.
