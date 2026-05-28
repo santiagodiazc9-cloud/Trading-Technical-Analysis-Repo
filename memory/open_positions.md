@@ -6,20 +6,20 @@
 - **Entry**: $387.07 | 51 shares | Cost basis: $19,740.57
 - **Stop**: 10% trailing GTC (order e0b8fbda) — initial hard floor ~$348.36
 - **Target**: $415.00 | R:R ~2.3:1
-- **Unrealized P&L**: +$21.93 (+0.11%) as of 2026-05-28 pre-market (Alpaca live $388.84) — recovered from -1.08% Mon
+- **Unrealized P&L**: +$36.71 (+0.19%) as of 2026-05-28 market-open (Alpaca live $387.79) — continued recovery from -1.08% Mon
 - **Stop tighten rules**: at +15% ($445.13) → 7% trail; at +20% ($464.48) → 5% trail
-- **-7% cut trigger**: $359.98 (close immediately if hit) — current $388.84, ~7.5% buffer
+- **-7% cut trigger**: $359.98 (close immediately if hit) — current $387.79, ~7.2% buffer
 - **Catalyst**: Google I/O 2026 (Gemini, AI Mode in Search)
 - **Sector**: Communication Services
 - **Week trade count**: 0/3 (Week 4; GOOGL counted in Week 3)
-- **Technical update 5/28 pre-market**: RSI 61.1 (improved from 57.6 Fri). MACD hist -3.54 (essentially unchanged from -3.53). Stoch K **8.86 (bounced from 0.22 Tue — first material recovery off extreme oversold)**. Price $388.84 testing SMA 20 reclaim ($389.37 from below). Long-term bullish stack intact. Trailing stop active. Manual watch trigger $375 well clear.
+- **Technical update 5/28 market-open (13:36 UTC)**: RSI 60.15 (slightly off from 61.1 pre-market). MACD hist -3.55 (essentially flat). Stoch K **12.10 (continued bounce from 8.86 pre-mkt → 12.10 now — recovery extending)**. Price $387.93 still testing SMA 20 ($391.25) from below. BB %B 0.36 mid-range. ATR 8.94. Long-term bullish stack intact. Trailing stop e0b8fbda CONFIRMED ACTIVE. Manual watch trigger $375 well clear.
 
 ## Pending Orders
 None.
 
 ## Pending Setups
 
-None as of 2026-05-28 pre-market. GOOGL-2026-05-20 filled on 2026-05-20 — see Current Positions for management.
+None as of 2026-05-28 market-open. Pre-market routine proposed 0 setups; AVGO debate PASS at 6/10 (gate is 7). Market-open routine is a no-op for new entries — only maintenance on GOOGL position. Next entry window: 5/29 pre-market.
 
 AVGO base-building watch is now the strongest setup candidate. Bull/Bear/Judge debate ran 5/28 pre-market — Judge PASS at 6/10 (gate is 7). MACD positive cross + Stoch K > 30 + price hold > SMA 20 would propose: entry $414–$418, stop $402, target $448, R:R 2.4:1. Re-evaluate 5/29 pre-market.
 
