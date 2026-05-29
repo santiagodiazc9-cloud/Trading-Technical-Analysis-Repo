@@ -4,6 +4,15 @@ This file is a fallback log. When a routine's `notify.py` call fails (Discord we
 
 ---
 
+### 2026-05-29 13:36 UTC — Market Open Execution Brief (Discord config missing in cloud env)
+- **Channel**: #daily-brief
+- **Title**: Market Open Execution — 2026-05-29
+- **Body**: 0 trades placed (no Approved:YES setups; pre-market 5/29 not detected in files). 0 setups skipped. 1 open position (GOOGL 51 sh @ $387.07, current $382.86, **-$214.46 / -1.09%** — gap-down open erased Thursday's +1.10% EOD strength). Trailing stop e0b8fbda CONFIRMED ACTIVE (10% GTC). -7% cut buffer ~6.0% ($359.98 trigger vs $382.86 spot). GOOGL technicals at open: RSI 54.96 (cooled from EOD 62.57), MACD hist **-3.74 REVERSED** (improvement broken from EOD -3.33), Stoch K **9.81** (bounce stalled from EOD 15.17), lost SMA 20 reclaim ($391.25, gap $8.39 reopened). BB %B 0.16, near lower band. Account equity $99,784.78, cash $80,259.43, deployed 19.57%, day-trades 0/3, PDT false. Day P&L -$371.28 (-0.37%) — within -2% daily cap. No stop tighten triggered. Next entry window: 6/1 pre-market (Monday, Week 5).
+- **Reason**: `memory/discord_config.json` missing in cloud routine host (recurring known gap).
+- **Setups to push as cards**: 0.
+- **Alerts**: 0.
+- **Dashboard mirror**: `notify.py dashboard` also failed (DISCORD_BOT_TOKEN missing in cloud env). Dashboard.md regenerated locally.
+
 ### 2026-05-28 13:36 UTC — Market Open Execution Brief (Discord config missing in cloud env)
 - **Channel**: #daily-brief
 - **Title**: Market Open Execution — 2026-05-28
