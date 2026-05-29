@@ -1,7 +1,7 @@
 # Market Context
 
 ## Last Updated
-2026-05-29 (Midday Scan, 12:37 ET / 16:37 UTC — Week 4 Day 4, Friday). Pre-market routine did not produce a fresh log; midday reset the posture and indicator baseline from live data.
+2026-05-29 (End-of-Day Review, 15:47 ET / 19:47 UTC — Week 4 Day 4, Friday, ~13 min to close).
 
 ## Market Posture
 🟢 GREEN STRENGTHENED — SPY $750.59 | SMA 20 $735.25 | SMA 50 $700.03 | SMA 200 $679.99
@@ -90,6 +90,18 @@
 - **META $625.00** — Pulled back from EOD $635.31 (-1.6%). MACD hist still positive (+2.73), but Stoch K 90 overbought and SMA 200 $666.53 overhead. Neither long nor short setup.
 - **XLE $56.35** — Continued weakness. MACD hist -0.29 (deeper negative). RSI 41.5. Below SMA 20.
 - **Setups proposed at midday**: 0. Same patient-pass conclusion as 5/28 pre-mkt / midday / EOD. **Week 4 ends 0/3 trades** (Friday remaining session can still propose at EOD or via 6/1 pre-mkt cycle).
+
+## End-of-Day Update (5/29 19:47 UTC / 15:47 ET — Week 4 Day 4, Friday, ~13 min to close)
+- **SPY $754.99** (slight pullback from midday $757.28, -0.30% intraday). RSI **74.65** (deeper OB held). MACD hist **-0.13** (basically flat from midday -0.11 — still approaching positive cross but stalled in the final hour). Stoch K 66.43 (flat). Above SMA 20 ($739.33) by 2.12%. Posture: 🟢 **GREEN HELD** through the close. Full SMA bull stack intact.
+- **QQQ** — MACD positive cross from midday held through EOD.
+- **XLK** — MACD positive cross extended through EOD; RSI 79+ deep OB; chase risk on extreme leaders confirmed.
+- **Position GOOGL $381.62 (EOD)** — Slide extended through afternoon. -1.41% unrealized (-$277.95) vs midday -1.06% (-$209.10). MACD hist -3.81 (regressed further from midday -3.73). RSI 53.96. Stoch K 9.81 (flat from midday). Below SMA 20 ($391.19) by $9.57 and below VWAP $390.76. Trailing stop e0b8fbda CONFIRMED ACTIVE. **No -7% cut, no stop tighten.** Two-session swing -2.51 pp (+1.10% EOD 5/28 → -1.41% EOD 5/29). Manual watch trigger $375 (-1.7% below) within striking distance.
+- **AVGO ~$440** (held midday gains) — EOD indicators: RSI 63.96, MACD hist -1.30 (full-trigger condition held), Stoch K 53.55, price > SMA 20 ($422.49) by ~$17.50. Above upper BB ($438.12) — overbought signal. **3/3 conditions still firing but no proposal** per chase rule (CLAUDE.md #12) — re-evaluate 6/1.
+- **AMZN ~$272** — EOD indicators: RSI 60.05, MACD hist -1.01 (closest to zero across watch list), Stoch K 49.55. Above SMA 20 ($268.74). No fresh catalyst → observation only.
+- **NVDA ~$216** — EOD indicators: RSI 54.87, MACD hist -1.81 (slight improvement from midday -1.84), Stoch K 7.07 (extreme oversold persisting), price slightly above SMA 20 ($215.74). Oversold-bounce thesis still alive but unconfirmed.
+- **Setups proposed at EOD**: 0. **4th straight no-setup day (5/26 Tue, 5/28 Thu, 5/29 Fri evaluable; 5/27 Wed infra miss). Week 4 closes 0/3 weekly slots used.**
+- **Daily P&L**: -$436.05 (-0.44%) — well within -2% daily loss cap (headroom $1,553.40).
+- **Posture conclusion**: 🟢 GREEN held through the close. Tape character ("tired uptrend with momentum re-igniting in tech") persists. SPY MACD approaching positive cross but stalled at -0.13. RSI overbought signals deep across the board. Weekly review (16:30 ET today) will categorize this week's evaluable days and score GOOGL framework recovery vs reversal.
 
 ## End-of-Day Update (5/28 19:46 UTC — ~14 min to close)
 - **SPY ~$755.3** (extended above $754.23 midday, +0.63% on day). RSI **73.6** (deeper OB; pre-mkt 71.5 → midday 73.3 → EOD 73.6). MACD hist **-0.31 (continued improvement: -0.56 → -0.36 → -0.31)**. Stoch K 60.1 (up from 59.4). Posture: 🟢 **GREEN STRENGTHENED HELD** through close. SMA 20 $737.41 — 2.4% above.
