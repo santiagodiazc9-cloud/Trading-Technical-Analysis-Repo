@@ -15,13 +15,14 @@
 - **Technical update 5/28 market-open (13:36 UTC)**: RSI 60.15 (slightly off from 61.1 pre-market). MACD hist -3.55 (essentially flat). Stoch K **12.10 (continued bounce from 8.86 pre-mkt → 12.10 now — recovery extending)**. Price $387.93 still testing SMA 20 ($391.25) from below. BB %B 0.36 mid-range. ATR 8.94. Long-term bullish stack intact. Trailing stop e0b8fbda CONFIRMED ACTIVE. Manual watch trigger $375 well clear.
 - **Technical update 5/28 midday (16:35 UTC)**: RSI 61.31. MACD hist **-3.46 (slight improvement)**. Stoch K **13.58 (bounce continuing: 0.22 Mon → 8.86 pre-mkt → 12.10 open → 13.58 midday)**. Price $389.25 narrowing gap to SMA 20 ($391.32) — now within $2.07. BB %B 0.42. ATR 9.19. VWAP $392.08 still overhead. Trailing stop e0b8fbda CONFIRMED ACTIVE. No stop tighten (only +0.50%, threshold +15%). Position trending in our favor through midday.
 - **EOD update 5/28 (19:46 UTC / 15:46 ET, 14 min to close)**: RSI 62.57. MACD hist **-3.33 (continued improvement: -3.54 pre-mkt → -3.46 midday → -3.33 EOD)**. Stoch K **15.17 (bounce extended: 0.22 → 8.86 → 12.10 → 13.58 → 15.17)**. Price $391.32 essentially **AT SMA 20 ($391.42 — gap closed to $0.10)**. BB %B 0.50. ATR 9.21. VWAP $392.02 still marginally overhead. Trailing stop e0b8fbda CONFIRMED ACTIVE. **Unrealized P&L: +$217.52 (+1.10%)** — best mark of position lifetime, up from +0.50% midday and +0.19% open. No stop tighten (well below +15% threshold). SMA 20 reclaim functionally complete at the close.
+- **Midday update 5/29 (16:37 UTC / 12:37 ET)**: **Position rolled back to -1.06% — yesterday's SMA 20 reclaim REVERSED intraday today.** RSI **54.98 (down from EOD 62.57)**. MACD hist **-3.73 (REGRESSED from EOD -3.33 — trajectory of improvement broken)**. Stoch K **9.81 (down from 15.17 — bounce wave reversed)**. Price $382.99 **back below SMA 20 ($391.26)** and below VWAP ($391.01). EMA 9 ($387.99) overhead but still above EMA 21 ($381.96 — short-term bullish stack intact by a hair). BB %B 0.17 (lower half of range). Long-term SMA 50 > 200 stack intact ($347.63 > $299.94). Trailing stop e0b8fbda CONFIRMED ACTIVE. **Unrealized P&L: -$209.10 (-1.06%)** vs +$217.52 (+1.10%) EOD 5/28 — -2.16 pp single-session round-trip. -7% cut trigger $359.98 — current $382.99 ~6.4% buffer (down from ~7.6% EOD). No automatic action: not at -7% cut, stop active, long-term thesis intact. No stop tighten (negative P&L). **Manual watch trigger $375 ($7.99 / 2.1% below current) is now the next decision point.**
 
 ## Pending Orders
 None.
 
 ## Pending Setups
 
-None as of 2026-05-28 market-open. Pre-market routine proposed 0 setups; AVGO debate PASS at 6/10 (gate is 7). Market-open routine is a no-op for new entries — only maintenance on GOOGL position. Next entry window: 5/29 pre-market.
+None as of 2026-05-29 midday. The 5/29 pre-market routine evidently did not fire (no fresh log present in this file — see `memory/pending_discord_updates.md` if a gap notification was written). Midday scan ran cleanly; AVGO half-trigger went to FULL trigger (3 of 3 conditions firing) but the entry was BLOCKED by the no-chase rule — see "AVGO" block below for the audit trail. **Setups proposed today: 0.**
 
 AVGO base-building watch is now the strongest setup candidate. Bull/Bear/Judge debate ran 5/28 pre-market — Judge PASS at 6/10 (gate is 7). MACD positive cross + Stoch K > 30 + price hold > SMA 20 would propose: entry $414–$418, stop $402, target $448, R:R 2.4:1. Re-evaluate 5/29 pre-market.
 
@@ -91,14 +92,12 @@ The full archive of expired/archived setups and prior routine logs (5/18–5/26)
 - Now: $212.58, lost SMA 20 ($214.64), dropped below watch zone. MACD deepened -0.87 → -1.79. Stoch K 3.7 (extreme oversold).
 - **Status**: Primary thesis fading. Only oversold-bounce setup remains if Stoch K < 5 produces sharp reversal.
 
-### AVGO — Long watch ACTIVE, debate PASS 6/10
-- Current: $421.81, reclaimed SMA 20 ($420.30). MACD hist -3.22 (improved from -4.18). Stoch K 20.94 (turning up from 8.5). Full SMA bull stack.
-- **Entry trigger**: MACD hist > -2 AND Stoch K continuation up AND price holds > SMA 20.
-- **Tentative setup params** (if confluence completes 5/29 pre-market): entry $414–$418, stop $402, target $448, R:R 2.4:1, confidence 7/10.
-- **Re-evaluate**: 5/29 pre-market — priority #1.
-- **Half-Trigger — 2 of 3 conditions met (logged 5/28 midday 16:35 UTC per ADR-0004; EOD update below)**:
-  - [✓] MET — Stoch K continuation up (20.94 pre-mkt → 33.28 midday → **34.87 EOD**)
-  - [✓] MET — Price holds > SMA 20 ($425.40 midday → **$426.95 EOD** vs SMA 20 $421.38 — gap widened)
-  - [✗] NOT YET — MACD hist > -2 (-3.22 pre-mkt → -2.67 midday → **-2.57 EOD** — slope of improvement DECELERATED into close: midday-to-EOD gain only +0.10 vs pre-mkt-to-midday +0.55. Cross still pending; not firing today.)
-  - **EOD 5/28 status**: still 2/3. Trajectory holds the right direction but lost momentum in the final session. AMZN MACD hist closed at -1.09 (closer to zero than AVGO's -2.57) but lacks AVGO's catalyst/base structure — observed, not proposed.
-  - **Half-trigger stale-by**: EOD 2026-06-04 (5 trading days per ADR-0004). 4 sessions remain.
+### AVGO — Long watch, half-trigger NOW FULL TRIGGER but BLOCKED by no-chase rule (5/29 midday)
+- Current: **$440.19** (up $13.24 / +3.1% from EOD 5/28 $426.95, +$18.38 / +4.4% over two sessions from 5/28 pre-mkt $421.81). RSI 63.93. MACD hist **-1.30 (CROSSED above -2 gate — was -2.57 EOD 5/28)**. Stoch K **53.48 (continued up from 34.87 EOD — gate met)**. Price above SMA 20 ($422.49) — gap WIDENED to $17.70. Full SMA bull stack intact. Above upper BB ($438.09) — extended.
+- **Half-Trigger ledger (final entry, ADR-0004)** — ALL 3 of 3 conditions firing this routine:
+  - [✓] MET — Stoch K continuation up (20.94 → 33.28 → 34.87 → **53.48 midday 5/29**)
+  - [✓] MET — Price holds > SMA 20 ($425.40 → $426.95 → **$440.19 vs SMA 20 $422.49**)
+  - [✓] **NEWLY MET** — MACD hist > -2 (-3.22 → -2.67 → -2.57 → **-1.30 midday 5/29**, cleared the gate by 0.70)
+- **No proposal issued.** Per CLAUDE.md rule 12 (no chasing if stock has moved >3% today), AVGO's +3.1% same-session move invalidates entry now. The tentative entry zone $414–$418 (logged 5/28) is also outrun by $22+, which would be a published-zone mutation per ADR-0003 even if a setup had been published. Both rules concur: do NOT propose mid-session.
+- **Next decision**: Pre-market 6/1 (Monday) — if price pulls back into a fresh entry zone with confluence still holding, re-debate with fresh Bull/Bear/Judge. If price keeps extending without a pullback, the move is gone — pass.
+- **Half-trigger stale-by**: EOD 2026-06-04. Gate has now FIRED so the ledger entry is closed regardless; this block becomes historical.
