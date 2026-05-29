@@ -319,6 +319,38 @@
       "daily_loss_cap_hit": false,
       "hard_rule_violations": [],
       "notes": "Week 4 Day 3 (Thursday). 0 trades, 0 closes, 1 open position. GOOGL 51 sh @ $387.07 marked at $391.32 → unrealized +$217.52 (+1.10%) — best mark of position lifetime. Today's intraday P&L +$127.76 (+0.13%). Stoch K bounce continued: 0.22 Mon → 8.86 pre-mkt → 12.10 open → 13.58 midday → 15.17 EOD. MACD hist trajectory continued positive: -3.54 → -3.46 → -3.33. Price $391.32 essentially AT SMA 20 ($391.42) at the close — reclaim functionally complete. Trailing stop e0b8fbda CONFIRMED ACTIVE. No stop tighten (well below +15% gate). No -7% cut threat (current ~7.7% buffer to $359.98). AVGO half-trigger remained 2 of 3 at close: Stoch K 34.87 ✓, price $426.95 > SMA 20 $421.38 ✓, MACD hist -2.57 (improved from -2.67 midday but slope DECELERATED — only +0.10 gain vs +0.55 from pre-mkt to midday). Cross still pending; stale-by EOD 2026-06-04 (4 sessions remain). 0 setups proposed today (3rd straight no-setup day). Market posture GREEN STRENGTHENED held (SPY ~$755 > SMA 20 $737.41 by 2.4%; deeper RSI 73.6 overbought). SPY MACD hist -0.31 EOD vs -0.56 pre-mkt — improvement. XLK MACD hist +0.27 EOD held positive (vs +0.15 pre-mkt). Sched gap: 5/27 EOD routine never fired (no journal/2026-05-27.md, no 5/26 or 5/27 snapshot — 2 missing snapshots, but Alpaca state remains source of truth). RuFlo MCP unavailable (file-only mode). `ta` package install fix held — research.py scans ran cleanly. Daily loss cap: NOT hit. Hard rule violations: NONE."
+    },
+    {
+      "date": "2026-05-29",
+      "routine": "end_of_day_review",
+      "equity": 99720.01,
+      "cash": 80259.43,
+      "buying_power": 179979.44,
+      "deployed_pct": 19.52,
+      "pnl_today_dollars": -436.05,
+      "pnl_today_pct": -0.44,
+      "open_positions": 1,
+      "trades_closed_today": 0,
+      "wins_today": 0,
+      "losses_today": 0,
+      "trades_opened_today": 0,
+      "weekly_trade_count": 0,
+      "daytrade_count": 0,
+      "pattern_day_trader": false,
+      "running_win_rate": null,
+      "running_pnl_dollars": 0.00,
+      "running_pnl_pct": 0.0,
+      "unrealized_pnl_dollars": -277.95,
+      "unrealized_pnl_pct": -1.41,
+      "confidence_calibration": {
+        "_comment": "predicted-confidence-bucket -> {sample_size, wins, losses}. Empty until we have closed trades.",
+        "bucket_9_10": {"n": 0, "wins": 0, "losses": 0},
+        "bucket_7_8":  {"n": 0, "wins": 0, "losses": 0},
+        "bucket_5_6":  {"n": 0, "wins": 0, "losses": 0}
+      },
+      "daily_loss_cap_hit": false,
+      "hard_rule_violations": [],
+      "notes": "Week 4 Day 4 (Friday). 0 trades, 0 closes, 1 open position. GOOGL 51 sh @ $387.07 marked at $381.62 → unrealized -$277.95 (-1.41%). Today's intraday P&L -$436.05 (-0.44%) — well within -2% cap (headroom $1,553.40). Two-session swing: +$217.52 (+1.10%) EOD 5/28 → -$277.95 (-1.41%) today = -2.51 pp round-trip. Stoch K monotonic-up run broke: 0.22 → 8.86 → 12.10 → 13.58 → 15.17 EOD 5/28 → 9.81 midday → 9.81 EOD. MACD hist trajectory inverted: -3.54 → -3.46 → -3.33 EOD 5/28 → -3.73 midday → -3.81 EOD today. Price $381.62 below SMA 20 ($391.19) by $9.57 and below VWAP $390.76 by $9.14. EMA 9/21 stack hairline-bullish ($387.72 / $381.84). BB %B 0.12 (lower band — STOCHASTIC OVERSOLD signal firing, same anchor as original entry). Long-term bull stack (SMA 50 $347.60 > SMA 200 $299.93) intact. Trailing stop e0b8fbda CONFIRMED ACTIVE. -7% cut $359.98 (~5.7% buffer, down from ~6.4% midday). No stop tighten (negative P&L). No automatic action: not at -7%, stop active, long-term thesis intact, inside normal swing volatility. Manual watch trigger $375 (-1.7% below current) now within striking distance. Real exit signal: SMA 50 break ($347.60, -8.9% from current) or -7% mechanical. AVGO half-trigger CONVERTED to FULL trigger 3/3 today (MACD hist -1.30 cleared -2 gate by 0.70; Stoch K 53.55; price ~$440 > SMA 20 $422.49 by $17.50) but NO PROPOSAL — CLAUDE.md rule 12 chase block (+3.1% intraday, $421.81 → ~$440; tentative entry zone $414–$418 outrun by $22+; ADR-0003 immutability concern even pre-publish). Re-evaluate 6/1 pre-market. 0 setups proposed (4th straight no-setup day: 5/26 Tue, 5/28 Thu, 5/29 Fri evaluable; 5/27 Wed infra miss). Market posture: 🟢 GREEN held through close (SPY $754.99 > SMA 20 $739.33 by 2.12%, MACD hist -0.13 stalled approaching positive cross, RSI 74.65 deep OB). QQQ MACD positive cross from midday held. XLK MACD positive extended (RSI 79+ chase risk). Sched gap: pre-market routine did not produce a fresh log for 5/29 (second pre-mkt drop in 2 weeks); midday re-baselined indicators independently. RuFlo MCP unavailable (file-only mode). ClickUp MCP available per task brief but per CLAUDE.md Phase 3, no new ClickUp writes — file + Discord only. Discord webhook config missing (recurring): brief logged to memory/pending_discord_updates.md. `ta` package install fix held (setuptools+wheel upgrade before pip install). Daily loss cap: NOT hit. Hard rule violations: NONE."
     }
   ],
   "summary": {
@@ -330,8 +362,8 @@
     "total_pnl": 0,
     "best_trade": null,
     "worst_trade": null,
-    "current_equity": 100217.52,
-    "phase_pnl": 217.52,
-    "phase_pnl_pct": 0.22
+    "current_equity": 99720.01,
+    "phase_pnl": -279.99,
+    "phase_pnl_pct": -0.28
   }
 }
