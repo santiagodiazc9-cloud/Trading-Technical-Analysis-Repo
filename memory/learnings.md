@@ -46,6 +46,8 @@
 - 2026-05-18 (EOD): Market taking a measured pause after last week's overbought extension. SPY MACD bearish cross (histogram -0.04) is the first momentum stall signal since the May rally. Not a reversal — uptrend intact — but caution appropriate. NVDA earnings binary tomorrow, no exposure (correct). MSFT half-trigger 1/2 held for 3rd session. 0 trades, full cash, patience working as designed.
 - 2026-05-19 (EOD): SPY trip-wire worsened into the close ($735.51 midday → $733.85 EOD), reinforcing that intraday tick readings are noise — only EOD or routine-time price matters for rule triggers. MSFT MACD histogram grind stalled (-0.5525 → -0.5435); rate of approach is informative, not predictive — do not pre-announce a cross. NVDA $221.46 heading into earnings 5/20 AMC — no exposure, correct. 0 trades, full cash, week 3 day 2. NVDA earnings tomorrow is the week's defining catalyst.
 - 2026-05-21 (EOD): First day with an open position. GOOGL +0.33% (+$64.26) into close. Post-NVDA AI cycle beat strengthened the tech thesis. Stoch K rebounded from 0.06 (extreme oversold at entry 5/20) to 0.87 today — the entry captured the oversold inflection point exactly as intended. MACD still negative (-2.8451) — this is the known weakness of the setup (confidence 6/10). SPY strengthened to 1.81% above SMA 20. Patience + oversold entry + catalyst alignment = valid framework, early data point positive. MSFT MACD histogram improved to -0.3178 (from -0.5598) — largest single-day improvement in the half-trigger window. Cross may fire at 5/22 pre-market.
+- 2026-05-30 (Weekly Review, Week 4): **MSFT ran 8% in 3 days (5/27→5/30) before Microsoft Build (June 2-3).** Our re-arm condition (MACD bullish cross) fired mid-week but no scan caught it — price was already extended by the time this session ran. At $449, above upper BB and RSI 69, entry is closed. Lesson: **pre-event rallies run 3-5 trading days early.** Re-arm windows for catalyst plays must be set with a 3-5 day lead, not on the event date itself.
+- 2026-05-30 (Weekly Review, Week 4): **NVDA-2026-05-27 expired.** SMA 20 ($215.46) failed to hold as support — price broke through entry zone floor to $211.15. When a setup's keystone support level fails, the correct action is to expire the setup immediately. The zone cannot be expanded downward per ADR-0003. Re-arm requires SMA 20 reclaim AND MACD hist > 0 in the same scan.
 - 2026-05-20 (EOD): Scheduling failure produced a concrete execution gap for the first time. GOOGL-2026-05-20 was approved at 9:28 AM ET (13:28Z) with GOOGL in entry zone ($388.77 inside $387–$391), but the market-open execution routine had already fired at 5:53 AM (pre-market, before approval). EOD routine fired at 9:45 AM — too early to be useful as an EOD snapshot, too late to be an execution routine. All three routines today fired in the first 4 hours. The "good news" is the setup's own execution note (wait for price above $390 + Stoch upturn) would have blocked a fill at 9:45 AM anyway — MACD hist deteriorated to -2.2335 (vs -1.4647 at proposal), Stoch K 0.857 (still oversold). Scheduling must be fixed before Week 4; a broken scheduler that accidentally produces clean P&L is not a clean result.
 - 2026-05-25 (EOD, Memorial Day): Holiday closures are a free observation day, not a wasted slot. With markets closed there is no execution decision to test, but the existing position state ages forward (GOOGL still -1.06%, MACD hist -3.53 on Fri close, Stoch K still 0.87) and the watch list re-anchors against fresh distance (NVDA $215.34 entered watch zone over the weekend without us seeing it intraday). Rule of thumb: holiday EOD routines should treat the next session's pre-market as the "wake-up bar" — prepare priorities ranked, not data refreshed. The data won't change until 5/26 open.
 - 2026-05-25 (EOD, Memorial Day): Half-trigger that stales mid-window is a clean retirement, not a failure. MSFT spent 5 trading days (5/15–5/22) at 1-of-2 conditions met. The MACD histogram best reading (-0.32 on 5/21) was the closest approach but never crossed positive. Per ADR-0004, the gate auto-archived at 5/22 EOD without any forced action or rule violation. The "give it one more day" instinct would have generated noise across the weekend; the stale-by mechanism prevented that. **Rule of thumb:** when a half-trigger reaches its stale-by date, archive cleanly and require a fresh setup proposal — do not extend or salvage. Validated.
@@ -105,6 +107,30 @@
 3. **ADR-0004 (NEW)** — Half-trigger ledger. Partial re-arm conditions logged at the routine where they first fire; subsequent routines inherit the state.
 4. **Carry forward** — RSI > 70 daily no-chase rule (ADR-0001) still active. Validated this week against multiple watchlist names (AAPL, GOOGL, SPY, QQQ, XLK all > 70 at various points).
 5. **No core risk-rule changes.** CLAUDE.md hard rules 1–15 unchanged this week. No position sizing changes, no stop methodology changes, no sector discipline changes.
+
+## Weekly Review — Week Ending 2026-05-30
+
+### Week 4 Summary
+- **Trades taken**: 0. NVDA-2026-05-27 proposed but expired before approval; price broke below entry zone.
+- **P&L**: Unrealized -$343.23 (-1.74%) on GOOGL. Equity $99,656.77. Cash $80,259.43.
+- **Deployed**: 19.46% (target 75-85%) — significantly under-deployed. Root cause: only GOOGL open, NVDA setup expired, MSFT entry window closed.
+- **Discipline categorization**: 4 clean evaluable days. 0 rule violations. 1 setup proposed, expired by price action. Patience held.
+
+### Key Events Week 4
+- NVDA SMA 20 support failed. Setup expired.
+- MSFT pre-Build rally: +8% to $449, MACD cross fired (our trigger), but price already extended before this session caught it. Missed opportunity — process lesson, not rule violation.
+- GOOGL slipped below SMA 20 ($391.13). Trailing stop active and doing its job.
+
+### Rules to Reinforce / Add
+1. **Pre-event rally lead time**: Set re-arm watches 3-5 trading days before a catalyst event, not on the event date. This week's MSFT miss was caused by gating the scan to "Build June 2-3" when the market pre-priced it on 5/27-5/30.
+2. **SMA 20 breach = expire setup**: When a swing setup's primary support (SMA 20) breaks, expire immediately. Do not lower the zone per ADR-0003. Re-arm requires fresh reclaim.
+3. **No core risk-rule changes.** CLAUDE.md hard rules 1-15 unchanged.
+
+### Plan for Week 5 (June 2-6)
+- Monday 6/2 pre-market: SPY posture refresh, GOOGL stop check, NVDA re-arm check (SMA 20 reclaim?), AVGO MACD hist check, META Stoch K reset check.
+- June 2-3 Microsoft Build: watch MSFT for post-event selloff → re-entry at SMA 20 ($417) if MACD hist stays positive on pullback.
+- Week 5 budget: 3 trade slots fresh. Under-deployed at 19% — quality setups needed.
+- Priority dev task: full web dashboard + agent web connectivity (ongoing).
 
 ### Plan for Week 3 (2026-05-18 to 2026-05-22)
 - **Monday 5/18 pre-market**: refresh MSFT half-trigger state (SMA 20 reclaim should still hold; MACD cross watch is the live trigger). Refresh AMZN-2026-05-15 against fresh open — if not filled by EOD 5/19 pre-market, auto-stale per ADR-0002.

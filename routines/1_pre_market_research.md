@@ -37,9 +37,9 @@ If `archived_count == 0`, continue silently — no alert needed. If the validato
 ### 0b. Internet Catalyst Discovery (~3 min)
 Run these before loading memory — they prime the priority list for the market-scan debate queue.
 
-1. `brave_search`: `"stock market catalyst premarket [today's date]"`
-2. `brave_search`: `"analyst upgrades downgrades [today's date]"`
-3. `brave_search`: `"sector rotation momentum this week"`
+1. `tavily_search`: `"stock market catalyst premarket [today's date]"`
+2. `tavily_search`: `"analyst upgrades downgrades [today's date]"`
+3. `tavily_search`: `"sector rotation momentum this week"`
 4. `fetch`: `https://finviz.com/screener.ashx?v=111&f=sh_price_o5,ta_gap_u2&o=-gap` — parse the top 10 symbol names from the gap-up screener table
 5. `fetch`: `https://finance.yahoo.com/calendar/earnings/` — today's earnings slate
 
@@ -47,7 +47,7 @@ Compile a deduped list of up to 15 **internet-flagged** symbols with a one-line 
 
 Write the flagged symbols to `memory/market_context.md` under an **"## Internet Flagged"** section so the midday routine can check them without re-running.
 
-If `brave-search` tool is unavailable: skip web queries, note in journal (`Ruflo/MCP: brave-search unavailable`), continue.
+If `tavily` tool is unavailable: skip web queries, note in journal (`MCP: tavily unavailable`), continue.
 If `fetch` returns an error for a URL: skip that URL, continue.
 
 ### 1. Load Memory

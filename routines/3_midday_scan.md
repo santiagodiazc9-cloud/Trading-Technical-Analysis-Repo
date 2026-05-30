@@ -33,7 +33,7 @@ Run: `python3 scripts/research.py analyze <SYMBOL>`
 ### 4. Catalyst Check on Open Positions + Internet-Flagged Follow-Up
 **For each open position symbol**, run a targeted web search:
 ```
-brave_search: "[SYMBOL] news today catalyst"
+tavily_search: "[SYMBOL] news today catalyst"
 ```
 Note anything that breaks the original setup thesis. If a bearish catalyst emerged (guidance cut, sector downgrade, macro shock), recommend closure in the next step — don't close without user approval unless it's a -7% cut situation.
 
