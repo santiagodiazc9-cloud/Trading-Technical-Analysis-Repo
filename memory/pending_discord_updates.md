@@ -4,6 +4,22 @@ This file is a fallback log. When a routine's `notify.py` call fails (Discord we
 
 ---
 
+### 2026-05-30 15:08 UTC — Security Scan alerts + brief (Discord config missing in cloud env)
+- **Reason**: `memory/discord_config.json` missing in cloud routine host (recurring known gap; same blocker as 2026-05-16 and the 2026-05-29 EOD/midday entries).
+- **Status**: All 5 findings WERE persisted to ClickUp Risk and Errors (`901217854046`) — see `journal/security-2026-05-30.md`. Discord delivery only is pending.
+
+**Intended posts (flush from here once Discord creds are provisioned):**
+
+1. `#risk-alerts` HIGH — `python3 scripts/notify.py alert high security 'GH_TOKEN persisted in .git/config (regression): scripts/discord_bot_cloud.py:70 — token survives on disk + leaks to any process reading config. Fix: use credential.helper store outside repo or GIT_ASKPASS env-read script. ClickUp 869dgf89z.'`
+2. `#risk-alerts` HIGH — `python3 scripts/notify.py alert high security 'DISCORD_BOT_TOKEN written to .env in repo tree (regression): scripts/discord_bot_cloud.py:85 — any git add -A or container snapshot exfiltrates it. Fix: pass via env var only, refactor discord_bot.py to read os.environ first. ClickUp 869dgf8a5.'`
+3. `#risk-alerts` HIGH — `python3 scripts/notify.py alert high security 'FastAPI dashboard has zero auth + CORS * on /approve/{id}, /deny, /pause, /resume, /session (NEW): api/main.py:45-50,203-257 — any cross-origin page can force a trade. Bypasses CLAUDE.md rule 15 at the network layer. Fix: Depends(verify_key) + restrict allow_origins. ClickUp 869dgf8au.'`
+4. `#daily-brief` summary — `python3 scripts/notify.py brief '🛡️ Security Scan — 2026-05-30 — 3 HIGH, 4 MEDIUM, 3 LOW, 3 dep-CVE flags' '17 .py files scanned (4,610 LOC), 14 deps across 3 requirements files. 3 HIGH: 2 regressions in discord_bot_cloud.py (GH_TOKEN in .git/config, bot token in .env), 1 NEW in api/main.py (unauth + CORS *). 4 MEDIUM: setup_id/reason injection (api+bot), unbounded symbol/qty/notional CLI args (alpaca_client.py), pickle.load on writable model dir (daytrader/ml_model.py). 3 LOW: log rotation, load_dotenv coupling, missing dep upper bounds. Dep CVEs: httpx 0.25 (CVE-2024-25199), pandas 2.0 (CVE-2024-9880), yfinance 0.2 (cache-path traversal in 0.2.40). 0 of 6 prior findings remediated since 2026-05-16. ClickUp tasks: 869dgf89z, 869dgf8a5, 869dgf8au, 869dgf8b7, 869dgf8ba. Read-only scan, no code modified.'`
+
+- **Setups to push as cards**: 0.
+- **Alerts (CRITICAL)**: 0.
+- **Dashboard mirror**: not refreshed this run (security routine does not regenerate Dashboard.md per `routines/7_security_scan.md`).
+
+
 ### 2026-05-29 19:47 UTC — End-of-Day Review Brief (Discord config missing in cloud env)
 - **Channel**: #daily-brief
 - **Title**: End-of-Day Review — 2026-05-29
