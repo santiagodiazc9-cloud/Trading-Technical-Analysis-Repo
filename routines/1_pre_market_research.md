@@ -34,13 +34,30 @@ python3 scripts/notify.py alert medium <SYMBOL> 'pre-market expired stale setup:
 
 If `archived_count == 0`, continue silently — no alert needed. If the validator itself fails (non-zero exit), post a `notify.py alert high setup_validator '...'` and proceed; pre-market still has value without the sweep, but flag it for the next weekly review.
 
+### 0b. Internet Catalyst Discovery (~3 min)
+Run these before loading memory — they prime the priority list for the market-scan debate queue.
+
+1. `brave_search`: `"stock market catalyst premarket [today's date]"`
+2. `brave_search`: `"analyst upgrades downgrades [today's date]"`
+3. `brave_search`: `"sector rotation momentum this week"`
+4. `fetch`: `https://finviz.com/screener.ashx?v=111&f=sh_price_o5,ta_gap_u2&o=-gap` — parse the top 10 symbol names from the gap-up screener table
+5. `fetch`: `https://finance.yahoo.com/calendar/earnings/` — today's earnings slate
+
+Compile a deduped list of up to 15 **internet-flagged** symbols with a one-line catalyst each. In Step 3 (market-scan), any symbol on this list gets priority debate treatment — if it also appears in the scan results, it jumps to the front of the candidate queue.
+
+Write the flagged symbols to `memory/market_context.md` under an **"## Internet Flagged"** section so the midday routine can check them without re-running.
+
+If `brave-search` tool is unavailable: skip web queries, note in journal (`Ruflo/MCP: brave-search unavailable`), continue.
+If `fetch` returns an error for a URL: skip that URL, continue.
+
 ### 1. Load Memory
 Read these files to understand your current state:
-- `memory/watchlist.json` — symbols to scan
+- `memory/watchlist.json` — posture-proxy ETFs (SPY, QQQ, XLK, XLV, XLE, XLI, XLF)
 - `memory/strategy.md` — current trading rules
 - `memory/open_positions.md` — any existing positions
 - `memory/market_context.md` — yesterday's market context
 - `memory/learnings.md` — lessons from past trades
+- `memory/tracking.json` — user-pinned symbols (short-term follow-up via /track)
 
 ### 2. Check Account
 Run: `python3 scripts/alpaca_client.py account`
@@ -81,7 +98,8 @@ This scans ~650 symbols (S&P 500 + Nasdaq 100 + emerging tech/RnD/AI/biotech/qua
 - `snapshot_gap_pct` — pre-market % move vs yesterday's close
 - `earnings_date` — if the company reports within 7 days (run-up play or avoid)
 - `news_headlines` — last 3 headlines from Alpaca news feed
-- `watchlist_notes` — any notes from `memory/watchlist.json` if the symbol is already tracked
+- `watchlist_notes` — posture-proxy notes if symbol is one of the 7 ETFs; also shows if symbol is in `memory/tracking.json`
+- `internet_flagged` — `true` if this symbol appeared in Step 0b discovery (give it priority in the debate queue)
 - Full TA indicator suite (RSI, MACD, SMA, BB, ATR, etc.)
 
 Interpret each candidate:

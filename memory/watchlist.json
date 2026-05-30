@@ -1,62 +1,9 @@
 {
   "watchlist": [
     {
-      "symbol": "AAPL",
-      "sector": "Tech",
-      "notes": "Mega-cap tech, strong trend follower. 2026-05-28 pre-mkt: $310.93 RSI 79.0 EXTREME OVERBOUGHT, MACD hist +0.85, Stoch K 96.5, SMA 20 $293.38 ✓ (price 6% above). Multi-week extension — no chase. Wait for daily pullback toward SMA 20.",
-      "strategy": "swing"
-    },
-    {
-      "symbol": "MSFT",
-      "sector": "Tech",
-      "notes": "Cloud/AI leader. 2026-05-29 midday: $443.97 — MACD bullish cross FIRED (+1.28), RSI 67.4, above SMA 20 ($417.27). BUT: SMA 50 ($402.69) < SMA 200 ($458.43) — long-term swing-trend test FAILS. Half-trigger from prior week stale-cleared 5/22 EOD. Next catalyst: Microsoft Build 2026 (6/2–6/3). Watch for post-Build pullback that ALSO reclaims SMA 50 → SMA 200 (would need run to $460+) before a real swing setup is possible. Until then: PASS on long, no clean short either (SMA 20 reclaimed + MACD just crossed).",
-      "strategy": "swing",
-      "priority": "high"
-    },
-    {
-      "symbol": "NVDA",
-      "sector": "Tech",
-      "notes": "AI chip leader. 2026-05-29 EOD: ~$216 RSI 54.87, MACD hist -1.81 (still negative — gate failing), Stoch K 7.07 (extreme oversold), price barely above SMA 20 ($215.74). Post-earnings (5/20) pullback zone $215–$220 was reached but MACD-cross gate never fired; thesis fading. Only oversold-bounce setup remains if Stoch < 5 produces sharp reversal with MACD reverse. If MACD continues deteriorating into Week 5, drop from active watch.",
-      "strategy": "both",
-      "priority": "high"
-    },
-    {
-      "symbol": "TSLA",
-      "sector": "Consumer Discretionary",
-      "notes": "High beta, momentum-driven. Daily SMA 50 < 200 still — day trade only until daily trend clarifies. 2026-05-14: ~$445 RSI ~70, above upper BB. Cooled somewhat but still extended. Day trade only on clean 5-min setups.",
-      "strategy": "day",
-      "priority": "normal"
-    },
-    {
-      "symbol": "AMZN",
-      "sector": "Consumer Discretionary",
-      "notes": "E-commerce + cloud. 2026-05-29 EOD: ~$272, RSI 60.05, MACD hist -1.01 (CLOSEST to zero in watch list — closer than AVGO and TSM), Stoch K 49.55, above SMA 20 ($268.74). MACD cross is the next gate event but no fresh catalyst on the calendar. Observe-only this week; if MACD crosses zero AND a catalyst surfaces (analyst day, AWS announcement, retail data), debate fresh. Re-evaluate 6/1 pre-market.",
-      "strategy": "swing",
-      "priority": "normal"
-    },
-    {
-      "symbol": "META",
-      "sector": "Communication Services",
-      "notes": "Social/AI play. 2026-05-29 midday: $625.00 (pulled back from $635.31 EOD 5/28, -1.6%). MACD hist still positive (+2.73), but Stoch K 90 OB and SMA 200 $666.53 overhead = neither long (overbought) nor short (MACD positive). Short thesis from prior weeks REVERSED 5/28. Removed from short watch. Re-add to long watch only on pullback to SMA 20 (~$614) with RSI cooling < 60 AND a fresh catalyst (e.g., AI product launch).",
-      "strategy": "swing"
-    },
-    {
-      "symbol": "GOOGL",
-      "sector": "Communication Services",
-      "notes": "Search + cloud. **OWN POSITION** since 2026-05-20 ($387.07 × 51 sh, Communication Services). 2026-05-29 EOD: $381.62 unrealized -1.41% (-$277.95). Long-term SMA bull stack intact (SMA 50 $347.60 > SMA 200 $299.93). Manual watch trigger $375. -7% mechanical cut $359.98. SMA 50 break ($347.60, -8.9%) is the real thesis-break signal. See `memory/open_positions.md` for full management trail.",
-      "strategy": "swing",
-      "priority": "high"
-    },
-    {
-      "symbol": "AMD",
-      "sector": "Tech",
-      "notes": "Chip sector. 2026-05-14: $445.40 RSI 76.1 — overbought. Long-term bullish. Observe-only until post-NVDA earnings (5/20 AMC) — NVDA print sets semiconductor sector direction for the week. Re-evaluate 5/21 pre-market.",
-      "strategy": "both"
-    },
-    {
       "symbol": "SPY",
       "sector": "ETF — Broad Market",
-      "notes": "S&P 500 ETF — PRIMARY market posture indicator. Pre-market routine classifies posture via SPY SMA relationships (see strategy.md Market Posture System): GREEN (above SMA 20 + SMA 20 > SMA 50) / CAUTION (below SMA 20 but above SMA 50) / RED (below SMA 50) / BEAR (below SMA 200). Old price-level trip-wire ($736) retired 2026-05-19 — it was stale. Also tradeable as day-trade vehicle on high-volume trend days.",
+      "notes": "S&P 500 ETF — PRIMARY market posture indicator. Pre-market routine classifies posture via SPY SMA relationships (see strategy.md Market Posture System): GREEN (above SMA 20 AND SMA 20 > SMA 50) / CAUTION (below SMA 20 but above SMA 50) / RED (below SMA 50) / BEAR (below SMA 200). Old price-level trip-wire ($736) retired 2026-05-19 — it was stale. Also tradeable as day-trade vehicle on high-volume trend days.",
       "strategy": "day"
     },
     {
@@ -68,128 +15,34 @@
     {
       "symbol": "XLK",
       "sector": "ETF — Tech",
-      "notes": "SPDR Tech Sector ETF. Use as tech sector trend proxy AND tradeable swing setup. Strong trending instrument. No indicator data yet — pre-market routine will initialize.",
-      "strategy": "swing"
-    },
-    {
-      "symbol": "XLE",
-      "sector": "ETF — Energy",
-      "notes": "SPDR Energy Sector ETF. Energy sector proxy AND tradeable swing setup. Excellent short candidate in risk-off environments. No indicator data yet — pre-market routine will initialize.",
+      "notes": "SPDR Tech Sector ETF. Tech sector trend proxy AND tradeable swing setup. Strong trending instrument.",
       "strategy": "swing"
     },
     {
       "symbol": "XLV",
       "sector": "ETF — Healthcare",
-      "notes": "SPDR Healthcare Sector ETF. Defensive sector proxy AND tradeable. **Priority raised 2026-05-29 per Week 4 weekly review**: watchlist is tech-heavy after Week 3 AI-infrastructure additions; XLV provides rotational protection if XLK starts to cool (XLK closed Fri 5/29 with RSI 79+ and MACD positive — extreme). Run fresh indicator scan in 6/1 pre-market to set baseline. Good long candidate if XLK rolls and XLV holds SMA 20.",
-      "strategy": "swing",
-      "priority": "high"
+      "notes": "SPDR Healthcare Sector ETF. Defensive sector proxy AND tradeable. Good long in risk-off rotation.",
+      "strategy": "swing"
     },
     {
-      "symbol": "XLF",
-      "sector": "ETF — Financials",
-      "notes": "SPDR Financials Sector ETF. Rate-sensitive — short candidate when yield curve flattens. No indicator data yet — pre-market routine will initialize.",
+      "symbol": "XLE",
+      "sector": "ETF — Energy",
+      "notes": "SPDR Energy Sector ETF. Energy sector proxy AND tradeable swing setup. Excellent short candidate in risk-off environments.",
       "strategy": "swing"
     },
     {
       "symbol": "XLI",
       "sector": "ETF — Industrials",
-      "notes": "SPDR Industrials Sector ETF. Cyclical sector proxy. No indicator data yet — pre-market routine will initialize.",
+      "notes": "SPDR Industrials Sector ETF. Cyclical sector proxy.",
       "strategy": "swing"
     },
     {
-      "symbol": "LLY",
-      "sector": "Healthcare",
-      "notes": "Eli Lilly — GLP-1/obesity drug leader, mega-cap biotech with strong multi-year momentum. High ATR, large moves. No indicator data yet — pre-market routine will initialize.",
-      "strategy": "swing",
-      "priority": "high"
-    },
-    {
-      "symbol": "JPM",
-      "sector": "Financials",
-      "notes": "JPMorgan Chase — financial sector bellwether. Rate-sensitive, good both-direction plays around FOMC events. No indicator data yet — pre-market routine will initialize.",
+      "symbol": "XLF",
+      "sector": "ETF — Financials",
+      "notes": "SPDR Financials Sector ETF. Rate-sensitive — short candidate when yield curve flattens.",
       "strategy": "swing"
-    },
-    {
-      "symbol": "GS",
-      "sector": "Financials",
-      "notes": "Goldman Sachs — investment bank, high beta to risk sentiment. Good short candidate in risk-off. No indicator data yet — pre-market routine will initialize.",
-      "strategy": "swing"
-    },
-    {
-      "symbol": "CRM",
-      "sector": "Tech",
-      "notes": "Salesforce — enterprise SaaS, cloud leader. Earnings-driven moves, good swing setups around analyst days. No indicator data yet — pre-market routine will initialize.",
-      "strategy": "swing"
-    },
-    {
-      "symbol": "PANW",
-      "sector": "Tech",
-      "notes": "Palo Alto Networks — cybersecurity leader. Strong institutional sponsorship, clean technical setups. No indicator data yet — pre-market routine will initialize.",
-      "strategy": "swing"
-    },
-    {
-      "symbol": "XOM",
-      "sector": "Energy",
-      "notes": "Exxon Mobil — energy megacap. Oil price proxy, good short in energy downturns. No indicator data yet — pre-market routine will initialize.",
-      "strategy": "swing"
-    },
-    {
-      "symbol": "PLTR",
-      "sector": "Tech",
-      "notes": "Palantir — AI/defense analytics. High momentum, high ATR, good for both directions. Volatile — size accordingly. No indicator data yet — pre-market routine will initialize.",
-      "strategy": "both",
-      "priority": "high"
-    },
-    {
-      "symbol": "AVGO",
-      "sector": "Tech",
-      "notes": "Broadcom — custom AI accelerators (Google TPU, Meta MTIA), networking silicon (switching/routing), VMware cloud infrastructure. Strong cash flow, dividend grower. High institutional ownership. **Week 4 lifecycle**: 5/28 PASS at 6/10 (tentative entry $414–$418), 5/28 midday+EOD half-trigger 2/3, 5/29 midday full-trigger 3/3 BLOCKED by chase rule (+3.1% intraday, tentative zone outrun by $22+). 5/29 EOD ~$440, 3/3 conditions held but no proposal. **6/1 pre-market priority #1**: if pullback to a fresh entry zone with confluence intact, re-debate Bull/Bear/Judge. If price keeps extending without a pullback, the move is gone — pass per ADR-0006. Next earnings ~Aug 2026.",
-      "strategy": "swing",
-      "priority": "high"
-    },
-    {
-      "symbol": "TSM",
-      "sector": "Tech",
-      "notes": "TSMC — world's largest semiconductor foundry, manufactures chips for NVDA, AAPL, AMD, ARM. Critical AI supply chain chokepoint. NYSE ADR (not Taiwan exchange). Watch for geopolitical risk premium (Taiwan Strait). NVDA earnings 5/20 AMC will move TSM sympathetically. No indicator data yet — pre-market routine will initialize.",
-      "strategy": "swing",
-      "priority": "high"
-    },
-    {
-      "symbol": "ARM",
-      "sector": "Tech",
-      "notes": "Arm Holdings — CPU architecture licensor. Every smartphone runs ARM; growing AI edge and data center deployment. High P/E, momentum-driven. Watch for licensing renewal catalysts (NVDA, AAPL, Qualcomm). High ATR relative to price — size accordingly. No indicator data yet — pre-market routine will initialize.",
-      "strategy": "swing",
-      "priority": "normal"
-    },
-    {
-      "symbol": "CEG",
-      "sector": "Energy",
-      "notes": "Constellation Energy — largest US nuclear fleet operator. Signed 20-year PPA with Microsoft to restart Three Mile Island Unit 1 for AI data center power. Direct beneficiary of the AI energy buildout thesis. More stable than speculative SMR names — existing revenue, contracted cashflows. Watch for new hyperscaler PPA announcements as catalysts. No indicator data yet — pre-market routine will initialize.",
-      "strategy": "swing",
-      "priority": "high"
-    },
-    {
-      "symbol": "VST",
-      "sector": "Energy",
-      "notes": "Vistra — nuclear + natural gas power operator. Heavy Texas/ERCOT grid exposure — AI data centers in Texas are direct customers. Higher beta than CEG. Good both-direction play around energy policy and ERCOT pricing events. No indicator data yet — pre-market routine will initialize.",
-      "strategy": "swing",
-      "priority": "high"
-    },
-    {
-      "symbol": "NNE",
-      "sector": "Energy",
-      "notes": "Nano Nuclear Energy — SPECULATIVE. Developing portable micro-nuclear reactors for remote/off-grid applications including AI edge computing. Very high ATR, low float, no revenue. Size at 50% of normal position max. Trade momentum and news catalysts, not fundamentals. No indicator data yet — pre-market routine will initialize.",
-      "strategy": "both",
-      "priority": "normal"
-    },
-    {
-      "symbol": "SMR",
-      "sector": "Energy",
-      "notes": "NuScale Power — SPECULATIVE. First SMR (small modular reactor) design to receive NRC design approval. Developing commercial SMR deployments. Very high ATR, binary event risk around regulatory milestones and partnership announcements. Size at 50% of normal position max. No indicator data yet — pre-market routine will initialize.",
-      "strategy": "both",
-      "priority": "normal"
     }
   ],
-  "last_updated": "2026-05-29",
-  "update_reason": "Week 4 Friday weekly review maintenance: refreshed stale notes on AAPL, MSFT, NVDA, AMZN, GOOGL (own position), AVGO (Week 4 lifecycle audit trail), META (short thesis reversed); raised XLV priority to high for defensive rotation as watchlist runs tech-heavy and XLK is RSI 79+. No symbols added or removed (29 symbols total). Earlier Week 3 expansion (AI infrastructure semiconductor supply chain + nuclear energy AI power thesis) still in force."
+  "last_updated": "2026-05-27",
+  "update_reason": "Converted to posture-proxies-only (7 ETFs). Individual stocks were a bottleneck — market-scan covers 650 symbols and is the real discovery engine. Internet-flagged symbols from Step 0b now prime the debate queue instead of a static list. Individual stocks previously tracked here (AAPL, MSFT, NVDA, TSLA, AMZN, META, GOOGL, AMD, LLY, JPM, GS, CRM, PANW, XOM, PLTR, AVGO, TSM, ARM, CEG, VST, NNE, SMR) are discovered dynamically. Use /track in Discord to pin specific symbols for short-term follow-up (memory/tracking.json, 5-day expiry)."
 }

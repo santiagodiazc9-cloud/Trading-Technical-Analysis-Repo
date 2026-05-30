@@ -3,7 +3,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const links = [
-  { href: "/", label: "Home", icon: "⊞" },
+  { href: "/", label: "Fleet", icon: "◉" },
   { href: "/swing", label: "Swing", icon: "↗" },
   { href: "/daytrader", label: "Day", icon: "⚡" },
   { href: "/positions", label: "Hold", icon: "◈" },

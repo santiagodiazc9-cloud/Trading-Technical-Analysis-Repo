@@ -58,5 +58,40 @@ export async function resumeAgent() {
   return res.json();
 }
 
+export async function fetchAgents() {
+  const res = await fetch(`${API_BASE}/agents`, { cache: "no-store" });
+  if (!res.ok) return [];
+  return res.json();
+}
+
+export async function fetchJournal(date?: string) {
+  const url = date ? `${API_BASE}/journal?date=${date}` : `${API_BASE}/journal`;
+  const res = await fetch(url, { cache: "no-store" });
+  return res.json();
+}
+
+export async function postChat(question: string) {
+  const res = await fetch(`${API_BASE}/chat`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ question }),
+  });
+  return res.json();
+}
+
+export async function fetchChatHistory() {
+  const res = await fetch(`${API_BASE}/chat-history`, { cache: "no-store" });
+  return res.json();
+}
+
+export async function triggerRoutine(routine: string) {
+  const res = await fetch(`${API_BASE}/trigger`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ routine }),
+  });
+  return res.json();
+}
+
 export const WS_URL = (process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000")
   .replace(/^http/, "ws") + "/stream";

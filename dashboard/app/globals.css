@@ -3,6 +3,13 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  /* Agent color glow values */
+  --glow-emerald: #10b981;
+  --glow-amber: #f59e0b;
+  --glow-purple: #8b5cf6;
+  --glow-blue: #3b82f6;
+  --glow-orange: #f97316;
+  --glow-cyan: #06b6d4;
 }
 
 @theme inline {

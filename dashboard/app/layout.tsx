@@ -35,7 +35,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 function SideNav() {
   return (
     <>
-      <NavIcon href="/" label="Home" icon="⊞" />
+      <NavIcon href="/" label="Fleet" icon="◉" />
       <NavIcon href="/swing" label="Swing" icon="↗" />
       <NavIcon href="/daytrader" label="Day" icon="⚡" />
       <NavIcon href="/positions" label="Positions" icon="◈" />

@@ -38,6 +38,7 @@ CONFIG_PATH = ROOT / "memory" / "discord_config.json"
 POSITIONS_PATH = ROOT / "memory" / "open_positions.md"
 ACTION_LOG = ROOT / "memory" / "discord_actions.log"
 WATCHLIST_PATH = ROOT / "memory" / "watchlist.json"
+TRACKING_PATH = ROOT / "memory" / "tracking.json"
 PAUSE_PATH = ROOT / "memory" / "pause_state.json"
 RUN_QUEUE_PATH = ROOT / "memory" / "run_queue.json"
 CHAT_QUEUE_PATH = ROOT / "memory" / "discord_chat_queue.json"
@@ -496,18 +497,16 @@ async def halt_cmd(interaction: discord.Interaction, reason: str):
     git_sync_memory(f"halt reason={reason}")
 
 
-@tree.command(name="watchlist", description="Manage the trading watchlist.")
+@tree.command(name="track", description="Pin a symbol for short-term follow-up (5-day expiry). /track add|remove|show")
 @app_commands.describe(
     action="add | remove | show",
     symbol="Ticker (required for add/remove)",
-    sector="Sector (optional, for add)",
-    notes="Notes (optional, for add)",
+    notes="Optional notes about why you're tracking",
 )
-async def watchlist_cmd(
+async def track_cmd(
     interaction: discord.Interaction,
     action: str,
     symbol: str = "",
-    sector: str = "",
     notes: str = "",
 ):
     if not authorized(interaction):
@@ -515,11 +514,14 @@ async def watchlist_cmd(
         return
     action = action.lower().strip()
     sym = symbol.upper().strip()
-    data = read_json(WATCHLIST_PATH, {"watchlist": []})
-    items = data.setdefault("watchlist", [])
+    data = read_json(TRACKING_PATH, {"symbols": [], "last_updated": ""})
+    items = data.setdefault("symbols", [])
 
     if action == "show":
-        body = "\n".join(f"- {i.get('symbol')} ({i.get('sector','?')}) — {i.get('notes','')[:80]}" for i in items)
+        body = "\n".join(
+            f"- {i.get('symbol')} (until {i.get('tracked_until','?')}) — {i.get('notes','')[:80]}"
+            for i in items
+        )
         await interaction.response.send_message(reply_block(body or "_empty_", "markdown"), ephemeral=True)
         return
 
@@ -529,26 +531,32 @@ async def watchlist_cmd(
 
     if action == "add":
         if any(i.get("symbol") == sym for i in items):
-            await interaction.response.send_message(f"`{sym}` already on watchlist.", ephemeral=True)
+            await interaction.response.send_message(f"`{sym}` already being tracked.", ephemeral=True)
             return
-        items.append({"symbol": sym, "sector": sector or "Unknown",
-                      "notes": notes, "strategy": "swing"})
-        write_json(WATCHLIST_PATH, data)
-        append_action_log(f"watchlist add {sym}")
-        await interaction.response.send_message(f"➕ Added `{sym}` to watchlist.")
-        git_sync_memory(f"watchlist add {sym}")
+        # 5 trading days ≈ 7 calendar days
+        import datetime as _dt
+        tracked_until = (_dt.date.today() + _dt.timedelta(days=7)).isoformat()
+        items.append({"symbol": sym, "notes": notes, "tracked_until": tracked_until,
+                      "added": _dt.date.today().isoformat()})
+        data["last_updated"] = _dt.date.today().isoformat()
+        write_json(TRACKING_PATH, data)
+        append_action_log(f"track add {sym} until={tracked_until}")
+        await interaction.response.send_message(f"📌 Tracking `{sym}` until {tracked_until}.")
+        git_sync_memory(f"track add {sym}")
         return
 
     if action == "remove":
         before = len(items)
-        data["watchlist"] = [i for i in items if i.get("symbol") != sym]
-        if len(data["watchlist"]) == before:
-            await interaction.response.send_message(f"`{sym}` not on watchlist.", ephemeral=True)
+        data["symbols"] = [i for i in items if i.get("symbol") != sym]
+        if len(data["symbols"]) == before:
+            await interaction.response.send_message(f"`{sym}` not in tracking list.", ephemeral=True)
             return
-        write_json(WATCHLIST_PATH, data)
-        append_action_log(f"watchlist remove {sym}")
-        await interaction.response.send_message(f"➖ Removed `{sym}` from watchlist.")
-        git_sync_memory(f"watchlist remove {sym}")
+        import datetime as _dt
+        data["last_updated"] = _dt.date.today().isoformat()
+        write_json(TRACKING_PATH, data)
+        append_action_log(f"track remove {sym}")
+        await interaction.response.send_message(f"🗑️ Removed `{sym}` from tracking.")
+        git_sync_memory(f"track remove {sym}")
         return
 
     await interaction.response.send_message(f"Unknown action `{action}`. Use add | remove | show.", ephemeral=True)

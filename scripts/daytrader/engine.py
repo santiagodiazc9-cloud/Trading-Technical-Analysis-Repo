@@ -76,13 +76,12 @@ def market_is_open() -> bool:
 # ── watchlist ───────────────────────────────────────────────────────────────
 
 def get_day_symbols() -> list[str]:
-    wl_path = os.path.join(ROOT, "memory", "watchlist.json")
-    with open(wl_path) as f:
-        wl = json.load(f)
-    return [
-        s["symbol"] for s in wl["watchlist"]
-        if s.get("strategy") in ("day", "both")
-    ]
+    # Pre-market routine populates session["day_symbols"] with top day-trade
+    # candidates discovered via market-scan. Fall back to liquid ETFs if not set.
+    session = load_session()
+    if session.get("day_symbols"):
+        return session["day_symbols"]
+    return ["SPY", "QQQ"]
 
 
 # ── score one symbol ─────────────────────────────────────────────────────────

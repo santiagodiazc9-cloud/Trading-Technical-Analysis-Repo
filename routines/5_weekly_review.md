@@ -91,11 +91,22 @@ How we'll know if this was the right call. Concrete metric + timeframe (e.g., "I
 
 If NO strategy change happened this week, skip ADR creation. ADRs are for actual rule changes, not weekly housekeeping.
 
-### 5. Watchlist Maintenance
-- Remove symbols that have gone stale (no signals for 2+ weeks)
-- Consider adding symbols that showed up in sector rotation
-- Update notes on existing watchlist items
-- Save changes to `memory/watchlist.json`
+### 5. Tracking List Cleanup + Internet Scan Hit-Rate Review
+`memory/watchlist.json` is now posture-proxies-only (7 ETFs) and requires no maintenance. Instead:
+
+**A. Expire stale tracking entries:**
+```python
+import json, datetime
+t = json.load(open('memory/tracking.json'))
+today = datetime.date.today().isoformat()
+before = len(t['symbols'])
+t['symbols'] = [s for s in t['symbols'] if s.get('tracked_until', '') >= today]
+t['last_updated'] = today
+json.dump(t, open('memory/tracking.json', 'w'), indent=2)
+print(f'Expired {before - len(t["symbols"])} entries. {len(t["symbols"])} remain.')
+```
+
+**B. Internet-scan hit-rate review:** Look at this week's journal entries. Which symbols appeared in Step 0b (internet-flagged) AND made it through the market-scan debate gate into an approved setup? Note the conversion rate in `journal/YYYY-MM-DD-weekly.md` under "Internet Scan Effectiveness". If conversion < 20% for the week, note what types of web-discovered signals were noise — this informs search query refinement next week.
 
 ### 6. Update Learnings
 Write a comprehensive weekly summary to `memory/learnings.md`:

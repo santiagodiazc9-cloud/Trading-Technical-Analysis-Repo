@@ -93,6 +93,7 @@ jobs:
           ALPACA_BASE_URL: ${{ secrets.ALPACA_BASE_URL }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
+          BRAVE_API_KEY: ${{ secrets.BRAVE_API_KEY }}
         run: |
           cat <<EOF > .env
           ALPACA_API_KEY=${ALPACA_API_KEY}
@@ -100,6 +101,7 @@ jobs:
           ALPACA_BASE_URL=${ALPACA_BASE_URL:-https://paper-api.alpaca.markets}
           ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
           DISCORD_BOT_TOKEN=${DISCORD_BOT_TOKEN}
+          BRAVE_API_KEY=${BRAVE_API_KEY}
           EOF
           # Sanity: file exists and is not empty
           test -s .env

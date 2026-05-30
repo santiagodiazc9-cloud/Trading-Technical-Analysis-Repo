@@ -30,12 +30,20 @@ Run: `python3 scripts/research.py analyze <SYMBOL>`
 - **Trending well?** → Consider trailing the stop using ATR. Update `memory/open_positions.md`.
 - **Thesis broken (no longer matches the setup)?** → Recommend closure in the `#daily-brief` summary; **do NOT close on thesis change without user approval**.
 
-### 4. Scan for New Opportunities
-Run: `python3 scripts/research.py scan`
-- Any new setups emerging that weren't there at open?
-- Note them in `memory/open_positions.md` under "Pending Setups" — **do not enter without user approval**.
-- Only flag for approval if high-conviction (score 4+ on the checklist).
-- Remember: max 5 positions, and respect the daily loss cap.
+### 4. Catalyst Check on Open Positions + Internet-Flagged Follow-Up
+**For each open position symbol**, run a targeted web search:
+```
+brave_search: "[SYMBOL] news today catalyst"
+```
+Note anything that breaks the original setup thesis. If a bearish catalyst emerged (guidance cut, sector downgrade, macro shock), recommend closure in the next step — don't close without user approval unless it's a -7% cut situation.
+
+**Check internet-flagged symbols from morning pre-market**: read `memory/market_context.md` → "## Internet Flagged" section. For any flagged symbol not already in an open position, run:
+```bash
+python3 scripts/research.py analyze [SYMBOL]
+```
+If the TA now shows a clean setup (ADX > 25, MACD confirming, RSI in range), propose it as a pending midday setup. Confidence ≥ 7 required for midday proposals (higher bar than pre-market since the day is already underway).
+
+Do not re-run `research.py scan` against the full watchlist — the watchlist is posture-proxies-only (7 ETFs). New setups come from internet-flagged symbols and position management.
 
 ### 5. Update Memory
 - **`memory/open_positions.md`**: Update P&L, adjust stops, note any closes

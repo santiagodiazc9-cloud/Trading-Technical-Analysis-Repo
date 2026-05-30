@@ -296,6 +296,92 @@ async def websocket_stream(ws: WebSocket):
         manager.disconnect(ws)
 
 
+@app.get("/agents")
+def get_agents():
+    """Fleet status: live data for wired agents, static config for stubs."""
+    state = _build_state()
+    account = state.get("account", {})
+    session = state.get("day_trading_session", {})
+
+    equity = float(account.get("equity", 0) or 0)
+    last_eq = float(account.get("last_equity", equity) or equity)
+    day_pl = equity - last_eq
+    pl_str = f"{'+' if day_pl >= 0 else ''}${abs(day_pl):,.2f}"
+
+    trades_taken = session.get("trades_taken", 0)
+    max_trades = session.get("max_trades", 0)
+    session_approved = session.get("session_approved", False)
+
+    return JSONResponse([
+        {
+            "id": "swing-trader",
+            "status": "paused" if state.get("paused") else "active",
+            "metric": {"label": "P&L", "value": pl_str},
+            "last_run": datetime.now(ET).isoformat(),
+            "live": True,
+        },
+        {
+            "id": "day-trader",
+            "status": "active" if session_approved else "idle",
+            "metric": {"label": "Trades", "value": f"{trades_taken} / {max_trades}"},
+            "last_run": datetime.now(ET).isoformat(),
+            "live": True,
+        },
+        {"id": "crypto-screener", "status": "stub", "live": False},
+        {"id": "content-engine",  "status": "stub", "live": False},
+        {"id": "freelance-agent", "status": "stub", "live": False},
+        {"id": "arbitrage-scout", "status": "stub", "live": False},
+    ])
+
+
+@app.get("/journal")
+def get_journal(date: str = ""):
+    target_date = date or datetime.now(ET).strftime("%Y-%m-%d")
+    path = os.path.join(ROOT, "journal", f"{target_date}.md")
+    content = _read_text(f"journal/{target_date}.md")
+    return JSONResponse({
+        "date": target_date,
+        "content": content,
+        "exists": os.path.exists(path),
+    })
+
+
+@app.post("/chat")
+async def post_chat(body: dict):
+    question = str(body.get("question", "")).strip()
+    if not question:
+        return JSONResponse({"ok": False, "error": "question required"}, status_code=400)
+    queue = _read_json("memory/discord_chat_queue.json", {"queue": []})
+    queue.setdefault("queue", []).append({
+        "question": question,
+        "source": "dashboard",
+        "queued_at": datetime.now(ET).isoformat(),
+    })
+    _write_json("memory/discord_chat_queue.json", queue)
+    return {"ok": True, "queued_at": datetime.now(ET).isoformat()}
+
+
+@app.get("/chat-history")
+def get_chat_history():
+    queue = _read_json("memory/discord_chat_queue.json", {"queue": []})
+    return JSONResponse({"items": queue.get("queue", [])})
+
+
+@app.post("/trigger")
+async def trigger_routine(body: dict):
+    routine = str(body.get("routine", "")).strip()
+    if not routine:
+        return JSONResponse({"ok": False, "error": "routine required"}, status_code=400)
+    queue = _read_json("memory/run_queue.json", {"queue": []})
+    queue.setdefault("queue", []).append({
+        "routine": routine,
+        "source": "dashboard",
+        "queued_at": datetime.now(ET).isoformat(),
+    })
+    _write_json("memory/run_queue.json", queue)
+    return {"ok": True, "routine": routine}
+
+
 @app.get("/health")
 def health():
     return {"ok": True, "time_et": datetime.now(ET).isoformat()}
