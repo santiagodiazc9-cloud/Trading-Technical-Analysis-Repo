@@ -93,5 +93,25 @@ export async function triggerRoutine(routine: string) {
   return res.json();
 }
 
+export async function fetchUsage() {
+  try {
+    const res = await fetch(`${API_BASE}/usage`, { cache: "no-store" });
+    if (!res.ok) return null;
+    return res.json();
+  } catch {
+    return null;
+  }
+}
+
+export async function fetchEvents() {
+  try {
+    const res = await fetch(`${API_BASE}/events`, { cache: "no-store" });
+    if (!res.ok) return [];
+    return res.json();
+  } catch {
+    return [];
+  }
+}
+
 export const WS_URL = (process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000")
   .replace(/^http/, "ws") + "/stream";

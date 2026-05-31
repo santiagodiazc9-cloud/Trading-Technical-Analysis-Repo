@@ -1,0 +1,20 @@
+{
+  "sessions": [
+    {
+      "timestamp": "2026-05-30T23:52:10+00:00",
+      "routine": "1_pre_market_research",
+      "status": "ok",
+      "input_tokens": 110000,
+      "output_tokens": 4500,
+      "cost_usd": 0.3975,
+      "elapsed_s": 720,
+      "source": "estimated"
+    }
+  ],
+  "totals": {
+    "input_tokens": 110000,
+    "output_tokens": 4500,
+    "cost_usd": 0.3975,
+    "run_count": 1
+  }
+}

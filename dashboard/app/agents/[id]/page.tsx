@@ -116,9 +116,29 @@ export default function AgentDetailPage({
             </p>
           </div>
 
-          <div className="rounded-lg border border-dashed border-slate-700 p-4 text-center text-sm text-slate-500">
-            This agent isn&apos;t deployed yet.{" "}
-            <span className="text-slate-400">Come back soon — or open a PR to wire this one up.</span>
+          <div className="rounded-lg p-4 text-center text-sm"
+            style={{
+              border: agent.currentTask === "IN DEVELOPMENT"
+                ? `1px dashed ${glow}40`
+                : "1px dashed #334155",
+              background: agent.currentTask === "IN DEVELOPMENT"
+                ? `${glow}06`
+                : "transparent",
+            }}>
+            {agent.currentTask === "IN DEVELOPMENT" ? (
+              <>
+                <div className="flex items-center justify-center gap-2 mb-1">
+                  <span className="w-1.5 h-1.5 rounded-full animate-ping" style={{ backgroundColor: glow, opacity: 0.7 }}/>
+                  <span className="text-[10px] tracking-widest font-bold" style={{ color: glow }}>IN DEVELOPMENT THIS WEEK</span>
+                </div>
+                <span className="text-slate-500 text-[11px]">Building now — check back soon.</span>
+              </>
+            ) : (
+              <>
+                <span className="text-slate-500">Not deployed yet. </span>
+                <span className="text-slate-400">Come back soon.</span>
+              </>
+            )}
           </div>
         </div>
 

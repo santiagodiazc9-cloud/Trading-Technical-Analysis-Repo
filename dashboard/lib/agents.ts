@@ -9,6 +9,7 @@ export type AgentDef = {
   defaultStatus: AgentStatus;
   pixelArt: string; // inline SVG
   metric: { label: string; value: string };
+  currentTask?: string;
   routines?: string[];
   detailRoute?: string;
   stub?: { tagline: string; potential: string };
@@ -178,6 +179,7 @@ export const AGENTS: AgentDef[] = [
     defaultStatus: "active",
     pixelArt: SWING_TRADER_SVG,
     metric: { label: "P&L", value: "$0.00" },
+    currentTask: "AWAITING MARKET OPEN",
     routines: [
       "routines/1_pre_market_research.md",
       "routines/2_market_open_execution.md",
@@ -195,52 +197,118 @@ export const AGENTS: AgentDef[] = [
     defaultStatus: "idle",
     pixelArt: DAY_TRADER_SVG,
     metric: { label: "Trades", value: "0 / 0" },
+    currentTask: "SESSION NOT STARTED",
     routines: ["routines/2_market_open_execution.md"],
     detailRoute: "/daytrader",
   },
+  // ── FRONTIER UNITS (in development this week) ──────────────
+
   {
-    id: "crypto-screener",
-    name: "Crypto Screener",
-    icon: "₿",
+    id: "market-oracle",
+    name: "Market Oracle",
+    icon: "🔮",
     color: "purple",
-    description: "24/7 on-chain + CEX momentum",
+    description: "Prediction market latency arb",
     defaultStatus: "stub",
-    pixelArt: CRYPTO_SVG,
-    metric: { label: "Signals", value: "—" },
-    stub: { tagline: "Always on", potential: "Crypto trend momentum" },
+    pixelArt: `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" shape-rendering="crispEdges">
+  <!-- robe body -->
+  <rect x="8"  y="12" width="16" height="14" fill="#8b5cf6"/>
+  <rect x="6"  y="14" width="4"  height="10" fill="#8b5cf6"/>
+  <rect x="22" y="14" width="4"  height="10" fill="#8b5cf6"/>
+  <!-- head -->
+  <rect x="11" y="4"  width="10" height="8"  fill="#f5cba7"/>
+  <!-- eyes -->
+  <rect x="13" y="6"  width="2"  height="2"  fill="#1a1a2e"/>
+  <rect x="17" y="6"  width="2"  height="2"  fill="#1a1a2e"/>
+  <!-- hat -->
+  <rect x="9"  y="0"  width="14" height="4"  fill="#6d28d9"/>
+  <rect x="6"  y="4"  width="20" height="2"  fill="#6d28d9"/>
+  <!-- crystal ball -->
+  <rect x="12" y="22" width="8"  height="8"  fill="#c4b5fd"/>
+  <rect x="13" y="23" width="6"  height="6"  fill="#a78bfa"/>
+  <rect x="14" y="24" width="2"  height="2"  fill="#ede9fe"/>
+  <!-- glow -->
+  <rect x="10" y="20" width="12" height="2"  fill="#7c3aed" opacity="0.5"/>
+  <rect x="11" y="30" width="10" height="2"  fill="#4c1d95"/>
+</svg>`,
+    metric: { label: "Edge", value: "—" },
+    currentTask: "IN DEVELOPMENT",
+    stub: {
+      tagline: "This week's build",
+      potential: "News breaks → 30-120s window → Kalshi/Polymarket positions before market reprices. 100% legal. < 50 systematic operators worldwide.",
+    },
   },
+
   {
-    id: "content-engine",
-    name: "Content Engine",
-    icon: "✍",
-    color: "blue",
-    description: "SEO posts → affiliate rev",
-    defaultStatus: "stub",
-    pixelArt: CONTENT_SVG,
-    metric: { label: "Posts", value: "—" },
-    stub: { tagline: "Passive income", potential: "Affiliate + ad revenue" },
-  },
-  {
-    id: "freelance-agent",
-    name: "Freelance Agent",
-    icon: "🤝",
-    color: "orange",
-    description: "Auto-bids Upwork / Fiverr gigs",
-    defaultStatus: "stub",
-    pixelArt: FREELANCE_SVG,
-    metric: { label: "Bids", value: "—" },
-    stub: { tagline: "Gig economy", potential: "Contract revenue" },
-  },
-  {
-    id: "arbitrage-scout",
-    name: "Arbitrage Scout",
-    icon: "🔄",
+    id: "compute-broker",
+    name: "Compute Broker",
+    icon: "⚙️",
     color: "cyan",
-    description: "Cross-platform price gaps",
+    description: "GPU spot price arbitrage",
     defaultStatus: "stub",
-    pixelArt: ARBITRAGE_SVG,
-    metric: { label: "Gaps", value: "—" },
-    stub: { tagline: "Price delta", potential: "Arbitrage spread" },
+    pixelArt: `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" shape-rendering="crispEdges">
+  <!-- server rack body -->
+  <rect x="6"  y="2"  width="20" height="28" fill="#0e7490"/>
+  <rect x="7"  y="3"  width="18" height="26" fill="#164e63"/>
+  <!-- rack units -->
+  <rect x="8"  y="4"  width="16" height="4"  fill="#0e7490"/>
+  <rect x="8"  y="9"  width="16" height="4"  fill="#0e7490"/>
+  <rect x="8"  y="14" width="16" height="4"  fill="#0e7490"/>
+  <rect x="8"  y="19" width="16" height="4"  fill="#0e7490"/>
+  <rect x="8"  y="24" width="16" height="4"  fill="#0e7490"/>
+  <!-- LEDs green/active -->
+  <rect x="9"  y="5"  width="2"  height="2"  fill="#00ff41"/>
+  <rect x="9"  y="10" width="2"  height="2"  fill="#00ff41"/>
+  <rect x="9"  y="15" width="2"  height="2"  fill="#ffd700"/>
+  <rect x="9"  y="20" width="2"  height="2"  fill="#00ff41"/>
+  <rect x="9"  y="25" width="2"  height="2"  fill="#ef4444"/>
+  <!-- price tag -->
+  <rect x="18" y="5"  width="5"  height="3"  fill="#06b6d4"/>
+  <rect x="19" y="6"  width="3"  height="1"  fill="#ffffff"/>
+</svg>`,
+    metric: { label: "Spread", value: "—" },
+    currentTask: "IN DEVELOPMENT",
+    stub: {
+      tagline: "This week's build",
+      potential: "H100 spot prices swing 3–8x in 24h across CoreWeave/Lambda/RunPod. Buy cheap, resell as managed inference. $50–300K/mo ceiling.",
+    },
+  },
+
+  {
+    id: "alpha-feed",
+    name: "Alpha Feed",
+    icon: "📡",
+    color: "amber",
+    description: "Trading signals as a subscription",
+    defaultStatus: "stub",
+    pixelArt: `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" shape-rendering="crispEdges">
+  <!-- dish base -->
+  <rect x="14" y="24" width="4"  height="6"  fill="#78350f"/>
+  <rect x="10" y="28" width="12" height="2"  fill="#92400e"/>
+  <!-- dish body -->
+  <rect x="6"  y="14" width="20" height="12" fill="#f59e0b"/>
+  <rect x="8"  y="12" width="16" height="4"  fill="#f59e0b"/>
+  <rect x="10" y="10" width="12" height="4"  fill="#f59e0b"/>
+  <rect x="12" y="8"  width="8"  height="4"  fill="#f59e0b"/>
+  <rect x="14" y="6"  width="4"  height="4"  fill="#f59e0b"/>
+  <!-- inner dish -->
+  <rect x="10" y="16" width="12" height="8"  fill="#fbbf24"/>
+  <rect x="12" y="14" width="8"  height="4"  fill="#fbbf24"/>
+  <!-- signal waves -->
+  <rect x="2"  y="8"  width="2"  height="2"  fill="#ffd700" opacity="0.8"/>
+  <rect x="0"  y="6"  width="2"  height="6"  fill="#ffd700" opacity="0.5"/>
+  <rect x="28" y="8"  width="2"  height="2"  fill="#ffd700" opacity="0.8"/>
+  <rect x="30" y="6"  width="2"  height="6"  fill="#ffd700" opacity="0.5"/>
+  <!-- focal point -->
+  <rect x="15" y="2"  width="2"  height="4"  fill="#b45309"/>
+  <rect x="14" y="0"  width="4"  height="2"  fill="#ffd700"/>
+</svg>`,
+    metric: { label: "Subs", value: "—" },
+    currentTask: "IN DEVELOPMENT",
+    stub: {
+      tagline: "This week's build",
+      potential: "Package the swing trader's signals as $97/mo alerts. 30 subscribers = $2,910/mo = API costs covered. Proof-of-system marketing flywheel.",
+    },
   },
 ];
 

@@ -99,7 +99,7 @@ def _build_state() -> dict:
     trade_log = _read_json("memory/trade_log.json", {})
     session = _read_json("memory/daytrader_session.json",
                          {"session_approved": False, "max_trades": 2, "trades_taken": 0})
-    pause_state = _read_json("memory/pause_state.json", {"paused": False})
+    pause_state = _read_json("memory/pause_state.json", {"state": "active"})
     watchlist = _read_json("memory/watchlist.json", {"watchlist": []})
 
     # Parse pending setups from open_positions.md
@@ -125,7 +125,7 @@ def _build_state() -> dict:
         "market_posture": posture,
         "market_context_raw": market_ctx,
         "day_trading_session": session,
-        "paused": pause_state.get("paused", False),
+        "paused": pause_state.get("state", "active") != "active",
         "day_scores": _latest_scores,
         "watchlist_count": len(watchlist.get("watchlist", [])),
         "trade_log_summary": {
@@ -218,14 +218,18 @@ async def set_session(body: dict):
 @app.post("/approve/{setup_id}")
 async def approve_setup(setup_id: str):
     raw = _read_text("memory/open_positions.md")
-    if f"Approved: YES" in raw and setup_id in raw:
+    # Check if THIS specific setup block already has the flag (not a global search).
+    block_match = re.search(
+        rf'###\s+{re.escape(setup_id)}[^\n]*\n(.*?)(?=\n###|\n##|\Z)', raw, re.DOTALL
+    )
+    if block_match and "Approved: YES" in block_match.group(1):
         return {"ok": True, "already_approved": True}
-    # Insert "Approved: YES" after the setup heading
-    pattern = rf'(##\s+{re.escape(setup_id)}[^\n]*\n)'
-    new_raw = re.sub(pattern, r'\1Approved: YES\n', raw, count=1)
+    # Insert "Approved: YES" after the ### heading line for this setup.
+    pattern = rf'(###\s+{re.escape(setup_id)}[^\n]*\n)'
+    new_raw = re.sub(pattern, r'\1- Approved: YES\n', raw, count=1)
     if new_raw == raw:
-        # Fallback: append after setup_id occurrence
-        new_raw = raw.replace(setup_id, f"{setup_id}\nApproved: YES", 1)
+        # Fallback: append directly after first occurrence of setup_id
+        new_raw = raw.replace(setup_id, f"{setup_id}\n- Approved: YES", 1)
     with open(os.path.join(ROOT, "memory", "open_positions.md"), "w") as f:
         f.write(new_raw)
     return {"ok": True, "setup_id": setup_id}
@@ -235,8 +239,10 @@ async def approve_setup(setup_id: str):
 async def deny_setup(setup_id: str, body: dict = {}):
     reason = body.get("reason", "denied via dashboard")
     raw = _read_text("memory/open_positions.md")
-    pattern = rf'(##\s+{re.escape(setup_id)}[^\n]*\n)'
-    new_raw = re.sub(pattern, rf'\1Approved: NO — {reason}\n', raw, count=1)
+    pattern = rf'(###\s+{re.escape(setup_id)}[^\n]*\n)'
+    new_raw = re.sub(pattern, rf'\1- Approved: NO — {reason}\n', raw, count=1)
+    if new_raw == raw:
+        new_raw = raw.replace(setup_id, f"{setup_id}\n- Approved: NO — {reason}", 1)
     with open(os.path.join(ROOT, "memory", "open_positions.md"), "w") as f:
         f.write(new_raw)
     return {"ok": True, "setup_id": setup_id}
@@ -245,15 +251,21 @@ async def deny_setup(setup_id: str, body: dict = {}):
 @app.post("/pause")
 async def pause_agent(body: dict = {}):
     reason = body.get("reason", "paused via dashboard")
-    _write_json("memory/pause_state.json",
-                {"paused": True, "reason": reason,
-                 "paused_at": datetime.now(ET).isoformat()})
+    _write_json("memory/pause_state.json", {
+        "state": "paused",
+        "reason": reason,
+        "set_at": datetime.now(ET).isoformat() + "Z",
+    })
     return {"ok": True, "paused": True}
 
 
 @app.post("/resume")
 async def resume_agent():
-    _write_json("memory/pause_state.json", {"paused": False})
+    _write_json("memory/pause_state.json", {
+        "state": "active",
+        "reason": "",
+        "set_at": datetime.now(ET).isoformat() + "Z",
+    })
     return {"ok": True, "paused": False}
 
 
@@ -303,10 +315,11 @@ def get_agents():
     account = state.get("account", {})
     session = state.get("day_trading_session", {})
 
-    equity = float(account.get("equity", 0) or 0)
-    last_eq = float(account.get("last_equity", equity) or equity)
-    day_pl = equity - last_eq
-    pl_str = f"{'+' if day_pl >= 0 else ''}${abs(day_pl):,.2f}"
+    positions = state.get("positions", [])
+    unrealized = sum(float(p.get("unrealized_pnl", 0) or 0) for p in positions)
+    day_pl = float(account.get("pnl_today", 0) or 0)
+    display_pl = unrealized if positions else day_pl
+    pl_str = f"{'+' if display_pl >= 0 else '-'}${abs(display_pl):,.2f}"
 
     trades_taken = session.get("trades_taken", 0)
     max_trades = session.get("max_trades", 0)
@@ -380,6 +393,103 @@ async def trigger_routine(body: dict):
     })
     _write_json("memory/run_queue.json", queue)
     return {"ok": True, "routine": routine}
+
+
+@app.get("/events")
+def get_events():
+    """Parse recent journal files and return last 50 timestamped events."""
+    import glob as _glob
+
+    journal_dir = os.path.join(ROOT, "journal")
+    events: list[dict] = []
+
+    # Parse lines matching [HH:MM] or **HH:MM** patterns from recent journals
+    AGENT_KEYWORDS = {
+        "swing": "swing-trader",
+        "market-open": "swing-trader",
+        "pre-market": "swing-trader",
+        "midday": "swing-trader",
+        "eod": "swing-trader",
+        "day": "day-trader",
+        "intraday": "day-trader",
+    }
+    TYPE_KEYWORDS = {
+        "buy": "trade", "sell": "trade", "fill": "trade",
+        "close": "trade", "entry": "trade", "exit": "trade",
+        "scan": "research", "research": "research", "symbol": "research",
+        "setup": "research", "candidate": "research",
+        "alert": "alert", "stop": "alert", "loss": "alert", "risk": "alert",
+    }
+
+    pattern_ts = re.compile(r"\[?(\d{1,2}:\d{2})\]?[\s\-–]*(.+)")
+
+    files = sorted(_glob.glob(os.path.join(journal_dir, "20*.md")))[-3:]
+    for fpath in files:
+        try:
+            lines = open(fpath).readlines()
+        except OSError:
+            continue
+        for line in lines:
+            line = line.strip()
+            m = pattern_ts.match(line)
+            if not m:
+                continue
+            ts, msg = m.group(1), m.group(2).strip()
+            msg = re.sub(r"[*_`#]", "", msg)[:120]
+            if not msg:
+                continue
+
+            msg_lower = msg.lower()
+            agent = "system"
+            for kw, aid in AGENT_KEYWORDS.items():
+                if kw in msg_lower:
+                    agent = aid
+                    break
+
+            ev_type = "system"
+            for kw, t in TYPE_KEYWORDS.items():
+                if kw in msg_lower:
+                    ev_type = t
+                    break
+
+            events.append({"time": ts, "agent": agent, "message": msg, "type": ev_type})
+
+    # Deduplicate and return last 50
+    seen: set[str] = set()
+    deduped = []
+    for e in events:
+        key = f"{e['time']}|{e['message'][:40]}"
+        if key not in seen:
+            seen.add(key)
+            deduped.append(e)
+
+    return JSONResponse(deduped[-50:])
+
+
+@app.get("/usage")
+def get_usage():
+    """Token usage stats from memory/token_usage.json."""
+    data = _read_json("memory/token_usage.json", {
+        "sessions": [], "totals": {"input_tokens": 0, "output_tokens": 0, "cost_usd": 0.0, "run_count": 0}
+    })
+    totals = data.get("totals", {})
+    sessions = data.get("sessions", [])
+
+    # Last 7 days spending
+    from datetime import timedelta
+    cutoff = (datetime.now(ET) - timedelta(days=7)).isoformat()
+    week_cost = sum(s.get("cost_usd", 0) for s in sessions if s.get("timestamp", "") >= cutoff)
+
+    # Today's spending
+    today = datetime.now(ET).strftime("%Y-%m-%d")
+    today_cost = sum(s.get("cost_usd", 0) for s in sessions if s.get("timestamp", "").startswith(today))
+
+    return JSONResponse({
+        "totals": totals,
+        "today_cost_usd": round(today_cost, 4),
+        "week_cost_usd":  round(week_cost, 4),
+        "last_5": sessions[-5:][::-1],
+    })
 
 
 @app.get("/health")

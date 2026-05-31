@@ -106,9 +106,18 @@ done
 
 if [[ "$ROUTINE_EXIT" -eq 0 ]]; then
   _discord_ping "✅ Routine done: ${ROUTINE_NAME}" "Completed successfully · $(TZ=America/New_York date '+%H:%M ET')"
+  # Write lockfile so GHA failsafe knows local already ran this slot.
+  python3 - "$PROJECT_ROOT" "$ROUTINE_FILE" <<'PYEOF' 2>/dev/null || true
+import json, time, sys
+lock = {"routine": sys.argv[2], "fired_by": "local", "fired_at_epoch": int(time.time())}
+open(sys.argv[1] + "/memory/last_routine_run.json", "w").write(json.dumps(lock))
+PYEOF
 else
   _discord_ping "❌ Routine failed: ${ROUTINE_NAME}" "Exit code ${ROUTINE_EXIT} · $(TZ=America/New_York date '+%H:%M ET') — check launchd log"
 fi
+
+# Track token usage estimate for the dashboard
+python3 "$SCRIPT_DIR/track_usage.py" "$ROUTINE_FILE" "$ROUTINE_EXIT" 2>/dev/null || true
 
 # Git cowork mode — auto-commit memory + journal updates after each routine.
 # Toggle with: export TRADING_GIT_AUTOCOMMIT=1 (default OFF until user enables).
