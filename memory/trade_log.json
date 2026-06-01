@@ -39,7 +39,8 @@
     "_comment": "Resets every Monday 00:00 ET. Used to enforce max-3-trades-per-week rule.",
     "week_starting_2026-05-11": 0,
     "week_starting_2026-05-18": 1,
-    "week_starting_2026-05-25": 0
+    "week_starting_2026-05-25": 0,
+    "week_starting_2026-06-01": 0
   },
   "daily_snapshots": [
     {
@@ -286,6 +287,38 @@
       "daily_loss_cap_hit": false,
       "hard_rule_violations": [],
       "notes": "Week 4 Friday review. 0 new trades this week. 1 open position (GOOGL -1.74%). NVDA-2026-05-27 setup expired — price broke below $213 entry floor to $211.15, SMA 20 ($215.46) failed as support. MSFT missed: MACD bullish cross fired mid-week, price ran from $416 → $449 (+8%) pre-Microsoft Build (June 2-3). Now above upper BB (bb_pct 1.38), RSI 69 — too extended to enter. Lesson: pre-event rallies run 3-5 days early; re-arm windows must lead the catalyst date. GOOGL trailing stop e0b8fbda confirmed active. -7% cut not triggered ($359.98 vs $380.34 current). Deployed 19% — significantly under-deployed."
+    },
+    {
+      "date": "2026-06-01",
+      "routine": "end_of_day_review",
+      "equity": 99532.84,
+      "cash": 80259.43,
+      "buying_power": 179792.27,
+      "deployed_pct": 19.36,
+      "pnl_today_dollars": -123.93,
+      "pnl_today_pct": -0.12,
+      "open_positions": 1,
+      "trades_closed_today": 0,
+      "wins_today": 0,
+      "losses_today": 0,
+      "trades_opened_today": 0,
+      "weekly_trade_count": 0,
+      "daytrade_count": 0,
+      "pattern_day_trader": false,
+      "running_win_rate": null,
+      "running_pnl_dollars": 0.00,
+      "running_pnl_pct": 0.0,
+      "unrealized_pnl_dollars": -467.16,
+      "unrealized_pnl_pct": -2.37,
+      "confidence_calibration": {
+        "_comment": "predicted-confidence-bucket -> {sample_size, wins, losses}. Empty until we have closed trades.",
+        "bucket_9_10": {"n": 0, "wins": 0, "losses": 0},
+        "bucket_7_8":  {"n": 0, "wins": 0, "losses": 0},
+        "bucket_5_6":  {"n": 0, "wins": 0, "losses": 0}
+      },
+      "daily_loss_cap_hit": false,
+      "hard_rule_violations": [],
+      "notes": "Week 5 Day 1 (Monday post-Memorial-Day-truncated week). 0 trades opened, 0 trades closed. Day P&L -$123.93 (-0.12%) — well within daily loss cap. GOOGL intraday round-trip: opened $374.62 (-3.22%) → closed $377.91 (-2.37%), clawed back ~$167 of weekend drift without forced action. Indicators: RSI 50.9, MACD hist -4.28 (worsening), Stoch K 5.43 (extreme oversold — same posture as 5/20 entry inflection), BB pct 0.04 (lower band). Bull stack intact (SMA 50 $349.00 > SMA 200 $300.81). -7% cut ($359.98) 4.74% below close; SMA 50 break ($349.00) 7.65% below — both buffers comfortable. Trailing stop e0b8fbda CONFIRMED ACTIVE (status new). Market posture: 🟢 GREEN held — SPY $758.86, RSI 75.5 overbought, full SMA stack. No fresh pre-market scan ran this morning (market_context.md was 5 calendar days stale on entry to this routine — now refreshed). Third Monday pre-market drop in 3 weeks (5/20, 5/27, 6/1) — pattern signal, not noise; flagged for Friday weekly review. Daily loss cap: NOT hit. Hard rule violations: NONE. Confidence-bucket cells remain n=0 (5 weeks, still 0 closed trades). Pause toggle: pause_state.json still missing (treated as active). Microsoft Build 2026 starts 6/2 (Tuesday) — MSFT post-event re-arm watch is tomorrow's priority."
     }
   ],
   "summary": {
