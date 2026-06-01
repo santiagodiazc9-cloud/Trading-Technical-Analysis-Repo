@@ -4,15 +4,15 @@
 
 ### GOOGL — LONG (filled 2026-05-20)
 - **Entry**: $387.07 | 51 shares | Cost basis: $19,740.57
-- **Current** (2026-06-01 09:37 ET): $374.62 | Unrealized: -$634.95 (-3.22%)
+- **Current** (2026-06-01 15:49 ET / EOD): $377.91 | Unrealized: -$467.16 (-2.37%)
 - **Stop**: 10% trailing GTC (order e0b8fbda) — confirmed ACTIVE on Alpaca (`status: new`, type trailing_stop, qty 51)
 - **Target**: $415.00 | R:R ~2.3:1
 - **-7% cut trigger**: $359.98 (close immediately if hit)
 - **Stop tighten rules**: at +15% ($445.13) → 7% trail; at +20% ($464.48) → 5% trail
-- **Catalyst**: Google I/O 2026 (Gemini, AI Mode in Search) — now 12 days old
+- **Catalyst**: Google I/O 2026 (Gemini, AI Mode in Search) — now 12 calendar days old (live data point)
 - **Sector**: Communication Services
 - **Week trade count at entry**: 1/3 (Week 3)
-- **Status 2026-06-01**: Position drew -1.50% over weekend (from $380.34 EOD 5/30 to $374.62 open). -7% cut NOT triggered (-3.22% vs -7% threshold). Trailing stop ACTIVE — letting it manage the exit. No management action.
+- **Status 2026-06-01 EOD**: Intraday recovery — opened $374.62 (-3.22%) and closed near $377.91 (-2.37%), reclaiming ~$3.30 of weekend drift. Technicals at EOD: RSI 50.9, MACD hist -4.28 (still worsening, known weakness at conf 6), Stoch K 5.43 (extreme oversold — same posture as 5/20 entry inflection), BB pct 0.04 (lower band — mean-reversion buffer thin). Price below SMA 20 ($390.73) but well above SMA 50 ($349.00) and SMA 200 ($300.81) — full long-term bull stack intact. -7% cut ($359.98) is $17.93 below current = 4.74% buffer. SMA 50 break ($349.00) is $28.91 below = 7.65% buffer (the real thesis-break signal). Trailing stop ACTIVE — letting it manage the exit. No management action this routine.
 
 ## Pending Orders
 None.
