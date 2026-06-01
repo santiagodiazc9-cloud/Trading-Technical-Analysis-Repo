@@ -4,6 +4,20 @@ This file is a fallback log. When a routine's `notify.py` call fails (Discord we
 
 ---
 
+### 2026-06-01 19:50 UTC — End-of-Day Review Brief (notify.py failed: discord_config.json missing in cloud env)
+
+- **Channel**: #daily-brief (silent)
+- **Title**: End-of-Day Review — 2026-06-01
+- **Body**: Day P&L -$123.93 (-0.12%) | Equity $99,532.84 | 0 closes / 0 wins / 0 losses | 1 swing held overnight: GOOGL -$467.16 (-2.37%) — intraday round-trip $374.62 open → $377.91 close, clawed back ~$167 of weekend drift without forced action. 0 setups proposed (no fresh pre-market scan this morning — 3rd Monday pre-market drop in 3 weeks). Posture 🟢 GREEN held (SPY $758.86 RSI 75.5 overbought). Weekly trade count 0/3. Deployed 19.36% (under-deployed). Daytrade count 0/3. No hard-rule violations. Tomorrow's catalyst: Microsoft Build 2026 Day 1 of 2.
+- **Channel**: #daily-brief (dashboard pin mirror)
+- **Action**: `notify.py dashboard` — failed with `DISCORD_BOT_TOKEN missing from .env`. Dashboard.md regenerated successfully on disk at `/home/user/Trading-Technical-Analysis-Repo/Dashboard.md` (live=true, positions=1, pending_setups=1).
+- **Reason**: `memory/discord_config.json` still missing in cloud routine host AND `DISCORD_BOT_TOKEN` still unprovisioned. Recurring known gap — same failure mode as 5/13-5/30 EOD briefs. Santiago side: provision both `discord_config.json` and `.env` in cloud workspace, OR install via session secret store.
+
+### 2026-06-01 19:58 UTC — Git push failure (HTTP 403 from local proxy, recurring)
+- **Channel**: n/a (internal log)
+- **Body**: `git push origin main` returned HTTP 403 from the local git proxy on 4 attempts with exponential backoff (2s, 4s, 8s, 16s). Identical failure mode as 5/28, 5/29, and the 13:42 UTC market-open routine. Falling back to `mcp__github__push_files` to publish the 7 EOD-touched files (memory/open_positions.md, memory/market_context.md, journal/2026-06-01.md, memory/learnings.md, memory/strategy.md, memory/trade_log.json, memory/pending_discord_updates.md) across multiple sequential API commits. Local main was rebased onto each API push as it landed to keep the working tree clean.
+- **Action needed**: Santiago side — the local git proxy 403 has now persisted across ~5 sessions and is a stable failure (not transient). Migrate routine commits to use `mcp__github__push_files` as the primary push path, OR investigate the proxy auth/credential lifecycle definitively. Continuing to use `git push` as the primary path means every routine eats 4 retries before the fallback fires.
+
 ### 2026-06-01 13:37 UTC — Market Open Execution Brief (Discord config missing in cloud env)
 - **Channel**: #daily-brief
 - **Title**: Market Open Execution — 2026-06-01
