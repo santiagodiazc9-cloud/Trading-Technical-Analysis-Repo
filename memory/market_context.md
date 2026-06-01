@@ -1,11 +1,21 @@
 # Market Context
 
 ## Last Updated
-2026-05-27 (Pre-Market Routine, 7:50 AM ET)
+2026-06-01 (End-of-Day Review, 3:49 PM ET — Week 5 Day 1 / Monday)
 
 ## Market Posture
-🟢 GREEN — SPY $750.46 | SMA 20 $733.30 | SMA 50 $698.39 | SMA 200 $679.42
-Full trading: new longs AND shorts allowed. **RSI caution: SPY 71.4 (overbought per ADR-0001) — new longs must have strong catalyst, no chasing.**
+🟢 GREEN — SPY $758.86 | SMA 20 $741.22 | SMA 50 $705.58 | SMA 200 $681.72
+Full trading: new longs AND shorts allowed. **RSI caution: SPY 75.5 (overbought per ADR-0001) — new longs must have strong catalyst, no chasing.** Stoch K 74.1, BB pct 0.94 (upper band) — extension persisting from Week 4 close.
+
+## Snapshot Summary — 2026-06-01 EOD (Week 5 Day 1)
+- SPY $758.86 (+0.4% from 5/27 read $750.46). MACD hist barely negative (-0.026) — near MACD bullish cross. EMA 9 ($750.11) above EMA 21 ($739.01).
+- Day P&L on account: -$123.93 (-0.12%) — well within daily loss cap (-2%).
+- Equity $99,532.84. Cash $80,259.43. Deployed 19.36% (still under-deployed vs 75-85% target).
+- Daytrade count: 0/3. Pause toggle: still missing (treated as active).
+- Hard rule violations today: NONE. Daily loss cap: NOT hit.
+- Trades opened today: 0. Trades closed today: 0. Setups proposed today: 0 (no fresh pre-market scan ran this morning per journal — known cloud-routine gap).
+- GOOGL (only open position) intraday round-trip: $374.62 open → $377.91 close (-2.39% → -2.37% unrealized).
+- **Microsoft Build 2026 (Day 1 of 2) is tomorrow 6/2.** MSFT live catalyst window opens — if Tuesday pre-market routine fires, scan for post-event re-arm and pre-event extension state.
 
 ## Market Summary — Week of May 26, 2026 (Week 4)
 
