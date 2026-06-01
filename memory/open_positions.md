@@ -4,15 +4,15 @@
 
 ### GOOGL — LONG (filled 2026-05-20)
 - **Entry**: $387.07 | 51 shares | Cost basis: $19,740.57
-- **Current** (2026-05-30 EOD): $380.34 | Unrealized: -$343.23 (-1.74%)
-- **Stop**: 10% trailing GTC (order e0b8fbda) — confirmed ACTIVE on Alpaca
+- **Current** (2026-06-01 09:37 ET): $374.62 | Unrealized: -$634.95 (-3.22%)
+- **Stop**: 10% trailing GTC (order e0b8fbda) — confirmed ACTIVE on Alpaca (`status: new`, type trailing_stop, qty 51)
 - **Target**: $415.00 | R:R ~2.3:1
 - **-7% cut trigger**: $359.98 (close immediately if hit)
 - **Stop tighten rules**: at +15% ($445.13) → 7% trail; at +20% ($464.48) → 5% trail
-- **Catalyst**: Google I/O 2026 (Gemini, AI Mode in Search) — now 10 days old
+- **Catalyst**: Google I/O 2026 (Gemini, AI Mode in Search) — now 12 days old
 - **Sector**: Communication Services
 - **Week trade count at entry**: 1/3 (Week 3)
-- **Status 2026-05-30**: Below SMA 20 ($391.13 — short-term trend down). MACD hist -3.89 (deteriorating). Stoch K 9.81 (extreme oversold — mean reversion possible). Near lower BB ($378.34). -7% cut NOT triggered. HOLD — trailing stop is the exit mechanism. No management action needed until +15% or -7% triggers.
+- **Status 2026-06-01**: Position drew -1.50% over weekend (from $380.34 EOD 5/30 to $374.62 open). -7% cut NOT triggered (-3.22% vs -7% threshold). Trailing stop ACTIVE — letting it manage the exit. No management action.
 
 ## Pending Orders
 None.
