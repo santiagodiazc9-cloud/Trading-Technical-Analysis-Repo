@@ -4,15 +4,15 @@
 
 ### GOOGL — LONG (filled 2026-05-20)
 - **Entry**: $387.07 | 51 shares | Cost basis: $19,740.57
-- **Current** (2026-06-01 15:49 ET / EOD): $377.91 | Unrealized: -$467.16 (-2.37%)
+- **Current** (2026-06-02 09:37 ET / market-open): $361.56 | Unrealized: -$1,301.01 (-6.59%)
 - **Stop**: 10% trailing GTC (order e0b8fbda) — confirmed ACTIVE on Alpaca (`status: new`, type trailing_stop, qty 51)
 - **Target**: $415.00 | R:R ~2.3:1
-- **-7% cut trigger**: $359.98 (close immediately if hit)
+- **-7% cut trigger**: $359.98 (close immediately if hit) — **WARNING: only $1.58 above trigger (0.44% buffer)**
 - **Stop tighten rules**: at +15% ($445.13) → 7% trail; at +20% ($464.48) → 5% trail
-- **Catalyst**: Google I/O 2026 (Gemini, AI Mode in Search) — now 12 calendar days old (live data point)
+- **Catalyst**: Google I/O 2026 (Gemini, AI Mode in Search) — now 13 calendar days old
 - **Sector**: Communication Services
 - **Week trade count at entry**: 1/3 (Week 3)
-- **Status 2026-06-01 EOD**: Intraday recovery — opened $374.62 (-3.22%) and closed near $377.91 (-2.37%), reclaiming ~$3.30 of weekend drift. Technicals at EOD: RSI 50.9, MACD hist -4.28 (still worsening, known weakness at conf 6), Stoch K 5.43 (extreme oversold — same posture as 5/20 entry inflection), BB pct 0.04 (lower band — mean-reversion buffer thin). Price below SMA 20 ($390.73) but well above SMA 50 ($349.00) and SMA 200 ($300.81) — full long-term bull stack intact. -7% cut ($359.98) is $17.93 below current = 4.74% buffer. SMA 50 break ($349.00) is $28.91 below = 7.65% buffer (the real thesis-break signal). Trailing stop ACTIVE — letting it manage the exit. No management action this routine.
+- **Status 2026-06-02 09:37 ET (market-open)**: Gap-down continuation — opened materially below yesterday's $377.91 close. Down $16.35 (-4.33%) overnight, now at -6.59% unrealized vs entry. **HARD-CUT proximity: $361.56 vs $359.98 trigger = $1.58 / 0.44% buffer.** If price crosses $359.98 (any intraday print ≤ -7.00% unrealized), the manual-cut rule fires and the position closes immediately — cancel trailing stop, market-close, log loss, raise high alert. Trailing stop on Alpaca currently active at ~$348.36 (10% below cost basis high) — would fire ~$11.62 below the manual-cut trigger, so manual cut governs first. No execution this routine (no pending setups) — but next midday scan must re-check this position immediately. Letting trailing stop / hard-cut rule manage the exit; no averaging down.
 
 ## Pending Orders
 None.
