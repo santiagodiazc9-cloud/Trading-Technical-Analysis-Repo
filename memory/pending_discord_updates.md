@@ -119,3 +119,18 @@ This file is a fallback log. When a routine's `notify.py` call fails (Discord we
 **Channel**: #chat (reflective question)
 **Title**: Reflection — 2026-05-28
 **Body**: GOOGL was entered at confidence 6/10 on 2026-05-20 — under the usual 7-gate but justified by Stoch K extreme oversold (0.06) inside a full bull SMA stack with the Google I/O catalyst. Six sessions in, the position is at +1.10% with five sequential Stoch K readings monotonically up (0.22 → 15.17) and SMA 20 reclaimed at the close. Was the "lower the confidence gate when oversold + catalyst + bull stack align" framework right to lower the gate here? Or are we one good entry away from getting comfortable taking confidence-6 trades that won't recover as cleanly?
+
+### 2026-06-02 13:38 UTC — Market Open Execution Brief (notify.py failed: discord_config.json missing in cloud env — recurring)
+
+- **Channel**: #daily-brief (silent)
+- **Title**: Market Open Execution — 2026-06-02
+- **Body**: No trades placed (0 pending setups, 0 approved). 1 open position: GOOGL -6.73% — $1.02 / 0.28% above -7% hard-cut trigger ($359.98). Trailing stop ACTIVE (order e0b8fbda). Account $98,671 equity, deployed 18.7%, day P&L -$783 (-0.79% vs -2% cap). Midday must re-check GOOGL immediately.
+
+- **Channel**: #daily-brief (dashboard pin mirror)
+- **Action**: `notify.py dashboard` — not attempted after `notify.py brief` failed config-load step. Dashboard.md regenerated successfully on disk (live=true, positions=1, pending_setups=1 — the "1" is the parser quirk reading the `_None._` placeholder, no real pending setup exists).
+
+- **Channel**: #risk-alerts (high — @here)
+- **Title**: GOOGL hard-cut proximity
+- **Body**: Position -6.73% unrealized ($361.00 vs entry $387.07). $1.02 / 0.28% above -7% manual-cut trigger ($359.98). Trailing stop active but manual-cut governs first. Midday routine MUST re-check immediately — any print ≤ $359.98 forces immediate close per CLAUDE.md rule 5.
+
+- **Reason**: `memory/discord_config.json` still missing in cloud routine host. Same failure mode as 5/13–6/01 briefs/alerts. Santiago side: provision `discord_config.json` (and `.env` with `DISCORD_BOT_TOKEN`) in cloud workspace, or install via session secret store.
