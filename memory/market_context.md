@@ -1,7 +1,18 @@
 # Market Context
 
 ## Last Updated
-2026-06-03 (Midday Scan, 12:36 PM ET — Week 5 Day 3 / Wednesday — GOOGL -7% cut executed)
+2026-06-03 (End-of-Day Review, 15:48 PM ET — Week 5 Day 3 / Wednesday — flat book into close after midday -7% cut)
+
+## EOD Update — 2026-06-03 15:48 ET (End-of-Day Review)
+- **Book flat**: 0 open positions into close (GOOGL closed 12:36 ET on -7% manual cut). No swing positions to manage overnight.
+- **Account**: Equity $98,612.11 | Cash $98,612.11 | Buying power $197,224.22 | Deployed 0% | Day P&L -$842.19 (-0.85%, within -2% cap).
+- **Trade activity today**: 1 close (GOOGL -$1,387.89 / -7.03% realized), 0 entries, 0 setups proposed. Weekly trade count Week-5: 0/3 (2 sessions left).
+- **Sector tally**: Communication Services 1/2 toward blocklist (5-day cooldown if 1 more loss).
+- **Confidence calibration first datapoint**: `bucket_5_6` n=1, 0 wins / 1 loss. Other buckets still empty after 5 weeks.
+- **Hard rule violations today**: NONE. -7% cut is a rule firing, not a violation.
+- **Daily loss cap**: NOT hit (-0.85% vs -2.0% cap).
+- **Pre-market funnel**: 5th consecutive scan-less window (cloud routine + Discord-config gap). 0 fresh ideas across pre-market, market-open, and midday.
+- **Market posture inheritance from 6/01 EOD**: 🟢 GREEN (SPY $758.86, SMA 20 $741.22, SMA 50 $705.58) — no fresh SPY read this routine; posture carried forward unchanged.
 
 ## Mid-day Update — 2026-06-03 12:36 ET (Midday Scan)
 - **GOOGL HARD-CUT FIRED**: position closed at $359.8565 (-7.03% realized, -$1,387.89). Trailing stop e0b8fbda cancelled before market-close.
