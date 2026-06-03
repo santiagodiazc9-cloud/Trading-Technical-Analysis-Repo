@@ -27,12 +27,17 @@
       "sector": "Communication Services",
       "confidence": 6,
       "setup_id": "GOOGL-2026-05-20",
-      "status": "open",
-      "exit_price": null,
-      "exit_date": null,
-      "realized_pnl": null,
-      "realized_pnl_pct": null,
-      "notes": "Swing long. Approved via Discord 2026-05-20 13:28Z. Filled after approval."
+      "status": "closed",
+      "exit_price": 359.8565,
+      "exit_date": "2026-06-03",
+      "exit_time_et": "12:36 ET (order filled 16:36:39Z)",
+      "exit_order_id": "990ed249-5d7b-43cd-8976-a535a7e72fc0",
+      "exit_proceeds": 18352.68,
+      "exit_reason": "minus_7_pct_manual_cut_rule",
+      "realized_pnl": -1387.89,
+      "realized_pnl_pct": -7.03,
+      "hold_sessions": 10,
+      "notes": "Swing long. Approved via Discord 2026-05-20 13:28Z. Filled after approval. CLOSED 2026-06-03 12:36 ET — -7% manual cut rule triggered (CLAUDE.md hard rule #5). Current price $359.83 < cut trigger $359.98. Trailing stop e0b8fbda cancelled before market-close 51 shares. Thesis (Google I/O 2026 catalyst) had decayed across 14 calendar days; MACD hist had been worsening for 5+ sessions. Daily loss cap not breached (-0.85% account drag). Sector: Communication Services (1 loss; not yet blocklist-eligible — needs 2 consecutive losses)."
     }
   ],
   "weekly_trade_count": {
@@ -324,14 +329,19 @@
   "summary": {
     "total_trades": 1,
     "wins": 0,
-    "losses": 0,
-    "open": 1,
-    "win_rate": null,
-    "total_pnl": 0,
+    "losses": 1,
+    "open": 0,
+    "win_rate": 0.0,
+    "total_pnl": -1387.89,
     "best_trade": null,
-    "worst_trade": null,
-    "current_equity": 100064.26,
-    "phase_pnl": 64.26,
-    "phase_pnl_pct": 0.06
+    "worst_trade": {
+      "trade_id": "GOOGL-2026-05-20",
+      "realized_pnl": -1387.89,
+      "realized_pnl_pct": -7.03,
+      "exit_reason": "minus_7_pct_manual_cut_rule"
+    },
+    "current_equity": 98612.11,
+    "phase_pnl": -1387.89,
+    "phase_pnl_pct": -1.39
   }
 }
