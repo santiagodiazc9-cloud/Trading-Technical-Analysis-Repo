@@ -4,15 +4,15 @@
 
 ### GOOGL — LONG (filled 2026-05-20)
 - **Entry**: $387.07 | 51 shares | Cost basis: $19,740.57
-- **Current** (2026-06-02 09:37 ET / market-open): $361.56 | Unrealized: -$1,301.01 (-6.59%)
+- **Current** (2026-06-03 09:38 ET / market-open): $361.81 | Unrealized: -$1,288.52 (-6.53%)
 - **Stop**: 10% trailing GTC (order e0b8fbda) — confirmed ACTIVE on Alpaca (`status: new`, type trailing_stop, qty 51)
 - **Target**: $415.00 | R:R ~2.3:1
-- **-7% cut trigger**: $359.98 (close immediately if hit) — **WARNING: only $1.58 above trigger (0.44% buffer)**
+- **-7% cut trigger**: $359.98 (close immediately if hit) — **WARNING: only $1.83 above trigger (0.51% buffer)**
 - **Stop tighten rules**: at +15% ($445.13) → 7% trail; at +20% ($464.48) → 5% trail
-- **Catalyst**: Google I/O 2026 (Gemini, AI Mode in Search) — now 13 calendar days old
+- **Catalyst**: Google I/O 2026 (Gemini, AI Mode in Search) — now 14 calendar days old (decaying)
 - **Sector**: Communication Services
 - **Week trade count at entry**: 1/3 (Week 3)
-- **Status 2026-06-02 09:37 ET (market-open)**: Gap-down continuation — opened materially below yesterday's $377.91 close. Down $16.35 (-4.33%) overnight, now at -6.59% unrealized vs entry. **HARD-CUT proximity: $361.56 vs $359.98 trigger = $1.58 / 0.44% buffer.** If price crosses $359.98 (any intraday print ≤ -7.00% unrealized), the manual-cut rule fires and the position closes immediately — cancel trailing stop, market-close, log loss, raise high alert. Trailing stop on Alpaca currently active at ~$348.36 (10% below cost basis high) — would fire ~$11.62 below the manual-cut trigger, so manual cut governs first. No execution this routine (no pending setups) — but next midday scan must re-check this position immediately. Letting trailing stop / hard-cut rule manage the exit; no averaging down.
+- **Status 2026-06-03 09:38 ET (market-open)**: Second consecutive day inside HARD-CUT proximity band. Yesterday's session closed -6.59% intraday low, recovered overnight to ~-5.98% on the pre-open print, then sagged again within the first 8 minutes of regular session to -6.53%. **HARD-CUT proximity: $361.81 vs $359.98 trigger = $1.83 / 0.51% buffer.** Any intraday print ≤ $359.98 forces immediate manual cut: cancel trailing stop, market-close 51 shares, log loss, raise high-severity Discord alert. Trailing stop on Alpaca still ACTIVE at ~$348.36 floor (10% below cost basis) — manual cut governs first (~$11.83 above it). No execution this routine (no pending setups, no approved entries). Midday scan must re-check immediately; this is the front-and-center risk item until either price reclaims SMA 20 area (~$385) or hard cut fires.
 
 ## Pending Orders
 None.
