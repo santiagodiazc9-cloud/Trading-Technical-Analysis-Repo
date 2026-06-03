@@ -4,6 +4,27 @@ This file is a fallback log. When a routine's `notify.py` call fails (Discord we
 
 ---
 
+## 2026-06-03 19:48 UTC — End-of-Day Review brief (notify.py failed: discord_config.json missing)
+
+- **Channel**: #daily-brief (silent)
+- **Title**: End-of-Day Review — 2026-06-03
+- **Body**: Daily P&L -$842.19 (-0.85%) | Equity $98,612.11 | 1 close / 0 wins / 1 loss | 0 swings overnight (flat book) | GOOGL -7.03% manual cut at 12:36 ET (rule fired as designed) | Comm Services sector 1/2 toward blocklist | First confidence-calibration sample in bucket_5_6 (n=1, 0W/1L) | No hard-rule violations | Daily loss cap NOT breached.
+
+- **Channel**: #daily-brief (dashboard pin mirror)
+- **Action**: `notify.py dashboard` — failed (DISCORD_BOT_TOKEN missing from .env). Dashboard.md regenerated successfully on disk (live=true, positions=0, pending_setups=1 — the "1" is the parser quirk reading the `_None._` placeholder, no real pending setup exists).
+
+- **Channel**: #chat (reflective question — first close after 5 weeks)
+- **Title**: Reflection — 2026-06-03
+- **Body**: GOOGL was approved at confidence 6/10 on 2026-05-20 — under the usual 7-gate but justified by Stoch K extreme oversold (0.06) inside a full bull SMA stack with the Google I/O catalyst. Today's -7% cut closed it as our first sample in the calibration data. Looking back, was the "lower the gate when oversold + catalyst + bull stack align" framework right to lower the gate here? Or do we need confidence 6 to require an additional confirmation (e.g. MACD positive cross) before approving in the future?
+
+- **Reason**: `memory/discord_config.json` still missing in cloud routine host + `DISCORD_BOT_TOKEN` missing from .env. Same recurring infra gap noted across 5/13–6/03 routines. **First material consequence today**: midday high-severity cut alert never reached Santiago's phone in real time. Friday weekly review must address as P0.
+- **Action needed Santiago side**: provision `discord_config.json` + `DISCORD_BOT_TOKEN` in cloud workspace, or install via session secret store.
+
+### 2026-06-03 19:55 UTC — Git push failure (HTTP 403 from local proxy, recurring)
+- **Channel**: n/a (internal log)
+- **Body**: `git push origin main` returned HTTP 403 from the local git proxy on all 4 attempts with exponential backoff (2s, 4s, 8s, 16s). Identical failure mode as 5/28, 5/29, 6/01, 6/02, and today's earlier market-open + midday routines. Falling back to `mcp__github__push_files` to publish the 7 EOD-touched files (memory/learnings.md, memory/strategy.md, memory/market_context.md, memory/open_positions.md, memory/pending_discord_updates.md, memory/trade_log.json, journal/2026-06-03.md) in a single API commit. The local commit (6ac9337) on detached-HEAD-rebased-to-main will be superseded by the MCP commit on origin/main; next routine should `git fetch origin && git reset --hard origin/main` to re-sync working tree.
+- **Action needed**: Santiago side — the local git proxy 403 has now persisted across ~10 sessions (5/28 → 6/03 EOD) and is a fully stable failure. Recommend migrating routine commits to `mcp__github__push_files` as the primary push path, OR investigate the proxy auth/credential lifecycle definitively.
+
 ### 2026-06-03 16:36 UTC — HIGH-SEVERITY RISK ALERT (Discord config missing — alert NOT delivered in real-time)
 - **Channel**: #risk-alerts (would have tagged @here on phone)
 - **Severity**: HIGH
