@@ -1,7 +1,15 @@
 # Market Context
 
 ## Last Updated
-2026-06-01 (End-of-Day Review, 3:49 PM ET — Week 5 Day 1 / Monday)
+2026-06-03 (Midday Scan, 12:36 PM ET — Week 5 Day 3 / Wednesday — GOOGL -7% cut executed)
+
+## Mid-day Update — 2026-06-03 12:36 ET (Midday Scan)
+- **GOOGL HARD-CUT FIRED**: position closed at $359.8565 (-7.03% realized, -$1,387.89). Trailing stop e0b8fbda cancelled before market-close.
+- **Account**: Equity $98,612.11 | Cash $98,612.11 | Deployed 0% (flat) | Day P&L -$842.19 (-0.85%, within -2% cap).
+- **Positions**: 0/5. Pending setups: 0. Weekly trade count Week-5: 0/3.
+- **Sector tally**: Communication Services 1/2 toward blocklist.
+- **Market posture inheritance from 6/01 EOD**: 🟢 GREEN (SPY $758.86, SMA 20 $741.22, SMA 50 $705.58) — no fresh SPY read this midday; posture carried forward.
+- **First closed trade after 5 weeks** = -7% loss; confidence-bucket bucket_5_6 now n=1 (0 wins / 1 loss). Calibration data finally exists.
 
 ## Market Posture
 🟢 GREEN — SPY $758.86 | SMA 20 $741.22 | SMA 50 $705.58 | SMA 200 $681.72
