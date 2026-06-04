@@ -356,6 +356,38 @@
       "daily_loss_cap_hit": false,
       "hard_rule_violations": [],
       "notes": "Week 5 Day 3 (Wednesday). FIRST CLOSED TRADE after 5 weeks. GOOGL-2026-05-20 closed at $359.8565 on -7% manual cut at 12:36 ET (CLAUDE.md hard rule #5, working as designed). Realized -$1,387.89 (-7.03%) over 10 trading sessions. Sector: Communication Services (1 consecutive loss, 1/2 toward blocklist). Day P&L -$842.19 (-0.85%) — well within -2% daily loss cap. 0 trades opened today, 0 setups proposed (5th consecutive scan-less pre-market window). Book flat into close (0/5 positions, 4 slots open). Weekly trade count Week-5: 0/3 with 2 sessions left (entries only; closes don't count). Daytrade count 0/3, PDT inactive. Pause toggle still missing (treated as active). Market posture: 🟢 GREEN inherited from 6/01 EOD — no fresh SPY read this routine. Confidence calibration: bucket_5_6 now n=1, 0 wins / 1 loss (first datapoint after 5 weeks). Hard rule violations: NONE. Risk machinery VALIDATED under live pressure: rule fired, position closed cleanly, account drag contained to -1.39% (under the 20%-concentration math ceiling of -1.40%). Manual cut governed before broker trailing stop by ~3 pp (manual trigger $359.98 vs trailing floor ~$348.36) — dual-stop design validated. Discord-config gap had first material consequence: high-severity cut alert never reached Santiago in real time, fell back to memory/pending_discord_updates.md. Three rule-change candidates queued for Friday's weekly review (Week 5 close): (1) confidence-6 entry MACD-positive add-on, (2) catalyst-staleness annotation, (3) Discord-config provisioning as P0 infra. No rule changes at EOD per standing protocol. Stale-state sweep clean: learnings.md and strategy.md both modified today."
+    },
+    {
+      "date": "2026-06-04",
+      "routine": "end_of_day_review",
+      "equity": 98612.09,
+      "cash": 98612.09,
+      "buying_power": 394448.36,
+      "deployed_pct": 0.0,
+      "pnl_today_dollars": -0.02,
+      "pnl_today_pct": 0.0,
+      "open_positions": 0,
+      "trades_closed_today": 0,
+      "wins_today": 0,
+      "losses_today": 0,
+      "trades_opened_today": 0,
+      "weekly_trade_count": 0,
+      "daytrade_count": 0,
+      "pattern_day_trader": false,
+      "running_win_rate": 0.0,
+      "running_pnl_dollars": -1387.89,
+      "running_pnl_pct": -1.39,
+      "unrealized_pnl_dollars": 0.0,
+      "unrealized_pnl_pct": 0.0,
+      "confidence_calibration": {
+        "_comment": "predicted-confidence-bucket -> {sample_size, wins, losses}. Unchanged from 6/03 — GOOGL still the only sample. Buckets 7-8 and 9-10 remain empty after 5 weeks.",
+        "bucket_9_10": {"n": 0, "wins": 0, "losses": 0},
+        "bucket_7_8":  {"n": 0, "wins": 0, "losses": 0},
+        "bucket_5_6":  {"n": 1, "wins": 0, "losses": 1}
+      },
+      "daily_loss_cap_hit": false,
+      "hard_rule_violations": [],
+      "notes": "Week 5 Day 4 (Thursday). Flat book + flat pipeline 4th routine running (post-GOOGL-cut wash-out phase). 0 trades opened, 0 trades closed, 0 setups proposed across pre-market / market-open / midday / EOD. Day P&L $0.00 (-$0.02 nominal vs 6/03 EOD = effectively zero on a fully cash book). Step 2 (close day trades) no-op — none in open_positions.md. Step 3 (swing review) no-op — none open. Daytrade count 0/3 (PDT inactive, equity > $25k). Weekly trade count Week-5: 0/3 with 1 session remaining (Fri 6/5). Sector blocklist empty; Comm Services still 1/2 toward auto-blocklist from GOOGL loss, no fresh exposure today. Market posture: 🟢 GREEN intact (SPY $756.29 above SMA 20 $745.92 above SMA 50 $711.83 above SMA 200 $683.41; RSI 69.4 first reading below ADR-0001 70-threshold since Week 4 close; MACD hist -0.69 cooling). Posture carried from midday 12:35 ET read — no fresh EOD SPY read this routine. Confidence calibration unchanged: bucket_5_6 n=1 (GOOGL), 7-8 and 9-10 empty. Stale-state sweep clean: learnings.md + strategy.md both modified 6/04 12:05 UTC. Hard rule violations: NONE. Daily loss cap: NOT hit (-2% headroom full). Microsoft Build 2026 wrapped 6/03 — MSFT re-arm gate has NOT been re-evaluated against fresh data since 5/27; tomorrow's pre-market is the natural first read. Two compounding 6/04 EOD lessons logged into learnings.md: (1) flat-book-flat-pipeline sessions are indistinguishable from disciplined-pass sessions in snapshots without an explicit evaluable-day tag, (2) the -7% manual cut creates a multi-session post-cut quiet period as a designed side effect. Both candidates queued for Friday Weekly Review (along with the 6/03 EOD trio: confidence-6 add-on, catalyst-staleness annotation, Discord-config P0). Tomorrow's pre-market (6/5) is the make-or-break for Week 5 — funnel must produce candidates or the Week 5 narrative shifts from 'disciplined patience' to 'idea generation broken'. Discord webhook + bot still offline (9th consecutive routine if today's brief fails as expected) — notify.py call logged to pending_discord_updates.md."
     }
   ],
   "summary": {
