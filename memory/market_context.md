@@ -1,7 +1,19 @@
 # Market Context
 
 ## Last Updated
-2026-06-04 (Market Open Execution, 09:37 ET — Week 5 Day 4 / Thursday — flat book carried over from 6/03 GOOGL cut, no approvals to execute)
+2026-06-04 (Midday Scan, 12:35 ET — Week 5 Day 4 / Thursday — flat book, posture GREEN intact, no internet-flagged candidates, no management actions)
+
+## Mid-day Update — 2026-06-04 12:35 ET (Midday Scan)
+- **Book**: Flat (0/5 positions). 4 slots open. No stops to ratchet, no winners to tighten, no -7% cuts to fire. Per-position management routine reduced to a no-op.
+- **Account**: Equity $98,612.09 | Cash $98,612.09 | Buying power $394,448.36 | Deployed 0% | Day P&L $0.00 (cap headroom full).
+- **Setups proposed this routine**: 0. `memory/market_context.md` had no "Internet Flagged" section to seed from — pre-market funnel still dry into Week 5 Day 4 (7th consecutive routine without fresh ideas; pre-market itself is 5 in a row).
+- **Weekly trade count Week-5**: 0/3 with Thu 6/4 PM + Fri 6/5 remaining.
+- **Daytrade count**: 0/3; PDT inactive.
+- **Sector blocklist**: empty. Comm Services still 1/2 toward auto-blocklist; no fresh Comm-Services exposure today.
+- **Pause toggle**: `pause_state.json` still missing — treated as active.
+- **SPY snapshot**: $756.29 — posture **🟢 GREEN unchanged**. Price above SMA 20 ($745.92) above SMA 50 ($711.83) above SMA 200 ($683.41). RSI 69.4 (cooled from 75.5 at pre-market — no longer extreme overbought per ADR-0001 trigger). MACD hist -0.69 (slightly negative, momentum cooling). EMA 9 ($753.15) > EMA 21 ($743.35). Stoch K 56.8 (mid-range). BB pct 0.81 (upper half but off the band). ATR 6.36. Price ABOVE VWAP ($748.07) intraday — bullish.
+- **Posture verdict**: No change. SPY drifted ~$2.50 lower from 6/01 EOD read ($758.86 → $756.29), but every SMA relationship still aligned bullish. No volatility shock signal (no SPY single-candle >1.5% gap, no VIX read available but no risk-off price action). Override conditions not met.
+- **Discord**: notify.py brief + dashboard pin both failed (config + bot token missing) — logged to pending_discord_updates.md. 7th consecutive routine without phone-side delivery.
 
 ## Market Open Update — 2026-06-04 09:37 ET (Market Open Execution)
 - **Account**: Equity $98,612.09 | Cash $98,612.09 | Buying power $394,448.36 | Deployed 0% | Day P&L $0.00 (cap headroom full).
@@ -34,8 +46,8 @@
 - **First closed trade after 5 weeks** = -7% loss; confidence-bucket bucket_5_6 now n=1 (0 wins / 1 loss). Calibration data finally exists.
 
 ## Market Posture
-🟢 GREEN — SPY $758.86 | SMA 20 $741.22 | SMA 50 $705.58 | SMA 200 $681.72
-Full trading: new longs AND shorts allowed. **RSI caution: SPY 75.5 (overbought per ADR-0001) — new longs must have strong catalyst, no chasing.** Stoch K 74.1, BB pct 0.94 (upper band) — extension persisting from Week 4 close.
+🟢 GREEN — SPY $756.29 | SMA 20 $745.92 | SMA 50 $711.83 | SMA 200 $683.41 (refreshed 6/04 midday)
+Full trading: new longs AND shorts allowed. RSI 69.4 — below the ADR-0001 ≥70 hard caution threshold for the first time since Week 4 close. Stoch K 56.8, BB pct 0.81 — extension easing slightly from Week 5 Day 1 read. No fresh long bias change; entries still gated by full 6/6 confluence + catalyst.
 
 ## Snapshot Summary — 2026-06-01 EOD (Week 5 Day 1)
 - SPY $758.86 (+0.4% from 5/27 read $750.46). MACD hist barely negative (-0.026) — near MACD bullish cross. EMA 9 ($750.11) above EMA 21 ($739.01).
