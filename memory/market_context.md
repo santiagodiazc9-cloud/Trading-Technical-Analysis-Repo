@@ -1,7 +1,18 @@
 # Market Context
 
 ## Last Updated
-2026-06-03 (End-of-Day Review, 15:48 PM ET — Week 5 Day 3 / Wednesday — flat book into close after midday -7% cut)
+2026-06-04 (Market Open Execution, 09:37 ET — Week 5 Day 4 / Thursday — flat book carried over from 6/03 GOOGL cut, no approvals to execute)
+
+## Market Open Update — 2026-06-04 09:37 ET (Market Open Execution)
+- **Account**: Equity $98,612.09 | Cash $98,612.09 | Buying power $394,448.36 | Deployed 0% | Day P&L $0.00 (cap headroom full).
+- **Positions**: 0/5. Pending setups: 0 (queue empty for 6th consecutive routine; pre-market funnel still dry).
+- **Trades placed this routine**: 0 (no Approved-YES setups read — correct no-op).
+- **Weekly trade count Week-5**: 0/3 with Thu 6/4 + Fri 6/5 remaining.
+- **Daytrade count**: 0/3; PDT inactive.
+- **Sector blocklist**: empty. Comm Services still 1/2 toward auto-blocklist; no fresh Comm-Services exposure today.
+- **Pause toggle**: `pause_state.json` still missing — treated as active.
+- **Market posture inheritance from 6/01 EOD**: 🟢 GREEN (SPY $758.86, SMA 20 $741.22, SMA 50 $705.58) — no fresh SPY read this routine; posture carried forward unchanged.
+- **Discord**: notify.py brief + dashboard mirror both failed (config + bot token missing) — logged to pending_discord_updates.md.
 
 ## EOD Update — 2026-06-03 15:48 ET (End-of-Day Review)
 - **Book flat**: 0 open positions into close (GOOGL closed 12:36 ET on -7% manual cut). No swing positions to manage overnight.
