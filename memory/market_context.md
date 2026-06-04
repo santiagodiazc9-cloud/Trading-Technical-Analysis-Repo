@@ -1,7 +1,21 @@
 # Market Context
 
 ## Last Updated
-2026-06-04 (Midday Scan, 12:35 ET — Week 5 Day 4 / Thursday — flat book, posture GREEN intact, no internet-flagged candidates, no management actions)
+2026-06-04 (EOD Review, 15:46 ET — Week 5 Day 4 / Thursday — flat book + flat pipeline 4th routine running, posture GREEN intact, no management actions, no new entries)
+
+## EOD Update — 2026-06-04 15:46 ET (End-of-Day Review)
+- **Book flat**: 0 open positions into close (unchanged from 6/03 close after GOOGL -7% cut). 5/5 slots open going into Friday.
+- **Account**: Equity $98,612.09 | Cash $98,612.09 | Buying power $394,448.36 | Deployed 0% | Day P&L $0.00 (-$0.02 nominal vs 6/03 EOD = zero on a cash book; full -2% cap headroom).
+- **Trade activity today**: 0 entries, 0 closes, 0 setups proposed across all 4 intraday routines. Weekly trade count Week-5: 0/3 with 1 session remaining (Fri 6/5).
+- **Sector tally**: Communication Services 1/2 toward auto-blocklist (carried from 6/03 GOOGL loss). No fresh Comm-Services exposure today.
+- **Confidence calibration**: unchanged. bucket_5_6 n=1 (0 wins / 1 loss); bucket_7_8 and bucket_9_10 still empty after 5 weeks live.
+- **Hard rule violations today**: NONE.
+- **Daily loss cap**: NOT hit ($0.00 vs -$1,972 trigger).
+- **Pre-market funnel**: 5th consecutive scan-less window. 0 fresh candidates across pre-market + market-open + midday + EOD.
+- **Market posture**: 🟢 GREEN carried from 6/04 midday (SPY $756.29, full bull SMA stack, RSI 69.4 cooled below ADR-0001 caution threshold). No fresh EOD SPY read this routine.
+- **Stale-state sweep**: clean — learnings.md and strategy.md both modified 6/04 12:05 UTC; no stale-file flags needed.
+- **MSFT post-Build re-arm gate**: NOT re-evaluated against fresh data since 5/27. Tomorrow's pre-market is the natural first read after Microsoft Build 2026 wrap (6/03).
+- **Discord**: notify.py brief + dashboard pin both expected to fail (config + bot token missing); will be logged to pending_discord_updates.md. 9th consecutive routine without phone delivery if today's brief fails as expected.
 
 ## Mid-day Update — 2026-06-04 12:35 ET (Midday Scan)
 - **Book**: Flat (0/5 positions). 4 slots open. No stops to ratchet, no winners to tighten, no -7% cuts to fire. Per-position management routine reduced to a no-op.
