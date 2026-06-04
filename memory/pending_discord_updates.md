@@ -236,3 +236,19 @@ This file is a fallback log. When a routine's `notify.py` call fails (Discord we
 - **Body**: Position -6.73% unrealized ($361.00 vs entry $387.07). $1.02 / 0.28% above -7% manual-cut trigger ($359.98). Trailing stop active but manual-cut governs first. Midday routine MUST re-check immediately — any print ≤ $359.98 forces immediate close per CLAUDE.md rule 5.
 
 - **Reason**: `memory/discord_config.json` still missing in cloud routine host. Same failure mode as 5/13–6/01 briefs/alerts. Santiago side: provision `discord_config.json` (and `.env` with `DISCORD_BOT_TOKEN`) in cloud workspace, or install via session secret store.
+
+### 2026-06-04 19:46 UTC — End-of-Day Review Brief (notify.py failed: discord_config.json missing in cloud env — recurring)
+
+- **Channel**: #daily-brief (silent)
+- **Title**: End-of-Day Review — 2026-06-04
+- **Body**: Flat book + flat pipeline 4th routine running (post-GOOGL-cut wash-out phase). Day P&L $0.00 / 0.00% on a cash book. 0 entries, 0 closes, 0 setups proposed across all 4 intraday routines. Posture 🟢 GREEN intact. Week-5 trade count 0/3 with Friday remaining. Sector Comm Services 1/2 toward auto-blocklist. Friday pre-market is make-or-break — funnel must produce candidates or pipeline becomes the headline.
+
+- **Channel**: #daily-brief (dashboard pin mirror)
+- **Action**: notify.py dashboard FAILED — DISCORD_BOT_TOKEN missing from .env. Dashboard.md regenerated successfully on disk (live=true, positions=0, pending_setups=1 — same parser quirk reading the `_None._` placeholder, NOT a real pending setup).
+
+- **Reason**: `memory/discord_config.json` + `DISCORD_BOT_TOKEN` still unprovisioned in cloud routine host. 9th consecutive routine without phone delivery. P0 queued for Friday 6/05 Weekly Review per 6/03 EOD candidates.
+
+### 2026-06-04 19:55 UTC — Git push failure (HTTP 403 from local proxy, recurring)
+- **Channel**: n/a (internal log)
+- **Body**: `git push origin main` returned HTTP 403 from the local git proxy on 4+ attempts with exponential backoff (2s, 4s, 8s, 16s). Identical failure mode as 5/28, 5/29, 6/01, 6/02, 6/03, and earlier-today market-open + midday routines. Falling back to `mcp__github__push_files` to publish the 6 EOD-touched files (memory/learnings.md, memory/market_context.md, memory/open_positions.md, memory/pending_discord_updates.md, memory/trade_log.json, journal/2026-06-04.md) across multiple sequential MCP API commits. Working tree reset to origin/main mid-routine after each successful MCP push to keep the index clean.
+- **Action needed**: Santiago side — local git proxy 403 has persisted ~14 sessions (5/28 → 6/04 EOD). Migrate routine commits to API push as primary path OR investigate proxy auth/credential lifecycle.
