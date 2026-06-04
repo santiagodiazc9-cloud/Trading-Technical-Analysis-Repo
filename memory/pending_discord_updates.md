@@ -4,6 +4,24 @@ This file is a fallback log. When a routine's `notify.py` call fails (Discord we
 
 ---
 
+## 2026-06-04 13:38 UTC — Market Open Execution brief (notify.py failed: discord_config.json missing)
+
+- **Channel**: #daily-brief (silent)
+- **Title**: Market Open Execution — 2026-06-04
+- **Body**: 0 trades placed | 0 setups skipped (empty pending queue, 6th consecutive scan-less window) | 0/5 positions | equity $98,612.09 | cash $98,612.09 | deployed 0% | day P&L $0.00 | daytrade 0/3 | Week-5 trades 0/3 (Thu 6/4, Fri 6/5 remain)
+
+- **Channel**: #daily-brief (dashboard pin mirror)
+- **Action**: `notify.py dashboard` — failed (DISCORD_BOT_TOKEN missing from .env). Dashboard.md regenerated successfully on disk (live=true, positions=0, pending_setups=1 — same parser quirk as 6/03, reading the `_None._` placeholder; no real pending setup).
+- **Reason**: `memory/discord_config.json` still missing in cloud routine host + `DISCORD_BOT_TOKEN` missing from .env. Recurring P0 infra gap. Friday weekly review must land a fix.
+- **Action needed Santiago side**: provision `discord_config.json` + `DISCORD_BOT_TOKEN` in cloud workspace.
+
+### 2026-06-04 13:42 UTC — Git push failure (HTTP 403 from local proxy, recurring)
+- **Channel**: n/a (internal log)
+- **Body**: `git push origin main` returned HTTP 403 from the local git proxy on 3 attempts with exponential backoff (initial + 2s + 4s). Identical failure mode as 5/28, 5/29, 6/01, 6/02, 6/03 routines. Falling back to `mcp__github__push_files` + `mcp__github__create_or_update_file` to publish the 3 routine-touched files (memory/market_context.md, memory/pending_discord_updates.md, journal/2026-06-04.md) across 2 sequential API commits. Local commit (31ae2fe) is now superseded by API commits on origin/main; next routine should `git fetch origin && git reset --hard origin/main` to re-sync working tree.
+- **Action needed**: Santiago side — local git proxy 403 has persisted ~12 sessions (5/28 → 6/04). Migrate routine commits to API push as primary path OR investigate proxy auth/credential lifecycle.
+
+---
+
 ## 2026-06-03 19:48 UTC — End-of-Day Review brief (notify.py failed: discord_config.json missing)
 
 - **Channel**: #daily-brief (silent)
