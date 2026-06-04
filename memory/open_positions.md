@@ -1,16 +1,16 @@
 # Open Positions
 
 ## Current Positions
-_None. GOOGL closed 2026-06-03 12:36 ET at $359.8565 — -7% manual cut rule triggered. Book flat into 6/03 close and overnight to 6/04 pre-market._
+_None. GOOGL closed 2026-06-03 12:36 ET at $359.8565 — -7% manual cut rule triggered. Book flat through 6/04 EOD (4th consecutive routine on a flat book + flat pipeline). 5/5 position slots open going into Friday 6/5._
 
 ## Pending Orders
 None.
 
 ## Pending Setups
-_None. Pre-market pipeline empty across this morning's scan (5th consecutive scan-less window per Discord-config + scheduler gaps). 4/5 position slots open; weekly trade count Week-5: 0/3 with 2 sessions remaining (Thu 6/4, Fri 6/5)._
+_None. Pre-market pipeline empty for 5th consecutive scan-less window (Mon 5/27 → Thu 6/4 with documented gaps). 5/5 position slots open; weekly trade count Week-5: 0/3 with 1 session remaining (Fri 6/5). Friday pre-market is the make-or-break for Week 5 — funnel must produce candidates or the Week 5 narrative shifts from "disciplined patience" to "idea generation broken" (queued for Friday Weekly Review)._
 
-## Sector Watch (post-cut, 2026-06-03 EOD)
-- **Communication Services**: 1 consecutive loss (GOOGL-2026-05-20). 1 more loss = auto-blocklist for 5 trading days per CLAUDE.md hard rule #10. Elevated scrutiny on any GOOGL / META / Comm-Services-tagged proposal for the next 5 sessions.
+## Sector Watch (carried 2026-06-04 EOD)
+- **Communication Services**: 1 consecutive loss (GOOGL-2026-05-20). 1 more loss = auto-blocklist for 5 trading days per CLAUDE.md hard rule #10. Elevated scrutiny on any GOOGL / META / Comm-Services-tagged proposal for the next 5 sessions. No fresh Comm-Services exposure today; tally unchanged from 6/03.
 
 ---
 
