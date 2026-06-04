@@ -4,6 +4,24 @@ This file is a fallback log. When a routine's `notify.py` call fails (Discord we
 
 ---
 
+## 2026-06-04 16:36 UTC — Midday Scan brief (notify.py failed: discord_config.json missing)
+
+- **Channel**: #daily-brief (silent)
+- **Title**: Midday Scan — 2026-06-04
+- **Body**: Book flat (0/5 positions), 7th consecutive routine with nothing to manage. SPY $756.29 — posture 🟢 GREEN intact (price > SMA 20 > SMA 50 > SMA 200). RSI cooled 75.5 → 69.4 (below ADR-0001 caution threshold for the first time this week). MACD hist -0.69, Stoch K 56.8, BB pct 0.81, ATR 6.36. 0 setups proposed (no internet-flagged tickers in market_context.md). 0 management actions (no positions). Week-5 trade count 0/3 with Thu PM + Fri remaining. Daily loss cap headroom full.
+
+- **Channel**: #daily-brief (dashboard pin mirror)
+- **Action**: `notify.py dashboard` — failed (DISCORD_BOT_TOKEN missing from .env). Dashboard.md regenerated successfully on disk (live=true, positions=0, pending_setups=1 — same parser quirk as 6/03 + 6/04 09:37 ET, reading the `_None._` placeholder; no real pending setup).
+- **Reason**: `memory/discord_config.json` still missing in cloud routine host + `DISCORD_BOT_TOKEN` missing from .env. Recurring P0 infra gap. Friday weekly review must land a fix.
+- **Action needed Santiago side**: provision `discord_config.json` + `DISCORD_BOT_TOKEN` in cloud workspace.
+
+### 2026-06-04 16:40 UTC — Git push failure (HTTP 403 from local proxy, recurring)
+- **Channel**: n/a (internal log)
+- **Body**: `git push origin main` returned HTTP 403 from the local git proxy on 3 attempts with exponential backoff (initial + 2s + 4s). Identical failure mode as 5/28, 5/29, 6/01, 6/02, 6/03, and earlier-today market-open routines. Falling back to `mcp__github__push_files` to publish memory/market_context.md + journal/2026-06-04.md (commit 165c0fb on origin/main). This pending_discord_updates.md follow-up will land in a second API commit. Local commit (bdef46a) is superseded by the API commits; next routine should `git fetch origin && git reset --hard origin/main` to re-sync working tree.
+- **Action needed**: Santiago side — local git proxy 403 has persisted ~13 sessions (5/28 → 6/04 midday). Migrate routine commits to API push as primary path OR investigate proxy auth/credential lifecycle.
+
+---
+
 ## 2026-06-04 13:38 UTC — Market Open Execution brief (notify.py failed: discord_config.json missing)
 
 - **Channel**: #daily-brief (silent)
