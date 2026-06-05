@@ -388,6 +388,41 @@
       "daily_loss_cap_hit": false,
       "hard_rule_violations": [],
       "notes": "Week 5 Day 4 (Thursday). Flat book + flat pipeline 4th routine running (post-GOOGL-cut wash-out phase). 0 trades opened, 0 trades closed, 0 setups proposed across pre-market / market-open / midday / EOD. Day P&L $0.00 (-$0.02 nominal vs 6/03 EOD = effectively zero on a fully cash book). Step 2 (close day trades) no-op — none in open_positions.md. Step 3 (swing review) no-op — none open. Daytrade count 0/3 (PDT inactive, equity > $25k). Weekly trade count Week-5: 0/3 with 1 session remaining (Fri 6/5). Sector blocklist empty; Comm Services still 1/2 toward auto-blocklist from GOOGL loss, no fresh exposure today. Market posture: 🟢 GREEN intact (SPY $756.29 above SMA 20 $745.92 above SMA 50 $711.83 above SMA 200 $683.41; RSI 69.4 first reading below ADR-0001 70-threshold since Week 4 close; MACD hist -0.69 cooling). Posture carried from midday 12:35 ET read — no fresh EOD SPY read this routine. Confidence calibration unchanged: bucket_5_6 n=1 (GOOGL), 7-8 and 9-10 empty. Stale-state sweep clean: learnings.md + strategy.md both modified 6/04 12:05 UTC. Hard rule violations: NONE. Daily loss cap: NOT hit (-2% headroom full). Microsoft Build 2026 wrapped 6/03 — MSFT re-arm gate has NOT been re-evaluated against fresh data since 5/27; tomorrow's pre-market is the natural first read. Two compounding 6/04 EOD lessons logged into learnings.md: (1) flat-book-flat-pipeline sessions are indistinguishable from disciplined-pass sessions in snapshots without an explicit evaluable-day tag, (2) the -7% manual cut creates a multi-session post-cut quiet period as a designed side effect. Both candidates queued for Friday Weekly Review (along with the 6/03 EOD trio: confidence-6 add-on, catalyst-staleness annotation, Discord-config P0). Tomorrow's pre-market (6/5) is the make-or-break for Week 5 — funnel must produce candidates or the Week 5 narrative shifts from 'disciplined patience' to 'idea generation broken'. Discord webhook + bot still offline (9th consecutive routine if today's brief fails as expected) — notify.py call logged to pending_discord_updates.md."
+    },
+    {
+      "date": "2026-06-05",
+      "routine": "end_of_day_review",
+      "equity": 98612.09,
+      "cash": 98612.09,
+      "buying_power": 394448.36,
+      "deployed_pct": 0.0,
+      "pnl_today_dollars": 0.00,
+      "pnl_today_pct": 0.0,
+      "open_positions": 0,
+      "trades_closed_today": 0,
+      "wins_today": 0,
+      "losses_today": 0,
+      "trades_opened_today": 0,
+      "weekly_trade_count": 0,
+      "daytrade_count": 0,
+      "pattern_day_trader": false,
+      "running_win_rate": 0.0,
+      "running_pnl_dollars": -1387.89,
+      "running_pnl_pct": -1.39,
+      "unrealized_pnl_dollars": 0.0,
+      "unrealized_pnl_pct": 0.0,
+      "confidence_calibration": {
+        "_comment": "predicted-confidence-bucket -> {sample_size, wins, losses}. Unchanged through Week 5 close — GOOGL still the only sample. Buckets 7-8 and 9-10 remain n=0 after 5 full weeks live; rule-evolution velocity has been dominated by setup-lifecycle ADRs rather than entry-criteria refinements (see 6/01 EOD lesson).",
+        "bucket_9_10": {"n": 0, "wins": 0, "losses": 0},
+        "bucket_7_8":  {"n": 0, "wins": 0, "losses": 0},
+        "bucket_5_6":  {"n": 1, "wins": 0, "losses": 1}
+      },
+      "daily_loss_cap_hit": false,
+      "hard_rule_violations": [],
+      "market_posture_eod": "CAUTION_exception_closed",
+      "market_posture_intraday_trajectory": "GREEN_open -> CAUTION_1236ET -> CAUTION_sustained_1405ET -> CAUTION_exception_closed_1546ET",
+      "spy_eod": {"price": 738.05, "sma_20": 746.27, "sma_50": 713.47, "sma_200": 683.90, "rsi_14": 49.85, "macd_hist": -2.05, "atr_14": 7.54, "stoch_k": 30.32, "bb_pct": 0.24, "vwap": 748.21, "vs_sma_20_pct": -1.10, "vs_sma_50_pct": 3.45},
+      "notes": "Week 5 Day 5 (Friday) — WEEK 5 CLOSE. Flat book + flat pipeline 5th consecutive trading day post-GOOGL-cut. 0 trades opened, 0 trades closed, 0 setups proposed across pre-market / market-open / midday (×2 — duplicate/late cron fires at 12:36 ET + 14:05 ET) / EOD. Day P&L $0.00 — full -2% cap headroom unused. Step 2 (close day trades) no-op — none in open_positions.md. Step 3 (swing review) no-op — none open. Daytrade count 0/3 (PDT inactive, equity > $25k). Weekly trade count Week-5: 0/3 FINAL (EOD is last new-entry-eligible routine; Weekly Review at ~16:30 ET does not place trades). Sector blocklist empty; Comm Services still 1/2 toward auto-blocklist (4 sessions of elevated scrutiny remaining before clear on 6/12). Market posture: 🟡 CAUTION + exception window CLOSED at EOD (first time since SMA-system adoption 2026-05-19). Full intraday trajectory in one day: GREEN inherited at 09:37 → CAUTION flip at 12:36 ET → CAUTION sustained at 14:05 ET late-cron → CAUTION + exception window CLOSED at 15:46 ET EOD (SPY $738.05 = -1.10% below SMA 20 $746.27, beyond 1% threshold). Long-term bull stack intact (SPY +3.45% above SMA 50 $713.47; no RED transition). SPY EOD indicators: RSI 49.85 (first sub-50 read since pre-GOOGL-entry window in May), MACD hist -2.05 (deepening), Stoch K 30.32 unchanged, BB pct 0.24 (lower half), ATR 14 = 7.54 (continued widening 6.36 → 6.95 → 7.05 → 7.54 = +18.6% in one trading day without single-candle >1.5% shock). No VIX read (override not applied). Confidence calibration unchanged: bucket_5_6 n=1 (GOOGL), 7-8 and 9-10 empty. Stale-state sweep clean: learnings.md and market_context.md modified this routine; strategy.md modified 2026-06-04 12:05 UTC (1 trading day old). Hard rule violations: NONE. Daily loss cap: NOT hit. Discord webhook + bot still offline (13th consecutive routine without phone delivery) — notify.py call expected to log to pending_discord_updates.md. Trigger-prompt mentioned ClickUp but CLAUDE.md Phase 4 (2026-05-16) retired ClickUp writes; followed project policy (no ClickUp writes) and logged conflict for Weekly Review attention. Four EOD lessons appended to learnings.md: (1) posture state-change is the rule paying compound interest, (2) clean transition on flat book is information not nothing, (3) ATR widening during intraday drift as regime-change leading indicator (>15% one-day rise candidate flag), (4) CAUTION-exception window is binary not sliding. Six standing candidates queued going into Weekly Review (~16:30 ET): confidence-6 MACD-positive add-on (6/03), catalyst-staleness annotation (6/03), Discord-config P0 provisioning (6/03), evaluable-day snapshot tag (6/04), post-cut quiet codification (6/04), cron-duplicate/late-fire idempotency gate (6/05 new). Plus: SMA-posture-transition validation case (rule worked vs whipsaw vs rotation), CAUTION-exception-closure logging convention, ATR-widening regime-flag candidate. Reflective question queued for #chat: 'Week 5 closed with first real posture state-change since SMA-system replaced $736 trip-wire on 5/19, on a flat book that didn't need to act. Same week as first closed trade (-7% manual cut on GOOGL). Looking at the two events together — does the SMA-system + manual-cut combo feel like the strategy doing its job, or does it feel like a sequence that worked by accident on this specific path?'"
     }
   ],
   "summary": {
