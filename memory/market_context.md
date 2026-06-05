@@ -1,7 +1,23 @@
 # Market Context
 
 ## Last Updated
-2026-06-05 (Midday Scan, 12:36 ET — Week 5 Day 5 / Friday — posture flipped 🟢 GREEN → 🟡 CAUTION on SPY -1.6% intraday slip below SMA 20; book still flat, no positions affected)
+2026-06-05 (Late Midday Re-baseline, 14:05 ET — Week 5 Day 5 / Friday — cron fired ~95 min after the 12:30 ET slot, ~28 min after the in-arrears 12:36 ET write; posture 🟡 CAUTION sustained on SPY $743.83 still below SMA 20; book flat, no positions affected, no new ideas)
+
+## Late Midday Re-baseline — 2026-06-05 14:05 ET (Midday Scan, late fire)
+- **Cron fired ~95 min after its scheduled 12:30 ET slot.** Prior in-arrears 12:36 ET midday entry (below) was written by a routine completing at 14:02 ET; this routine fired immediately after at 14:04 ET. Two midday-class executions back-to-back, both against an identical flat book. No-op for management, no-op for ideas, same posture verdict — logged here for audit clarity and de-duplicated against the 12:36 ET section.
+- **SPY $743.83** (down a further $0.43 / -0.06% from the 12:36 ET read of $744.26). Still BELOW SMA 20 ($746.56) by 0.37%, above SMA 50 ($713.59), above SMA 200 ($683.93). RSI 54.6 (essentially unchanged from 55.0). MACD hist -1.69 (marginally more negative from -1.66 — momentum still cooling). EMA 9 ($751.40) > EMA 21 ($743.45) — short-term EMA cross still bullish but converging. Stoch K 30.3 unchanged. BB pct 0.41 (mid-band). ATR 14 = 7.05 (up from 6.95 — volatility tick continues). Price BELOW VWAP ($748.81) intraday.
+- **Posture verdict: 🟡 CAUTION sustained.** No reversal toward GREEN, no deepening toward RED. SPY is still within 1% of SMA 20 (-0.37% vs -1% threshold), so CAUTION-exception eligibility remains intact for any hypothetical confidence-8+ setup with sector-ETF-above-SMA-20 confirmation. No volatility shock (no SPY single-candle >1.5% gap observed, VIX still unavailable in feed). Override conditions not met.
+- **Book**: Flat (0/5 positions). 0 open orders. No stops to ratchet, no winners to tighten, no -7% cuts to fire, no thesis-break recommendations to surface. Per-position management routine reduced to a no-op for the 9th consecutive intraday routine (counting the 12:36 ET fire from this same cron cycle).
+- **Account**: Equity $98,612.09 | Cash $98,612.09 | Buying power $394,448.36 | Deployed 0% | Day P&L $0.00 (cap headroom full at -$1,972.24 to trip -2%). Daytrade count 0/3; PDT inactive.
+- **Setups proposed this routine**: 0. `memory/market_context.md` has no "Internet Flagged" section to seed from — pre-market funnel still dry into Week 5 Day 5. CAUTION posture would still gate any candidate above confidence ≥ 8 + sector-ETF-aligned.
+- **Catalyst check on open positions**: skipped (0 open positions). No tavily queries fired.
+- **Weekly trade count Week-5**: 0/3 entering EOD with one routine remaining today + Friday Weekly Review. Week-5 will close with 0 entries.
+- **Sector blocklist**: empty. Comm Services still 1/2 toward auto-blocklist; no fresh Comm-Services exposure today.
+- **Pause toggle**: `pause_state.json` still missing — treated as active.
+- **Hard rule violations this routine**: NONE.
+- **Discord**: notify.py brief + dashboard pin both expected to fail (config + bot token still unprovisioned in cloud host); will be logged to `memory/pending_discord_updates.md`. 12th consecutive routine without phone-side delivery if today's brief fails as expected.
+- **Stale-state sweep**: `memory/open_positions.md` carries no Pending Setups; no stale-approval check needed; setup_validator.py not invoked (no setup IDs to validate).
+- **Late-fire pattern note for Friday Weekly Review**: A scheduler firing two midday routines within ~30 minutes of each other (12:36 ET in-arrears + 14:04 ET nominal) is a new infra artifact — not the same as the Wed-only full-day drops or the pre-market scheduler gaps logged Weeks 2-4. Worth flagging in tonight's Weekly Review as a distinct symptom: not a drop, but a duplicate/late fire. Operationally moot today (both routines saw an identical flat book), but if it recurred on a busy day each routine could attempt independent re-baselines or, worse, duplicate setup proposals.
 
 ## Mid-day Update — 2026-06-05 12:36 ET (Midday Scan)
 - **POSTURE CHANGE 🟢 → 🟡 CAUTION**: SPY $744.26 (down from $756.29 at 6/04 midday → -1.59% over ~24h trading). Now BELOW SMA 20 ($746.59) by 0.31% but above SMA 50 ($713.59) and SMA 200 ($683.94). First posture change in 2+ weeks. Shallow dip — within 1% of SMA 20 trigger (-0.31% vs -1% threshold), so CAUTION-exceptions for high-confidence longs remain available IF an 8+ setup with sector-ETF-above-SMA-20 confirmation surfaces.
@@ -90,8 +106,8 @@
 - **First closed trade after 5 weeks** = -7% loss; confidence-bucket bucket_5_6 now n=1 (0 wins / 1 loss). Calibration data finally exists.
 
 ## Market Posture
-🟡 CAUTION — SPY $744.26 | SMA 20 $746.59 | SMA 50 $713.59 | SMA 200 $683.94 (refreshed 6/05 midday — FLIPPED from GREEN)
-Reduced trading: new longs only at confidence ≥ 8 AND within 1% of SMA 20 AND sector ETF above its own SMA 20; prefer shorts over new longs at the margin. SPY -0.31% below SMA 20 (shallow dip, CAUTION-exception eligibility intact). RSI 55.0 (cooled from 69.4). MACD hist -1.66 turning more negative. Stoch K 30.3. ATR 6.95 (volatility uptick). No VIX read available; no override applied (no SPY single-candle >1.5% shock — drift, not crash). First posture transition since SMA-based posture system adopted 2026-05-19. Operationally moot today: book flat, no setups in queue. Re-evaluate at Friday Weekly Review for narrative attribution (system worked, transient, or rotation starting).
+🟡 CAUTION — SPY $743.83 | SMA 20 $746.56 | SMA 50 $713.59 | SMA 200 $683.93 (refreshed 6/05 14:05 ET late-midday — CAUTION sustained from 12:36 ET flip)
+Reduced trading: new longs only at confidence ≥ 8 AND within 1% of SMA 20 AND sector ETF above its own SMA 20; prefer shorts over new longs at the margin. SPY -0.37% below SMA 20 (shallow dip, CAUTION-exception eligibility intact). RSI 54.6 (essentially unchanged from 55.0 / no longer overbought). MACD hist -1.69 (continues to deepen modestly from -1.66 → -1.69). Stoch K 30.3 unchanged. ATR 7.05 (continued volatility uptick from 6.95 → 7.05). No VIX read available; no override applied (no SPY single-candle >1.5% shock — drift, not crash). First posture transition since SMA-based posture system adopted 2026-05-19 — now sustained across two midday-class reads in the same cron cycle. Operationally moot: book flat, no setups in queue. Friday Weekly Review (later today) to attribute the transition (transient / system-worked / rotation-starting) and to log the duplicate-midday-fire as a new infra symptom.
 
 ## Snapshot Summary — 2026-06-01 EOD (Week 5 Day 1)
 - SPY $758.86 (+0.4% from 5/27 read $750.46). MACD hist barely negative (-0.026) — near MACD bullish cross. EMA 9 ($750.11) above EMA 21 ($739.01).
