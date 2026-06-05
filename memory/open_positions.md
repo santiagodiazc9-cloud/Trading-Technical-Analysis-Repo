@@ -1,13 +1,13 @@
 # Open Positions
 
 ## Current Positions
-_None. GOOGL closed 2026-06-03 12:36 ET at $359.8565 — -7% manual cut rule triggered. Book flat through 6/05 midday (6th consecutive routine on a flat book + flat pipeline). 5/5 position slots open. Midday posture flipped 🟢 GREEN → 🟡 CAUTION on SPY -1.6% intraday slip — operationally moot at zero exposure._
+_None. GOOGL closed 2026-06-03 12:36 ET at $359.8565 — -7% manual cut rule triggered. Book flat through 6/05 14:05 ET late-midday re-baseline (7th consecutive routine on a flat book + flat pipeline). 5/5 position slots open. Posture 🟡 CAUTION sustained across the duplicate midday-class fires today (12:36 ET in-arrears + 14:05 ET nominal late-cron) — operationally moot at zero exposure._
 
 ## Pending Orders
 None.
 
 ## Pending Setups
-_None. Pre-market pipeline empty for 7th consecutive scan-less or scan-empty window into 2026-06-05 midday (Mon 5/27 → Fri 6/5 with documented gaps). 5/5 position slots open; weekly trade count Week-5: 0/3 with intra-session Fri 6/5 still in play (EOD scan + Weekly Review remain). Midday 6/05 executed as no-op (no positions to manage, no Internet-Flagged symbols to evaluate, no pending setups in queue). Posture flipped 🟡 CAUTION midday — would raise the bar to confidence ≥ 8 + sector-ETF-aligned for any new long, but nothing in the pipeline to gate. Friday Weekly Review (later today) will resolve whether the empty 6/05 pre-market funnel was a scheduler drop or a genuine zero-candidate scan, and will record the first live posture transition since the SMA system was adopted._
+_None. Pre-market pipeline empty for 8th consecutive scan-less or scan-empty window into 2026-06-05 late-midday (Mon 5/27 → Fri 6/5 with documented gaps). 5/5 position slots open; weekly trade count Week-5: 0/3 with intra-session Fri 6/5 still in play (EOD scan + Weekly Review remain). Both midday-class fires on 6/05 (12:36 ET + 14:05 ET) executed as no-ops (no positions to manage, no Internet-Flagged symbols to evaluate, no pending setups in queue). Posture 🟡 CAUTION sustained — raises the bar to confidence ≥ 8 + within-1%-of-SMA-20 + sector-ETF-above-its-own-SMA-20 for any new long, but nothing in the pipeline to gate. Friday Weekly Review (later today) will resolve (a) the empty 6/05 pre-market funnel — scheduler drop vs genuine zero-candidate scan, (b) the first live posture transition since the SMA system was adopted, and (c) the new infra symptom of duplicate/late midday cron fires._
 
 ## Sector Watch (carried 2026-06-04 EOD)
 - **Communication Services**: 1 consecutive loss (GOOGL-2026-05-20). 1 more loss = auto-blocklist for 5 trading days per CLAUDE.md hard rule #10. Elevated scrutiny on any GOOGL / META / Comm-Services-tagged proposal for the next 5 sessions. No fresh Comm-Services exposure today; tally unchanged from 6/03.
