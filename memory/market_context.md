@@ -1,7 +1,22 @@
 # Market Context
 
 ## Last Updated
-2026-06-04 (EOD Review, 15:46 ET — Week 5 Day 4 / Thursday — flat book + flat pipeline 4th routine running, posture GREEN intact, no management actions, no new entries)
+2026-06-05 (Market Open Execution, 09:37 ET — Week 5 Day 5 / Friday — flat book + empty pending-setup queue 7th consecutive intraday routine; no-op execution)
+
+## Market Open Update — 2026-06-05 09:37 ET (Market Open Execution)
+- **Account**: Equity $98,612.09 | Cash $98,612.09 | Buying power $394,448.36 | Deployed 0% | Day P&L $0.00 (cap headroom full at -$1,972.24 to trip -2%).
+- **Positions**: 0/5. Pending setups: 0 (queue empty for 7th consecutive intraday routine; pre-market funnel still dry going into Week 5 close).
+- **Trades placed this routine**: 0 (no Approved-YES setups read — correct no-op). No-trade is a valid outcome per CLAUDE.md rule 14.
+- **Weekly trade count Week-5**: 0/3 entering Friday — single session remaining to either propose+approve+fill or close Week 5 with 0 entries (would tie Weeks 1, 2, 4 for zero-activity weeks).
+- **Daytrade count**: 0/3; PDT inactive (`pattern_day_trader: false`).
+- **Sector blocklist**: empty. Comm Services still 1/2 toward auto-blocklist; no fresh Comm-Services exposure today.
+- **Pause toggle**: `pause_state.json` still missing — treated as active (would have permitted entries had any been approved).
+- **Market clock**: open (next_close 16:00:00-04:00). Routine fired inside its scheduled window.
+- **Market posture inheritance from 6/04 midday**: 🟢 GREEN (SPY $756.29, SMA 20 $745.92, SMA 50 $711.83, SMA 200 $683.41, RSI 69.4) — no fresh SPY read this routine; posture carried forward unchanged. Will be re-baselined at midday or by Friday pre-market if that scheduler slot fires.
+- **Pre-market 6/05 funnel**: per memory state at routine entry, no Approved setups present in `open_positions.md`. Two interpretations: (a) pre-market scheduler dropped its 6/05 slot (continuing the Wed/Fri infra pattern), or (b) pre-market fired but produced no candidates (5 in a row before today). Either way, market-open executes 0 trades — distinction is for the Friday Weekly Review.
+- **Discord**: notify.py brief + dashboard pin both expected to fail (config + bot token still unprovisioned in cloud host); will be logged to `memory/pending_discord_updates.md`. 10th consecutive routine without phone-side delivery if today's brief fails as expected.
+- **Stale-state sweep**: `memory/open_positions.md` carries no Pending Setups; no stale-approval check needed; setup_validator.py not invoked (no setup IDs to validate).
+- **Hard rule violations this routine**: NONE.
 
 ## EOD Update — 2026-06-04 15:46 ET (End-of-Day Review)
 - **Book flat**: 0 open positions into close (unchanged from 6/03 close after GOOGL -7% cut). 5/5 slots open going into Friday.

@@ -4,6 +4,24 @@ This file is a fallback log. When a routine's `notify.py` call fails (Discord we
 
 ---
 
+## 2026-06-05 13:38 UTC — Market Open Execution brief (notify.py failed: discord_config.json missing)
+
+- **Channel**: #daily-brief (silent)
+- **Title**: Market Open Execution — 2026-06-05
+- **Body**: 0 trades placed (Approved-YES queue empty for 7th consecutive intraday routine). 0/5 positions; equity $98,612.09; cash $98,612.09; buying power $394,448.36; deployed 0%; day P&L $0.00; daytrade 0/3; PDT false. Posture 🟢 GREEN carried from 6/04 midday (SPY $756.29, full bull SMA stack, RSI 69.4). Weekly count Week-5: 0/3 with Friday remaining. Sector blocklist empty; Comm Services 1/2 toward auto-blocklist. Hard rule violations this routine: none.
+
+- **Channel**: #daily-brief (dashboard pin mirror)
+- **Action**: `notify.py dashboard` — failed (DISCORD_BOT_TOKEN missing from .env). Dashboard.md regenerated successfully on disk (live=true, positions=0, pending_setups=1 — same parser quirk as 6/03 + 6/04, reading the `_None._` placeholder; no real pending setup).
+- **Reason**: `memory/discord_config.json` still missing in cloud routine host + `DISCORD_BOT_TOKEN` missing from .env. Recurring P0 infra gap — 10th consecutive routine without phone-side delivery. Friday Weekly Review (later today) must land a provisioning plan.
+- **Action needed Santiago side**: provision `discord_config.json` + `DISCORD_BOT_TOKEN` in cloud workspace.
+
+### 2026-06-05 13:50 UTC — Git push failure (HTTP 403 from local proxy, recurring)
+- **Channel**: n/a (internal log)
+- **Body**: `git push origin main` returned HTTP 403 from the local git proxy on the first attempt at this routine. Identical failure mode as 5/28, 5/29, 6/01, 6/02, 6/03, 6/04 (all routines). Local HEAD is 11 commits ahead of origin/main spanning 6/04 market-open → 6/04 EOD plus today's market-open commit; falling back to `mcp__github__push_files` to publish the 7 routine-touched files (memory/market_context.md, memory/open_positions.md, memory/pending_discord_updates.md, memory/learnings.md, memory/trade_log.json, journal/2026-06-04.md, journal/2026-06-05.md) in a single API commit. Local commits will be superseded by the API commit; next routine should `git fetch origin && git reset --hard origin/main` to re-sync working tree.
+- **Action needed**: Santiago side — local git proxy 403 has now persisted ~15 sessions (5/28 → 6/05 market-open). Migrate routine commits to API push as primary path OR investigate proxy auth/credential lifecycle. Friday Weekly Review is the natural place to land this as a definitive infra rule.
+
+---
+
 ## 2026-06-04 16:36 UTC — Midday Scan brief (notify.py failed: discord_config.json missing)
 
 - **Channel**: #daily-brief (silent)
