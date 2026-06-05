@@ -4,6 +4,24 @@ This file is a fallback log. When a routine's `notify.py` call fails (Discord we
 
 ---
 
+## 2026-06-05 18:05 UTC — Midday Scan brief, LATE CRON FIRE (notify.py failed: discord_config.json missing)
+
+- **Channel**: #daily-brief (silent)
+- **Title**: Midday Scan (late fire) — 2026-06-05 14:05 ET
+- **Body**: Cron fired ~95min late, ~28min after the in-arrears 12:36 ET write. Book flat (0/5 positions), deployed 0%, day P&L $0.00. SPY $743.83 (drifted -$0.43 / -0.06% from 12:36 read of $744.26) — still below SMA 20 ($746.56), above SMA 50 ($713.59), above SMA 200 ($683.93). RSI 54.6 (unchanged), MACD hist -1.69 (marginally deeper from -1.66), Stoch K 30.3 unchanged, ATR 7.05 (uptick continues 6.36 → 6.95 → 7.05). Posture 🟡 CAUTION sustained — no GREEN reversion, no RED deepening, still within 1% of SMA 20 (-0.37% vs -1% threshold). 0 new setups, 0 management actions, 0 tavily queries (no open positions, no Internet-Flagged section). Weekly count 0/3. Sector Comm Services 1/2 toward auto-blocklist (unchanged).
+- **Channel**: #daily-brief (dashboard pin mirror)
+- **Action**: `notify.py dashboard` — failed (DISCORD_BOT_TOKEN missing from .env). Dashboard.md regenerated successfully on disk (live=true, positions=0, pending_setups=1 — same parser quirk as prior routines reading the `_None._` placeholder; no real pending setup).
+- **Reason**: `memory/discord_config.json` still missing + `DISCORD_BOT_TOKEN` missing from .env. Recurring P0 infra gap — 12th consecutive routine without phone-side delivery.
+- **New infra symptom flagged for Friday Weekly Review**: cron fired TWICE in ~30 min for the midday-class slot (12:36 ET in-arrears + 14:04 ET nominal late-fire). Distinct from the pre-market drops and Wed full-day misses logged Weeks 2-4. Operationally moot today (both routines saw identical flat book), but on a busy day this could produce duplicate setup proposals, overlapping stop-tightening attempts, or double-fills. Candidate fix: "last-routine-ran-at" stamp + N-minute idempotency gate at routine entry.
+- **Action needed Santiago side**: provision `discord_config.json` + `DISCORD_BOT_TOKEN` in cloud workspace; add cron-deduplication / idempotency gate to routine scheduler.
+
+### 2026-06-05 18:10 UTC — Git push failure (HTTP 403 from local proxy, recurring)
+- **Channel**: n/a (internal log)
+- **Body**: `git push -u origin main` returned HTTP 403 from the local git proxy on 3 attempts with exponential backoff (initial + 2s + 4s). Identical failure mode as 5/28, 5/29, 6/01, 6/02, 6/03, 6/04 (all routines), and the 6/05 market-open + 6/05 midday (12:36 ET in-arrears) earlier today. Local HEAD is 1 commit ahead of origin/main (the late-midday commit 28d87d4 on top of 2f12ada); falling back to `mcp__github__push_files` to publish the 4 routine-touched files (memory/market_context.md, memory/open_positions.md, memory/pending_discord_updates.md, journal/2026-06-05.md) in a single API commit. Local commit will be superseded by the API commit; next routine should `git fetch origin && git reset --hard origin/main` to re-sync working tree.
+- **Action needed**: Santiago side — local git proxy 403 has now persisted ~17 sessions (5/28 → 6/05 late-midday). Migrate routine commits to API push as primary path OR investigate proxy auth/credential lifecycle. Friday Weekly Review (later today) is the natural place to land this as a definitive infra rule alongside the duplicate/late-cron-fire and Discord-config items.
+
+---
+
 ## 2026-06-05 16:38 UTC — Midday Scan brief (notify.py failed: discord_config.json missing)
 
 - **Channel**: #daily-brief (silent)
