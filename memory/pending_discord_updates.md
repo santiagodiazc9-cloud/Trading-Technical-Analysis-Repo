@@ -4,6 +4,27 @@ This file is a fallback log. When a routine's `notify.py` call fails (Discord we
 
 ---
 
+## 2026-06-06 15:15 UTC — Security Scan, all Discord posts undelivered (notify.py failed: discord_config.json missing)
+
+- **Routine**: `routines/7_security_scan.md` — weekly Saturday 11:00 AM ET (15:00 UTC)
+- **Reason**: `memory/discord_config.json` still missing in cloud session (recurring infra gap, now 13+ consecutive routines). `notify.py` exited `{"ok": false, "error": "Missing memory/discord_config.json"}` on every invocation.
+- **Fallback used**: Findings posted to ClickUp `Risk and Errors` (list `901217854046`) instead — per session user instruction this run.
+
+### Would-have-been-sent #risk-alerts (CRITICAL/HIGH × 4)
+1. **critical / security** — `setuptools floor too low: requirements-bootstrap.txt:5 — CVE-2025-47273 path traversal/RCE — pin setuptools>=78.1.1.` → ClickUp `869dk8kqv`
+2. **high / security** — `FastAPI/Starlette BADHOST: requirements-api.txt:1 — CVE-2026-48710 host-header auth bypass — pin fastapi>=0.118.` → ClickUp `869dk8kr3`
+3. **high / security** — `Dashboard API wildcard CORS + no auth: api/main.py:45-50 — CSRF-style approve/pause/session — restrict origins + add API-key gate.` → ClickUp `869dk8krg`
+4. **high / security** — `GH_TOKEN in git remote URL (REGRESSION from 2026-05-16): scripts/discord_bot_cloud.py:70 — token leaks via remote -v / push errors — use GIT_ASKPASS.` → ClickUp `869dk8krt`
+
+### Would-have-been-sent #daily-brief (medium/low summary)
+- **Title**: `🛡️ Security Scan — 2026-06-06 — 4 medium/low findings`
+- **Body**: `scripts/daytrader/ml_model.py:127 pickle.load deserialization (RCE if MODELS_DIR writeable); urllib3 transitive CVE-2025-66418 (pin >=2.5.1); numpy 1.x EOL Sept-2025 (bump to >=2.0); scripts/discord_bot_cloud.py:60-74 three subprocess.run without timeout (add timeout=30).` → ClickUp `869dk8ktr`
+
+### Action needed Santiago side
+Provision `memory/discord_config.json` + `DISCORD_BOT_TOKEN` in cloud workspace. 13th consecutive routine without phone-side delivery. This is now the longest-running open infra gap and is blocking the entire Discord migration objective from the cloud side.
+
+---
+
 ## 2026-06-05 18:05 UTC — Midday Scan brief, LATE CRON FIRE (notify.py failed: discord_config.json missing)
 
 - **Channel**: #daily-brief (silent)
