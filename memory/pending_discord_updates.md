@@ -343,7 +343,23 @@ Provision `memory/discord_config.json` + `DISCORD_BOT_TOKEN` in cloud workspace.
 
 - **Reason**: `memory/discord_config.json` + `DISCORD_BOT_TOKEN` still unprovisioned in cloud routine host. **14th consecutive routine without phone delivery.** P0 status carried from 6/03 EOD candidates; still outstanding through Week 6 entry.
 
+### 2026-06-08 16:38 UTC — Midday Scan brief (notify.py failed: discord_config.json missing in cloud env — recurring)
+
+- **Channel**: #daily-brief (silent)
+- **Title**: Midday Scan — 2026-06-08
+- **Body**: Week 6 Day 1 midday. Flat book + flat pipeline, **12th consecutive intraday routine no-op**. 0 positions to manage / 0 internet-flagged candidates to evaluate / 0 setups proposed. Account: equity $98,612.09, cash $98,612.09, deployed 0%, day P&L $0.00, daytrade 0/3, PDT false. **POSTURE STATE-CHANGE**: 🟡 CAUTION sustained, **exception window REOPENED**. First live 6/08 SPY read: $742.20 (+$4.15 / +0.56% from 6/05 EOD), now -0.57% below SMA 20 ($746.48) — back inside the 1% threshold after Friday EOD's -1.10% breach closed it. RSI 53.0 (up from 49.85 — back above 50). MACD hist -2.70 (deeper from -2.05 — momentum continues weakening even as price recovered). Stoch K 23.1 (oversold, room to bounce). ATR 14 = 7.57 (essentially flat vs 7.54 — Friday's intraday +18.6% widening did NOT continue, one-day spike). EMA 9 $748.54 > EMA 21 $742.80 (positive cross, convergence narrowed 7.32 → 5.74). Price BELOW VWAP ($748.55) intraday. SMA-posture-system's first live test now has 5 reads / 4 state changes (GREEN→CAUTION→sustained→exception-CLOSED→exception-REOPENED) — partial recovery, not full GREEN reversion. Weekly count Week-6 0/3 with EOD + 4 days remaining. Sector Comm Services 1/2 toward auto-blocklist; elevated scrutiny through Thu 6/11. Hard rule violations this routine: NONE. Daily loss cap NOT hit.
+
+- **Channel**: #daily-brief (dashboard pin mirror)
+- **Action**: `notify.py dashboard` — failed with `DISCORD_BOT_TOKEN missing from .env`. Dashboard.md regenerated successfully on disk (live=true, positions=0, pending_setups=1 — same parser quirk reading the `_None._` placeholder, NOT a real pending setup).
+
+- **Reason**: `memory/discord_config.json` + `DISCORD_BOT_TOKEN` still unprovisioned in cloud routine host. **15th consecutive routine without phone-side delivery.** P0 status carried from 6/03 EOD candidates; still outstanding through Week 6 entry — now spanning a full weekend without resolution.
+
 ### 2026-06-08 13:48 UTC — Git push failure (HTTP 403 from local proxy, recurring)
 - **Channel**: n/a (internal log)
 - **Body**: `git push origin main` returned HTTP 403 from the local git proxy on 4 attempts with exponential backoff (initial + 2s + 4s + 8s). Identical failure mode as 5/28, 5/29, 6/01, 6/02, 6/03, 6/04, 6/05 (all routines). Falling back to MCP push: 2x `mcp__github__push_files` (journal/2026-06-08.md, memory/open_positions.md) + 2x `mcp__github__create_or_update_file` (memory/market_context.md, memory/pending_discord_updates.md) across 4 sequential API commits. Local main superseded by API commits; next routine should `git fetch origin && git reset --hard origin/main` to re-sync working tree.
 - **Action needed**: Santiago side — local git proxy 403 has now persisted ~18 sessions (5/28 → 6/08 market-open). Migrate routine commits to API push as primary path OR investigate proxy auth/credential lifecycle. Friday Weekly Review (6/05) flagged this as a definitive infra rule — still outstanding into Week 6.
+
+### 2026-06-08 16:48 UTC — Git push failure (HTTP 403 from local proxy, recurring)
+- **Channel**: n/a (internal log)
+- **Body**: `git push -u origin main` returned HTTP 403 from the local git proxy on 5 attempts with exponential backoff (initial + 2s + 4s + 8s + 16s). Identical failure mode as 5/28, 5/29, 6/01, 6/02, 6/03, 6/04, 6/05, and 6/08 market-open earlier today (now ~19 sessions). Falling back to `mcp__github__push_files` to publish the 4 routine-touched files (journal/2026-06-08.md, memory/market_context.md, memory/open_positions.md, memory/pending_discord_updates.md) in a single API commit. Local commit (594c25b) is superseded by the API commit; next routine should `git fetch origin && git reset --hard origin/main` to re-sync working tree.
+- **Action needed**: Santiago side — local git proxy 403 has now persisted ~19 sessions (5/28 → 6/08 midday). Migrate routine commits to API push as primary path OR investigate proxy auth/credential lifecycle. Friday Weekly Review (6/05) flagged this as a definitive infra rule — still outstanding into Week 6 Day 1 midday.
