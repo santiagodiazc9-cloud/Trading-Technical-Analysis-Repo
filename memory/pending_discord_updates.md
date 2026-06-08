@@ -331,3 +331,19 @@ Provision `memory/discord_config.json` + `DISCORD_BOT_TOKEN` in cloud workspace.
 - **Channel**: n/a (internal log)
 - **Body**: `git push origin main` returned HTTP 403 from the local git proxy on 4+ attempts with exponential backoff (2s, 4s, 8s, 16s). Identical failure mode as 5/28, 5/29, 6/01, 6/02, 6/03, and earlier-today market-open + midday routines. Falling back to `mcp__github__push_files` to publish the 6 EOD-touched files (memory/learnings.md, memory/market_context.md, memory/open_positions.md, memory/pending_discord_updates.md, memory/trade_log.json, journal/2026-06-04.md) across multiple sequential MCP API commits. Working tree reset to origin/main mid-routine after each successful MCP push to keep the index clean.
 - **Action needed**: Santiago side — local git proxy 403 has persisted ~14 sessions (5/28 → 6/04 EOD). Migrate routine commits to API push as primary path OR investigate proxy auth/credential lifecycle.
+
+### 2026-06-08 13:38 UTC — Market Open Execution Brief (notify.py failed: discord_config.json missing in cloud env — recurring)
+
+- **Channel**: #daily-brief (silent)
+- **Title**: Market Open Execution — 2026-06-08
+- **Body**: Week 6 Day 1 / Mon. Flat book + flat pipeline, 11th consecutive routine no-op. 0 entries, 0 closes, 0 skipped-awaiting-approval, 0 setup IDs to validate. Account: equity $98,612.09, cash $98,612.09, deployed 0%, day P&L $0.00, daytrade_count 0/3. Posture inherited 🟡 CAUTION sustained / exception CLOSED (carried from 6/05 EOD). Week-6 trade count 0/3.
+
+- **Channel**: #daily-brief (dashboard pin mirror)
+- **Action**: notify.py dashboard NOT attempted — same config-missing failure mode. Dashboard.md regenerated successfully on disk (live=true, positions=0, pending_setups=1 — same parser quirk reading the `_None._` placeholder, NOT a real pending setup).
+
+- **Reason**: `memory/discord_config.json` + `DISCORD_BOT_TOKEN` still unprovisioned in cloud routine host. **14th consecutive routine without phone delivery.** P0 status carried from 6/03 EOD candidates; still outstanding through Week 6 entry.
+
+### 2026-06-08 13:48 UTC — Git push failure (HTTP 403 from local proxy, recurring)
+- **Channel**: n/a (internal log)
+- **Body**: `git push origin main` returned HTTP 403 from the local git proxy on 4 attempts with exponential backoff (initial + 2s + 4s + 8s). Identical failure mode as 5/28, 5/29, 6/01, 6/02, 6/03, 6/04, 6/05 (all routines). Falling back to MCP push: 2x `mcp__github__push_files` (journal/2026-06-08.md, memory/open_positions.md) + 2x `mcp__github__create_or_update_file` (memory/market_context.md, memory/pending_discord_updates.md) across 4 sequential API commits. Local main superseded by API commits; next routine should `git fetch origin && git reset --hard origin/main` to re-sync working tree.
+- **Action needed**: Santiago side — local git proxy 403 has now persisted ~18 sessions (5/28 → 6/08 market-open). Migrate routine commits to API push as primary path OR investigate proxy auth/credential lifecycle. Friday Weekly Review (6/05) flagged this as a definitive infra rule — still outstanding into Week 6.
