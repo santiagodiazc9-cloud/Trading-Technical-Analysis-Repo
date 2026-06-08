@@ -1,7 +1,24 @@
 # Market Context
 
 ## Last Updated
-2026-06-05 (EOD Review, 15:46 ET — Week 5 Day 5 / Friday — SPY EOD re-baseline produced posture 🟡 CAUTION sustained with **exception window CLOSED** for the first time since SMA-system adoption 2026-05-19; SPY $738.05 now -1.10% below SMA 20, beyond the 1% threshold; book flat, no positions affected, no new ideas; ATR continued widening 7.05 → 7.54; first real intraday state-trajectory across four routine reads in one day)
+2026-06-08 09:37 ET (Market Open Execution, Week 6 Day 1 / Monday — routine fired into a flat book + empty Approved queue; no fresh SPY re-baseline available pre-market, so posture inherited from 6/05 EOD 🟡 CAUTION sustained / exception window CLOSED; no trades placed, no trades skipped due to approval; weekly count reset to Week-6 0/3; Discord notify.py still failing — discord_config.json missing in cloud host, 14th consecutive routine; 6th consecutive trading day post-GOOGL-cut on a flat book)
+
+## Market Open Update — 2026-06-08 09:37 ET (Market Open Execution)
+- **Routine fire**: clean 09:37 ET (≈2 min after nominal 09:35 ET trigger). Market clock confirmed OPEN (next close 2026-06-08 16:00 ET); first trading session of Week 6.
+- **POSTURE inherited (no fresh SPY read)**: 🟡 CAUTION sustained, exception window CLOSED (carried from 6/05 EOD: SPY $738.05, -1.10% below SMA 20 $746.27, beyond the 1% threshold). No pre-market routine produced a 6/08 SPY re-baseline before this routine entered — same gap pattern logged on Friday 6/05 09:37 ET. Posture will be re-evaluated at midday with the first live 6/08 SPY indicator pull.
+- **Book**: Flat (0/5 positions). Pending orders: 0 (confirmed via `alpaca_client.py orders` → `[]`). Day-trade close step no-op. Swing-position review step no-op. Per-position management routine reduced to a no-op for the **11th consecutive intraday routine** (6th consecutive trading day post-GOOGL-cut).
+- **Account**: Equity $98,612.09 | Cash $98,612.09 | Buying power $394,448.36 | Deployed 0% | Day P&L $0.00 (cap headroom full at -$1,972.24 to trip -2%). Daytrade count 0/3; PDT inactive.
+- **Pending setups & approvals**: `memory/open_positions.md` "Pending Setups" empty; no setup IDs → `setup_validator.py` not invoked; no `Approved: YES` flags to read. Trades placed = 0. Trades skipped due to "awaiting approval" = 0. Trades skipped due to "paused" = 0.
+- **Pause toggle**: `pause_state.json` still missing — treated as active per project convention. No `/pause` or `/halt` in effect.
+- **Hard rule violations this routine**: NONE. Daily loss cap NOT hit ($0.00 vs -$1,972 trigger). PDT count well under cap.
+- **Weekly trade count Week-6** (week_starting_2026-06-08): **0/3** at routine exit. Three subsequent new-entry-eligible routines remain today (midday × 1, EOD × 1; Weekly Review is not new-entry-eligible) and four more trading days this week.
+- **Sector blocklist**: empty. Communication Services still 1/2 toward auto-blocklist (carried from GOOGL-2026-05-20 loss); no fresh Comm-Services exposure this routine. Elevated scrutiny on GOOGL / META / Comm-Services-tagged proposals through Thu 6/11; auto-clear Fri 6/12 if no fresh Comm-Services loss.
+- **Confidence calibration**: unchanged. bucket_5_6 n=1 (GOOGL 0W/1L); bucket_7_8 and bucket_9_10 still n=0 after 5 weeks live.
+- **Discord**: `notify.py brief` failed with `discord_config.json missing` — 14th consecutive routine without phone-side delivery. Logged to `memory/pending_discord_updates.md`. `dashboard.py` refreshed on disk (live=true, positions=0, pending_setups=1 same parser quirk reading the `_None._` placeholder, not a real setup). `notify.py dashboard` not attempted — same config-missing failure mode.
+- **Stale-state sweep**: `memory/open_positions.md` carries no Pending Setups → no stale-approval check needed. `learnings.md` last touched 6/05 EOD (1 trading day old); `strategy.md` last touched 2026-06-04 (2 trading days old); no stale-file flags needed.
+- **First Week-6 entry into Week 6**: Week 5 closed at 0 entries / 1 closed trade (GOOGL -7% cut on 6/03). Week 6 enters with the same flat book that has now persisted for ≈3 calendar days + 1 trading session. Friday Weekly Review (6/05) outputs not yet folded into market_context (Weekly Review didn't write a fresh section into this file) — referencing 6/05 EOD's pending Weekly-Review questions (a)-(d) is the latest checkpoint.
+
+
 
 ## EOD Update — 2026-06-05 15:46 ET (End-of-Day Review)
 - **POSTURE: 🟡 CAUTION sustained, exception window CLOSED**. SPY $738.05 at EOD read — drifted -$5.78 / -0.78% from the 14:05 ET late-midday read of $743.83. Now **-1.10% below SMA 20 ($746.27)** — beyond the 1% CAUTION-exception threshold for the first time since the SMA-based posture system was adopted 2026-05-19. Long-term bull stack intact: SMA 50 $713.47 > SMA 200 $683.90; SPY +3.4% / $24.58 above SMA 50 (no RED transition). For any hypothetical new long under CAUTION, the path-to-eligibility now requires the SMA 20 reclaim itself, not just the confidence-8 + sector-ETF overlay.
